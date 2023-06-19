@@ -15,7 +15,7 @@
 		<property name="password" value="tiger"/>
 	</bean>
 	
-<!-- 	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+ 	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
 		<property name="dataSource" ref="data_source"/>
 		<property name="mapperLocations" value="/WEB-INF/mybatis/mapper/**/*_mapper.xml"></property>
 		<property name="configLocation" value="/WEB-INF/mybatis/mybatis-config.xml"/>
@@ -23,7 +23,7 @@
 	
 	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSessionTemplate">
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean> -->
+	</bean> 
 		
 </beans>
 
