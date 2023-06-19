@@ -1,13 +1,14 @@
-package com.fpp.controller;
+package com.fpp.controller.main;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class testController {
+public class mainController {
 
-	@RequestMapping("/test")
-	public String test() {
-		return "test";
+	@RequestMapping("/")
+	public String main() {
+		
+		return "main";
 	}
 }
