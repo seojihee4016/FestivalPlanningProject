@@ -10,7 +10,6 @@
     </settings>
 
     <typeAliases>	<!-- mapper-parameterType -->
-    	<typeAlias type="com.fpp.dto.reservation.ReservationDto" alias="ReservationDto"/>
     	<typeAlias type="com.fpp.dto.user.UserDto" alias="UserDto"/>
     </typeAliases>
 
