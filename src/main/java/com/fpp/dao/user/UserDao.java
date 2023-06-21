@@ -1,4 +1,4 @@
-package com.fpp.dao;
+package com.fpp.dao.user;
 
 import java.util.List;
 

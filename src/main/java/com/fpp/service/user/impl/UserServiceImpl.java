@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fpp.dao.UserDao;
+import com.fpp.dao.user.UserDao;
 import com.fpp.dto.user.UserDto;
 import com.fpp.service.user.UserService;
 

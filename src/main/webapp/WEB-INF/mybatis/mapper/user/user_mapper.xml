@@ -6,18 +6,20 @@
 <mapper namespace="user_mapper">
 
 	<insert id="insert_user" parameterType="UserDto">
-		insert into f_user 
+		insert into f_user
 		values ( #{login_Id}, #{login_Pw}, #{name}, #{email}, #{phone_Number} )
 	</insert>
-	
-	<select id="select_user" resultType="UserDto" parameterType="UserDto">
-		select login_id, login_pw, name, email, phone_number 
-				from f_user
+
+	<select id="select_user" resultType="UserDto"
+		parameterType="UserDto">
+		select login_Id, login_Pw, name, email, phone_Number
+		from f_user
 	</select>
-	
-<select id="select_user2" resultType="UserDto" parameterType="UserDto">
-		select login_id, login_pw, name, email, phone_number 
-				from f_user
+
+	<select id="select_user2" resultType="UserDto"
+		parameterType="UserDto">
+		select login_Id, login_Pw, name, email, phone_Number
+		from f_user
 	</select>
 
 </mapper>
