@@ -10,7 +10,7 @@
     </settings>
 
     <typeAliases>	<!-- mapper-parameterType -->
-    	<typeAlias type="com.fpp.dto.board.BoardDto" alias="BoardDto"/>
+    		<typeAlias type="com.fpp.dto.board.FormDto" alias="FormDto"/>
     </typeAliases>
 
 </configuration>

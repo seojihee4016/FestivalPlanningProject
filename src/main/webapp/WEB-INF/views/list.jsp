@@ -2,19 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <html>
 <head>
 <title>게시판</title>
-<link href="${path}/css/board.css" rel="stylesheet" type="text/css">
-<!--테일윈드-->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.17/tailwind.min.css">
-<!--폰트어썸-->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
 </head>
 <body>
 	<div id="root">
@@ -23,36 +13,42 @@
 		</header>
 		<hr />
 
-		<nav>신청 양식으로 변경</nav>
+		<nav>홈 - 글 작성</nav>
 		<hr />
 
 		<section id="container">
-			<form role="form" method="post" action="write">
-				<table class="board-table">
+			<form role="form" method="post" action="/write">
+				<table>
 					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>등록일</th>
+						<td>번호
+						<th>축제 이름</th>
+						<th>담당자 성함</th>
+						<th>장소 구분</th>
+						<th>축제 장소</th>
+						<th>예상 인원수</th>
+						<th>운반 난이도</th>
+						<th>예상 금액</th>
+						<th>운영 기관</th>
+						<th>시작 일자</th>
+						<th>종료 일자</th>
 					</tr>
 
-					<c:forEach items="${list}" var="list" varStatus="loop">
+					<c:forEach items="${list}" var="list">
 						<tr>
-							<!-- 번호로 조회해서 글 보기 -->
-							<td><c:out value="${list.bno}" /></td>
-							<td><a href="/readView?bno=${list.bno}"><c:out
-										value="${list.title}" /></a></td>
-							<td><c:out value="${list.writer}" /></td>
-							<td><fmt:formatDate value="${list.regdate}"
-									pattern="yyyy-MM-dd" /></td>
+							<td><c:out value="${list.fno}" /></td>
+
+							<td><a href="/readView?fno=${list.fno}"><c:out
+										value="${list.festivalName}" /></a></td>
+							<td><c:out value="${list.name}" /></td>
+							<td><c:out value="${list.place}" /></td>
+							<td><c:out value="${list.addressEvent}" /></td>
+							<td><c:out value="${list.numberOfPeople}" /></td>
+							<td><c:out value="${list.carryingDifficulty}" /></td>
+							<td><c:out value="${list.budgetRange}" /></td>
+							<td><c:out value="${list.commissioningAgency}" /></td>
+							<td><c:out value="${list.startDate}" /></td>
+							<td><c:out value="${list.endDate}" /></td>
 						</tr>
-						<c:if test="${!loop.last}">
-							<tr>
-								<td colspan="4">
-									<hr />
-								</td>
-							</tr>
-						</c:if>
 					</c:forEach>
 
 				</table>
