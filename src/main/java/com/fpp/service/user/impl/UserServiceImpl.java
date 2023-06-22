@@ -8,17 +8,23 @@ import org.springframework.stereotype.Service;
 import com.fpp.dao.user.UserDao;
 import com.fpp.dto.user.UserDto;
 import com.fpp.service.user.UserService;
+import com.fpp.validator.user.UserValidator;
 
 @Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserDao userDao;
+	
+	@Autowired
+	UserValidator userValidator;
 
 	@Override
 	public int saveUser(UserDto userDto) {
 		// TODO Auto-generated method stub
 		// if(userDto.getUserType()) {}
+		
+		
 
 		int result = userDao.insertUser(userDto);
 

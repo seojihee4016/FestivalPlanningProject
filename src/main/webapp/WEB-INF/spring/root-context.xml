@@ -32,6 +32,10 @@
 		<constructor-arg name="sqlSessionFactory"
 			ref="sqlSessionFactory" />
 	</bean>
+	
+	<bean class="com.fpp.validator.user.UserValidator"
+			id="userValidator">		
+	</bean>
 
 
 	<!-- <bean id="messageSource"
