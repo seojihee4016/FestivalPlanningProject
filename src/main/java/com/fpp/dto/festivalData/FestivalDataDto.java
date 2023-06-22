@@ -1,26 +1,30 @@
 package com.fpp.dto.festivalData;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Data;
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown =true)
 public class FestivalDataDto {
 
-	String fstvlNm;	
+	String fstvlNm;
 	String opar;
 	String fstvlStartDate;
 	String fstvlEndDate;
 	String fstvlCo;
+	String phoneNumber;
+	String homepageUrl;
+	String rdnmadr;
 	String mnnst;
 	String auspcInstt;
 	String suprtInstt;
-	String phoneNumber;
-	String homepageUrl;
 	String relateInfo;
-	String rdnmadr;
 	String lnmadr;
 	String latitude;
 	String longitude;
 	String referenceDate;
-	String insttCode;
+	String instt_code;
+
 	
 }
