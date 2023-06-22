@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fpp.dao.festivalListDao.FestivalListDao;
-import com.fpp.dto.FestivalList.FestivalListDto;
+import com.fpp.dto.festivalList.FestivalListDto;
 import com.fpp.service.festivalList.FestivalListService;
 
 @Service

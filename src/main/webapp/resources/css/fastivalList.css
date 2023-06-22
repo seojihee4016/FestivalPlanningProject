@@ -1,0 +1,26 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+li{
+    margin-top: 40px;
+    padding-top: 20px;
+}
+
+.festivalListBox-header {
+    padding: 0 20px;
+    width: 100%;
+    height: 150px;
+    display: flex;
+
+}
+
+.fastivalSearchBox {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

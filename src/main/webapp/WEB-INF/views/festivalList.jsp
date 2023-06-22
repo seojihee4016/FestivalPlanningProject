@@ -1,23 +1,44 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<%@ include file="navBar.jsp" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+		<c:set var="path" value="${pageContext.request.contextPath}" />
+		<!DOCTYPE html>
+		<html>
 
+		<head>
+			<meta charset="UTF-8">
+			<title>Insert title here</title>
+			<link rel="stylesheet" href="${path}/css/fastivalList.css" />
+		</head>
 
+		<body>
+			<%@ include file="navBar.jsp" %>
 
-	<c:forEach var="item" items="${festivalList}">
-	<p>
-	<a href="">${item.fstvlName}, ${item.fstvlStartDate}, ${item.fstvlEndDate}, ${item.phoneNumber}, ${item.fstvlCo}</a>
-	</p>
-		
-	</c:forEach>
-	
-	
-</body>
-</html>
+				<div>
+					<div class="fastivalSearchBox">
+						<form action="">
+							<input type="text">
+							<button>검색</button>
+						</form>
+					</div>
+
+					<ul>
+						<c:forEach var="item" items="${festivalList}">
+							<li>
+								<div class="festivalListBox-header">
+									<a href="">${item.fstvlNm}</a>
+								</div>
+								<div class="festivalListBox-meddel">
+									<a href="">${item.fstvlCo}</a>
+								</div>
+								<div class="festivalListBox-footer">
+									${item.fstvlStartDate}, ${item.fstvlEndDate}, ${item.phoneNumber}</a>
+								</div>
+								<hr>
+							</li>
+						</c:forEach>
+					</ul>
+				</div>
+
+		</body>
+
+		</html>

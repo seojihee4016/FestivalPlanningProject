@@ -1,4 +1,4 @@
-package com.fpp.dto.FestivalList;
+package com.fpp.dto.festivalList;
 
 import lombok.Data;
 

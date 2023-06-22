@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.fpp.dao.festivalListDao.FestivalListDao;
-import com.fpp.dto.FestivalList.FestivalListDto;
+import com.fpp.dto.festivalList.FestivalListDto;
 
 @Repository
 public class FestivalListDaoImpl implements FestivalListDao {
@@ -18,7 +18,7 @@ public class FestivalListDaoImpl implements FestivalListDao {
 	@Override
 	public List<FestivalListDto> selectFestivalList() {
 		
-		List<FestivalListDto> List = sqlSessionTemplate.selectList("fastivalList_mapper.select_fastivalList");
+		List<FestivalListDto> List = sqlSessionTemplate.selectList("festivalData_mapper.select_festivalList");
 		
 		return List;
 	}

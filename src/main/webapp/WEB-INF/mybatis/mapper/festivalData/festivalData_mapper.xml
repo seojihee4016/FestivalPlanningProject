@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="festivalData_mapper">
+
+	<select id="select_festivalList" resultType="FestivalListDto">
+		select fstvl_Nm,
+		fstvl_Start_Date, fstvl_End_Date, fstvl_Co, phone_Number from
+		festival_info
+	</select>
+
+	<update id="merge_FestivalData" parameterType="list">
+		MERGE INTO festival_info fi
+		USING (
+		<foreach collection="list" item="item" open="" close=""
+			index="index" separator="UNION">
+			SELECT
+			#{item.fstvlNm} as fstvl_Nm,
+			#{item.opar} as opar,
+			#{item.fstvlStartDate} as fstvlStartDate,
+			#{item.fstvlEndDate} as fstvlEndDate,
+			#{item.fstvlCo} as fstvlCo,
+			#{item.mnnst} as mnnst,
+			#{item.auspcInstt} as auspcInstt,
+			#{item.suprtInstt} as suprtInstt,
+			#{item.phoneNumber} as phoneNumber,
+			#{item.homepageUrl} as homepageUrl,
+			#{item.relateInfo} as relateInfo,
+			#{item.rdnmadr} as rdnmadr,
+			#{item.lnmadr} as lnmadr,
+			#{item.latitude} as latitude,
+			#{item.longitude} as longitude,
+			#{item.referenceDate} as referenceDate
+
+			FROM DUAL
+		</foreach>
+		) T1
+		ON (fi.fstvlNm = T1.fstvlNm)
+		WHEN MATCHED THEN
+		UPDATE
+		SET
+		fi.fstvlNm =	T1.fstvlNm,
+		fi.opar = T1.opar,
+		fi.fstvlStartDate = T1.fstvlStartDate,
+		fi.fstvlEndDate = T1.fstvlEndDate,
+		fi.fstvlCo = T1.fstvlCo,
+		fi.mnnst =	T1.mnnst,
+		fi.auspcInstt = T1.auspcInstt,
+		fi.suprtInstt = T1.suprtInstt,
+		fi.phoneNumber = T1.phoneNumber,
+		fi.homepageUrl = T1.homepageUrl,
+		fi.relateInfo = T1.relateInfo,
+		fi.rdnmadr = T1.rdnmadr,
+		fi.lnmadr =	T1.lnmadr,
+		fi.latitude = T1.latitude,
+		fi.longitude = T1.longitude,
+		fi.referenceDate = T1.referenceDari
+
+		WHEN NOT MATCHED THEN
+		INSERT (
+		fstvlNm,
+		opar,
+		fstvlStartDate,
+		fstvlEndDate,
+		fstvlCo,
+		mnnst,
+		auspcInstt,
+		suprtInstt,
+		phoneNumber,
+		homepageUrl,
+		relateInfo,
+		rdnmadr,
+		lnmadr,
+		latitude,
+		longitude,
+		referenceDari
+		)
+		VALUES (
+		T1.fstvlNm,
+		T1.opar,
+		T1.fstvlStartDate,
+		T1.fstvlEndDate,
+		T1.fstvlCo,
+		T1.mnnst,
+		T1.auspcInstt,
+		T1.suprtInstt,
+		T1.phoneNumber,
+		T1.homepageUrl,
+		T1.relateInfo,
+		T1.rdnmadr,
+		T1.lnmadr,
+		T1.latitude,
+		T1.longitude,
+		T1.referenceDari
+		)
+	</update>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

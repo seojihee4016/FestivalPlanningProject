@@ -10,8 +10,8 @@
     </settings>
 
     <typeAliases>	<!-- mapper-parameterType -->
-    	<typeAlias type="com.fpp.dto.FestivalList.FestivalListDto" alias="FestivalListDto"/>
-    	
+    	<typeAlias type="com.fpp.dto.festivalList.FestivalListDto" alias="FestivalListDto"/>
+    	<typeAlias type="com.fpp.dto.festivalData.FestivalDataDto" alias="FestivalDataDto"/>
     </typeAliases>
 
 </configuration>
