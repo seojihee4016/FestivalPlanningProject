@@ -26,10 +26,10 @@ public class BoardController {
 	}
 
 	// 신청 양식 작성
-	@RequestMapping(value = "/list", method = RequestMethod.POST)
+	@RequestMapping(value = "/applicationForm", method = RequestMethod.POST)
 	public String write(FormDto formDto) throws Exception{
 		boardService.write(formDto);
-		return "list";
+		return "redirect:/list";
 	}
 
 	// 신청 양식 목록 조회 
@@ -39,12 +39,34 @@ public class BoardController {
 		return "list";
 	}
 
-	// 신청 양식 읽기
-		@RequestMapping(value = "/readView", method = RequestMethod.GET)
-		public String read(FormDto formDto, Model model) throws Exception{		
-			model.addAttribute("read", boardService.read(formDto.getFno()));		
-			return "readView";
-		}
+//	// 신청 양식 읽기
+//	@RequestMapping(value = "/View", method = RequestMethod.GET)
+//	public String read(FormDto formDto, Model model) throws Exception{		
+//		model.addAttribute("read", boardService.read(formDto.getFno()));		
+//		return "readView";
+//	}
+
+
+	// 신청 양식 수정뷰로 이동
+	@RequestMapping(value = "/updateView", method = RequestMethod.GET)
+	public String updateView(FormDto formDto, Model model) throws Exception{
+
+		model.addAttribute("update", boardService.read(formDto.getFno()));
+
+		return "updateView";
+	}
+
+	// 신청 양식 수정 이후 list로 이동
+	@RequestMapping(value = "/updateView", method = RequestMethod.POST)
+	public String update(FormDto formDto) throws Exception{
+
+		boardService.update(formDto);
+
+		return "redirect:/list";
+	}
+
+
+
 }
 
 

@@ -34,13 +34,13 @@ public class BoardDaoImpl implements BoardDao{
 
 		return sqlSession.selectOne("board_mapper.read", fno);
 	}
-//
-//	// 게시글 수정
-//	@Override
-//	public void update(BoardDto boardDto) throws Exception {
-//
-//		sqlSession.update("board_mapper.update", boardDto);
-//	}
+
+	// 게시글 수정
+	@Override
+	public void update(FormDto formDto) throws Exception {
+
+		sqlSession.update("board_mapper.update", formDto);
+	}
 //
 //	// 게시글 삭제
 //	@Override

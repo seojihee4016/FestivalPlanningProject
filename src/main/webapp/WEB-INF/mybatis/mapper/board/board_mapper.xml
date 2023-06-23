@@ -5,36 +5,46 @@
 <mapper namespace="board_mapper">
 
 	<!-- 신청 양식 작성 -->
-	<insert id="insert">
-		INSERT INTO FESTIVAL_FORM(
-		FNO, PLACE, FESTIVAL_NAME,
-		ADDRESS_EVENT, Number_of_people, carrying_difficulty, start_date
-		,end_date, budget_range , commissioning_agency, name)
-		VALUES( FESTIVAL_FORM_SEQ.NEXTVAL, #{place}, #{festivalName},
-		#{addressEvent}, #{numberOfPeople}, #{carryingDifficulty}
-		,#{startDate}, #{endDate}, #{budgetRange}, #{commissioningAgency},
-		#{name})
+	<insert id="insert"> 
+		INSERT INTO FESTIVAL_FORM
+		(FNO, PLACE, FESTIVAL_NAME, ADDRESS_EVENT, Number_of_people, carrying_difficulty,
+		start_date ,end_date, budget_range , commissioning_agency, name)
+		VALUES(FESTIVAL_FORM_SEQ.NEXTVAL, #{place}, #{festivalName}, #{addressEvent}, 
+		#{numberOfPeople}, #{carryingDifficulty} ,#{startDate}, #{endDate}, #{budgetRange}, 
+		#{commissioningAgency}, #{name})
 	</insert>
-
-	<!-- 신청 양식 리스트 -->
+	
+	
+	<!-- 신청 양식 리스트 (전체 불러오기)-->
 	<select id="list" resultType="com.fpp.dto.board.FormDto">
-		SELECT FNO, PLACE, FESTIVAL_NAME,
-		ADDRESS_EVENT, Number_of_people, carrying_difficulty, start_date
-		,end_date, budget_range , commissioning_agency, name
-		FROM FESTIVAL_FORM
-		ORDER BY FNO DESC
+		SELECT FNO, PLACE, FESTIVAL_NAME, ADDRESS_EVENT, Number_of_people, carrying_difficulty, 
+		start_date ,end_date, budget_range , commissioning_agency, name
+		FROM FESTIVAL_FORM  ORDER BY FNO DESC
 	</select>
-
-	<!-- 신청 양식 번호로 읽기 -->
-	<select id="read" parameterType="int"
-		resultType="com.fpp.dto.board.FormDto">
-		SELECT FNO, PLACE, FESTIVAL_NAME, ADDRESS_EVENT, Number_of_people,
-		carrying_difficulty, start_date
-		,end_date, budget_range ,
-		commissioning_agency, name
-		FROM FESTIVAL_FORM
-		WHERE FNO = #{fno}
+	
+	
+	<!-- 신청 양식 번호로 읽기 (번호로만 불러오기) -->
+	<select id="read" parameterType="int" resultType="com.fpp.dto.board.FormDto"> 
+		SELECT FNO, PLACE, FESTIVAL_NAME, ADDRESS_EVENT, Number_of_people, carrying_difficulty, 
+		start_date ,end_date, budget_range , commissioning_agency, name 
+		FROM FESTIVAL_FORM WHERE FNO = #{fno}
 	</select>
-
-
+	
+	<!-- 신청 양식 수정 -->
+	<update id="update" parameterType="com.fpp.dto.board.FormDto"> 
+		UPDATE FESTIVAL_FORM SET
+		PLACE = #{place}, 
+		FESTIVAL_NAME = #{festivalName},
+		ADDRESS_EVENT = #{addressEvent}, 
+		Number_of_people = #{numberOfPeople},
+		carrying_difficulty = #{carryingDifficulty}, 
+		start_date = #{startDate}, 
+		end_date = #{endDate}, 
+		budget_range = #{budgetRange},
+		commissioning_agency = #{commissioningAgency}, 
+		name = #{name} WHERE
+		FNO = #{fno}
+	</update>
+	
+	
 </mapper>

@@ -37,7 +37,7 @@
 						<tr>
 							<td><c:out value="${list.fno}" /></td>
 
-							<td><a href="/readView?fno=${list.fno}"><c:out
+							<td><a href="/updateView?fno=${list.fno}"><c:out
 										value="${list.festivalName}" /></a></td>
 							<td><c:out value="${list.name}" /></td>
 							<td><c:out value="${list.place}" /></td>

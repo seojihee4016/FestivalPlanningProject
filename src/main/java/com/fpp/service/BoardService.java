@@ -15,9 +15,9 @@ public interface BoardService {
 
 	// 게시글 번호로 조회
 	public FormDto read(int fno) throws Exception;
-//
-//	// 게시글 수정
-//	public void update(BoardDto boardDto) throws Exception;
+
+	// 게시글 수정
+	public void update(FormDto formDto) throws Exception;
 //
 //	// 게시글 삭제
 //	public void delete(int bno) throws Exception;

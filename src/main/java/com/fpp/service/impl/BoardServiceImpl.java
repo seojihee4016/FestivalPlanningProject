@@ -36,13 +36,13 @@ public class BoardServiceImpl implements BoardService {
 
 		return boardDao.read(fno);
 	}
-//
-//	//게시글 수정
-//	@Override
-//	public void update(BoardDto boardDto) throws Exception {
-//
-//		boardDao.update(boardDto);
-//	}
+
+	//게시글 수정
+	@Override
+	public void update(FormDto formDto) throws Exception {
+
+		boardDao.update(formDto);
+	}
 //
 //	//게시글 삭제
 //	@Override

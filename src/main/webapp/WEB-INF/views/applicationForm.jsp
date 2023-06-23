@@ -28,7 +28,7 @@
 		<p>*은 필수 입력입니다.</p>
 		
 		
-	<form action="list" method="post" class="form">
+	<form action="applicationForm" method="post" class="form">
 		<fieldset>
 			<p class="place">장소 구분을 선택해주세요 *</p><br> 
 			<input type="radio" name="place" id="inside" value="inside"><label for="inside"> 실내</label> <br> 
