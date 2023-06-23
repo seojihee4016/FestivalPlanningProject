@@ -3,13 +3,16 @@ package com.fpp.controller.user;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.fpp.dto.user.UserDto;
@@ -21,28 +24,29 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
-	@Autowired
-	UserValidator userValidator;
 
 	@GetMapping("/join")
-	public String join(HttpSession session) {
+	public String join() {
 
 		return "join";
 	}
 
 	@PostMapping("/join")
-	public String join_process(UserDto userDto) {
+	public String join_process(@ModelAttribute UserDto userDto, BindingResult bindingResult) {
 
-		// userDto 안에 사용자가 입력한, id , name 들어있을것이다.
-		int result = userService.saveUser(userDto);
-
-		if (result > 0) {
-			// 정상 케이스
-			return "login";
-		} else {
+		int result = userService.saveUser(userDto, bindingResult);
+		
+		
+		// 유효성 검증 실패
+		if (bindingResult.hasErrors() || result == 0) {			
+			
 			return "join";
-		}
+		}	
+			// 회원가입 성공		
 
+			
+			return "login";
+		
 	}
 
 	@GetMapping("/userList")
@@ -56,5 +60,6 @@ public class UserController {
 
 		return "userList";
 	}
+
 
 }

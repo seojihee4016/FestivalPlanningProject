@@ -7,18 +7,18 @@
 
 	<insert id="insert_user" parameterType="UserDto">
 		insert into f_user
-		values ( #{login_Id}, #{login_Pw}, #{name}, #{email}, #{phone_Number} )
+		values ( #{login_Id}, #{login_Pw}, #{name}, #{email}, #{tel_Number}, #{birth} )
 	</insert>
 
 	<select id="select_user" resultType="UserDto"
 		parameterType="UserDto">
-		select login_Id, login_Pw, name, email, phone_Number
+		select login_Id, login_Pw, name, email, tel_Number, birth
 		from f_user
 	</select>
 
 	<select id="select_user2" resultType="UserDto"
 		parameterType="UserDto">
-		select login_Id, login_Pw, name, email, phone_Number
+		select login_Id, login_Pw, name, email, tel_Number, birth
 		from f_user
 	</select>
 
