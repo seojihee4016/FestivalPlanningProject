@@ -13,11 +13,11 @@
 		</header>
 		<hr />
 
-		<nav>홈 - 글 작성</nav>
+		<nav></nav>
 		<hr />
 
 		<section id="container">
-			<form role="form" method="post" action="/write">
+			<form role="form" method="post" action="list">
 				<table>
 					<tr>
 						<td>번호

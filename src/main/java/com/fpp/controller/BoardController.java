@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fpp.service.BoardService;
 import com.fpp.dto.board.BoardDto;
@@ -39,31 +40,22 @@ public class BoardController {
 		return "list";
 	}
 
-//	// 신청 양식 읽기
-//	@RequestMapping(value = "/View", method = RequestMethod.GET)
-//	public String read(FormDto formDto, Model model) throws Exception{		
-//		model.addAttribute("read", boardService.read(formDto.getFno()));		
-//		return "readView";
-//	}
-
-
-	// 신청 양식 수정뷰로 이동
-	@RequestMapping(value = "/updateView", method = RequestMethod.GET)
+	// 신청 양식 수정뷰로 이동 - 화면 연결
+	@GetMapping("/updateView")
 	public String updateView(FormDto formDto, Model model) throws Exception{
-
 		model.addAttribute("update", boardService.read(formDto.getFno()));
-
+		//model.addAttribute("read", boardService.read(formDto.getFno()));
+		
 		return "updateView";
 	}
 
 	// 신청 양식 수정 이후 list로 이동
-	@RequestMapping(value = "/updateView", method = RequestMethod.POST)
-	public String update(FormDto formDto) throws Exception{
-
+	@PostMapping("/updateView")
+	public String update(FormDto formDto ) throws Exception{
 		boardService.update(formDto);
-
 		return "redirect:/list";
 	}
+
 
 
 

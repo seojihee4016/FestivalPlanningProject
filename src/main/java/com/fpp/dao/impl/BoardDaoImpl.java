@@ -3,6 +3,7 @@ package com.fpp.dao.impl;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +15,7 @@ import com.fpp.dto.board.FormDto;
 public class BoardDaoImpl implements BoardDao{
 	@Autowired
 	private SqlSession sqlSession;
+	SqlSessionTemplate sessionTemplate;
 
 	// 게시글 작성
 	@Override
@@ -39,7 +41,8 @@ public class BoardDaoImpl implements BoardDao{
 	@Override
 	public void update(FormDto formDto) throws Exception {
 
-		sqlSession.update("board_mapper.update", formDto);
+		int a = sqlSession.update("board_mapper.update", formDto);
+		System.out.println(a);
 	}
 //
 //	// 게시글 삭제

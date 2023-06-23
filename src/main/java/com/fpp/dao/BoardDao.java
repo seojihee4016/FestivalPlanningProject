@@ -19,5 +19,5 @@ public interface BoardDao {
 	public void update(FormDto formDto) throws Exception;
 
 //	// 게시글 삭제
-//	public void delete(int bno) throws Exception;
+//	public void delete(int fno) throws Exception;
 }

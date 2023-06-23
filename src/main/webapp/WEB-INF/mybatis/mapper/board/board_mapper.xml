@@ -42,9 +42,9 @@
 		end_date = #{endDate}, 
 		budget_range = #{budgetRange},
 		commissioning_agency = #{commissioningAgency}, 
-		name = #{name} WHERE
-		FNO = #{fno}
+		name = #{name} 
+		WHERE FNO = #{fno}
 	</update>
-	
+
 	
 </mapper>

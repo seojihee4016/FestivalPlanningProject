@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -31,23 +32,24 @@
 	<main>
 		<p>*은 필수 입력입니다.</p>
 
-		<form action="updateView" method="post" class="form" name="updateForm">
+		
+		<form action="" method="post" class="form">
 			<fieldset>
 				<p class="place">장소 구분을 선택해주세요 *</p>
 				<br> <input type="radio" name="place" id="inside" value="inside"
-					<c:if test="${update.place == '실내'}">checked</c:if>> <label
+					<c:if test="${update.place}">checked</c:if>> <label
 					for="inside"> 실내</label> <br> <input type="radio" name="place"
 					id="outdoors" value="outdoors"
-					<c:if test="${update.place == '실외'}">checked</c:if>> <label
+					<c:if test="${update.place}">checked</c:if>> <label
 					for="outdoors"> 실외</label> <br> <input type="radio"
 					name="place" id="inAndOut" value="inAndOut"
-					<c:if test="${update.place == '실내 + 실외'}">checked</c:if>> <label
+					<c:if test="${update.place}">checked</c:if>> <label
 					for="inAndOut">실내 + 실외</label> <br>
 			</fieldset>
 
 			<fieldset>
 				<p class="festival_name">행사명을 적어주세요 *</p>
-				<br> <input type="text" class="answer1" name="festivalName"
+				<br> <input type="text" class="answer1" name="festivalName" id="festivalName"
 					value="${update.festivalName}" placeholder="행사명을 입력해주세요">
 			</fieldset>
 
@@ -240,53 +242,21 @@
 						});
 	</script>
 
-
-
-	<!--<script type="text/javascript">
-		$(document).ready(function() {
-			var formObj = $("form[name='readForm']");
-
-			// 수정 
-			$(".update_btn").on("click", function() {
-				formObj.attr("action", "/updateView");
-				formObj.attr("method", "get");
-				formObj.submit();
-			})
-	 
-			// 삭제
-			$(".delete_btn").on("click", function() {
-				formObj.attr("action", "/delete");
-				formObj.attr("method", "post");
-				formObj.submit();
-			})
-
-			// 취소
-			$(".list_btn").on("click", function() {
-
-				location.href = "/list";
-			}) 
-		})
-	</script>
-	-->
 	<script type="text/javascript">
-		$(document).ready(function() {
-			var formObj = $("form[name='updateForm']");
+	$(document).ready(function() {
+		var formObj = $("form[name='update']");
 
-			// 수정 
-			$(".update_btn").on("click", function() {
-				formObj.attr("action", "/updateView");
-				formObj.attr("method", "get");
-				formObj.submit();
-			});
-
-			// 수정 취소
-			$(".cancel_update_btn").on("click", function() {
-				formObj.attr("action", "/cancelUpdate");
-				formObj.attr("method", "post");
-				formObj.submit();
-			});
+		// 수정 
+		$(".update_btn").on("click", function() {
+			formObj.attr("action", "/list");
+			formObj.attr("method", "get");
+			formObj.submit();
 		});
-	</script>
+
+	});
+</script>
+
+	
 
 
 </body>
