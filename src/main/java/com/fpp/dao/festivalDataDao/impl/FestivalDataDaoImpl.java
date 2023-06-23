@@ -1,22 +1,25 @@
 package com.fpp.dao.festivalDataDao.impl;
 
-import java.util.List;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.fpp.dao.festivalDataDao.FestivalDataDao;
 import com.fpp.dto.festivalData.FestivalDataDto;
 
+@Repository
 public class FestivalDataDaoImpl implements FestivalDataDao{
 	
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
 	@Override
-	public void festivalDataApiSave(List<FestivalDataDto> requestInfo) {
+	public int festivalDataApiSave(FestivalDataDto item) {
 		
-		sqlSessionTemplate.update("festivalData_mapper.updat_festivalDataUpdate", requestInfo);
+		int i = sqlSessionTemplate.insert("festivalData_mapper.merge_festivalDataUpdate", item);
+		
+		
+		return i;
 	}
 
 	

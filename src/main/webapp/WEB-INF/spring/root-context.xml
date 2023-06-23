@@ -9,17 +9,13 @@
 	  				      http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
 	  				      http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
 
-	  <task:scheduler id="mainScheduler" pool-size="10" />
-
-    <!-- 작업 실행자 빈 설정 -->
-    <task:executor id="mainTaskExecutor" pool-size="10" />
-
-    <!-- 어노테이션 기반 스케줄링 활성화 -->
-    <task:annotation-driven executor="mainTaskExecutor" scheduler="mainScheduler" />
-
-    <!-- FestivalInfoUpdate 클래스 빈 설정 -->
-    <bean id="festivalInfoUpdate" class="com.fpp.scheduler.FestivalInfoUpdate" />
-
+	<bean id="festivalInfoUpdate" 	class="com.fpp.scheduler.FestivalInfoUpdate" />
+	<task:scheduler id="mainScheduler" pool-size="10" />
+	<task:executor id="mainTaskExecutor" pool-size="10" />
+	<task:annotation-driven executor="mainTaskExecutor" scheduler="mainScheduler" />
+	
+	
+	
 	<bean class="org.apache.commons.dbcp2.BasicDataSource"
 		id="data_source"><!-- 데이터를 어디서 가져올 것인지, DB 연결 정보 -->
 		<!-- <property name="driverClassName" value="oracle.jdbc.OracleDriver"/> -->
@@ -41,10 +37,8 @@
 			value="/WEB-INF/mybatis/mybatis-config.xml" />
 	</bean>
 
-	<bean class="org.mybatis.spring.SqlSessionTemplate"
-		id="sqlSessionTemplate">
-		<constructor-arg name="sqlSessionFactory"
-			ref="sqlSessionFactory" />
+	<bean class="org.mybatis.spring.SqlSessionTemplate"	id="sqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 
 	

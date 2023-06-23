@@ -12,71 +12,69 @@
 		festival_info
 	</select>
 
-	<update id="merge_FestivalData" parameterType="list">
-		MERGE INTO festival_info fi
+	<insert id="merge_festivalDataUpdate" parameterType="FestivalDataDto">
+		MERGE INTO festival_info as fi 
 		USING (
-		<foreach collection="list" item="item" open="" close=""
-			index="index" separator="UNION">
 			SELECT
-			#{item.fstvlNm} as fstvl_Nm,
-			#{item.opar} as opar,
-			#{item.fstvlStartDate} as fstvlStartDate,
-			#{item.fstvlEndDate} as fstvlEndDate,
-			#{item.fstvlCo} as fstvlCo,
-			#{item.mnnst} as mnnst,
-			#{item.auspcInstt} as auspcInstt,
-			#{item.suprtInstt} as suprtInstt,
-			#{item.phoneNumber} as phoneNumber,
-			#{item.homepageUrl} as homepageUrl,
-			#{item.relateInfo} as relateInfo,
-			#{item.rdnmadr} as rdnmadr,
-			#{item.lnmadr} as lnmadr,
-			#{item.latitude} as latitude,
-			#{item.longitude} as longitude,
-			#{item.referenceDate} as referenceDate
-
+			#{fstvlNm} as fstvlNm,
+			#{opar} as opar,
+			#{fstvlStartDate} as fstvlStartDate,
+			#{fstvlEndDate} as fstvlEndDate,
+			#{fstvlCo} as fstvlCo,
+			#{mnnst} as mnnst,
+			#{auspcInstt} as auspcInstt,
+			#{suprtInstt} as suprtInstt,
+			#{phoneNumber} as phoneNumber,
+			#{homepageUrl} as homepageUrl,
+			#{relateInfo} as relateInfo,
+			#{rdnmadr} as rdnmadr,
+			#{lnmadr} as lnmadr,
+			#{latitude} as latitude,
+			#{longitude} as longitude,
+			#{referenceDate} as referenceDate,
+			#{insttCode} = as insttcode
 			FROM DUAL
-		</foreach>
-		) T1
-		ON (fi.fstvlNm = T1.fstvlNm)
+		) as T1
+		ON (fi.fstvl_Nm = T1.fstvlNm)
 		WHEN MATCHED THEN
 		UPDATE
 		SET
-		fi.fstvlNm =	T1.fstvlNm,
+		fi.fstvl_Nm = T1.fstvlNm,
 		fi.opar = T1.opar,
-		fi.fstvlStartDate = T1.fstvlStartDate,
-		fi.fstvlEndDate = T1.fstvlEndDate,
-		fi.fstvlCo = T1.fstvlCo,
+		fi.fstvl_Start_Date = T1.fstvlStartDate,
+		fi.fstvl_End_Date = T1.fstvlEndDate,
+		fi.fstvl_Co = T1.fstvlCo,
 		fi.mnnst =	T1.mnnst,
-		fi.auspcInstt = T1.auspcInstt,
-		fi.suprtInstt = T1.suprtInstt,
-		fi.phoneNumber = T1.phoneNumber,
-		fi.homepageUrl = T1.homepageUrl,
-		fi.relateInfo = T1.relateInfo,
+		fi.auspc_Instt = T1.auspcInstt,
+		fi.suprt_Instt = T1.suprtInstt,
+		fi.phone_Number = T1.phoneNumber,
+		fi.homepage_Url = T1.homepageUrl,
+		fi.relate_Info = T1.relateInfo,
 		fi.rdnmadr = T1.rdnmadr,
 		fi.lnmadr =	T1.lnmadr,
 		fi.latitude = T1.latitude,
 		fi.longitude = T1.longitude,
-		fi.referenceDate = T1.referenceDari
-
+		fi.reference_Date = T1.referenceDari,
+		fi.instt_code = T1.insttcode
 		WHEN NOT MATCHED THEN
 		INSERT (
-		fstvlNm,
-		opar,
-		fstvlStartDate,
-		fstvlEndDate,
-		fstvlCo,
-		mnnst,
-		auspcInstt,
-		suprtInstt,
-		phoneNumber,
-		homepageUrl,
-		relateInfo,
-		rdnmadr,
-		lnmadr,
-		latitude,
-		longitude,
-		referenceDari
+		fi.fstvl_Nm,
+		fi.opar,
+		fi.fstvl_Start_Date,
+		fi.fstvl_End_Date,
+		fi.fstvl_Co,
+		fi.mnnst,
+		fi.auspc_Instt,
+		fi.suprt_Instt,
+		fi.phone_Number,
+		fi.homepage_Url,
+		fi.relate_Info,
+		fi.rdnmadr,
+		fi.lnmadr,
+		fi.latitude,
+		fi.longitude,
+		fi.reference_Date,
+		fi.instt_Code
 		)
 		VALUES (
 		T1.fstvlNm,
@@ -94,9 +92,10 @@
 		T1.lnmadr,
 		T1.latitude,
 		T1.longitude,
-		T1.referenceDari
+		T1.referenceDate,
+		T1.insttCode
 		)
-	</update>
+	</insert>
 
 </mapper>
 

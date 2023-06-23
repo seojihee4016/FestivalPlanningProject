@@ -11,6 +11,7 @@ import lombok.Data;
 public class FestivalDataBody {
 	
 	List<FestivalDataDto> items;
+	String pageNo;
 
 
 }

@@ -6,8 +6,8 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown =true)
-public class FestivalDataResponse {
+public class FestivalDataHeader {
 	
-	FestivalDataBody body;
-	FestivalDataHeader header;
+	String resultCode;
+	
 }

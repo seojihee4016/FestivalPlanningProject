@@ -28,9 +28,8 @@ public class FestivalListController {
 		List<FestivalListDto> List = festivalListService.lodeList();
 		model.addAttribute("festivalList", List);
 		
-		FestivalInfoUpdate.festivalInfoUpdateScheduler();
+		festivalInfoUpdate.festivalInfoUpdateScheduler();
 		
-		//sqlSessionTemplate.selectList("reservation_mapper.select_reservation_list_by_searchKeyword", searchKeyword);
 		return "festivalList";
 	}
 

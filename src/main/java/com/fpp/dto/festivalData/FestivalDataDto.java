@@ -8,7 +8,7 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown =true)
 public class FestivalDataDto {
 
-	String fstvlNm;
+    String fstvlNm;
 	String opar;
 	String fstvlStartDate;
 	String fstvlEndDate;
@@ -24,7 +24,6 @@ public class FestivalDataDto {
 	String latitude;
 	String longitude;
 	String referenceDate;
-	String instt_code;
+	String insttCode;
 
-	
 }
