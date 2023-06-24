@@ -51,4 +51,37 @@ public class UserServiceImpl implements UserService {
 		return userList;
 	}
 
+	@Override
+	public boolean idCheck(UserDto userDto, BindingResult bindingResult) {
+		
+		UserValidator.idValidate(userDto, bindingResult);
+		
+		if(!(bindingResult.hasErrors())) {
+			
+			UserDto user = userDao.selectUserById(userDto);
+			
+			
+			// 중복아이디 없으면 true
+			if(user == null) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
+	@Override
+	public boolean login(UserDto userDto) {
+		
+		UserDto userInfo = userDao.selectUserById(userDto);
+		
+		if(userInfo != null) {
+			if(userInfo.getLoginPw().equals(userDto.getLoginPw())) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
 }

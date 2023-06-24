@@ -15,9 +15,9 @@
 <body>
 	<h1>로그인 페이지</h1><br><br>
 
-	<form action="" method="GET">
-		아이디 <input type='text' name="login_Id"/><br>
-		비밀번호 <input type='password' name="login_Pw"/><br>
+	<form action="" method="POST">
+		아이디 <input type='text' name="loginId"/><br>
+		비밀번호 <input type='password' name="loginPw"/><br>
 
 		<button type="submit">로그인</button>
 	</form>

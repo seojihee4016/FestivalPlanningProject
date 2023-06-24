@@ -17,6 +17,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
 	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
@@ -39,18 +40,18 @@
 
 	<div class="container">
 		<form action="" method="POST">
-			아이디 <input type="text" class="form-control" name="login_Id"
-				value="${userDto.login_Id}" /><br> <span class="errMsg">
+			아이디 <input type="text" class="form-control" name="loginId" id="login_Id"
+				value="${userDto.loginId}" /><button type="button" id="idCheck">중복체크</button><br> <span class="errMsg">
 				<spring:hasBindErrors name="userDto">
-					<c:if test="${errors.hasFieldErrors('login_Id') }">
-						<p>▶ ${errors.getFieldError("login_Id").getDefaultMessage() }</p>
+					<c:if test="${errors.hasFieldErrors('loginId') }">
+						<p>▶ ${errors.getFieldError("loginId").getDefaultMessage() }</p>
 					</c:if>
 				</spring:hasBindErrors>
-			</span> 비밀번호 <input type="password" class="form-control" name="login_Pw"
-				value="${userDto.login_Pw}" /><br> <span class="errMsg">
+			</span> 비밀번호 <input type="text" class="form-control" name="loginPw"
+				value="${userDto.loginPw}" /><br> <span class="errMsg">
 				<spring:hasBindErrors name="userDto">
-					<c:if test="${errors.hasFieldErrors('login_Pw') }">
-						<p>▶ ${errors.getFieldError("login_Pw").getDefaultMessage() }</p>
+					<c:if test="${errors.hasFieldErrors('loginPw') }">
+						<p>▶ ${errors.getFieldError("loginPw").getDefaultMessage() }</p>
 					</c:if>
 				</spring:hasBindErrors>
 			</span> 이름 <input type="text" class="form-control" name="name"
@@ -67,14 +68,14 @@
 						<p>▶ ${errors.getFieldError("email").getDefaultMessage() }</p>
 					</c:if>
 				</spring:hasBindErrors>
-			</span> 전화번호 <input type="number" class="form-control" name="tel_Number"
-				value="${userDto.tel_Number}" /><br> <span class="errMsg">
+			</span> 전화번호 <input type="text" class="form-control" name="telNumber"
+				value="${userDto.telNumber}" /><br> <span class="errMsg">
 				<spring:hasBindErrors name="userDto">
-					<c:if test="${errors.hasFieldErrors('tel_Number') }">
-						<p>▶ ${errors.getFieldError("tel_Number").getDefaultMessage() }</p>
+					<c:if test="${errors.hasFieldErrors('telNumber') }">
+						<p>▶ ${errors.getFieldError("telNumber").getDefaultMessage() }</p>
 					</c:if>
 				</spring:hasBindErrors>
-			</span> 생년월일 <input type="number" class="form-control" name="birth"
+			</span> 생년월일 <input type="text" class="form-control" name="birth"
 				value="${userDto.birth}" /><br> <span class="errMsg"> <spring:hasBindErrors
 					name="userDto">
 					<c:if test="${errors.hasFieldErrors('birth') }">
@@ -82,8 +83,37 @@
 					</c:if>
 				</spring:hasBindErrors>
 			</span>
-			<button type="submit" class="btn btn-primary">등록하기</button>
+			<button type="submit" id="btn_submit" class="btn btn-primary">등록하기</button>
 		</form>
 	</div>
 </body>
+<script>
+$(function() {
+	
+	$("#idCheck").click(function() {
+		
+		const input_id = $("#login_Id").val(); // 입력 아이디 가져오기
+		
+		$.ajax({
+			type : "POST",
+			url : "/idcheck", //요청 할 URL
+			async : false,
+			data : { loginId : input_id}, //넘길 파라미터
+			dataType : "json",
+			success : function(data) {
+				console.log(data);
+				if(data.result === 'true') {
+					alert("사용가능 아이디");
+				} else {
+					alert("사용 불가능한 아이디");
+				}
+			},
+			error : function(data) {
+				console.log("접속 도중 오류가 발생했습니다."); //에러시 실행 할 내용
+			}
+		});
+				
+	});
+});
+</script>
 </html>

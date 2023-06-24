@@ -46,4 +46,10 @@ public class UserDaoImpl implements UserDao {
 		return list;
 	}
 
+	@Override
+	public UserDto selectUserById(UserDto userDto) {
+		UserDto findUser = sqlSessionTemplate.selectOne("user_mapper.select_user_by_id", userDto);
+		return findUser;
+	}
+
 }

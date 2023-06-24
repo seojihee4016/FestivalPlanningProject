@@ -4,22 +4,19 @@
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="user_mapper">
-
+	<!-- #{~~~} 안에 있는 애들은 DTO 필드명, 쿼리문은 DB컬럼명 -->
 	<insert id="insert_user" parameterType="UserDto">
 		insert into f_user
-		values ( #{login_Id}, #{login_Pw}, #{name}, #{email}, #{tel_Number}, #{birth} )
+		values ( #{loginId}, #{loginPw}, #{name}, #{email}, #{telNumber}, #{birth} )
 	</insert>
 
-	<select id="select_user" resultType="UserDto"
+	<select id="select_user_by_id" resultType="UserDto"
 		parameterType="UserDto">
-		select login_Id, login_Pw, name, email, tel_Number, birth
+		select *
 		from f_user
+		where login_Id = #{loginId}
 	</select>
-
-	<select id="select_user2" resultType="UserDto"
-		parameterType="UserDto">
-		select login_Id, login_Pw, name, email, tel_Number, birth
-		from f_user
-	</select>
+	
+	
 
 </mapper>

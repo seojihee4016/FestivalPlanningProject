@@ -1,14 +1,16 @@
 package com.fpp.dto.user;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
+@ToString
 public class UserDto {
 
-	String login_Id;
-	String login_Pw;
+	String loginId;
+	String loginPw;
 	String name;
 	String email;
-	String tel_Number;
+	String telNumber;
 	String birth;
 }

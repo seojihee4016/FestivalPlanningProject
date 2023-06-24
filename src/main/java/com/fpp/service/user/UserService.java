@@ -13,4 +13,8 @@ public interface UserService {
 	public List<UserDto> getUserList();
 	
 	public List<UserDto> getUserList2(UserDto userDto);
+	
+	public boolean idCheck(UserDto userDto, BindingResult bindingResult);
+	
+	public boolean login(UserDto userDto);
 }

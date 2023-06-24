@@ -12,5 +12,7 @@ public interface UserDao {
 	public List<UserDto> selectUserList();
 
 	public List<UserDto> selectUserList2(UserDto userDto);
+	
+	public UserDto selectUserById(UserDto userDto);
 
 }
