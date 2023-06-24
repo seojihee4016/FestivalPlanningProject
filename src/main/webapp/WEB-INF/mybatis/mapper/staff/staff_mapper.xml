@@ -7,21 +7,24 @@
 <mapper namespace="staff_mapper">
 	<insert id="insert_staff" parameterType="StaffDto">
 		insert into t_staff_recruitment
-		values ( #{festivalName}, #{supportPeriod},
+		values ( #{festivalName}, #{commissioningAgency}, #{addressEvent},
+				 #{place}, #{startDate}, #{endDate},
 				 #{recruitmentTO}, #{recruitmentField},
 				 #{preferentialTreatment}, #{applicationPeriod} )
 	</insert>
 	
 	<select id="select_staff_recruitment_list" resultType="StaffDto">
-		select festival_name, support_period,
+		select festival_name, commissioning_agency, address_event, place,
+			   start_date, end_date,
 		       recruitment_to, recruitment_field,
 		       preferential_treatment, application_period
-		       from t_staff_recruitment
+		from t_staff_recruitment
 	</select>
 	
 	<select id="select_staff_recruitment_list_by_festivalName" resultType="StaffDto"
 										    				   parameterType="String">
-		select festival_name, support_period,
+		select festival_name, commissioning_agency, address_event, place,
+			   start_date, end_date,
 		       recruitment_to, recruitment_field,
 		       preferential_treatment, application_period
 		from t_staff_recruitment

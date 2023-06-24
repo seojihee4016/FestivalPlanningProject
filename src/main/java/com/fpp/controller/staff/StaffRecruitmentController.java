@@ -46,6 +46,11 @@ public class StaffRecruitmentController {
 	}
 	
 	//스탭 모집 페이지
+//	@GetMapping("/staffRecruitment")
+//	public String staffRecruitmentListByFestivalName() {
+//		return "staffRecruitment";
+//	}
+	
 	@GetMapping("/staffRecruitment")
 	public String staffRecruitmentListByFestivalName(Model model, 
 								@RequestParam("festivalName") String festivalName) {
