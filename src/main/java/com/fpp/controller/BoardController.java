@@ -1,5 +1,7 @@
 package com.fpp.controller;
 
+import javax.validation.constraints.PastOrPresent;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,17 +47,23 @@ public class BoardController {
 	public String updateView(FormDto formDto, Model model) throws Exception{
 		model.addAttribute("update", boardService.read(formDto.getFno()));
 		//model.addAttribute("read", boardService.read(formDto.getFno()));
-		
+
 		return "updateView";
 	}
 
 	// 신청 양식 수정 이후 list로 이동
 	@PostMapping("/updateView")
-	public String update(FormDto formDto ) throws Exception{
+	public String update(FormDto formDto) throws Exception{
 		boardService.update(formDto);
 		return "redirect:/list";
 	}
 
+	// 신청 양식 삭제
+	@PostMapping("/delete")
+	public String delete(FormDto formDto) throws Exception{
+		boardService.delete(formDto.getFno());
+		return "redirect:/list";
+	}
 
 
 

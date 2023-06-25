@@ -6,13 +6,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="${path}/css/applicationForm.css" rel="stylesheet" type="text/css" />
+<link href="${path}/css/applicationForm.css?ver=3" rel="stylesheet"
+	type="text/css" />
+<!-- 버전 정보 쿼리스트링 형태로 추가. 브라우저가 url 인식해 캐쉬된 파일 대신 쿼리 스티링 추가된 css사용 -->
 <title>google form</title>
 </head>
 <body>
 	<header>
+
+		<img src="images/신청 양식 이미지1.png" >
 		<section class="header-wrap">
 			<div class="top-deco">""</div>
+
+
 			<section class="header">
 				<h1>축제 신청 폼</h1>
 				<p>행사 문의</p>
@@ -23,41 +29,52 @@
 			</div>
 		</section>
 	</header>
-	
+
 	<main>
 		<p>*은 필수 입력입니다.</p>
-		
-		
-	<form action="applicationForm" method="post" class="form">
-		<fieldset>
-			<p class="place">장소 구분을 선택해주세요 *</p><br> 
-			<input type="radio" name="place" id="inside" value="inside"><label for="inside"> 실내</label> <br> 
-			<input type="radio" name="place" id="outdoors" value="outdoors"> <label for="outdoors"> 실외</label> <br> 
-			<input type="radio" name="place" id="inAndOut" value="inAndOut"> <label for="inAndOut">실내 + 실외</label> <br>
-		</fieldset>
 
-		  	
-		
-		<fieldset>
-			<p class="festival_name">행사명을 적어주세요 *</p>
-			<br> <input type="text" class="answer1" name="festivalName" value="festivalName" placeholder="행사명을 입력해주세요">
-		</fieldset>
-		
+
+		<form action="applicationForm" method="post" class="form">
+			<fieldset>
+				<p class="place">장소 구분을 선택해주세요 *</p>
+				<br> <input type="radio" name="place" id="inside"
+					value="inside"><label for="inside"> 실내</label> <br> <input
+					type="radio" name="place" id="outdoors" value="outdoors"> <label
+					for="outdoors"> 실외</label> <br> <input type="radio"
+					name="place" id="inAndOut" value="inAndOut"> <label
+					for="inAndOut">실내 + 실외</label> <br>
+			</fieldset>
+
+
+
+			<fieldset>
+				<p class="festival_name">행사명을 적어주세요 *</p>
+				<br> <input type="text" class="answer1" name="festivalName"
+					value="festivalName" placeholder="행사명을 입력해주세요">
+			</fieldset>
+
 			<fieldset>
 				<p class="address_event">행사장 주소를 적어주세요 *</p>
-				<br> <input type="text" class="answer1" name="addressEvent" placeholder="행사장 주소를 입력해주세요">
+				<br> <input type="text" class="answer1" name="addressEvent"
+					placeholder="행사장 주소를 입력해주세요">
 			</fieldset>
-			
+
 			<fieldset>
 				<p class="Number_of_people">예상 인원 수가 어떻게 되시나요? *</p>
-				<br> <input type="radio" name="NumberOfPeople" value="NumberOfPeople 50"> <label for="50"> 50명 이내 </label> <br> 
-					<input type="radio" name="NumberOfPeople" value="NumberOfPeople 51~100"> <label for="51~100">51~100명</label> <br> 
-					<input type="radio" name="NumberOfPeople" value="NumberOfPeople 101~200"> <label for="101~200">101명~200명</label> <br> 
-					<input type="radio" name="NumberOfPeople" value="NumberOfPeople 201~300"> <label for="201~300">201명 ~ 400명</label> <br> 
-					<input type="radio" name="NumberOfPeople" value="NumberOfPeople 301~400"> <label for="301~400">400명 이상</label> <br> 
+				<br> <input type="radio" name="NumberOfPeople"
+					value="NumberOfPeople 50"> <label for="50"> 50명 이내
+				</label> <br> <input type="radio" name="NumberOfPeople"
+					value="NumberOfPeople 51~100"> <label for="51~100">51~100명</label>
+				<br> <input type="radio" name="NumberOfPeople"
+					value="NumberOfPeople 101~200"> <label for="101~200">101명~200명</label>
+				<br> <input type="radio" name="NumberOfPeople"
+					value="NumberOfPeople 201~300"> <label for="201~300">201명
+					~ 400명</label> <br> <input type="radio" name="NumberOfPeople"
+					value="NumberOfPeople 301~400"> <label for="301~400">400명
+					이상</label> <br>
 			</fieldset>
-			
-						
+
+
 
 			<fieldset>
 				<p class="carrying_difficulty">운반 난이도가 어떻게 되시나요? *</p>
@@ -77,15 +94,16 @@
 				<p class="start_date">행사일과 시작 시간이 어떻게 되시나요? *</p>
 				<br>
 				<p class="mini-name">날짜</p>
-				<input type="date" class="datetime" value="startDate" name="startDate">
-			</fieldset>	
-		<!--  시간
+				<input type="date" class="datetime" value="startDate"
+					name="startDate">
+			</fieldset>
+			<!--  시간
 			<p class="mini-name">시간</p>
 			<input type="time" class="time">
 			</fieldset>
 		
 		 -->
-			
+
 			<fieldset>
 				<p class="end_date">행사일과 종료 시간이 어떻게 되시나요? *</p>
 				<br>
@@ -98,9 +116,9 @@
 				<input type="time" class="time">
 			</fieldset>
 			-->
-			
-			
-			
+
+
+
 			<fieldset>
 				<p class="budget_range">예상 금액이 어떻게 되시나요? *</p>
 				<br> <select name="budgetRange" id="budgetRange">
@@ -116,26 +134,29 @@
 					<option value="budgetRange 3000~">3000만원 이상</option>
 				</select>
 			</fieldset>
-		
-		
-			
+
+
+
 			<fieldset>
 				<p class="commissioning_agency">의뢰 회사(기관)을 적어주세요 *</p>
-				<br> <input type="text" class="answer1" name="commissioningAgency" value="commissioningAgency" placeholder="회사명을 입력해주세요">
+				<br> <input type="text" class="answer1"
+					name="commissioningAgency" value="commissioningAgency"
+					placeholder="회사명을 입력해주세요">
 			</fieldset>
-		
+
 
 			<fieldset>
 				<p class="name">담당자 성함을 적어주세요 *</p>
-				<br> <input type="text" class="answer1" name="name" value="name" placeholder="담당자 성함을 입력해주세요">
-			</fieldset>  
+				<br> <input type="text" class="answer1" name="name"
+					value="name" placeholder="담당자 성함을 입력해주세요">
+			</fieldset>
 
 
 			<div class="bottom">
 				<button type="submit" class="submit">제출</button>
 				<button type="reset" class="clear">양식 지우기</button>
-		</div>
-	</form>
+			</div>
+		</form>
 	</main>
 </body>
 </html>

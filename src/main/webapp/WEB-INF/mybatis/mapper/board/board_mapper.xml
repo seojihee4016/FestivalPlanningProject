@@ -33,18 +33,23 @@
 	<!-- 신청 양식 수정 -->
 	<update id="update" parameterType="com.fpp.dto.board.FormDto"> 
 		UPDATE FESTIVAL_FORM SET
-		PLACE = #{place}, 
+		
 		FESTIVAL_NAME = #{festivalName},
 		ADDRESS_EVENT = #{addressEvent}, 
-		Number_of_people = #{numberOfPeople},
-		carrying_difficulty = #{carryingDifficulty}, 
+		
 		start_date = #{startDate}, 
 		end_date = #{endDate}, 
-		budget_range = #{budgetRange},
+		
 		commissioning_agency = #{commissioningAgency}, 
 		name = #{name} 
 		WHERE FNO = #{fno}
 	</update>
 
+	<!-- 신청 양식 삭제 -->
+	<delete id="delete" parameterType="int">
+		DELETE 
+		FROM FESTIVAL_FORM
+		WHERE FNO = #{fno}
+	</delete>
 	
 </mapper>

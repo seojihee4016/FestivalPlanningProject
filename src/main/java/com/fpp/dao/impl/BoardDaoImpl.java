@@ -17,12 +17,12 @@ public class BoardDaoImpl implements BoardDao{
 	private SqlSession sqlSession;
 	SqlSessionTemplate sessionTemplate;
 
-	// 게시글 작성
+	// 신청 양식 작성
 	@Override
 	public void write(FormDto formDto) throws Exception {
 		sqlSession.insert("board_mapper.insert", formDto);
 	}
-	// 게시글 리스트 조회
+	// 신청 양식 리스트 조회
 	@Override
 	public List<FormDto> list() throws Exception {
 		// TODO Auto-generated method stub
@@ -30,26 +30,26 @@ public class BoardDaoImpl implements BoardDao{
 		return sqlSession.selectList("board_mapper.list");
 	}
 	
-	// 게시글 번호로 조회
+	// 신청 양식 번호로 조회
 	@Override
 	public FormDto read(int fno) throws Exception {
 
 		return sqlSession.selectOne("board_mapper.read", fno);
 	}
 
-	// 게시글 수정
+	// 신청 양식 수정
 	@Override
 	public void update(FormDto formDto) throws Exception {
 
 		int a = sqlSession.update("board_mapper.update", formDto);
 		System.out.println(a);
 	}
-//
-//	// 게시글 삭제
-//	@Override
-//	public void delete(int bno) throws Exception {
-//
-//		sqlSession.delete("board_mapper.delete", bno);
-//	}
+
+	// 신청 양식 삭제
+	@Override
+	public void delete(int fno) throws Exception {
+
+		sqlSession.delete("board_mapper.delete", fno);
+	}
 
 }

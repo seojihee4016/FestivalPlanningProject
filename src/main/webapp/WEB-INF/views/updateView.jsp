@@ -9,13 +9,16 @@
 <head>
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link href="${path}/css/applicationForm.css" rel="stylesheet"
+<link href="${path}/css/applicationForm.css?ver=3" rel="stylesheet"
 	type="text/css" />
+<!-- 버전 정보 쿼리스트링 형태로 추가. 브라우저가 url 인식해 캐쉬된 파일 대신 쿼리 스티링 추가된 css사용 -->
 <title>게시판</title>
 
 </head>
 <body>
+
 	<header>
+	<img src="images/신청 양식 이미지1.png"  width="800" height="220">
 		<section class="header-wrap">
 			<div class="top-deco">""</div>
 			<section class="header">
@@ -32,14 +35,15 @@
 	<main>
 		<p>*은 필수 입력입니다.</p>
 
-		
+
 		<form action="" method="post" class="form">
+			<input type="hidden" id="fno" name="fno" value="${delete.fno}" />
 			<fieldset>
 				<p class="place">장소 구분을 선택해주세요 *</p>
-				<br> <input type="radio" name="place" id="inside" value="inside"
-					<c:if test="${update.place}">checked</c:if>> <label
-					for="inside"> 실내</label> <br> <input type="radio" name="place"
-					id="outdoors" value="outdoors"
+				<br> <input type="radio" name="place" id="inside"
+					value="inside" <c:if test="${update.place}">checked</c:if>>
+				<label for="inside"> 실내</label> <br> <input type="radio"
+					name="place" id="outdoors" value="outdoors"
 					<c:if test="${update.place}">checked</c:if>> <label
 					for="outdoors"> 실외</label> <br> <input type="radio"
 					name="place" id="inAndOut" value="inAndOut"
@@ -49,8 +53,9 @@
 
 			<fieldset>
 				<p class="festival_name">행사명을 적어주세요 *</p>
-				<br> <input type="text" class="answer1" name="festivalName" id="festivalName"
-					value="${update.festivalName}" placeholder="행사명을 입력해주세요">
+				<br> <input type="text" class="answer1" name="festivalName"
+					id="festivalName" value="${update.festivalName}"
+					placeholder="행사명을 입력해주세요">
 			</fieldset>
 
 			<fieldset>
@@ -171,10 +176,10 @@
 					value="${update.name}" placeholder="성함을 입력해주세요">
 			</fieldset>
 
-
-
 			<button type="submit" class="update_btn">수정</button>
+			<button type="submit" class="delete_btn">삭제</button>
 			<button type="button" class="cancel-btn" onclick="history.back();">취소</button>
+
 		</form>
 	</main>
 
@@ -243,20 +248,31 @@
 	</script>
 
 	<script type="text/javascript">
-	$(document).ready(function() {
-		var formObj = $("form[name='update']");
+		$(document).ready(function() {
+			var formObj = $("form[name='update']");
 
-		// 수정 
-		$(".update_btn").on("click", function() {
-			formObj.attr("action", "/list");
-			formObj.attr("method", "get");
-			formObj.submit();
+			// 수정
+			$(".update_btn").on("click", function() {
+				if (confirm("수정하시겠습니까?")) {
+					formObj.attr("action", "/update");
+					formObj.attr("method", "post");
+					formObj.submit();
+				}
+			});
+
+			// 삭제
+			$(".delete_btn").on("click", function() {
+				if (confirm("삭제하시겠습니까?")) {
+					formObj.attr("action", "/delete");
+					formObj.attr("method", "post");
+					formObj.submit();
+				}
+			});
+
 		});
+	</script>
 
-	});
-</script>
 
-	
 
 
 </body>
