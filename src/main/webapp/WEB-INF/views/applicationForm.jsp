@@ -12,9 +12,9 @@
 <title>google form</title>
 </head>
 <body>
-	<header>
 
-		<img src="images/신청 양식 이미지1.png" >
+	<header>
+		<img src="images/신청 양식 이미지1.png">
 		<section class="header-wrap">
 			<div class="top-deco">""</div>
 
@@ -34,9 +34,10 @@
 		<p>*은 필수 입력입니다.</p>
 
 
-		<form action="applicationForm" method="post" class="form">
+		<form action="applicationForm" method="post" class="form"
+			onsubmit="return validateForm()">
 			<fieldset>
-				<p class="place">장소 구분을 선택해주세요 *</p>
+				<p class="place" id="">장소 구분을 선택해주세요 *</p>
 				<br> <input type="radio" name="place" id="inside"
 					value="inside"><label for="inside"> 실내</label> <br> <input
 					type="radio" name="place" id="outdoors" value="outdoors"> <label
@@ -46,12 +47,12 @@
 			</fieldset>
 
 
-
 			<fieldset>
 				<p class="festival_name">행사명을 적어주세요 *</p>
 				<br> <input type="text" class="answer1" name="festivalName"
 					value="festivalName" placeholder="행사명을 입력해주세요">
 			</fieldset>
+
 
 			<fieldset>
 				<p class="address_event">행사장 주소를 적어주세요 *</p>
@@ -158,5 +159,104 @@
 			</div>
 		</form>
 	</main>
+
+	<!-- 유효성 검사 스크립트 -->
+	<script>
+		function validateForm() {
+
+			var placeRadioButtons = document
+					.querySelectorAll('input[name="place"]');
+			var placeRadioButtonChecked = false;
+			for (var i = 0; i < placeRadioButtons.length; i++) {
+				if (placeRadioButtons[i].checked) {
+					placeRadioButtonChecked = true;
+					break;
+				}
+			}
+			if (!placeRadioButtonChecked) {
+				alert('장소 구분을 선택해주세요.');
+				return false;
+			}
+			
+			//예상 인원 수
+			var numberOfPeopleRadioButtons = document
+					.querySelectorAll('input[name="NumberOfPeople"]');
+			var numberOfPeopleRadioButtonChecked = false;
+			for (var i = 0; i < numberOfPeopleRadioButtons.length; i++) {
+				if (numberOfPeopleRadioButtons[i].checked) {
+					numberOfPeopleRadioButtonChecked = true;
+					break;
+				}
+			}
+			if (!numberOfPeopleRadioButtonChecked) {
+				alert('예상 인원 수를 선택해주세요.');
+				return false;
+			}
+
+			//행사명 
+			var festivalNameField = document
+					.querySelector('input[name="festivalName"]');
+			if (festivalNameField.value.trim() === '') {
+				alert('행사명을 입력해주세요.');
+				return false;
+			}
+
+			//행사장 주소 
+			var addressEventField = document
+					.querySelector('input[name="addressEvent"]');
+			if (addressEventField.value.trim() === '') {
+				alert('행사장 주소를 입력해주세요.');
+				return false; // Prevent form submission
+			}
+
+			//의뢰 회사(기관) 
+			var commissioningAgencyField = document
+					.querySelector('input[name="commissioningAgency"]');
+			if (commissioningAgencyField.value.trim() === '') {
+				alert('회사명을 입력해주세요.');
+				return false;
+			}
+
+			//담당자 성함 (name) field
+			var nameField = document.querySelector('input[name="name"]');
+			if (nameField.value.trim() === '') {
+				alert('담당자 성함을 입력해주세요.');
+				return false;
+			}
+
+			var selectOption = document
+					.querySelector('select[name="carryingDifficulty"]');
+			if (selectOption.value === '운반 난이도를 선택해주세요') {
+				alert('운반 난이도를 선택해주세요.');
+				return false;
+			}
+
+			var selectOption = document
+					.querySelector('select[name="budgetRange"]');
+			if (selectOption.value === '예상 금액을 선택해주세요') {
+				alert('예상 금액을 선택해주세요.');
+				return false;
+			}
+			var startDateField = document
+					.querySelector('input[name="startDate"]');
+			var endDateField = document.querySelector('input[name="endDate"]');
+
+			if (startDateField.value.trim() === '') {
+				alert('행사 시작 날짜를 선택해주세요.');
+				return false;
+			}
+
+			if (endDateField.value.trim() === '') {
+				alert('행사 종료 날짜를 선택해주세요.');
+				return false;
+			}
+			
+			
+			return true;
+		}
+	</script>
+
+
+
 </body>
 </html>
