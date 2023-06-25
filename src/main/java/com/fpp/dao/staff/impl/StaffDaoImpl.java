@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.fpp.dao.staff.StaffDao;
+import com.fpp.dto.staff.StaffApplyDto;
 import com.fpp.dto.staff.StaffDto;
 
 @Repository
@@ -41,6 +42,15 @@ public class StaffDaoImpl implements StaffDao {
 				sqlSessionTemplate.selectList("staff_mapper.select_staff_recruitment_list_by_festivalName", festivalName);
 		
 		return list;
+	}
+
+	@Override
+	public int insertStaffApply(StaffApplyDto staffApplyDto) {
+		// TODO Auto-generated method stub
+		
+		int result = sqlSessionTemplate.insert("staff_mapper.insert_staff_apply", staffApplyDto);
+		
+		return result;
 	}
 
 }

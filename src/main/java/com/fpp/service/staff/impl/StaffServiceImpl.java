@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fpp.dao.staff.StaffDao;
+import com.fpp.dto.staff.StaffApplyDto;
 import com.fpp.dto.staff.StaffDto;
 import com.fpp.service.staff.StaffService;
 
@@ -42,5 +43,16 @@ public class StaffServiceImpl implements StaffService {
 		
 		return list;
 	}
+
+	@Override
+	public int staffRecruitmentApply(StaffApplyDto staffApplyDto) {
+		// TODO Auto-generated method stub
+		
+		int result = staffDao.insertStaffApply(staffApplyDto);
+		
+		return result;
+	}
+
+
 
 }

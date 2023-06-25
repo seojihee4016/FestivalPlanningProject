@@ -15,15 +15,15 @@
 	<p>한 줄 공지사항(누르면 팝업?)</p>
 	
 	<div class="list_container">
-	<c:forEach var="item" items="${staffRecruitmentList}">
-		<a href="staffRecruitment?festivalName=${item.festivalName}">
-	<div class="list_area">
-			<p>${item.festivalName}</p>
-			<p>${item.startDate}</p>
-			<p>~ ${item.endDate}</p>
-	</div>
-		</a>
-	</c:forEach>
+		<c:forEach var="item" items="${staffRecruitmentList}">
+			<a href="staffRecruitment?festivalName=${item.festivalName}">
+				<div class="list_area">
+					<p>${item.festivalName}</p>
+					<p>${item.startDate}</p>
+					<p>~ ${item.endDate}</p>
+				</div>
+			</a>
+		</c:forEach>
 	</div>
 </body>
 </html>

@@ -5,6 +5,7 @@
 						
 
 <mapper namespace="staff_mapper">
+	<!-- 스탭 모집 공고 -->
 	<insert id="insert_staff" parameterType="StaffDto">
 		insert into t_staff_recruitment
 		values ( #{festivalName}, #{commissioningAgency}, #{addressEvent},
@@ -30,5 +31,13 @@
 		from t_staff_recruitment
 		where festival_name like '%' || #{value} || '%'
 	</select>
+	
+	
+	<!-- 스탭 모집 신청 -->
+	<insert id="insert_staff_apply" parameterType="StaffApplyDto">
+		insert into t_staff_recruitment_apply
+		values ( #{festivalName}, #{supportPeriodStart}, #{supportPeriodEnd},
+				 #{recruitmentField} )
+	</insert>	
 
 </mapper>
