@@ -38,6 +38,8 @@
 		insert into t_staff_recruitment_apply
 		values ( #{festivalName}, #{supportPeriodStart}, #{supportPeriodEnd},
 				 #{recruitmentField} )
-	</insert>	
+	</insert>
+	
+	
 
 </mapper>
