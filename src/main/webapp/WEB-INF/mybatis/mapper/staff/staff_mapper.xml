@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+						
+
+<mapper namespace="staff_mapper">
+	<!-- 스탭 모집 공고 -->
+	<insert id="insert_staff" parameterType="StaffDto">
+		insert into t_staff_recruitment
+		values ( #{festivalName}, #{commissioningAgency}, #{addressEvent},
+				 #{place}, #{startDate}, #{endDate},
+				 #{recruitmentTO}, #{recruitmentField},
+				 #{preferentialTreatment}, #{applicationPeriod} )
+	</insert>
+	
+	<select id="select_staff_recruitment_list" resultType="StaffDto">
+		select festival_name, commissioning_agency, address_event, place,
+			   start_date, end_date,
+		       recruitment_to, recruitment_field,
+		       preferential_treatment, application_period
+		from t_staff_recruitment
+	</select>
+	
+	<select id="select_staff_recruitment_list_by_festivalName" resultType="StaffDto"
+										    				   parameterType="String">
+		select festival_name, commissioning_agency, address_event, place,
+			   start_date, end_date,
+		       recruitment_to, recruitment_field,
+		       preferential_treatment, application_period
+		from t_staff_recruitment
+		where festival_name like '%' || #{value} || '%'
+	</select>
+	
+	
+	<!-- 스탭 모집 신청 -->
+	<insert id="insert_staff_apply" parameterType="StaffApplyDto">
+		insert into t_staff_recruitment_apply
+		values ( #{festivalName}, #{supportPeriodStart}, #{supportPeriodEnd},
+				 #{recruitmentField} )
+	</insert>
+	
+	
+
+</mapper>
