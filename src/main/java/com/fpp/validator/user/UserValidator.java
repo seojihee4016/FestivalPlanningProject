@@ -20,7 +20,7 @@ public class UserValidator {
 
 		// 아이디
 		if (!(Pattern.matches(ID_REG, userDto.getLoginId()))) {
-			errors.rejectValue("loginId", "id.error", "아이디 : 8~16자의 영문 대 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.");
+			errors.rejectValue("loginId", "id.error", "아이디 : 8~16자의 영문 대 소문자, 숫자와 특수기호(_), (-)만 사용 가능합니다.");
 		}
 		// 비번
 		if (!(Pattern.matches(PW_REG, userDto.getLoginPw()))) {
@@ -36,11 +36,11 @@ public class UserValidator {
 		}
 		// 전화번호
 		if (!(Pattern.matches(TEL_REG, userDto.getTelNumber()))) {
-			errors.rejectValue("telNumber", "telNumber.error", "전화번호 : 형식에 맞지 않는 번호입니다. (000-0000-0000 형식)");
+			errors.rejectValue("telNumber", "telNumber.error", "전화번호 : 형식에 맞지 않는 번호입니다. (000-0000-0000)");
 		}
 		// 생년월일
 		if (!(Pattern.matches(BIRTH_REG, userDto.getBirth()))) {
-			errors.rejectValue("birth", "birth.error", "생년월일 : 형식에 맞지 않는 생년월일입니다. (YYYY-MM-DD 형식)");
+			errors.rejectValue("birth", "birth.error", "생년월일 : 형식에 맞지 않는 생년월일입니다. (YYYY-MM-DD)");
 		}
 
 	}
@@ -51,7 +51,7 @@ public class UserValidator {
 
 		// 아이디
 		if (!(Pattern.matches(ID_REG, userDto.getLoginId()))) {
-			errors.rejectValue("loginId", "id.error", "아이디 : 8~16자의 영문 대 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.");
+			errors.rejectValue("loginId", "id.error", "아이디 : 8~16자의 영문 대 소문자, 숫자와 특수기호(_), (-)만 사용 가능합니다.");
 		}
 	
 	}

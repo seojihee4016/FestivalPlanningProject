@@ -47,7 +47,7 @@ public class UserController {
 
 		// 유효성 검증 실패
 		if (bindingResult.hasErrors() || result == 0) {
-			ScriptUtil.alert(response, "회원가입에 실패했습니다");
+//			ScriptUtil.alert(response, "회원가입에 실패했습니다.");
 			return "join";
 		}
 		// 회원가입 성공
@@ -78,7 +78,7 @@ public class UserController {
 	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
-		session.removeAttribute("loginId");
+		session.invalidate();
 		return "redirect:/login";
 	}
 
@@ -110,6 +110,12 @@ public class UserController {
 		}
 
 		return obj;
+	}
+	
+	@RequestMapping("/header")
+	public String header() {
+		
+		return "header";
 	}
 
 }
