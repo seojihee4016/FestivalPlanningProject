@@ -36,8 +36,8 @@
 		<p>*은 필수 입력입니다.</p>
 
 
-		<form action="" method="post" class="form">
-			<input type="hidden" id="fno" name="fno" value="${delete.fno}" />
+		<form action="" method="post" class="form" id="update">
+			<input type="hidden" id="fno" name="fno" value="${update.fno}" />
 			<fieldset>
 				<p class="place">장소 구분을 선택해주세요 *</p>
 				<br> <input type="radio" name="place" id="inside"
@@ -190,6 +190,7 @@
 						"DOMContentLoaded",
 						function() {
 							// 장소 구분 값 가져오기
+							
 							var place = "${update.place}";
 							var placeRadios = document
 									.getElementsByName("place");
@@ -249,12 +250,12 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			var formObj = $("form[name='update']");
+			var formObj = $("#update");
 
 			// 수정
 			$(".update_btn").on("click", function() {
 				if (confirm("수정하시겠습니까?")) {
-					formObj.attr("action", "/update");
+					formObj.attr("action", "/updateView");
 					formObj.attr("method", "post");
 					formObj.submit();
 				}

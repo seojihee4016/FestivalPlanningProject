@@ -128,5 +128,7 @@ fieldset {
 img {
 	width: 800px;
 	height: 220px;
-	border-radius: 10px;
+	border-radius: 18px;
+	padding-bottom: 8px;
+	
 }

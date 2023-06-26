@@ -31,7 +31,6 @@
 						<th>축제 시작 일자</th>
 						<th>축제 종료 일자</th>
 						<th>수정</th>
-						<th>삭제</th>
 					</tr>
 
 					<c:forEach items="${list}" var="list">
@@ -50,9 +49,6 @@
 							<td><c:out value="${list.endDate}" /></td>
 							<td><a href="/updateView?fno=${list.fno}"
 								class="custom-button">수정</a></td>
-							<td><a href="/delete?fno=${list.fno}">삭제</a></td>
-
-
 
 						</tr>
 					</c:forEach>
@@ -65,12 +61,11 @@
 					<span>신청하기</span>
 				</button>
 			</div>
-			
-			
+
+
 
 		</section>
 	</div>
-
 
 
 </body>
