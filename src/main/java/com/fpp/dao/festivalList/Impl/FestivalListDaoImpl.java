@@ -1,4 +1,4 @@
-package com.fpp.dao.festivalListDao.Impl;
+package com.fpp.dao.festivalList.Impl;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.fpp.dao.festivalListDao.FestivalListDao;
-import com.fpp.dto.festivalList.FestivalListDto;
+import com.fpp.dao.festivalList.FestivalListDao;
+import com.fpp.dto.festivalData.FestivalDataDto;
 
 @Repository
 public class FestivalListDaoImpl implements FestivalListDao {
@@ -16,9 +16,9 @@ public class FestivalListDaoImpl implements FestivalListDao {
 	SqlSessionTemplate sqlSessionTemplate;
 	
 	@Override
-	public List<FestivalListDto> selectFestivalList() {
+	public List<FestivalDataDto> selectFestivalList() {
 		
-		List<FestivalListDto> List = sqlSessionTemplate.selectList("festivalData_mapper.select_festivalList");
+		List<FestivalDataDto> List = sqlSessionTemplate.selectList("festivalData_mapper.select_festivalList");
 		
 		return List;
 	}

@@ -7,7 +7,8 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown =true)
 public class FestivalDataDto {
-
+	
+	String ftCode;
     String fstvlNm;
 	String opar;
 	String fstvlStartDate;

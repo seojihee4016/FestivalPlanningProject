@@ -6,77 +6,80 @@
 
 <mapper namespace="festivalData_mapper">
 
-	<select id="select_festivalList" resultType="FestivalListDto">
+	<select id="select_festivalList" resultType="FestivalDataDto">
 		select fstvl_Nm,
-		fstvl_Start_Date, fstvl_End_Date, fstvl_Co, phone_Number from
+		fstvl_Start_Date, fstvl_End_Date, fstvl_Co, phone_Number , ft_Code from
 		festival_info
 	</select>
-
-	<insert id="merge_festivalDataUpdate" parameterType="FestivalDataDto">
-		MERGE INTO festival_info as fi 
+	
+	<select id="select_festivalDetailInfo" resultType="FestivalDataDto" parameterType="String">
+		select * from festival_info where ft_Code = #{value}
+	</select>
+	
+	<update id="merge_festivalDataUpdate"
+		parameterType="FestivalDataDto">
+		MERGE INTO festival_info
 		USING (
-			SELECT
-			#{fstvlNm} as fstvlNm,
-			#{opar} as opar,
-			#{fstvlStartDate} as fstvlStartDate,
-			#{fstvlEndDate} as fstvlEndDate,
-			#{fstvlCo} as fstvlCo,
-			#{mnnst} as mnnst,
-			#{auspcInstt} as auspcInstt,
-			#{suprtInstt} as suprtInstt,
-			#{phoneNumber} as phoneNumber,
-			#{homepageUrl} as homepageUrl,
-			#{relateInfo} as relateInfo,
-			#{rdnmadr} as rdnmadr,
-			#{lnmadr} as lnmadr,
-			#{latitude} as latitude,
-			#{longitude} as longitude,
-			#{referenceDate} as referenceDate,
-			#{insttCode} = as insttcode
-			FROM DUAL
-		) as T1
-		ON (fi.fstvl_Nm = T1.fstvlNm)
+		SELECT
+		#{fstvlNm} as fstvlNm,
+		#{opar} as opar,
+		#{fstvlStartDate} as fstvlStartDate,
+		#{fstvlEndDate} as fstvlEndDate,
+		#{fstvlCo} as fstvlCo,
+		#{mnnst} as mnnst,
+		#{auspcInstt} as auspcInstt,
+		#{suprtInstt} as suprtInstt,
+		#{phoneNumber} as phoneNumber,
+		#{homepageUrl} as homepageUrl,
+		#{relateInfo} as relateInfo,
+		#{rdnmadr} as rdnmadr,
+		#{lnmadr} as lnmadr,
+		#{latitude} as latitude,
+		#{longitude} as longitude,
+		#{referenceDate} as referenceDate,
+		#{insttCode} as insttcode
+		FROM DUAL ) T1 ON (festival_info.fstvl_Nm = T1.fstvlNm)
 		WHEN MATCHED THEN
-		UPDATE
-		SET
-		fi.fstvl_Nm = T1.fstvlNm,
-		fi.opar = T1.opar,
-		fi.fstvl_Start_Date = T1.fstvlStartDate,
-		fi.fstvl_End_Date = T1.fstvlEndDate,
-		fi.fstvl_Co = T1.fstvlCo,
-		fi.mnnst =	T1.mnnst,
-		fi.auspc_Instt = T1.auspcInstt,
-		fi.suprt_Instt = T1.suprtInstt,
-		fi.phone_Number = T1.phoneNumber,
-		fi.homepage_Url = T1.homepageUrl,
-		fi.relate_Info = T1.relateInfo,
-		fi.rdnmadr = T1.rdnmadr,
-		fi.lnmadr =	T1.lnmadr,
-		fi.latitude = T1.latitude,
-		fi.longitude = T1.longitude,
-		fi.reference_Date = T1.referenceDari,
-		fi.instt_code = T1.insttcode
+		UPDATE SET
+		festival_info.opar = T1.opar,
+		festival_info.fstvl_Start_Date = T1.fstvlStartDate,
+		festival_info.fstvl_End_Date = T1.fstvlEndDate,
+		festival_info.fstvl_Co = T1.fstvlCo,
+		festival_info.mnnst = T1.mnnst,
+		festival_info.auspc_Instt = T1.auspcInstt,
+		festival_info.suprt_Instt = T1.suprtInstt,
+		festival_info.phone_Number = T1.phoneNumber,
+		festival_info.homepage_Url = T1.homepageUrl,
+		festival_info.relate_Info = T1.relateInfo,
+		festival_info.rdnmadr = T1.rdnmadr,
+		festival_info.lnmadr = T1.lnmadr,
+		festival_info.latitude = T1.latitude,
+		festival_info.longitude = T1.longitude,
+		festival_info.reference_Date = T1.referenceDate,
+		festival_info.instt_code = T1.insttcode
 		WHEN NOT MATCHED THEN
 		INSERT (
-		fi.fstvl_Nm,
-		fi.opar,
-		fi.fstvl_Start_Date,
-		fi.fstvl_End_Date,
-		fi.fstvl_Co,
-		fi.mnnst,
-		fi.auspc_Instt,
-		fi.suprt_Instt,
-		fi.phone_Number,
-		fi.homepage_Url,
-		fi.relate_Info,
-		fi.rdnmadr,
-		fi.lnmadr,
-		fi.latitude,
-		fi.longitude,
-		fi.reference_Date,
-		fi.instt_Code
+		ft_Code,
+		fstvl_Nm,
+		opar,
+		fstvl_Start_Date,
+		fstvl_End_Date,
+		fstvl_Co,
+		mnnst,
+		auspc_Instt,
+		suprt_Instt,
+		phone_Number,
+		homepage_Url,
+		relate_Info,
+		rdnmadr,
+		lnmadr,
+		latitude,
+		longitude,
+		reference_Date,
+		instt_Code
 		)
 		VALUES (
+		NVL((SELECT ft_code FROM (SELECT ft_code FROM festival_info ORDER BY ROWNUM DESC) WHERE ROWNUM = 1), 0)+1,
 		T1.fstvlNm,
 		T1.opar,
 		T1.fstvlStartDate,
@@ -95,7 +98,7 @@
 		T1.referenceDate,
 		T1.insttCode
 		)
-	</insert>
+	</update>
 
 </mapper>
 

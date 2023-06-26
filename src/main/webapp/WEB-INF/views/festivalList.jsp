@@ -25,10 +25,10 @@
 						<c:forEach var="item" items="${festivalList}">
 							<li>
 								<div class="festivalListBox-header">
-									<a href="">${item.fstvlNm}</a>
+									<a href="/festivalView?ftCode=${item.ftCode}">${item.fstvlNm}</a>
 								</div>
 								<div class="festivalListBox-meddel">
-									<a href="">${item.fstvlCo}</a>
+									<a href="/festivalView?ftCode=${item.ftCode}">${item.fstvlCo}</a>
 								</div>
 								<div class="festivalListBox-footer">
 									${item.fstvlStartDate}, ${item.fstvlEndDate}, ${item.phoneNumber}</a>

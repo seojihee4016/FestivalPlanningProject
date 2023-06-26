@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fpp.dao.festivalListDao.FestivalListDao;
-import com.fpp.dto.festivalList.FestivalListDto;
+import com.fpp.dao.festivalList.FestivalListDao;
+import com.fpp.dto.festivalData.FestivalDataDto;
 import com.fpp.service.festivalList.FestivalListService;
 
 @Service
@@ -16,9 +16,9 @@ public class FestivalListServiceImpl implements FestivalListService{
 	FestivalListDao festivalListDao;
 	
 	@Override
-	public List<FestivalListDto> lodeList() {
+	public List<FestivalDataDto> loadList() {
 		
-		List<FestivalListDto> List = festivalListDao.selectFestivalList();
+		List<FestivalDataDto> List = festivalListDao.selectFestivalList();
 		
 		return List;
 	}

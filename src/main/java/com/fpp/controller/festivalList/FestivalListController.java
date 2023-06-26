@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.fpp.service.festivalList.FestivalListService;
-import com.fpp.dto.festivalList.FestivalListDto;
+import com.fpp.dto.festivalData.FestivalDataDto;
 import com.fpp.scheduler.FestivalInfoUpdate;
 
 
@@ -25,10 +25,10 @@ public class FestivalListController {
 	@RequestMapping("/festivalList")
 	public String festivalList(Model model) throws IOException, ParseException {
 
-		List<FestivalListDto> List = festivalListService.lodeList();
+		List<FestivalDataDto> List = festivalListService.loadList();
 		model.addAttribute("festivalList", List);
 		
-		festivalInfoUpdate.festivalInfoUpdateScheduler();
+		//festivalInfoUpdate.festivalInfoUpdateScheduler();
 		
 		return "festivalList";
 	}
