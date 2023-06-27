@@ -9,47 +9,120 @@
 </head>
 <body>
 
-<script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ths5zg540n"></script>
+<!-- <script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ths5zg540n"></script> -->
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ths5zg540n&submodules=drawing"></script>
 
-<!-- 지도가 생성되는 div 영역, id 는 naverMap 으로 설정 -->
+<!-- 지도가 생성되는 div 영역 -->
 <div id="map" style="margin:0 auto; width:1000px; max-width:100%; height:700px;"></div>
 
+<!-- 
 <script>
-// naverMap 값은 div 의 id
-	new naver.maps.Map('map', {
+var map = new naver.maps.Map('map', {
+    zoomControl: true,
+    zoomControlOptions: {
+        style: naver.maps.ZoomControlStyle.LARGE,
+        position: naver.maps.Position.TOP_RIGHT
+    },
+    mapTypeControl: true,
+    zoom: 7
+});
 
-	// 지도 중앙 위치 : 위도, 경도 설정
-	center : new naver.maps.LatLng( 37.5782709, 126.9770043 ),
+// 오버레이를 매니저에 추가
+var rect = new naver.maps.Rectangle({
+    map: map,
+    bounds: [125.6195858,37.1928595,126.5689034,37.8594302],
+    fillColor: '#00bf46',
+    fillOpacity: 0.4,
+    strokeWeight: 2,
+    strokeColor: '#00bf46'
+});
 
-	// 줌 설정 : 수치가 클수록 지도 확대(줌인), 이 옵션 생략시 기본값 9
-	zoom : 18,
-	// 줌 컨트롤 표시, 지정하지 않으면 false 가 기본값
-	zoomControl : true,
-
-	// 줌 컨트롤 오른쪽 위로 위치 설정
-	zoomControlOptions : {
-		position : naver.maps.Position.TOP_RIGHT // 오른쪽 위로 설정
-	},
-
-	// 일반ㆍ위성 지도보기 컨트롤 표시, 지정하지 않으면 false 가 기본값
-	mapTypeControl : true,
-
-}); 
-//var map = new naver.maps.Map('map');
-var drawingManager = new naver.maps.drawing.DrawingManager({map: map});
+// 오버레이의 setEditable을 직접 호출
+var rect2 = new naver.maps.Rectangle({
+    map: map,
+    bounds: [124.2220128,37.1928595,125.1587723,37.8594302],
+    fillColor: '#bf0091',
+    fillOpacity: 0.4,
+    strokeWeight: 2,
+    strokeColor: '#bf0091'
+});
+rect2.setEditable(true);
 
 var drawingManager;
-naver.maps.Event.once(map, 'init', function() {
-    drawingManager = new naver.maps.drawing.DrawingManager({map: map});
-    drawingManager.addDrawing(rect, naver.maps.drawing.DrawingMode.RECTANGLE, 'my-id');
-    drawingManager.addDrawing(polygon, naver.maps.drawing.DrawingMode.POLYGON);
-});
+naver.maps.Event.once(map, 'init', function () {
+    drawingManager = new naver.maps.drawing.DrawingManager({
+        map: map,
+        drawingControl: [
+            naver.maps.drawing.DrawingMode.POLYLINE,
+            naver.maps.drawing.DrawingMode.POLYGON,
+            naver.maps.drawing.DrawingMode.ELLIPSE,
+            naver.maps.drawing.DrawingMode.RECTANGLE
+        ],
+        drawingControlOptions: {
+            position: naver.maps.Position.TOP_CENTER,
+            style: naver.maps.drawing.DrawingStyle.VERTICAL
+        },
+        controlPointOptions: {
+            anchorPointOptions: {
+                radius: 5,
+                fillColor: '#ff0000',
+                strokeColor: '#0000ff',
+                strokeWeight: 2
+            },
+            midPointOptions: {
+                radius: 4,
+                fillColor: '#ff0000',
+                strokeColor: '#0000ff',
+                strokeWeight: 2,
+                fillOpacity: 0.5
+            }
+        },
+        rectangleOptions: {
+            fillColor: '#ff0000',
+            fillOpacity: 0.5,
+            strokeWeight: 3,
+            strokeColor: '#ff0000'
+        },
+        ellipseOptions: {
+            fillColor: '#ff25dc',
+            fillOpacity: 0.5,
+            strokeWeight: 3,
+            strokeColor: '#ff25dc'
+        },
+        polylineOptions: { // 화살표 아이콘 계열 옵션은 무시됩니다.
+            strokeColor: '#222',
+            strokeWeight: 3
+        },
+        arrowlineOptions: { // startIcon || endIcon 옵션이 없으면 endIcon을 BLOCK_OPEN으로 설정합니다.
+            endIconSize: 16,
+            strokeWeight: 3
+        },
+        polygonOptions: {
+            fillColor: '#ffc300',
+            fillOpacity: 0.5,
+            strokeWeight: 3,
+            strokeColor:'#ffc300'
+        },
+        markerOptions: {
+            icon: {
+                content: '<img src="'+ HOME_PATH +'/img/example/pin_default.png" alt="" ' +
+                    'style="margin:0px;padding:0px;border:0px solid transparent;display:block;max-width:none;max-height:none; ' +
+                    '-webkit-user-select: none; position: absolute; width: 22px; height: 35px; left: 0px; top: 0px;">',
+                size: new naver.maps.Size(22, 35),
+                anchor: new naver.maps.Point(11, 35)
+            }
+        }
+    });
 
-drawingManager.setOptions('drawingControlOptions', {
-    position: naver.maps.Position.LEFT_CENTER,
-    style: naver.maps.drawing.DrawingStyle.VERTICAL
+    // 옵션 조정
+    drawingManager.setOptions('drawingControlOptions', {position: naver.maps.Position.RIGHT_CENTER});
+    drawingManager.addDrawing(rect, naver.maps.drawing.DrawingMode.RECTANGLE, 'my-id');
 });
-/* var map = new naver.maps.Map('naverMap', {
+</script>
+  -->
+
+<script>
+var map = new naver.maps.Map('map', {
     zoomControl: true,
     zoomControlOptions: {
         style: naver.maps.ZoomControlStyle.LARGE,
@@ -60,7 +133,7 @@ drawingManager.setOptions('drawingControlOptions', {
 });
 
 // 오버레이 추가
-var rect = new naver.maps.Rectangle({
+/* var rect = new naver.maps.Rectangle({
     map: map,
     bounds: [126.96744,37.561622,126.9737437,37.5668781],
     fillColor: '#ff0000',
@@ -87,110 +160,15 @@ var polygon = new naver.maps.Polygon({
     fillOpacity: 0.4,
     strokeWeight: 2,
     strokeColor: '#ff0000'
-});
+}); */
 
 var drawingManager;
 naver.maps.Event.once(map, 'init', function() {
     drawingManager = new naver.maps.drawing.DrawingManager({map: map});
     drawingManager.addDrawing(rect, naver.maps.drawing.DrawingMode.RECTANGLE, 'my-id');
     drawingManager.addDrawing(polygon, naver.maps.drawing.DrawingMode.POLYGON);
-}); */
-
-/* var drawingManager = new naver.maps.drawing.DrawingManager();
-drawingManager.setMap(map); */
-
+});
 </script>
-
-<!-- <div id="map" style="width:100%;height:350px;"></div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2704b0ca1dd38d3c652309b90d3eb1e3&libraries=drawing"></script>
-<script>
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = { 
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };
-
-// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-var map = new kakao.maps.Map(mapContainer, mapOption); 
-
-// 도형 스타일을 변수로 설정합니다
-var strokeColor = '#39f',
-	fillColor = '#cce6ff',
-	fillOpacity = 0.5,
-	hintStrokeStyle = 'dash';
-
-var options = { // Drawing Manager를 생성할 때 사용할 옵션입니다
-    map: map, // Drawing Manager로 그리기 요소를 그릴 map 객체입니다
-    drawingMode: [
-        kakao.maps.Drawing.OverlayType.MARKER,
-        kakao.maps.Drawing.OverlayType.ARROW,
-        kakao.maps.Drawing.OverlayType.POLYLINE,
-        kakao.maps.Drawing.OverlayType.RECTANGLE,
-        kakao.maps.Drawing.OverlayType.CIRCLE,
-        kakao.maps.Drawing.OverlayType.ELLIPSE,
-        kakao.maps.Drawing.OverlayType.POLYGON
-    ],
-    // 사용자에게 제공할 그리기 가이드 툴팁입니다
-    // 사용자에게 도형을 그릴때, 드래그할때, 수정할때 가이드 툴팁을 표시하도록 설정합니다
-    guideTooltip: ['draw', 'drag', 'edit'], 
-    markerOptions: {
-        draggable: true,
-        removable: true
-    },
-    arrowOptions: {
-        draggable: true,
-        removable: true,
-        strokeColor: strokeColor,
-        hintStrokeStyle: hintStrokeStyle
-    },
-    polylineOptions: {
-        draggable: true,
-        removable: true,
-        strokeColor: strokeColor,
-        hintStrokeStyle: hintStrokeStyle
-    },
-    rectangleOptions: {
-        draggable: true,
-        removable: true,
-        strokeColor: strokeColor,
-        fillColor: fillColor,
-        fillOpacity: fillOpacity
-    },
-    circleOptions: {
-        draggable: true,
-        removable: true,
-        strokeColor: strokeColor,
-        fillColor: fillColor,
-        fillOpacity: fillOpacity
-    },
-    ellipseOptions: {
-        draggable: true,
-        removable: true,
-        strokeColor: strokeColor,
-        fillColor: fillColor,
-        fillOpacity: fillOpacity
-    },
-    polygonOptions: {
-        draggable: true,
-        removable: true,
-        strokeColor: strokeColor,
-        fillColor: fillColor,
-        fillOpacity: fillOpacity
-    }
-};
-
-// 위에 작성한 옵션으로 Drawing Manager를 생성합니다
-var manager = new kakao.maps.Drawing.DrawingManager(options);
-
-// Toolbox를 생성합니다. 
-// Toolbox 생성 시 위에서 생성한 DrawingManager 객체를 설정합니다.
-// DrawingManager 객체를 꼭 설정해야만 그리기 모드와 매니저의 상태를 툴박스에 설정할 수 있습니다.
-var toolbox = new kakao.maps.Drawing.Toolbox({drawingManager: manager});
-
-// 지도 위에 Toolbox를 표시합니다
-// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOP은 위 가운데를 의미합니다.
-map.addControl(toolbox.getElement(), kakao.maps.ControlPosition.TOP);
-</script> -->
 
 </body>
 </html>
