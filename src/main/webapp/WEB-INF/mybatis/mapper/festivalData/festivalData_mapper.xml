@@ -7,9 +7,11 @@
 <mapper namespace="festivalData_mapper">
 
 	<select id="select_festivalList" resultType="FestivalDataDto">
-		select fstvl_Nm,
-		fstvl_Start_Date, fstvl_End_Date, fstvl_Co, phone_Number , ft_Code from
+		SELECT fstvl_Nm,
+		fstvl_Start_Date, fstvl_End_Date, fstvl_Co, phone_Number , ft_Code FROM
 		festival_info
+		WHERE fstvl_Start_Date &lt;= sysdate AND fstvl_End_Date &gt;= sysdate 
+		ORDER BY fstvl_End_Date DESC
 	</select>
 	
 	<select id="select_festivalDetailInfo" resultType="FestivalDataDto" parameterType="String">
@@ -79,7 +81,7 @@
 		instt_Code
 		)
 		VALUES (
-		NVL((SELECT ft_code FROM (SELECT ft_code FROM festival_info ORDER BY ROWNUM DESC) WHERE ROWNUM = 1), 0)+1,
+		NVL((SELECT ft_code FROM (SELECT ft_code FROM festival_info ORDER BY FT_CODE DESC) WHERE ROWNUM = 1), 0)+1,
 		T1.fstvlNm,
 		T1.opar,
 		T1.fstvlStartDate,

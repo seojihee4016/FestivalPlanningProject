@@ -16,7 +16,6 @@ public class FestivalDataDaoImpl implements FestivalDataDao{
 	@Override
 	public int festivalDataApiSave(FestivalDataDto festivalDataDto) {
 		
-		System.out.println(festivalDataDto);
 		sqlSessionTemplate.insert("festivalData_mapper.merge_festivalDataUpdate", festivalDataDto);
 		
 		
