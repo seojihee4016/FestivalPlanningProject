@@ -1,16 +1,15 @@
 package com.fpp.controller.user;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +27,7 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
-	
+
 	@RequestMapping("/main")
 	public String main() {
 		return "main";
@@ -41,57 +40,44 @@ public class UserController {
 	}
 
 	@PostMapping("/join")
-	public String join_process(@ModelAttribute UserDto userDto, BindingResult bindingResult, HttpServletResponse response) throws IOException {
+	public String join_process(@ModelAttribute UserDto userDto, BindingResult bindingResult,
+			HttpServletResponse response) throws IOException {
 
 		int result = userService.saveUser(userDto, bindingResult);
 
 		// 유효성 검증 실패
 		if (bindingResult.hasErrors() || result == 0) {
-//			ScriptUtil.alert(response, "회원가입에 실패했습니다.");
+			ScriptUtil.alert(response, "회원가입에 실패했습니다.");
 			return "join";
 		}
 		// 회원가입 성공
-
-		return "redirect:/login";
+		return "main";
 	}
 
 	@GetMapping("/login")
 	public String login() {
 		return "login";
 	}
-	
-	@PostMapping("/login")
+
+	@PostMapping("/login.do")
 	public String login_proc(@ModelAttribute UserDto userDto, HttpSession session) {
-		
+
 		System.out.println(userDto.toString());
 		boolean tryLogin = userService.login(userDto);
-		
+
 		System.out.println(tryLogin);
-		
-		if(tryLogin) {
+
+		if (tryLogin) {
 			session.setAttribute("loginId", userDto.getLoginId());
 			return "redirect:/main";
 		}
-		
 		return "redirect:/login";
 	}
-	
+
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/login";
-	}
-
-	@GetMapping("/userList")
-	public String userList(Model model) {
-
-		UserDto userDto = new UserDto();
-
-		List<UserDto> userList = userService.getUserList2(userDto);
-
-		model.addAttribute("userList", userList);
-
-		return "userList";
 	}
 
 	@PostMapping("/idcheck")
@@ -107,14 +93,15 @@ public class UserController {
 			obj = (JsonObject) parser.parse("{\"result\" : \"true\" }");
 		} else {
 			obj = (JsonObject) parser.parse("{\"result\" : \"false\" }");
+
 		}
 
 		return obj;
 	}
-	
+
 	@RequestMapping("/header")
 	public String header() {
-		
+
 		return "header";
 	}
 

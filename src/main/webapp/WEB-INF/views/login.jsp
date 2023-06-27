@@ -20,7 +20,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-
 .container {
 	border: 1px, solid;
 	width: 600px;
@@ -32,14 +31,14 @@
 	<h1>로그인 페이지</h1>
 	<br>
 
-	<div class="container">
-		<form action="" method="POST">
+	<c:if test="${login == null}">
+		<form action="${cpath}/login.do" method="POST">
 			아이디 <input type='text' name="loginId" class="form-control" /><br>
 			비밀번호 <input type='password' name="loginPw" class="form-control" /><br>
 
 			<button type="submit" class="btn btn-primary">로그인</button>
 		</form>
-	</div>
+	</c:if>
 
 </body>
 </html>

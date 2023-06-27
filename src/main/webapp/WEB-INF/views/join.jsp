@@ -41,9 +41,8 @@
 }
 
 .errorMsg {
-	font-size:0.7rem;
+	font-size: 0.78rem;
 }
-
 </style>
 </head>
 <body>
@@ -54,49 +53,55 @@
 			<br>
 			<form action="" method="POST">
 				<div>
-					<input type="text" class="form-control idBtn" name="loginId"
+					<input type="text" class="form-control" name="loginId"
 						id="login_Id" placeholder="아이디" value="${userDto.loginId}" />
 					<button type="button" id="idCheck"
 						class="btn btn-primary idCheckBtn">중복체크</button>
 				</div>
 				<span class="errMsg"> <spring:hasBindErrors name="userDto">
 						<c:if test="${errors.hasFieldErrors('loginId') }">
-							<p class="errorMsg">▶ ${errors.getFieldError("loginId").getDefaultMessage() }</p>
+							<p class="errorMsg">▶
+								${errors.getFieldError("loginId").getDefaultMessage() }</p>
 						</c:if>
 					</spring:hasBindErrors>
 				</span><br> <input type="text" class="form-control" name="loginPw"
 					placeholder="비밀번호" value="${userDto.loginPw}" /><br> <span
 					class="errMsg"> <spring:hasBindErrors name="userDto">
 						<c:if test="${errors.hasFieldErrors('loginPw') }">
-							<p class="errorMsg">▶ ${errors.getFieldError("loginPw").getDefaultMessage() }</p>
+							<p class="errorMsg">▶
+								${errors.getFieldError("loginPw").getDefaultMessage() }</p>
 						</c:if>
 					</spring:hasBindErrors>
 				</span> <input type="text" class="form-control" name="name"
 					placeholder="이름" value="${userDto.name}" /><br> <span
 					class="errMsg"> <spring:hasBindErrors name="userDto">
 						<c:if test="${errors.hasFieldErrors('name') }">
-							<p class="errorMsg">▶ ${errors.getFieldError("name").getDefaultMessage() }</p>
+							<p class="errorMsg">▶
+								${errors.getFieldError("name").getDefaultMessage() }</p>
 						</c:if>
 					</spring:hasBindErrors>
 				</span> <input type="text" class="form-control" name="email"
 					placeholder="이메일" value="${userDto.email}" /><br> <span
 					class="errMsg"> <spring:hasBindErrors name="userDto">
 						<c:if test="${errors.hasFieldErrors('email') }">
-							<p class="errorMsg">▶ ${errors.getFieldError("email").getDefaultMessage() }</p>
+							<p class="errorMsg">▶
+								${errors.getFieldError("email").getDefaultMessage() }</p>
 						</c:if>
 					</spring:hasBindErrors>
 				</span> <input type="text" class="form-control" name="birth"
 					placeholder="생년월일" value="${userDto.birth}" /><br> <span
 					class="errMsg"> <spring:hasBindErrors name="userDto">
 						<c:if test="${errors.hasFieldErrors('birth') }">
-							<p class="errorMsg">▶ ${errors.getFieldError("birth").getDefaultMessage() }</p>
+							<p class="errorMsg">▶
+								${errors.getFieldError("birth").getDefaultMessage() }</p>
 						</c:if>
 					</spring:hasBindErrors>
 				</span> <input type="text" class="form-control" name="telNumber"
 					placeholder="전화번호" value="${userDto.telNumber}" /><br> <span
 					class="errMsg"> <spring:hasBindErrors name="userDto">
 						<c:if test="${errors.hasFieldErrors('telNumber') }">
-							<p class="errorMsg">▶ ${errors.getFieldError("telNumber").getDefaultMessage() }</p>
+							<p class="errorMsg">▶
+								${errors.getFieldError("telNumber").getDefaultMessage() }</p>
 						</c:if>
 					</spring:hasBindErrors>
 				</span>

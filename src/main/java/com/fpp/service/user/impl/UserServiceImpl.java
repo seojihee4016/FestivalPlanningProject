@@ -21,66 +21,47 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int saveUser(UserDto userDto, BindingResult bindingResult) {
-		
+
 		UserValidator.validate(userDto, bindingResult);
-		
-		
-		if(bindingResult.hasErrors()) {
+
+		if (bindingResult.hasErrors()) {
 			return 0;
 		}
-		
+
 		int result = userDao.insertUser(userDto);
 
 		return result;
 	}
 
 	@Override
-	public List<UserDto> getUserList() {
-		// TODO Auto-generated method stub
-		List<UserDto> userList = userDao.selectUserList();
-
-		return userList;
-	}
-
-	@Override
-	public List<UserDto> getUserList2(UserDto userDto) {
-		// TODO Auto-generated method stub
-
-		List<UserDto> userList = userDao.selectUserList2(userDto);
-
-		return userList;
-	}
-
-	@Override
 	public boolean idCheck(UserDto userDto, BindingResult bindingResult) {
-		
+
 		UserValidator.idValidate(userDto, bindingResult);
-		
-		if(!(bindingResult.hasErrors())) {
-			
+
+		if (!(bindingResult.hasErrors())) {
+
 			UserDto user = userDao.selectUserById(userDto);
-			
-			
+
 			// 중복아이디 없으면 true
-			if(user == null) {
+			if (user == null) {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 
 	@Override
 	public boolean login(UserDto userDto) {
-		
+
 		UserDto userInfo = userDao.selectUserById(userDto);
-		
-		if(userInfo != null) {
-			if(userInfo.getLoginPw().equals(userDto.getLoginPw())) {
+
+		if (userInfo != null) {
+			if (userInfo.getLoginPw().equals(userDto.getLoginPw())) {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,15 +20,60 @@
 <script src="https://code.jquery.com/jquery-3.7.0.js"
 	integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
 	crossorigin="anonymous"></script>
+
 </head>
+
 <body>
+
 	<nav class="navbar navbar-expand-lg bg-light">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="main">축제컨설팅</a>
-			<ul class="nav justify-content-end">
-				<li class="nav-item"><a class="nav-link" href="login">로그인</a></li>
-				<li class="nav-item"><a class="nav-link" href="join">회원가입</a></li>
-			</ul>
+		<div class="container-xl">
+			<a class="navbar-brand fs-2 me-5" href="#">feset 미정</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarText"
+				aria-controls="navbarText" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarText">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link active fs-5" href="#">사이트소개</a></li>
+					<li class="nav-item"><a class="nav-link active fs-5" href="#">행사문의</a></li>
+					<li class="nav-item"><a class="nav-link active fs-5" href="#">채용공고</a></li>
+					<li class="nav-item"><a class="nav-link active fs-5" href="#">미정</a></li>
+					<li class="nav-item"><a class="nav-link active fs-5" href="#">게시판</a></li>
+					<li class="nav-item"><a class="nav-link active fs-5" href="#">고객센터</a></li>
+				</ul>
+				<c:choose>
+					<c:when test="${empty sessionScope}">
+						<ul class="nav justify-content-end">
+							<li class="nav-item"><a class="nav-link" href="login">로그인</a></li>
+							<li class="nav-item"><a class="nav-link" href="join">회원가입</a></li>
+						</ul>
+					</c:when>
+					<c:otherwise>
+						<c:choose>
+							<c:when test="${sessionScope.loginId eq 'admin010203'}">
+								<ul class="nav justify-content-end ms-5">
+									<li class="nav-item"><span class="nav-link"> 관리자모드
+											접속중</span></li>
+									<li class="nav-item"><a class="nav-link"
+										href="<!-- 관리자페이지 -->">관리자페이지</a></li>
+									<li class="nav-item"><a class="nav-link" href="logout">로그아웃</a></li>
+								</ul>
+							</c:when>
+							<c:otherwise>
+								<ul class="nav justify-content-end ms-5">
+									<li class="nav-item"><span class="nav-link">${sessionScope.loginId}님,
+											환영합니다.</span></li>
+									<li class="nav-item"><a class="nav-link" href="mypage">마이페이지</a></li>
+									<li class="nav-item"><a class="nav-link" href="logout">로그아웃</a></li>
+								</ul>
+							</c:otherwise>
+						</c:choose>
+					</c:otherwise>
+				</c:choose>
+			</div>
 		</div>
 	</nav>
+
 </body>

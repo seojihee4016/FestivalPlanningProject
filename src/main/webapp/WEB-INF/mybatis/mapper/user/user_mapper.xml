@@ -7,16 +7,16 @@
 	<!-- #{~~~} 안에 있는 애들은 DTO 필드명, 쿼리문은 DB컬럼명 -->
 	<insert id="insert_user" parameterType="UserDto">
 		insert into f_user
-		values ( #{loginId}, #{loginPw}, #{name}, #{email}, #{telNumber}, #{birth} )
+		values
+		( #{loginId}, #{loginPw}, #{name}, #{email}, #{telNumber}, #{birth} )
 	</insert>
 
 	<select id="select_user_by_id" resultType="UserDto"
 		parameterType="UserDto">
-		select *
+		select login_id, login_pw, name, email, tel_number,
+		birth
 		from f_user
 		where login_Id = #{loginId}
 	</select>
-	
-	
 
 </mapper>
