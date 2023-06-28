@@ -6,23 +6,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- CSS only -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-	crossorigin="anonymous">
-<!-- JavaScript Bundle with Popper -->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-	crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
 .container {
-	border: 1px, solid;
-	width: 600px;
+	border: 1px solid black;
+	width: 550px;
+	height: 300px;
+}
+
+.login-form {
+	margin-top:50px;
 }
 </style>
 
@@ -31,14 +25,15 @@
 	<h1>로그인 페이지</h1>
 	<br>
 
-	<c:if test="${login == null}">
-		<form action="${cpath}/login.do" method="POST">
-			아이디 <input type='text' name="loginId" class="form-control" /><br>
-			비밀번호 <input type='password' name="loginPw" class="form-control" /><br>
+	<div class="container">
+		<c:if test="${login == null}">
+			<form action="${cpath}/login.do" method="POST" class="login-form">
+				아이디 <input type='text' name="loginId" class="form-control" /><br>
+				비밀번호 <input type='password' name="loginPw" class="form-control" /><br>
 
-			<button type="submit" class="btn btn-primary">로그인</button>
-		</form>
-	</c:if>
-
+				<button type="submit" class="btn btn-primary">로그인</button>
+			</form>
+		</c:if>
+	</div>
 </body>
 </html>

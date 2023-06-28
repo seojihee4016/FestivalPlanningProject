@@ -21,13 +21,20 @@
 	integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
 	crossorigin="anonymous"></script>
 
+<style>
+.mainicon {
+	width: 75px;
+	height: 55px;
+}
+</style>
 </head>
 
 <body>
 
 	<nav class="navbar navbar-expand-lg bg-light">
 		<div class="container-xl">
-			<a class="navbar-brand fs-2 me-5" href="#">feset 미정</a>
+			<a class="navbar-brand fs-2" href="main"><img
+				src="images/mainIcon.png" class="mainicon"></a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarText"
 				aria-controls="navbarText" aria-expanded="false"
@@ -36,7 +43,7 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active fs-5" href="#">사이트소개</a></li>
+					<li class="nav-item"><a class="nav-link active fs-5" href="#">지역축제</a></li>
 					<li class="nav-item"><a class="nav-link active fs-5" href="#">행사문의</a></li>
 					<li class="nav-item"><a class="nav-link active fs-5" href="#">채용공고</a></li>
 					<li class="nav-item"><a class="nav-link active fs-5" href="#">미정</a></li>
@@ -47,12 +54,12 @@
 					<c:when test="${empty sessionScope}">
 						<ul class="nav justify-content-end">
 							<li class="nav-item"><a class="nav-link" href="login">로그인</a></li>
-							<li class="nav-item"><a class="nav-link" href="join">회원가입</a></li>
+							<li class="nav-item"><a class="nav-link" href="agreement">회원가입</a></li>
 						</ul>
 					</c:when>
 					<c:otherwise>
 						<c:choose>
-							<c:when test="${sessionScope.loginId eq 'admin010203'}">
+							<c:when test="${sessionScope.loginId eq 'pinata1234'}">
 								<ul class="nav justify-content-end ms-5">
 									<li class="nav-item"><span class="nav-link"> 관리자모드
 											접속중</span></li>

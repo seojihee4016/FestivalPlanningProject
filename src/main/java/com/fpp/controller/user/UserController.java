@@ -104,5 +104,11 @@ public class UserController {
 
 		return "header";
 	}
+	
+	@RequestMapping("/agreement")
+	public String agreement() {
+		
+		return "agreement";
+	}
 
 }
