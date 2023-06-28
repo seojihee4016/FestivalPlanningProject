@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fpp.dto.board.FormDto;
 import com.fpp.dto.bulletinBoard.BulletinBoardDto;
+import com.fpp.dto.bulletinBoard.PageMaker;
+import com.fpp.dto.bulletinBoard.Criteria;
 import com.fpp.dto.staff.StaffDto;
 import com.fpp.service.bulletinBoard.BulletinBoardService;
 
@@ -37,13 +39,27 @@ public class BulletinBoardController {
 	}
 
 	//게시판 글 리스트 페이지
+//	@GetMapping("/bulletinBoardList")
+//	public String bulletinBoardList(Model model)  throws Exception{
+//
+//		model.addAttribute("selectBulletinBoardList", bulletinBoardService.selectBulletinBoardList());
+//		return "bulletinBoardList";
+//	}
+
 	@GetMapping("/bulletinBoardList")
-	public String bulletinBoardList(Model model)  throws Exception{
-
-		model.addAttribute("selectBulletinBoardList", bulletinBoardService.selectBulletinBoardList());
-		return "bulletinBoardList";
+	public String bulletinBoardList(Model model, Criteria cri) throws Exception{
+		
+		model.addAttribute("selectBulletinBoardList", bulletinBoardService.selectBulletinBoardList(cri));
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(bulletinBoardService.listCount());
+		
+		model.addAttribute("pageMaker", pageMaker);
+		return "bulletinBoardList";	
 	}
-
+		
+	
+	
 	// 게시판 읽기 /수정 / 삭제 가능한 페이지로 이동 - 화면 연결
 	@GetMapping("/bulletinBoardProcess")
 	public String bulletinBoardProcess(@Validated BulletinBoardDto bulletinBoardDto, Model model,  BindingResult bindingResult) throws Exception{

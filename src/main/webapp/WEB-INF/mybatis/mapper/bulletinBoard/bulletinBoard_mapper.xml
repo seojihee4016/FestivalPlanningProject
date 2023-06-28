@@ -16,15 +16,41 @@
 		,#{title}, #{content}, #{writer} )
 	</insert>
 
-	<!-- 게시판 작성된 리스트 조회 -->
-	<select id="select_BulletinBoard_List"
-		resultType="BulletinBoardDto">
-		SELECT BNO, TITLE, CONTENT, WRITER, REGDATE
-		FROM
-		Bulletin_Board
-		ORDER
-		BY BNO DESC
+	<!-- 게시판 작성된 리스트 조회 <select id="select_BulletinBoard_List" resultType="BulletinBoardDto"> 
+		SELECT BNO, TITLE, CONTENT, WRITER, REGDATE FROM Bulletin_Board ORDER BY 
+		BNO DESC </select> -->
+
+	<!-- 페이지네이션 -->
+	<select id="listPage" resultType="BulletinBoardDto"
+		parameterType="Criteria">
+		SELECT BNO,
+		TITLE,
+		CONTENT,
+		WRITER,
+		REGDATE
+		FROM (
+		SELECT BNO,
+		TITLE,
+		CONTENT,
+		WRITER,
+		REGDATE,
+		ROW_NUMBER() OVER(ORDER BY BNO DESC) AS
+		RNUM
+		FROM Bulletin_Board
+		) Bulletin
+		WHERE RNUM BETWEEN #{rowStart} AND
+		#{rowEnd}
+		ORDER BY BNO DESC
 	</select>
+
+	<select id="listCount" resultType="int">
+	<![CDATA[
+		SELECT COUNT(BNO)
+		  FROM Bulletin_Board
+		 WHERE BNO > 0
+	]]>
+	</select>
+
 
 	<!-- 번호로 리스트 조회 -->
 	<select id="select_BulletinBoard_List_By_Bno"

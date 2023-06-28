@@ -51,16 +51,16 @@ form button[type="submit"] {
 		<hr />
 
 		<section id="container">
-			<form role="form" method="post" action="BulletinBoard">
+			<form role="form" method="post" action="BulletinBoard" onsubmit="return validateForm()">
 				<table>
 					<tbody>
 						<tr>
 							<td><label for="title">제목</label><input type="text"
-								id="title" name="title" /></td>
+								id="title" name="title" value="" /></td>
 						</tr>
 						<tr>
 							<td><label for="content">내용</label>
-							<textarea id="content" name="content"></textarea></td>
+							<textarea id="content" name="content" ></textarea></td>
 						</tr>
 						<tr>
 							<td><label for="writer">작성자 - 세션 적용 전</label><input type="text"
@@ -75,5 +75,22 @@ form button[type="submit"] {
 		</section>
 		<hr />
 	</div>
+	
+	<script>
+	function validateForm() {
+
+
+		if (title.value.trim() === '') {
+			alert('제목을 입력해주세요.');
+			return false;
+		}
+		if (content.value.trim() === '') {
+			alert('내용을 입력해주세요.');
+			return false;
+		}
+		
+		return true;
+	}
+	</script>
 </body>
 </html>

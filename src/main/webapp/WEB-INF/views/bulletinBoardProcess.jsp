@@ -56,7 +56,7 @@ form button[type="submit"] {
 		<hr />
 
 		<section id="container">
-			<form role="form" method="post" action="" id="updateBulletinBoard">
+			<form role="form" method="post" action="" id="updateBulletinBoard" onsubmit="return validateForm()">
 				<input type="hidden" id="bno" name="bno"
 					value="${updateBulletinBoard.bno}" />
 
@@ -114,6 +114,20 @@ form button[type="submit"] {
 			});
 		});
 	</script>
+	<script>
+		function validateForm() {
 
+			if (title.value.trim() === '') {
+				alert('제목을 입력해주세요.');
+				return false;
+			}
+			if (content.value.trim() === '') {
+				alert('내용을 입력해주세요.');
+				return false;
+			}
+
+			return true;
+		}
+	</script>
 </body>
 </html>

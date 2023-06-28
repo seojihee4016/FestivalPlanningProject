@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.fpp.dao.bulletinBoard.BulletinBoardDao;
 import com.fpp.dto.board.FormDto;
 import com.fpp.dto.bulletinBoard.BulletinBoardDto;
+import com.fpp.dto.bulletinBoard.Criteria;
 import com.fpp.dto.staff.StaffDto;
 import com.fpp.service.bulletinBoard.BulletinBoardService;
 
@@ -25,11 +26,26 @@ public class BulletinBoardServiceImpl implements BulletinBoardService{
 	}
 
 	// 게시물 목록 조회
+//	@Override
+//	public List<BulletinBoardDto> selectBulletinBoardList() throws Exception {
+//
+//		return bulletinBoardDao.selectBulletinBoardList();
+//	}
+	
 	@Override
-	public List<BulletinBoardDto> selectBulletinBoardList() throws Exception {
+	public List<BulletinBoardDto> selectBulletinBoardList(Criteria cri) throws Exception {
 
-		return bulletinBoardDao.selectBulletinBoardList();
+		return bulletinBoardDao.selectBulletinBoardList(cri);
 	}
+	
+	//페이징
+	@Override
+	public int listCount() throws Exception {
+		// TODO Auto-generated method stub
+		return bulletinBoardDao.listCount();
+	}
+
+	
 	
 	//게시글 고유 번호로 조회
 	@Override
@@ -51,4 +67,5 @@ public class BulletinBoardServiceImpl implements BulletinBoardService{
 		// TODO Auto-generated method stub
 		bulletinBoardDao.deleteBulletinBoardByBno(bno);
 	}
+
 }
