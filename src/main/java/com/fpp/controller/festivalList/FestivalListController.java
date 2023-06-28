@@ -18,17 +18,12 @@ public class FestivalListController {
 	
 	@Autowired
 	FestivalListService festivalListService;
-	
-	@Autowired
-	FestivalInfoUpdate festivalInfoUpdate;
 
 	@RequestMapping("/festivalList")
 	public String festivalList(Model model) throws IOException, ParseException {
 
 		List<FestivalDataDto> List = festivalListService.loadList();
 		model.addAttribute("festivalList", List);
-		
-		//festivalInfoUpdate.festivalInfoUpdateScheduler();
 		
 		return "festivalList";
 	}

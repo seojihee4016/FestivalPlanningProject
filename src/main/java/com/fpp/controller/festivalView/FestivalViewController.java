@@ -20,8 +20,6 @@ public class FestivalViewController {
 	@PostMapping("/festivalView")
 	public String festivalView() {
 		
-		
-		
 		return "redirect:festivalList";
 	}
 	

@@ -22,8 +22,8 @@
 	<task:executor id="mainTaskExecutor" pool-size="10" />
 	<task:annotation-driven executor="mainTaskExecutor" scheduler="mainScheduler" />
 	
-	<xsi:schemaLocation="http://www.springframework.org/schema/beans
-	  				      http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!--<xsi:schemaLocation="http://www.springframework.org/schema/beans
+	  				      http://www.springframework.org/schema/beans/spring-beans.xsd">-->
 	
 	
 	

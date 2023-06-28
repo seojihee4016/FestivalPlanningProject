@@ -11,7 +11,7 @@
 		</head>
 
 		<body>
-			<%@ include file="navBar.jsp" %>
+			<%@ include file="header.jsp" %>
 
 				<div>
 					<div class="fastivalSearchBox">

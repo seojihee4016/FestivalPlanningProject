@@ -28,8 +28,13 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
-	@RequestMapping("/main")
+	@RequestMapping("/")
 	public String main() {
+		return "main";
+	}
+	
+	@RequestMapping("/main")
+	public String mainpage() {
 		return "main";
 	}
 
