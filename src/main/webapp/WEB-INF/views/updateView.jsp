@@ -18,7 +18,7 @@
 <body>
 
 	<header>
-	<img src="images/신청 양식 이미지1.png"  width="800" height="220">
+	<img src="images/신청 양식 이미지3.png"  width="800" height="220">
 		<section class="header-wrap">
 			<div class="top-deco">""</div>
 			<section class="header">

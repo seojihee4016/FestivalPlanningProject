@@ -1,8 +1,7 @@
-package com.fpp.service;
+package com.fpp.service.applicationForm;
 
 import java.util.List;
 
-import com.fpp.dto.board.BoardDto;
 import com.fpp.dto.board.FormDto;
 
 public interface BoardService {
@@ -11,7 +10,6 @@ public interface BoardService {
 
 	// 신청 양식 리스트 조회
 	public List<FormDto> list() throws Exception;
-		
 
 	// 신청 양식 번호로 조회
 	public FormDto read(int fno) throws Exception;
