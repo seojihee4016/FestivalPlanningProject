@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user_mapper">
+	<!-- #{~~~} 안에 있는 애들은 DTO 필드명, 쿼리문은 DB컬럼명 -->
+	<insert id="insert_user" parameterType="UserDto">
+		insert into f_user
+		values
+		( #{loginId}, #{loginPw}, #{name}, #{email}, #{telNumber}, #{birth} )
+	</insert>
+
+	<select id="select_user_by_id" resultType="UserDto"
+		parameterType="UserDto">
+		select login_id, login_pw, name, email, tel_number,
+		birth
+		from f_user
+		where login_Id = #{loginId}
+	</select>
+
+</mapper>
