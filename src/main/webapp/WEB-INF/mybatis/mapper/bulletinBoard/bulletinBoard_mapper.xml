@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bulletinBoard_mapper">
+	<!-- 게시판 글 작성 -->
+	<insert id="insertBulletinBoard" parameterType="BulletinBoardDto">
+		INSERT INTO Bulletin_Board(
+		BNO
+		, TITLE
+		, CONTENT
+		, WRITER )
+		VALUES( Bulletin_Board_SEQ.NEXTVAL
+		,
+		#{title}
+		, #{content}
+		, #{writer} )
+	</insert>
+
+	<!-- 게시판 글 작성 -->
+	<select id="select_BulletinBoard_List" resultType="BulletinBoardDto">
+		SELECT BNO
+		, TITLE
+		, WRITER
+		, REGDATE
+		FROM Bulletin_Board
+		ORDER BY BNO DESC
+	</select>
+</mapper>

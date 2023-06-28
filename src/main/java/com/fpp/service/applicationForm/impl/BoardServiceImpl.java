@@ -1,14 +1,13 @@
-package com.fpp.service.impl;
+package com.fpp.service.applicationForm.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fpp.dao.BoardDao;
-import com.fpp.dto.board.BoardDto;
+import com.fpp.dao.applicationForm.BoardDao;
 import com.fpp.dto.board.FormDto;
-import com.fpp.service.BoardService;
+import com.fpp.service.applicationForm.BoardService;
 
 @Service
 public class BoardServiceImpl implements BoardService {

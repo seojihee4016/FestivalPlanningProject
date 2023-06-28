@@ -1,8 +1,7 @@
-package com.fpp.dao;
+package com.fpp.dao.applicationForm;
 
 import java.util.List;
 
-import com.fpp.dto.board.BoardDto;
 import com.fpp.dto.board.FormDto;
 
 public interface BoardDao {
