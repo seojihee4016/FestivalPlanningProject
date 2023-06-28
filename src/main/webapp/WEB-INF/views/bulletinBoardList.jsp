@@ -16,25 +16,31 @@
 		</header>
 
 		<section id="container">
-			<form role="form" method="post" action="selectBulletinBoardList">
+			<form role="form" method="post" action="">
 
 				<table>
 					<tr>
 						<th>번호</th>
 						<th>제목</th>
+						<th>내용</th>
 						<th>작성자</th>
 						<th>등록일</th>
 						<th>수정</th>
 					</tr>
 
-					<c:forEach items="${selectBulletinBoardList}" var="selectBulletinBoardList">
+					<c:forEach items="${selectBulletinBoardList}"
+						var="selectBulletinBoardList">
 						<tr>
 							<td><c:out value="${selectBulletinBoardList.bno}" /></td>
-							<td><c:out value="${selectBulletinBoardList.title}" /></td>
+							<td><a
+								href="/bulletinBoardProcess?bno=${selectBulletinBoardList.bno}"><c:out
+										value="${selectBulletinBoardList.title}" /></a></td>
+							<td><c:out value="${selectBulletinBoardList.content}" /></td>
 							<td><c:out value="${selectBulletinBoardList.writer}" /></td>
-							<td><fmt:formatDate value="${selectBulletinBoardList.regdate}"
-									pattern="yyyy-MM-dd" /></td>
-							<td><a href="/BulletinBoardPocess?bno=${selectBulletinBoardList.bno}"
+							<td><fmt:formatDate
+									value="${selectBulletinBoardList.regdate}" pattern="yyyy-MM-dd" /></td>
+							<td><a
+								href="/bulletinBoardProcess?bno=${selectBulletinBoardList.bno}"
 								class="custom-button">수정</a></td>
 						</tr>
 					</c:forEach>

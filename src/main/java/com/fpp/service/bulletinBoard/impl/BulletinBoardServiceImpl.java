@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fpp.dao.bulletinBoard.BulletinBoardDao;
+import com.fpp.dto.board.FormDto;
 import com.fpp.dto.bulletinBoard.BulletinBoardDto;
 import com.fpp.dto.staff.StaffDto;
 import com.fpp.service.bulletinBoard.BulletinBoardService;
@@ -28,5 +29,26 @@ public class BulletinBoardServiceImpl implements BulletinBoardService{
 	public List<BulletinBoardDto> selectBulletinBoardList() throws Exception {
 
 		return bulletinBoardDao.selectBulletinBoardList();
+	}
+	
+	//게시글 고유 번호로 조회
+	@Override
+	public BulletinBoardDto selectBulletinBoardListByBno(int bno) throws Exception {
+		// TODO Auto-generated method stub
+		return bulletinBoardDao.selectBulletinBoardListByBno(bno);
+	}
+
+	//게시글 수정
+	@Override
+	public void updateBulletinBoard(BulletinBoardDto bulletinBoardDto) throws Exception {
+		// TODO Auto-generated method stub
+		bulletinBoardDao.updateBulletinBoard(bulletinBoardDto);
+	}
+	
+	//게시글 삭제
+	@Override
+	public void deleteBulletinBoardByBno(int bno) throws Exception {
+		// TODO Auto-generated method stub
+		bulletinBoardDao.deleteBulletinBoardByBno(bno);
 	}
 }
