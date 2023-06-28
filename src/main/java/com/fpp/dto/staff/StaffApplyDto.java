@@ -7,10 +7,10 @@ import lombok.Data;
 
 @Data
 public class StaffApplyDto {
-	String festivalName;			//축제 이름
-//	String supportPeriod;			//지원기간
+	String SRNO;			//스탭 모집 공고 고유 번호
+	String SRANO;			//스탭 신청 양식 고유 번호
 	String supportPeriodStart; 
 	String supportPeriodEnd;
 	String recruitmentField;		//모집분야
-//	String id;
+	String id;
 }

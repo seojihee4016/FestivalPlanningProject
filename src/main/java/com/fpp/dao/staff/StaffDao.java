@@ -6,6 +6,7 @@ import com.fpp.dto.staff.StaffApplyDto;
 import com.fpp.dto.staff.StaffDto;
 
 public interface StaffDao {
+	
 	public int insertStaff(StaffDto staffDto);
 	
 	public List<StaffDto> selectStaffRecruitmentList();

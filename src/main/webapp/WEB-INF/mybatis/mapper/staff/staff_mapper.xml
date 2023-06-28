@@ -8,9 +8,7 @@
 	<!-- 스탭 모집 공고 -->
 	<insert id="insert_staff" parameterType="StaffDto">
 		insert into t_staff_recruitment
-		values ( #{festivalName}, #{commissioningAgency}, #{addressEvent},
-				 #{place}, #{startDate}, #{endDate},
-				 #{recruitmentTO}, #{recruitmentField},
+		values ( #{SRNO}, #{recruitmentTO}, #{recruitmentField},
 				 #{preferentialTreatment}, #{applicationPeriod} )
 	</insert>
 	

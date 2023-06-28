@@ -15,7 +15,7 @@
 	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ths5zg540n&submodules=drawing"></script>
 	
 	<!-- 지도가 생성되는 div 영역 -->
-	<div id="map" style="margin:0 auto; width:1000px; max-width:100%; height:700px;"></div>
+	<div id="map" style="margin:0 auto; width:1400px; max-width:100%; height:700px;"></div>
 	
 	<p>그리기 도구 사용 방법</p>
 	<ol>그리기
