@@ -1,17 +1,14 @@
-package com.fpp.dto.board;
+package com.fpp.dto.bulletinBoard;
 
 import java.util.Date;
 
 import lombok.Data;
-@Data
-public class BoardDto {
 
+@Data
+public class BulletinBoardDto {
 	private int bno;
 	private String title;
 	private String content;
 	private String writer;
 	private Date regdate;
-	
-	
-	
 }
