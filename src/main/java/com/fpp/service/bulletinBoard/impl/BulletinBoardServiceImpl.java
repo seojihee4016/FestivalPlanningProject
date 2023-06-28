@@ -9,6 +9,7 @@ import com.fpp.dao.bulletinBoard.BulletinBoardDao;
 import com.fpp.dto.board.FormDto;
 import com.fpp.dto.bulletinBoard.BulletinBoardDto;
 import com.fpp.dto.bulletinBoard.Criteria;
+import com.fpp.dto.bulletinBoard.SearchCriteria;
 import com.fpp.dto.staff.StaffDto;
 import com.fpp.service.bulletinBoard.BulletinBoardService;
 
@@ -25,24 +26,18 @@ public class BulletinBoardServiceImpl implements BulletinBoardService{
 		bulletinBoardDao.insertBulletinBoard(bulletinBoardDto);
 	}
 
-	// 게시물 목록 조회
-//	@Override
-//	public List<BulletinBoardDto> selectBulletinBoardList() throws Exception {
-//
-//		return bulletinBoardDao.selectBulletinBoardList();
-//	}
-	
+	// 게시물 목록 조회 - 페이지네이션 포함
 	@Override
-	public List<BulletinBoardDto> selectBulletinBoardList(Criteria cri) throws Exception {
+	public List<BulletinBoardDto> selectBulletinBoardList(SearchCriteria scri) throws Exception {
 
-		return bulletinBoardDao.selectBulletinBoardList(cri);
+		return bulletinBoardDao.selectBulletinBoardList(scri);
 	}
 	
-	//페이징
+	//페이지네이션 게시물 총 개수
 	@Override
-	public int listCount() throws Exception {
+	public int listCount(SearchCriteria scri) throws Exception {
 		// TODO Auto-generated method stub
-		return bulletinBoardDao.listCount();
+		return bulletinBoardDao.listCount(scri);
 	}
 
 	

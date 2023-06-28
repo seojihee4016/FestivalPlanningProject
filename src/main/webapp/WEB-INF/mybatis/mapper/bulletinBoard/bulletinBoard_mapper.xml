@@ -20,9 +20,13 @@
 		SELECT BNO, TITLE, CONTENT, WRITER, REGDATE FROM Bulletin_Board ORDER BY 
 		BNO DESC </select> -->
 
-	<!-- 페이지네이션 -->
+	<!-- 페이지네이션 <select id="listPage" resultType="BulletinBoardDto" parameterType="Criteria"> 
+		SELECT BNO, TITLE, CONTENT, WRITER, REGDATE FROM ( SELECT BNO, TITLE, CONTENT, 
+		WRITER, REGDATE, ROW_NUMBER() OVER(ORDER BY BNO DESC) AS RNUM FROM Bulletin_Board 
+		) Bulletin WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd} ORDER BY BNO DESC 
+		</select> -->
 	<select id="listPage" resultType="BulletinBoardDto"
-		parameterType="Criteria">
+		parameterType="SearchCriteria">
 		SELECT BNO,
 		TITLE,
 		CONTENT,
@@ -34,22 +38,41 @@
 		CONTENT,
 		WRITER,
 		REGDATE,
-		ROW_NUMBER() OVER(ORDER BY BNO DESC) AS
-		RNUM
+		ROW_NUMBER() OVER(ORDER BY BNO DESC) AS RNUM
 		FROM Bulletin_Board
+		WHERE 1=1
+		<include refid="search"></include>
 		) Bulletin
-		WHERE RNUM BETWEEN #{rowStart} AND
-		#{rowEnd}
-		ORDER BY BNO DESC
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY BNO
+		DESC
 	</select>
 
-	<select id="listCount" resultType="int">
-	<![CDATA[
+	<!-- <select id="listCount" resultType="int"> <![CDATA[ SELECT COUNT(BNO) 
+		FROM Bulletin_Board WHERE BNO > 0 ]]> </select> -->
+
+	<!-- 페이지네이션 카운트 -->
+	<select id="listCount" resultType="int"
+		parameterType="SearchCriteria">
 		SELECT COUNT(BNO)
-		  FROM Bulletin_Board
-		 WHERE BNO > 0
-	]]>
+		FROM Bulletin_Board
+		WHERE 1=1
+		<include refid="search"></include>
+		AND BNO > 0
 	</select>
+
+	<!-- 검색 기능을 위해 동적 쿼리문 추가 -->
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">AND TITLE LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'c'.toString()">AND CONTENT LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'w'.toString()">AND WRITER LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'tc'.toString()">AND (TITLE LIKE '%' || #{keyword} || '%') or (CONTENT
+				LIKE '%' || #{keyword} || '%')</if>
+		</if>
+	</sql>
+
+
 
 
 	<!-- 번호로 리스트 조회 -->

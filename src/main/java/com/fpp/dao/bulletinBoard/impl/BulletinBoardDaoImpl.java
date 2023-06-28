@@ -11,6 +11,7 @@ import com.fpp.dao.bulletinBoard.BulletinBoardDao;
 import com.fpp.dto.board.FormDto;
 import com.fpp.dto.bulletinBoard.BulletinBoardDto;
 import com.fpp.dto.bulletinBoard.Criteria;
+import com.fpp.dto.bulletinBoard.SearchCriteria;
 import com.fpp.dto.staff.StaffDto;
 
 @Repository
@@ -25,22 +26,17 @@ public class BulletinBoardDaoImpl implements BulletinBoardDao{
 		sqlSessionTemplate.insert("bulletinBoard_mapper.insertBulletinBoard",bulletinBoardDto);
 	}
 
-	// 게시물 목록 조회
-//	@Override
-//	public List<BulletinBoardDto> selectBulletinBoardList() throws Exception {
-//		return sqlSessionTemplate.selectList("bulletinBoard_mapper.select_BulletinBoard_List");
-//	}
-	
+	// 게시물 목록 조회 - 페이지네이션 포함	
 	@Override
-	public List<BulletinBoardDto> selectBulletinBoardList(Criteria cri) throws Exception {
-		return sqlSessionTemplate.selectList("bulletinBoard_mapper.listPage" ,cri);
+	public List<BulletinBoardDto> selectBulletinBoardList(SearchCriteria scri) throws Exception {
+		return sqlSessionTemplate.selectList("bulletinBoard_mapper.listPage" ,scri);
 	}
 	
 	//페이징 - 개시물 총 개수
 	@Override
-	public int listCount() throws Exception {
+	public int listCount(SearchCriteria scri) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSessionTemplate.selectOne("bulletinBoard_mapper.listCount");
+		return sqlSessionTemplate.selectOne("bulletinBoard_mapper.listCount" , scri);
 	}
 
 

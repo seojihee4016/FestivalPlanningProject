@@ -56,9 +56,20 @@ form button[type="submit"] {
 		<hr />
 
 		<section id="container">
-			<form role="form" method="post" action="" id="updateBulletinBoard" onsubmit="return validateForm()">
+			<form role="form" method="post" action="" id="updateBulletinBoard"
+				onsubmit="return validateForm()">
+
+
+				<!-- cri값을 보관하기위해 form태그안에 타입 hidden으로 input태그를 추가 -->
 				<input type="hidden" id="bno" name="bno"
-					value="${updateBulletinBoard.bno}" />
+					value="${updateBulletinBoard.bno}" /> <input type="hidden"
+					id="bno" name="bno" value="${read.bno}" /> <input type="hidden"
+					id="page" name="page" value="${scri.page}"> <input
+					type="hidden" id="perPageNum" name="perPageNum"
+					value="${scri.perPageNum}"> <input type="hidden"
+					id="searchType" name="searchType" value="${scri.searchType}">
+				<input type="hidden" id="keyword" name="keyword"
+					value="${scri.keyword}">
 
 				<table>
 					<tbody>
@@ -128,6 +139,16 @@ form button[type="submit"] {
 
 			return true;
 		}
+	</script>
+
+	<script>
+	// 목록
+	$(".list_btn").on("click", function(){
+
+	location.href = "/bulletinBoardList?page=${scri.page}"
+	+"&perPageNum=${scri.perPageNum}"
+	+"&searchType=${scri.searchType}&keyword=${scri.keyword}";
+	})
 	</script>
 </body>
 </html>
