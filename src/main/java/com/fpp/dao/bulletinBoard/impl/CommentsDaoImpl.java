@@ -26,7 +26,7 @@ public class CommentsDaoImpl implements CommentsDao{
 	@Override
 	public void writeReply(CommentsDto commentsDto) throws Exception {
 		// TODO Auto-generated method stub
-		sqlSessionTemplate.insert("comments_mapper.writeReply", commentsDto);
+		sqlSessionTemplate.insert("comments_mapper.write_Reply", commentsDto);
 	}
 
 }
