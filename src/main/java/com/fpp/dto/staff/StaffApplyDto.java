@@ -7,10 +7,10 @@ import lombok.Data;
 
 @Data
 public class StaffApplyDto {
-	String SRNO;			//스탭 모집 공고 고유 번호
-	String SRANO;			//스탭 신청 양식 고유 번호
-	String supportPeriodStart; 
-	String supportPeriodEnd;
-	String recruitmentField;		//모집분야
+	int SRNO;					//스탭 모집 공고 고유 번호
+	int SRANO;					//스탭 신청 양식 고유 번호
+	String supportPeriodStart;	//지원기간 시작일
+	String supportPeriodEnd;	//지원기간 종료일
+	String recruitmentField;	//모집분야
 	String id;
 }

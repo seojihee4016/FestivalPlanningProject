@@ -1,0 +1,59 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+h1 {
+	margin: 30px 0px 20px 0px;
+	text-align: center;
+}
+
+.container {
+	width: 800px;
+	margin: 0 auto;
+}
+form {
+	width: 800px;
+	margin: 20px 0px;
+	padding: 15px 20px;
+	border: 2px solid darkgray;
+	border-radius: 10px;
+}
+.formContainer {
+	display: flex;
+	justify-content: space-evenly;
+    align-items: center;
+}
+
+.formKey {
+	margin-top: 20px;
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+.formValue {
+	padding-bottom: 5px;
+	font-size: 1.1rem;
+}
+
+.borderBottom {
+	border-bottom: 1.5px solid lightgray;
+}
+.inputText {
+	border-style: none;
+	font-size: 1.1rem;
+}
+
+.btnArea {
+	margin-top: 30px;
+	text-align: center;
+}
+#submitBtn {
+	width: 230px;
+    height: 50px;
+    margin: 10px;
+    background-color: #E6F4ED;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border: 1.5px solid darkgray;
+    border-radius: 5px;
+}

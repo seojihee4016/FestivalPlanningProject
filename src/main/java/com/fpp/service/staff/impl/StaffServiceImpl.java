@@ -25,6 +25,7 @@ public class StaffServiceImpl implements StaffService {
 		return result;
 	}
 
+	/*
 	@Override
 	public List<StaffDto> getStaffRecruitmentList() {
 		// TODO Auto-generated method stub
@@ -33,7 +34,8 @@ public class StaffServiceImpl implements StaffService {
 		
 		return list;
 	}
-
+	*/
+	/*
 	@Override
 	public List<StaffDto> getStaffRecruitmentListByFestivalName(String festivalName) {
 		// TODO Auto-generated method stub
@@ -43,14 +45,24 @@ public class StaffServiceImpl implements StaffService {
 		
 		return list;
 	}
+	*/
 
 	@Override
-	public int staffRecruitmentApply(StaffApplyDto staffApplyDto) {
+	public void staffRecruitmentApply(StaffApplyDto staffApplyDto) {
 		// TODO Auto-generated method stub
 		
-		int result = staffDao.insertStaffApply(staffApplyDto);
+		staffDao.insertStaffApply(staffApplyDto);
 		
-		return result;
+	}
+
+	//스탭 모집 공고 조회
+	@Override
+	public StaffDto getStaffRecruitment(int fno) {
+		// TODO Auto-generated method stub
+		
+		StaffDto staffDto = staffDao.selectStaffRecruitment(fno);
+		
+		return staffDto;
 	}
 
 

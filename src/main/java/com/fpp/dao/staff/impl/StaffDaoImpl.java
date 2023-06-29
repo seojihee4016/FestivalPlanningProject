@@ -25,6 +25,7 @@ public class StaffDaoImpl implements StaffDao {
 		return result;
 	}
 
+	/*
 	@Override
 	public List<StaffDto> selectStaffRecruitmentList() {
 		// TODO Auto-generated method stub
@@ -34,7 +35,8 @@ public class StaffDaoImpl implements StaffDao {
 		
 		return list;
 	}
-
+	*/
+	/*
 	@Override
 	public List<StaffDto> selectStaffRecruitmentListByFestivalName(String festivalName) {
 		// TODO Auto-generated method stub
@@ -43,14 +45,24 @@ public class StaffDaoImpl implements StaffDao {
 		
 		return list;
 	}
+	*/
 
 	@Override
-	public int insertStaffApply(StaffApplyDto staffApplyDto) {
+	public void insertStaffApply(StaffApplyDto staffApplyDto) {
 		// TODO Auto-generated method stub
 		
-		int result = sqlSessionTemplate.insert("staff_mapper.insert_staff_apply", staffApplyDto);
+		sqlSessionTemplate.insert("staff_mapper.insert_staff_apply", staffApplyDto);
+	}
+
+	//스탭 모집 공고 조회
+	@Override
+	public StaffDto selectStaffRecruitment(int fno) {
+		// TODO Auto-generated method stub
 		
-		return result;
+		StaffDto staffDto = 
+				sqlSessionTemplate.selectOne("staff_mapper.select_staff_recruitment_by_fno", fno);
+		
+		return staffDto;
 	}
 
 }
