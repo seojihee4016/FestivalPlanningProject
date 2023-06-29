@@ -59,8 +59,8 @@ public class UserController {
 		return "login";
 	}
 
-	@PostMapping("/login.do")
-	public String login_proc(@ModelAttribute UserDto userDto, HttpSession session) {
+	@PostMapping("/login")
+	public String login_proc(@ModelAttribute UserDto userDto, HttpSession session){
 
 		System.out.println(userDto.toString());
 		boolean tryLogin = userService.login(userDto);
@@ -104,10 +104,10 @@ public class UserController {
 
 		return "header";
 	}
-	
+
 	@RequestMapping("/agreement")
 	public String agreement() {
-		
+
 		return "agreement";
 	}
 
