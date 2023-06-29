@@ -6,22 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<style>
-.agreebox {
-	width: 550px;
-	margin: 0 auto;
-	margin-top: 50px;
-}
-
-.nextbtn {
-	width: 450px;
-}
-
-.nextbtnbox {
-	text-align: center;
-}
-</style>
+<link href="css/agreement.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<form action="" method="POST">
@@ -50,7 +35,7 @@
 						서비스를 이용하시거나 Piñata 서비스 회원으로 가입하실 경우 여러분은 본 약관 및 관련 운영 정책을 확인하거나
 						동의하게 되므로, 잠시 시간을 내시어 주의 깊게 살펴봐 주시기 바랍니다.<br> <br> <label
 							for="agree"> <input type="checkbox" name="agree"
-							value="1"> <span>Piñata 이용약관 동의<strong>(필수)</strong>
+							id="agreement" value="1"> <span>Piñata 이용약관 동의<strong>(필수)</strong>
 						</span>
 						</label>
 					</div>
@@ -74,7 +59,7 @@
 						뉴스 보기 등 대부분의 네이버 서비스를 회원과 동일하게 이용할 수 있습니다. 이용자가 메일, 캘린더, 카페, 블로그
 						등과 같이 개인화 혹은 회원제 서비스를 이용하기 위해 회원가입을 할 경우, 네이버는 서비스 이용을 위해 필요한 최소한의
 						개인정보를 수집합니다.<br> <br> <label for="agree"> <input
-							type="checkbox" name="agree" value="2"> <span>개인정보
+							type="checkbox" id="agreement" name="agree" value="2"> <span>개인정보
 								수집 및 이용 동의<strong>(필수)</strong>
 						</span>
 						</label>
@@ -106,11 +91,23 @@
 			</div>
 			<br>
 			<div class="nextbtnbox">
-				<a href="join"><button type="button" class="btn btn-primary nextbtn">다음</button></a>
+				<button type="button" class="btn btn-primary nextbtn"
+					id="submitBtn" onclick="movepage('/join');">다음</button>
 			</div>
 		</div>
 	</form>
 
 	<script type="text/javascript" src="js/agreement.js"></script>
+
+	<script>
+		document.getElementById('submitBtn').onclick = function movepage(page) {
+			if (document.getElementById('agreement').checked) {
+				window.document.location.href = page;
+			} else {
+				alert('필수동의 안함');
+			}
+		}
+	</script>
+
 </body>
 </html>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fpp.dto.user.UserDto;
@@ -71,6 +72,7 @@ public class UserController {
 			session.setAttribute("loginId", userDto.getLoginId());
 			return "redirect:/main";
 		}
+		
 		return "redirect:/login";
 	}
 
@@ -108,7 +110,7 @@ public class UserController {
 	@RequestMapping("/agreement")
 	public String agreement() {
 
-		return "agreement";
+		return "/agreement";
 	}
 
 }
