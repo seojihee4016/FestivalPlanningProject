@@ -17,17 +17,22 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fpp.dto.board.FormDto;
 import com.fpp.dto.bulletinBoard.BulletinBoardDto;
+import com.fpp.dto.bulletinBoard.CommentsDto;
 import com.fpp.dto.bulletinBoard.PageMaker;
 import com.fpp.dto.bulletinBoard.SearchCriteria;
 import com.fpp.dto.bulletinBoard.Criteria;
 import com.fpp.dto.staff.StaffDto;
 import com.fpp.service.bulletinBoard.BulletinBoardService;
+import com.fpp.service.bulletinBoard.CommentsService;
 
 @Controller
 public class BulletinBoardController {
 
 	@Autowired
 	BulletinBoardService bulletinBoardService;
+
+	@Autowired
+	CommentsService commentsService;
 
 	// 게시판 글 작성
 	@GetMapping("/BulletinBoard") 
@@ -57,10 +62,15 @@ public class BulletinBoardController {
 
 	//게시글 수정
 	@GetMapping("/bulletinBoardProcess")
-	public String bulletinBoardProcess(BulletinBoardDto bulletinBoardDto, @ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception{
+	public String bulletinBoardProcess(BulletinBoardDto bulletinBoardDto,CommentsDto commentsDto, @ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception{
 
 		model.addAttribute("updateBulletinBoard", bulletinBoardService.selectBulletinBoardListByBno(bulletinBoardDto.getBno()));
 		model.addAttribute("scri", scri);
+
+		//댓글 - commentsService 주입
+		List<CommentsDto> commentList = commentsService.readCommentsList(bulletinBoardDto.getBno());
+		model.addAttribute("commentList", commentList);
+
 
 		return "bulletinBoardProcess";
 	}
@@ -69,8 +79,10 @@ public class BulletinBoardController {
 	@PostMapping("/bulletinBoardProcess")
 	public String update(BulletinBoardDto bulletinBoardDto, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception{
 
+		//게시글 수정
 		bulletinBoardService.updateBulletinBoard(bulletinBoardDto);
 
+		//페이징 유지
 		rttr.addAttribute("page", scri.getPage());
 		rttr.addAttribute("perPageNum", scri.getPerPageNum());
 		rttr.addAttribute("searchType", scri.getSearchType());
@@ -94,5 +106,27 @@ public class BulletinBoardController {
 
 		return "redirect:/bulletinBoardList";
 	}
+
+
+	/*댓글 작성
+	CommentsDto는 댓글 작성하기위한 데이터, 
+	SearchCriteria는 bulletinBoardProcess에 있던 page, perPageNum, searchType, keyword값을 받아오는 용도
+	RedirectAttributes는 redirect했을때 값들을 가지고 이동
+	SearchCriteria의 값을 넣어서 댓글을 저장 한 뒤 원래 페이지로 redirect하여 이동하는 구조*/
+	
+	@PostMapping("/writeReply")
+	public String writeReply(CommentsDto commentsDto, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
+
+		commentsService.writeReply(commentsDto);
+
+		rttr.addAttribute("bno", commentsDto.getBno());
+		rttr.addAttribute("page", scri.getPage());
+		rttr.addAttribute("perPageNum", scri.getPerPageNum());
+		rttr.addAttribute("searchType", scri.getSearchType());
+		rttr.addAttribute("keyword", scri.getKeyword());
+
+		return "redirect:/bulletinBoardProcess";
+	}
+
 
 }

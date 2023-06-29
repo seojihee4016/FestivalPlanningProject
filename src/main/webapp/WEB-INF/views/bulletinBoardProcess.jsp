@@ -11,11 +11,11 @@
 <meta charset="UTF-8">
 <title>BulletinBoard</title>
 <style>
+/*게시판*/
 body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 100vh;
 }
 
 form {
@@ -43,6 +43,30 @@ form input[type="text"], form textarea {
 form button[type="submit"] {
 	padding: 10px 20px;
 }
+
+/*댓글*/
+.commentList {
+	list-style: none;
+	padding: 0;
+}
+
+.commentList li {
+	margin-bottom: 20px;
+	border: 1px solid #ccc;
+	padding: 10px;
+}
+
+.commentList p {
+	margin: 0;
+}
+
+.commentList p:first-child {
+	font-weight: bold;
+}
+
+.commentList p:last-child {
+	margin-top: 10px;
+}
 </style>
 </head>
 <body>
@@ -62,8 +86,8 @@ form button[type="submit"] {
 
 				<!-- cri값을 보관하기위해 form태그안에 타입 hidden으로 input태그를 추가 -->
 				<input type="hidden" id="bno" name="bno"
-					value="${updateBulletinBoard.bno}" /> <input type="hidden"
-					id="bno" name="bno" value="${read.bno}" /> <input type="hidden"
+					value="${updateBulletinBoard.bno}" /> 
+					<input type="hidden"
 					id="page" name="page" value="${scri.page}"> <input
 					type="hidden" id="perPageNum" name="perPageNum"
 					value="${scri.perPageNum}"> <input type="hidden"
@@ -97,10 +121,48 @@ form button[type="submit"] {
 				<button type="submit" class="delete_btn">삭제</button>
 				<button type="button" class="cancel-btn" onclick="history.back();">취소</button>
 			</form>
+
+			<!-- 작성된 댓글 조회-->
+			<div id="comments">
+				<ol class="commentList">
+					<c:forEach items="${commentList}" var="commentList">
+						<li>
+							<p>
+								작성자 : ${commentList.writer}<br /> 작성 날짜 :
+								<fmt:formatDate value="${commentList.regdate}"
+									pattern="yyyy-MM-dd" />
+							</p>
+							<p>${commentList.content}</p>
+						</li>
+					</c:forEach>
+				</ol>
+			</div>
+
+			<!-- 댓글 작성 -->
+			<form name="replyForm" method="post">
+				<input type="hidden" id="bno" name="bno" value="${updateBulletinBoard.bno}" /> <input
+					type="hidden" id="page" name="page" value="${scri.page}"> <input
+					type="hidden" id="perPageNum" name="perPageNum"
+					value="${scri.perPageNum}"> <input type="hidden"
+					id="searchType" name="searchType" value="${scri.searchType}">
+				<input type="hidden" id="keyword" name="keyword"
+					value="${scri.keyword}">
+
+				<div>
+					<label for="writer">댓글 작성자</label><input type="text" id="writer"
+						name="writer" /> <br /> <label for="content">댓글 내용</label><input
+						type="text" id="content" name="content" />
+				</div>
+				<div>
+					<button type="button" class="replyWriteBtn">작성</button>
+				</div>
+			</form>
+
+
+
 		</section>
 		<hr />
 	</div>
-
 
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -125,6 +187,8 @@ form button[type="submit"] {
 			});
 		});
 	</script>
+
+	<!-- input 유효성 검사 -->
 	<script>
 		function validateForm() {
 
@@ -141,14 +205,26 @@ form button[type="submit"] {
 		}
 	</script>
 
+	<!-- 페이지 값 작성 중/ 댓글 -->
 	<script>
-	// 목록
-	$(".list_btn").on("click", function(){
 
-	location.href = "/bulletinBoardList?page=${scri.page}"
-	+"&perPageNum=${scri.perPageNum}"
-	+"&searchType=${scri.searchType}&keyword=${scri.keyword}";
-	})
+		// 목록
+		$(".list_btn")
+				.on(
+						"click",
+						function() {
+
+							location.href = "/bulletinBoardList?page=${scri.page}"
+									+ "&perPageNum=${scri.perPageNum}"
+									+ "&searchType=${scri.searchType}&keyword=${scri.keyword}";
+						})
+
+		//댓글 작성
+		$(".replyWriteBtn").on("click", function() {
+			var formObj = $("form[name='replyForm']");
+			formObj.attr("action", "writeReply");
+			formObj.submit();
+		});
 	</script>
 </body>
 </html>

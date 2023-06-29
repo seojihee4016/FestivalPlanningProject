@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comments_mapper">
+
+	<!-- 댓글 조회 -->
+	<select id="read_Comments_List" resultType="CommentsDto">
+		SELECT
+		CNO, CONTENT,
+		WRITER, REGDATE
+		FROM comments
+		WHERE BNO = #{bno}
+	</select>
+
+	<!-- 댓글 작성 -->
+	<insert id="writeReply">
+		INSERT INTO comments(
+		BNO
+		, CNO
+		, CONTENT
+		, WRITER
+		)
+		VALUES( #{bno}
+		, comments_seq.NEXTVAL
+		, #{content}
+		, #{writer} )
+	</insert>
+</mapper>

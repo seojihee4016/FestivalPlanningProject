@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fpp.dto.board.FormDto;
 import com.fpp.dto.bulletinBoard.BulletinBoardDto;
+import com.fpp.dto.bulletinBoard.CommentsDto;
 import com.fpp.dto.bulletinBoard.Criteria;
 import com.fpp.dto.bulletinBoard.SearchCriteria;
 
@@ -25,4 +26,5 @@ public interface BulletinBoardDao {
 
 	// 게시글 삭제
 	public void deleteBulletinBoardByBno(int bno) throws Exception;
+	
 }
