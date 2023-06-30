@@ -61,8 +61,8 @@
 			<!-- <p>축제 스탭 신청하기 <input type="hidden" name="festivalName" value="${param.festivalName}" /></p> -->		 	<p>지원기간 <input type="date" name="supportPeriodStart" min="<%= java.time.LocalDate.now().plusDays(1) %>" max="${maxDate}" />
 		 		   ~ <input type="date" name="supportPeriodEnd" min="<%= java.time.LocalDate.now().plusDays(1) %>" max="${maxDate}" /></p>
 			<p>모집분야 <input type="radio" name="recruitmentField" id="rf1" value="rf1" checked="checked" /><label for="rf1">안내 도우미</label>
-				<input type="radio" name="recruitmentField" id="rf2" value="rf2" /><label for="rf2">안전요원</label>
-				<input type="radio" name="recruitmentField" id="rf0" value="rf0" /><label for="rf0">기타</label>
+					<input type="radio" name="recruitmentField" id="rf2" value="rf2" /><label for="rf2">안전요원</label>
+					<input type="radio" name="recruitmentField" id="rf0" value="rf0" /><label for="rf0">기타</label>
 			</p>
 			<button type="submit">신청하기</button>
 		</form>

@@ -4,12 +4,17 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fpp.dto.board.FormDto;
@@ -78,14 +83,32 @@ public class StaffRecruitmentController {
 	//스탭 신청 페이지
 	@GetMapping("/staffRecruitment")
 	public String staffRecruitment(@RequestParam("fno") int fno,
-			/* FormDto formDto, StaffDto staffDto, */ Model model) throws Exception {
-		
+			/* @Valid @RequestBody FormDto formDtoByFno, */
+			/* @PathVariable(value="fno", required = false) */
+			/* FormDto formDto, StaffDto staffDto, */ Model model/*, 
+			BindingResult bindingResult*/) throws Exception {
 		
 		//Form
 		// 해당 축제의 데이터 가져오기
 		FormDto formDtoByFno = boardService.read(fno);
-	    
-	    // 모델에 추가하여 뷰로 전달
+		
+		
+		/*
+		 * if (bindingResult.hasErrors()) { System.out.println("bindingResult = " +
+		 * bindingResult.getAllErrors()); return "valid :: #form"; }
+		 */
+		
+		//formDto.getFno();를 가져오는데 fno < 0인 경우 유효성 검사 추가
+		//http://localhost:8080/updateView로 들어가는 경우에는 list 로 이동
+		/*
+		fno = formDtoByFno.getFno();
+	    if (fno < 0 || fno !=  ) {
+	        return "list";
+	    }
+	    */
+		 
+		
+		// 모델에 추가하여 뷰로 전달
 	    model.addAttribute("formDtoByFno", formDtoByFno);
 	    
 	    //Staff

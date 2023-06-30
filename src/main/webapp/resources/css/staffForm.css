@@ -48,12 +48,16 @@ form {
 	text-align: center;
 }
 #submitBtn {
-	width: 230px;
+    width: 230px;
     height: 50px;
     margin: 10px;
-    background-color: #E6F4ED;
+    color: #fff;
+    background-color: #333;
+    border: none;
+    border-radius: 4px;
     font-size: 1.3rem;
     font-weight: bold;
-    border: 1.5px solid darkgray;
-    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+    
 }
