@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+.container {
+	box-sizing: border-box;
+}
+
+.login-form {
+	margin-top: 50px;
+	border: 1px solid lightgray;
+	border-radius: 5%;
+	width: 500px;
+	height: 460px;
+	max-height: 100%;
+	margin: 0 auto;
+	margin: 0 auto;
+	max-height: 100%;
+}
+
+.input-box {
+	text-align: center;
+}
+
+.login-btn {
+	width: 100%;
+}
+
+h1 {
+	text-align: center;
+	margin-top: 100px;
+}
