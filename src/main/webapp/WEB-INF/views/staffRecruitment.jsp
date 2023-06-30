@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
+<%@ include file="header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,9 +59,11 @@
 				<c:set var="maxDate" value="${staffRecruitment.applicationPeriod}" />
 			</c:if>
 	
-			<!-- <p>축제 스탭 신청하기 <input type="hidden" name="festivalName" value="${param.festivalName}" /></p> -->		 	<p>지원기간 <input type="date" name="supportPeriodStart" min="<%= java.time.LocalDate.now().plusDays(1) %>" max="${maxDate}" />
-		 		   ~ <input type="date" name="supportPeriodEnd" min="<%= java.time.LocalDate.now().plusDays(1) %>" max="${maxDate}" /></p>
-			<p>모집분야 <input type="radio" name="recruitmentField" id="rf1" value="rf1" checked="checked" /><label for="rf1">안내 도우미</label>
+			<!-- <p>축제 스탭 신청하기 <input type="hidden" name="festivalName" value="${param.festivalName}" /></p> -->		 	<p>지원기간 <input type="date" name="supportPeriodStart" required="required"
+		 					min="<%= java.time.LocalDate.now().plusDays(1) %>" max="${maxDate}" />
+		 		   ~ <input type="date" name="supportPeriodEnd" required="required"
+		 		   			min="<%= java.time.LocalDate.now().plusDays(1) %>" max="${maxDate}" /></p>
+			<p>지원분야 <input type="radio" name="recruitmentField" id="rf1" value="rf1" checked="checked" /><label for="rf1">안내 도우미</label>
 					<input type="radio" name="recruitmentField" id="rf2" value="rf2" /><label for="rf2">안전요원</label>
 					<input type="radio" name="recruitmentField" id="rf0" value="rf0" /><label for="rf0">기타</label>
 			</p>
@@ -70,11 +73,15 @@
 
 
 <script>
-	var error = "${error}";
-	if (error) {
-		alert(error);
+	var errorDate = "${errorDate}";
+	if (errorDate) {
+		alert(errorDate);
 	}
 	
+	var successApply = "${successApply}";
+	if (successApply) {
+		alert(successApply);
+	}
 </script>
 
 </body>

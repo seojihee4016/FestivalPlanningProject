@@ -4,21 +4,22 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fpp.dto.board.FormDto;
 import com.fpp.dto.staff.StaffApplyDto;
+import com.fpp.dto.staff.StaffBySrnoDto;
 import com.fpp.dto.staff.StaffDto;
 import com.fpp.service.applicationForm.BoardService;
 import com.fpp.service.staff.StaffService;
@@ -46,36 +47,70 @@ public class StaffRecruitmentController {
 	}
 	
 	@PostMapping("/staffRecruitment_form")
-	public String staffRecruitment_form_process(StaffDto staffDto, /*FormDto formDto, */
-				  Model model ) throws Exception {
+	public String staffRecruitment_form_process(@RequestParam("fno") int fno, 
+				  Model model, @ModelAttribute StaffDto staffDto,
+				  BindingResult bindingResult, RedirectAttributes redirectAttributes
+				  ) throws Exception {
 		
-		//스탭 모집 공고 등록
-		staffService.recruitmentStaff(staffDto);
+		//모집 공고 중복 업로드 확인
+		FormDto formDto = boardService.read(fno);
+	    //int srno = staffDto.getSRNO();
+	    
+	    //StaffDto List 중 SRNO 가져와서 중복 체크하기
+		List<StaffDto> staffList = staffService.getStaffRecruitmentList();
+	    // 중복 여부 확인
+	    for (StaffDto staff : staffList) {
+	        if (staff.getSRNO() == formDto.getFno()) {
+	        	redirectAttributes.addFlashAttribute("errorFno", "이미 업로드된 모집 공고입니다.");
+	        	return "redirect:/staffRecruitment_form?fno=" + fno;
+	        }
+	    }
 		
 		/*
-		// 신청 양식 번호로 확인하기
-	    int fno = formDto.getFno(); // FormDto에서 fno 값을 가져옴
-	    FormDto readFormDto = boardService.read(fno);
-	    model.addAttribute("formDto", readFormDto);
-		*/
-		
-		/*
-		 * //신청 양식 불러오기 List<FormDto> formList = boardService.list();
-		 * model.addAttribute("formList", formList);
-		 */
-		
-		return "redirect:/staffRecruitmentList";
+	    if (srno == formDto.getFno()) {
+	        //model.addAttribute("errorFno", "이미 업로드된 모집 공고입니다."); //redirect:/시 파라미터값이 전달되지 않음
+	    	redirectAttributes.addFlashAttribute("errorFno", "이미 업로드된 모집 공고입니다.");
+	    	return "redirect:/staffRecruitment_form?fno=" + fno; // 오류가 있는 경우 다시 해당 페이지를 표시
+	    }*/
+	    
+	    
+//	    Map<String, String> errors = new HashMap<>();
+	    
+	    if (ObjectUtils.isEmpty(staffDto.getRecruitmentTO())) {
+	        bindingResult.addError(new FieldError("staffDto"
+	                    , "recruitmentTO"
+	                    , "모집 인원을 입력해 주세요."));
+	    }
+	    if (ObjectUtils.isEmpty(staffDto.getApplicationPeriod())) {
+	        bindingResult.addError(new FieldError("staffDto"
+	                    , "applicationPeriod"
+	                    , "접수 기간을 입력해 주세요."));
+	    }
+	    
+	 // 검증에 실패하면 다시 입력 폼으로
+	    if (bindingResult.hasErrors()) {
+	        return "redirect:/staffRecruitment_form?fno=\" + fno";
+	    }
+	    
+	    //모집 공고 업로드
+	    staffService.recruitmentStaff(staffDto);
+	    
+	    return "redirect:/staffRecruitmentList";
 	}
+	
 	
 	//스탭 모집 공고 리스트 페이지
 	@GetMapping("/staffRecruitmentList")
 	public String staffRecruitmentList(Model model) throws Exception {
 		
-		List<FormDto> formlist =
-				boardService.list();
+		//신청 양식 불러오기
+//		List<FormDto> formlist = boardService.list();
+//
+//		model.addAttribute("formlist", formlist);
+//		staff_recruitment 테이블로 다시 불러오기
 		
-
-		model.addAttribute("formlist", formlist);
+		List<StaffBySrnoDto> StaffBySrnoList = staffService.getStaffRecruitmentAndFormList();
+		model.addAttribute("StaffBySrnoList", StaffBySrnoList);
 		
 		return "staffRecruitmentList";
 	}
@@ -89,9 +124,15 @@ public class StaffRecruitmentController {
 			BindingResult bindingResult*/) throws Exception {
 		
 		//Form
-		// 해당 축제의 데이터 가져오기
+		//해당 축제의 데이터 가져오기
 		FormDto formDtoByFno = boardService.read(fno);
+		//모델에 추가하여 뷰로 전달
+		model.addAttribute("formDtoByFno", formDtoByFno);
 		
+		//Staff
+		//스탭 모집 공고 조회
+		StaffDto staffRecruitment = staffService.getStaffRecruitment(fno);
+		model.addAttribute("staffRecruitment", staffRecruitment);
 		
 		/*
 		 * if (bindingResult.hasErrors()) { System.out.println("bindingResult = " +
@@ -106,62 +147,47 @@ public class StaffRecruitmentController {
 	        return "list";
 	    }
 	    */
-		 
-		
-		// 모델에 추가하여 뷰로 전달
-	    model.addAttribute("formDtoByFno", formDtoByFno);
-	    
-	    //Staff
-        // 스탭 모집 목록 데이터 조회
-        StaffDto staffRecruitment = staffService.getStaffRecruitment(fno);
-        model.addAttribute("staffRecruitment", staffRecruitment);
-		
-		
+
 		return "staffRecruitment";
 	}
 	
 	@PostMapping("/staffRecruitment")
-	public String staffRecruitment_process (StaffApplyDto staffApplyDto
-				  //Model model 
-				  
-				  /*, 
+	public String staffRecruitment_process (@RequestParam("fno") int fno, 
+				  Model model, @ModelAttribute StaffApplyDto staffApplyDto, 
 				  @RequestParam("supportPeriodStart") String supportPeriodStart,
 			      @RequestParam("supportPeriodEnd") String supportPeriodEnd,
-			      */) {
-//		
-//		// 유효성 검사 통과 시, staffApplyDto를 이용해 스탭 모집에 지원 등록
-		staffService.staffRecruitmentApply(staffApplyDto);
-//		
-//		// 신청 양식 번호로 확인하기
-//	    int fno = formDto.getFno(); // FormDto에서 fno 값을 가져옴
-//	    FormDto readFormDto = boardService.read(fno);
-//	    model.addAttribute("formDto", readFormDto);
-//		/*
-//	    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//	    try {
-//	        LocalDate startDate = LocalDate.parse(supportPeriodStart, dateFormatter);
-//	        LocalDate endDate = LocalDate.parse(supportPeriodEnd, dateFormatter);
-//
-//	        if (endDate.isBefore(startDate)) {
-//	            model.addAttribute("error", "지원기간을 다시 확인해 주세요.");
-//	            
-//	         // 스탭 모집 목록 데이터 조회
-//	            List<StaffDto> staffRecruitmentListByFestivalName = staffService.getStaffRecruitmentListByFestivalName(festivalName);
-//	            model.addAttribute("staffRecruitmentListByFestivalName", staffRecruitmentListByFestivalName);
-//	            return "staffRecruitment";
-//	        }
-//
-//	        
-//	        
-//	        
-//	    } catch (ParseException e) {
-//	        // 날짜 형식이 올바르지 않은 경우 예외 처리
-//	        model.addAttribute("error", "Invalid date format");
-//	        return "staffRecruitment";
-//	    }
-//	    */
-//
-	    return "redirect:/staffRecruitmentList";
+			      BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+		
+		//날짜가 String이라서 형변환 후 if문으로 비교
+	    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	    
+	    try {
+	        LocalDate startDate = LocalDate.parse(supportPeriodStart, dateFormatter);
+	        LocalDate endDate = LocalDate.parse(supportPeriodEnd, dateFormatter);
+
+	        if (endDate.isBefore(startDate)) {
+	        	redirectAttributes.addFlashAttribute("errorDate", "지원기간을 다시 확인해 주세요.");
+	            
+	            return "redirect:/staffRecruitment?fno=" + fno;
+	        }
+	        
+	        //유효성 검사 통과 시, 스탭 신청 성공
+			staffService.staffRecruitmentApply(staffApplyDto);
+			redirectAttributes.addFlashAttribute("successApply", "해당 모집 공고에 신청 성공하였습니다.");
+
+	    } catch (ParseException e) {
+	        //날짜 형식이 올바르지 않은 경우 예외 처리
+	    	redirectAttributes.addFlashAttribute("errorDate", "날짜 형식이 올바르지 않습니다.");
+	    	
+	        return "redirect:/staffRecruitment?fno=" + fno;
+	    }
+
+	    return "redirect:/staffRecruitment?fno=" + fno;
 	}
 
 }
+
+
+
+
+

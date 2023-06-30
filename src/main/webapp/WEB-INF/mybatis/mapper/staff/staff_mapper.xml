@@ -6,9 +6,7 @@
 
 <mapper namespace="staff_mapper">
 
-	<!-- resultMap 정의 -->
-
-	<!-- 스탭 모집 공고 -->
+	<!-- 스탭 모집 공고 추가 -->
 	<insert id="insert_staff" parameterType="StaffDto">
 		INSERT INTO staff_recruitment
 		(SRNO, recruitment_to, recruitment_field, preferential_treatment, application_period) 
@@ -16,16 +14,26 @@
 				 #{preferentialTreatment}, #{applicationPeriod} )
 	</insert>
 	
+	<!-- 스탭 모집 공고 조회 -->
 	<select id="select_staff_recruitment_by_fno" parameterType="int" resultType="StaffDto"> 
 		SELECT SRNO, recruitment_to, recruitment_field, preferential_treatment, application_period
 		FROM staff_recruitment WHERE SRNO = #{fno}
 	</select>
 	
-<!--  	<select id="select_staff_recruitment_list" resultType="StaffDto">
-		select SRNO, recruitment_to, recruitment_field,
-       preferential_treatment, application_period 
-		from staff_recruitment
-	</select> -->
+	<!-- 스탭 모집 공고 리스트 조회 -->
+ 	<select id="select_staff_recruitment_list" resultType="StaffDto">
+		SELECT SRNO, recruitment_to, recruitment_field, preferential_treatment, application_period 
+		FROM staff_recruitment
+	</select>
+	
+	<!-- 스탭 모집 공고 + 신청 양식 테이블 조회 -->
+	 <select id="select_staff_recruitment_and_form_list" resultType="StaffBySrnoDto">
+		SELECT ff.fno, ff.festival_name, ff.commissioning_agency, ff.address_event, ff.place, ff.start_date, ff.end_date, 
+			   sr.recruitment_to, sr.recruitment_field, sr.preferential_treatment, sr.application_period
+		FROM staff_recruitment sr, FESTIVAL_FORM ff
+		WHERE sr.SRNO = ff.FNO
+		ORDER BY sr.application_period
+	</select>
 	
 
 <!-- 	<select id="select_staff_recruitment_list_by_fno" resultType="StaffDto"

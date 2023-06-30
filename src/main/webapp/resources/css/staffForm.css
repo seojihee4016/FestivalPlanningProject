@@ -36,6 +36,7 @@ form {
 }
 
 .borderBottom {
+	width: 195px;
 	border-bottom: 1.5px solid lightgray;
 }
 .inputText {

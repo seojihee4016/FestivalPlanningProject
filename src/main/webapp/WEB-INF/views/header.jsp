@@ -64,7 +64,7 @@
 									<li class="nav-item"><span class="nav-link"> 관리자모드
 											접속중</span></li>
 									<li class="nav-item"><a class="nav-link"
-										href="<!-- 관리자페이지 -->">관리자페이지</a></li>
+										href="admin">관리자페이지</a></li>
 									<li class="nav-item"><a class="nav-link" href="logout">로그아웃</a></li>
 								</ul>
 							</c:when>

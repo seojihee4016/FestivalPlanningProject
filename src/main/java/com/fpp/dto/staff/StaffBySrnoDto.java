@@ -6,7 +6,8 @@ import lombok.Data;
 @AllArgsConstructor
 
 @Data
-public class StaffByFnoDto {
+public class StaffBySrnoDto {
+	int fno;
 	String FestivalName;
 	String commissioningAgency;
 	String addressEvent;

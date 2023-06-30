@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
+<%@ include file="header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,8 +42,9 @@
 					<p class="formValue">${formDto.startDate} ~ ${formDto.endDate}</p>
 				</div>
 				<div class="formArea">
-					<p class="formKey">모집인원</p> <!-- String 값 비교 후 int형변환+value 저장 -->
+					<p class="formKey">모집인원</p>
 					<p class="formValue borderBottom">
+						 <!-- String 값 비교 후 int형변환+value 저장 -->
 						<c:set var="numberOfPeople" value="${formDto.numberOfPeople}" />
 						<c:if test="${numberOfPeople == 'NumberOfPeople 50'}">
 							<fmt:parseNumber var="recruitmentTO_value" value="50" integerOnly="true" />
@@ -61,7 +64,7 @@
 						
 						<!-- 모집인원 화면 출력시 input 기본값 소수점 없애기 -->
 						<fmt:parseNumber var="recruitmentTO_value" value="${recruitmentTO_value/10}" integerOnly="true" />
-						<input type="text" class="inputText" name="recruitmentTO" value="${recruitmentTO_value}" />
+						<input type="text" class="inputText" name="recruitmentTO" value="${recruitmentTO_value}" required="required"/>
 					</p>
 					
 					<p class="formKey">모집분야</p>
@@ -72,14 +75,10 @@
 					</p>
 					<p class="formKey">우대사항</p>
 					<p class="formValue borderBottom"><input type="text" class="inputText" name="preferentialTreatment" placeholder="해당사항을 적어주세요"/></p>
-					
-			<%--  		<fmt:parseDate value="${formDto.endDate}" var="endDateValue" pattern="yyyy-MM-dd" />
-					<fmt:formatDate value="${endDateValue}" pattern="yyyy-MM-dd"/> --%>
 					<p class="formKey">접수기간</p>
 					<p class="formValue inputText">
-			<%-- 		 	<fmt:parseDate value="${formDto.endDate}" var="endDateValue" pattern="yyyy-MM-dd" />
-						<fmt:formatDate value="${endDateValue}" pattern="yyyy-MM-dd"/> --%>
-						<input type="date" class="inputText" name="applicationPeriod" value="${formDto.endDate}" />
+						<input type="date" class="inputText" name="applicationPeriod" value="${formDto.endDate}" required="required" 
+							   min="<%= java.time.LocalDate.now().plusDays(1) %>" max="${formDto.endDate}" />
 					</p>
 				</div>
 			</div>
@@ -88,6 +87,14 @@
 			</div>
 		</form>	
 	</div>
+	
+	
+<script>
+    var errorFno = "${errorFno}";
+    if (errorFno) {
+        alert(errorFno);
+    }
+</script>
 </body>
 </html>
 
