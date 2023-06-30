@@ -5,6 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="header.jsp"%>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <html>
 <head>
@@ -140,11 +141,6 @@ ol {
 	content: "◀";
 	color: #EAEAEA;
 }
-
-#writer {
-	color: blue;
-	font-weight: bold;
-}
 </style>
 </head>
 <body>
@@ -181,9 +177,12 @@ ol {
 										value="${updateBulletinBoard.content}" /></textarea></td>
 						</tr>
 						<tr>
-							<td><label for="writer">작성자 - 세션 적용 전</label><input
+							<!-- 	<td>
+								
+							<label for="writer">작성자 - 세션 적용 전</label><input
 								type="text" id="writer" name="writer"
-								value="${updateBulletinBoard.writer}" /></td>
+								value="${updateBulletinBoard.writer}" /> 
+							 -->
 						</tr>
 					</tbody>
 				</table>
@@ -199,31 +198,32 @@ ol {
 				<div class="chat ch1">
 					<ol class="commentList ">
 						<c:forEach items="${commentList}" var="commentList">
+
 							<!-- 관리자인 경우 -->
 							<li class="admin"><c:if
-									test="${commentList.writer == 'admin'}">
+									test="${commentList.writer == 'pinata1234'}">
 									<div class="textbox">
-										작성자: ${commentList.writer}<br /> 작성 날짜:
+										작성자: ${commentList.writer} <br /> 작성 날짜:
 										<fmt:formatDate value="${commentList.regdate}"
 											pattern="yyyy-MM-dd" />
 										<br /> 댓글 내용:
 										<p>${commentList.content}</p>
 									</div>
-								</c:if></li>
-
+									</c:if>
+								</li>
 
 							<!-- 글 작성자인 경우 -->
-							<li class="user"><c:if
-									test="${commentList.writer == updateBulletinBoard.writer}">
+							<c:if test="${commentList.writer ne 'pinata1234'}">
+							<li class="user">
 									<div class="textbox">
-										작성자: ${commentList.writer}<br /> 작성 날짜:
+										작성자: ${commentList.writer }<br /> 작성 날짜:
 										<fmt:formatDate value="${commentList.regdate}"
 											pattern="yyyy-MM-dd" />
 										<br /> 댓글 내용:
 										<p>${commentList.content}</p>
 									</div>
-								</c:if></li>
-
+								</li>
+								</c:if>
 						</c:forEach>
 					</ol>
 				</div>
@@ -245,9 +245,49 @@ ol {
 
 					<div>
 
-						<label for="writer"></label><input type="text" id="writer"
-							name="writer" /> <br /> <label for="content">댓글 내용</label><input
-							type="text" id="content" name="content" />
+
+						<c:choose>
+							<c:when test="${sessionScope.loginId eq 'pinata1234'}">
+								<label for="writer"></label>
+								<input type="text" id="writer" name="writer"
+									value="<c:out value="${sessionScope.loginId}" />" readonly />
+
+								<!-- 					<input type="hidden" id="writer" name="writer"
+										value="<c:out value="${updateBulletinBoard.writer}" />"
+										readonly /> -->
+
+			
+							</c:when>
+
+							<c:when test="${sessionScope.loginId == updateBulletinBoard.writer}">
+								<label for="writer"></label>
+								<input type="text" id="writer" name="writer"
+									value="<c:out value="${updateBulletinBoard.writer}" />"
+									readonly />
+							</c:when>
+						</c:choose>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+						<br /> <label for="content">댓글 내용</label><input type="text"
+							id="content" name="content" />
 					</div>
 					<div>
 						<button type="button" class="replyWriteBtn">댓글 작성</button>
@@ -260,6 +300,11 @@ ol {
 		</section>
 		<hr />
 	</div>
+
+
+
+
+
 
 	<script type="text/javascript">
 		$(document).ready(function() {

@@ -1,42 +1,85 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>BulletinBoard</title>
 <style>
+/*게시판*/
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
 body {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100vh;
+	font-family: Arial, sans-serif;
 }
 
-form {
-	width: 400px;
+#root {
+	width: 600px;
+	margin: 0 auto;
 }
 
-form table {
+header {
+	text-align: center;
+	padding: 20px 0;
+}
+
+h1 {
+	font-size: 24px;
+	color: #333;
+}
+
+hr {
+	border: none;
+	border-top: 1px solid #ccc;
+	margin-bottom: 20px;
+}
+
+#container {
+	margin-bottom: 20px;
+}
+
+table {
 	width: 100%;
+	border-collapse: collapse;
 }
 
-form td {
-	padding: 10px;
+label {
+	font-weight: bold;
 }
 
-form label {
-	display: block;
-	margin-bottom: 5px;
-}
-
-form input[type="text"], form textarea {
+input[type="text"], textarea {
 	width: 100%;
-	padding: 5px;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
 }
 
-form button[type="submit"] {
-	padding: 10px 20px;
+button[type="submit"], button[type="button"] {
+	display: inline-block;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 4px;
+	background-color: #333;
+	color: #fff;
+	cursor: pointer;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+button[type="submit"]:hover, button[type="button"]:hover {
+	background-color: #222;
+}
+
+button[type="submit"]:focus, button[type="button"]:focus {
+	outline: none;
 }
 </style>
 </head>
@@ -51,31 +94,34 @@ form button[type="submit"] {
 		<hr />
 
 		<section id="container">
-			<form role="form" method="post" action="BulletinBoard" onsubmit="return validateForm()">
+			<form role="form" method="post" action="BulletinBoard"
+				onsubmit="return validateForm()">
 				<table>
 					<tbody>
+
 						<tr>
 							<td><label for="title">제목</label><input type="text"
 								id="title" name="title" value="" /></td>
 						</tr>
 						<tr>
-							<td><label for="content">내용</label>
-							<textarea id="content" name="content" ></textarea></td>
+							<td><label for="content">내용</label> <textarea id="content"
+									name="content"></textarea></td>
 						</tr>
 						<tr>
-							<td><label for="writer">작성자 - 세션 적용 전</label><input type="text"
-								id="writer" name="writer" /></td>
+							<td><label for="writer">작성자</label><input
+								type="text" id="writer" name="writer" value="<c:out value="${writer}" />" readonly/></td>
 						</tr>
 						<tr>
 							<td><button type="submit">작성</button></td>
 						</tr>
+
 					</tbody>
 				</table>
 			</form>
 		</section>
 		<hr />
 	</div>
-	
+
 	<script>
 	function validateForm() {
 

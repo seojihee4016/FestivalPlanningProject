@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="header.jsp"%>
 <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <html>
 <head>
@@ -39,19 +40,19 @@ li {
 						var="selectBulletinBoardList">
 						<tr>
 							<td><c:out value="${selectBulletinBoardList.bno}" /></td>
-							<td><a
-								href="/bulletinBoardProcess?bno=${selectBulletinBoardList.bno}&page=${scri.page}
-								&perPageNum=${scri.perPageNum}
-								&searchType=${scri.searchType}
-								&keyword=${scri.keyword}"><c:out
-										value="${selectBulletinBoardList.title}" /></a></td>
+							<td><c:out value="${selectBulletinBoardList.title}" /></a></td>
 							<td><c:out value="${selectBulletinBoardList.content}" /></td>
 							<td><c:out value="${selectBulletinBoardList.writer}" /></td>
 							<td><fmt:formatDate
 									value="${selectBulletinBoardList.regdate}" pattern="yyyy-MM-dd" /></td>
 							<td><a
-								href="/bulletinBoardProcess?bno=${selectBulletinBoardList.bno}"
+								href="/bulletinBoardProcess?bno=${selectBulletinBoardList.bno}&page=${scri.page}
+								&perPageNum=${scri.perPageNum}
+								&searchType=${scri.searchType}
+								&keyword=${scri.keyword}"
+
 								class="custom-button">수정</a></td>
+
 						</tr>
 					</c:forEach>
 
