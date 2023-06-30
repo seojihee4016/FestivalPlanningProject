@@ -6,8 +6,6 @@
 <html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://kit.fontawesome.com/aa973261c8.js"
-	crossorigin="anonymous"></script>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -21,122 +19,132 @@
 }
 
 body {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	font-family: Arial, sans-serif;
 }
 
-form {
-	width: 800px;
+#root {
+	width: 600px;
+	margin: 0 auto;
 }
 
-form table {
+header {
+	text-align: center;
+	padding: 20px 0;
+}
+
+h1 {
+	font-size: 24px;
+	color: #333;
+}
+
+hr {
+	border: none;
+	border-top: 1px solid #ccc;
+	margin-bottom: 20px;
+}
+
+#container {
+	margin-bottom: 20px;
+}
+
+table {
 	width: 100%;
+	border-collapse: collapse;
 }
 
-form td {
-	padding: 10px;
+label {
+	font-weight: bold;
 }
 
-form label {
-	display: block;
-	margin-bottom: 5px;
-}
-
-form input[type="text"], form textarea {
+input[type="text"], textarea {
 	width: 100%;
-	padding: 5px;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
 }
 
-form button[type="submit"] {
-	padding: 10px 20px;
+button[type="submit"], button[type="button"] {
+	display: inline-block;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 4px;
+	background-color: #333;
+	color: #fff;
+	cursor: pointer;
+	margin-top: 10px;
+	margin-right: 10px;
 }
 
+.cancel-btn {
+	background-color: #ccc;
+}
+
+button[type="submit"]:hover, button[type="button"]:hover {
+	background-color: #222;
+}
+
+button[type="submit"]:focus, button[type="button"]:focus {
+	outline: none;
+}
 /*작성된 댓글 보이는 부분*/
 a {
 	text-decoration: none;
 }
 
-/*
 ol {
 	list-style: none;
-}*//*
-.wrap {
-	padding: 40px 0;
 }
 
-.wrap .chat {
-	display: flex;
-	align-items: flex-start;
-	padding: 20px;
-}
-*/
-.wrap .chat .icon {
+.admin .textbox {
 	position: relative;
-	overflow: hidden;
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	background-color: #eee;
-}
-
-.wrap .chat .icon i {
-	position: absolute;
-	top: 10px;
-	left: 50%;
-	font-size: 2.5rem;
-	color: #aaa;
-	transform: translateX(-50%);
-}
-
-.wrap .chat .textbox {
-	position: relative;
-	display: inline-block;
-	max-width: calc(100% - 70px);
-	padding: 10px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	font-size: 13px;
+	height: auto;
+	max-width: 70%;
+	background-color: #DCF8C6;
 	border-radius: 10px;
+	padding: 10px;
+	margin-bottom: 10px;
+	text-align: right;
+	float: right;
+	clear: both;
 }
 
-.wrap .chat .textbox::before {
+.wrap .admin .textbox::after {
 	position: absolute;
 	display: block;
 	top: 0;
 	font-size: 1.5rem;
-		left: -15px;
-	content: "◀";
-	color: #ddd;
-}
-
-
-.wrap:nth-of-type(odd) .textbox {
-	margin-left: auto;
-	margin-right: 20px;
-	background-color: #ddd;
-	
-}
-
-.wrap:nth-of-type(odd) .textbox::before {
-	left: auto;
-	right: -15px;
+	left: 170px;
 	content: "▶";
-	color: #ddd;
+	color: #DCF8C6;
 }
 
-.wrap:nth-of-type(even) .textbox {
-	margin-left: 20px;
-	background-color: red;
+.user .textbox {
+	position: relative;
+	height: auto;
+	max-width: 70%;
+	background-color: #EAEAEA;
+	border-radius: 10px;
+	padding: 10px;
+	margin-bottom: 10px;
+	text-align: left;
+	float: left;
+	clear: both;
 }
 
-.wrap:nth-of-type(even) .textbox::before {
+.wrap .user .textbox::after {
+	position: absolute;
+	display: block;
+	top: 0;
+	font-size: 1.5rem;
 	left: -15px;
 	content: "◀";
-	color: #ddd;
+	color: #EAEAEA;
 }
 
-
+#writer {
+	color: blue;
+	font-weight: bold;
+}
 </style>
 </head>
 <body>
@@ -144,7 +152,7 @@ ol {
 		<header>
 			<h1>게시판</h1>
 		</header>
-		<hr />                                  
+		<hr />
 
 
 		<section id="container">
@@ -177,38 +185,50 @@ ol {
 								type="text" id="writer" name="writer"
 								value="${updateBulletinBoard.writer}" /></td>
 						</tr>
-						<tr>
-							<td><button type="submit">작성</button></td>
-						</tr>
 					</tbody>
 				</table>
 
 				<button type="submit" class="update_btn">수정</button>
 				<button type="submit" class="delete_btn">삭제</button>
 				<button type="button" class="cancel-btn" onclick="history.back();">취소</button>
+				<button type="button" class="list-btn">목록</button>
 			</form>
 
 			<!-- 작성된 댓글 조회-->
 			<div class="wrap" id="comments">
 				<div class="chat ch1">
-					<ol class="commentList">
+					<ol class="commentList ">
 						<c:forEach items="${commentList}" var="commentList">
-							<li>
-								<div class="icon">
-									<i class="fa-solid fa-user"></i>
-								</div>
-								<div class="textbox">
-									작성자 : ${commentList.writer} <br /> 작성 날짜 :
-									<fmt:formatDate value="${commentList.regdate}"
-										pattern="yyyy-MM-dd" />
-									<br /> 댓글 내용:
-									<p>${commentList.content}</p>
-								</div>
-							</li>
+							<!-- 관리자인 경우 -->
+							<li class="admin"><c:if
+									test="${commentList.writer == 'admin'}">
+									<div class="textbox">
+										작성자: ${commentList.writer}<br /> 작성 날짜:
+										<fmt:formatDate value="${commentList.regdate}"
+											pattern="yyyy-MM-dd" />
+										<br /> 댓글 내용:
+										<p>${commentList.content}</p>
+									</div>
+								</c:if></li>
+
+
+							<!-- 글 작성자인 경우 -->
+							<li class="user"><c:if
+									test="${commentList.writer == updateBulletinBoard.writer}">
+									<div class="textbox">
+										작성자: ${commentList.writer}<br /> 작성 날짜:
+										<fmt:formatDate value="${commentList.regdate}"
+											pattern="yyyy-MM-dd" />
+										<br /> 댓글 내용:
+										<p>${commentList.content}</p>
+									</div>
+								</c:if></li>
+
 						</c:forEach>
 					</ol>
 				</div>
 			</div>
+
 
 
 			<!-- 댓글 작성 -->
@@ -224,7 +244,8 @@ ol {
 						value="${scri.keyword}">
 
 					<div>
-						<label for="writer">댓글 작성자</label><input type="text" id="writer"
+
+						<label for="writer"></label><input type="text" id="writer"
 							name="writer" /> <br /> <label for="content">댓글 내용</label><input
 							type="text" id="content" name="content" />
 					</div>
@@ -251,6 +272,11 @@ ol {
 					formObj.attr("method", "post");
 					formObj.submit();
 				}
+			});
+
+			//목록 이동
+			$(".list-btn").on("click", function() {
+				window.location.href = "/bulletinBoardList";
 			});
 
 			// 삭제
