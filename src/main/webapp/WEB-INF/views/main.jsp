@@ -7,5 +7,7 @@
 
 <h1>임시 메인페이지</h1>
 
+<%@ include file="footer.jsp"%>
+
 
 

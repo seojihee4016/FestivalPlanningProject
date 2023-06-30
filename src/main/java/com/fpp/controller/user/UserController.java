@@ -41,8 +41,8 @@ public class UserController {
 	}
 
 	@PostMapping("/join")
-	public String join_process(@ModelAttribute UserDto userDto, BindingResult bindingResult,
-			HttpServletResponse response) throws IOException {
+	public String join_proc(@ModelAttribute UserDto userDto, BindingResult bindingResult, HttpServletResponse response)
+			throws IOException {
 
 		int result = userService.saveUser(userDto, bindingResult);
 
@@ -61,7 +61,7 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public String login_proc(@ModelAttribute UserDto userDto, HttpSession session){
+	public String login_proc(@ModelAttribute UserDto userDto, HttpSession session) {
 
 		System.out.println(userDto.toString());
 		boolean tryLogin = userService.login(userDto);
@@ -72,7 +72,7 @@ public class UserController {
 			session.setAttribute("loginId", userDto.getLoginId());
 			return "redirect:/main";
 		}
-		
+
 		return "redirect:/login";
 	}
 
@@ -113,4 +113,42 @@ public class UserController {
 		return "/agreement";
 	}
 
+	@GetMapping("/userupdate")
+	public String userupdate() {
+
+		return "userupdate";
+	}
+
+	@PostMapping("/userupdate")
+	public String userupdate_proc(@ModelAttribute UserDto userDto, BindingResult bindingResult,
+			HttpServletResponse response) throws IOException {
+
+		int result = userService.editUserInfo(userDto, bindingResult);
+
+		// 유효성 검증 실패
+		if (bindingResult.hasErrors() || result == 0) {
+			ScriptUtil.alert(response, "회원정보 수정에 실패했습니다.");
+			return "userupdate";
+		}
+		// 회원정보 수정성공
+		return "main";
+	}
+
+	@RequestMapping("/mypage")
+	public String mypage() {
+
+		return "mypage";
+	}
+
+	@RequestMapping("/withdrawal")
+	public String withdrawal() {
+
+		return "withdrawal";
+	}
+
+	@RequestMapping("/footer")
+	public String footer() {
+
+		return "footer";
+	}
 }

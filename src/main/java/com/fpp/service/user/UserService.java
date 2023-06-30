@@ -11,5 +11,7 @@ public interface UserService {
 	public boolean idCheck(UserDto userDto, BindingResult bindingResult);
 
 	public boolean login(UserDto userDto);
+	
+	public int editUserInfo(UserDto userDto, BindingResult bindingResult);
 
 }

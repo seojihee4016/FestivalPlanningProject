@@ -12,7 +12,6 @@
 	crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="short icon" href="#">
 <link href="css/join.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -28,8 +27,7 @@
 					<div class="idbox">
 						<input type="text" class="form-control mb-1" name="loginId"
 							id="login_Id" placeholder="아이디" value="${userDto.loginId}" />
-						<button type="button" id="idCheck"
-							class="btn btn-primary idCheckBtn">중복체크</button>
+						<button type="button" id="idCheck" class="btn idCheckBtn">중복체크</button>
 					</div>
 					<input type="password" class="form-control" name="loginPw"
 						placeholder="비밀번호" value="${userDto.loginPw}" /> <span
@@ -39,15 +37,15 @@
 									${errors.getFieldError("loginId").getDefaultMessage() }</span>
 							</c:if>
 						</spring:hasBindErrors>
-					</span>
-					<span class="errMsg"> <spring:hasBindErrors name="userDto">
+					</span> <span class="errMsg"> <spring:hasBindErrors name="userDto">
 							<c:if test="${errors.hasFieldErrors('loginPw') }">
 								<p class="errorMsg">▶
 									${errors.getFieldError("loginPw").getDefaultMessage() }</p>
 							</c:if>
 						</spring:hasBindErrors>
 					</span>
-				</div><br>
+				</div>
+				<br>
 				<div class="restinfo">
 					<input type="text" class="form-control mb-1" name="name"
 						placeholder="이름" value="${userDto.name}" /><input type="text"
@@ -60,19 +58,22 @@
 							name="userDto">
 							<c:if test="${errors.hasFieldErrors('name') }">
 								<span class="errorMsg">▶
-									${errors.getFieldError("name").getDefaultMessage() }</span><br>
+									${errors.getFieldError("name").getDefaultMessage() }</span>
+								<br>
 							</c:if>
 						</spring:hasBindErrors>
 					</span> <span class="errMsg"> <spring:hasBindErrors name="userDto">
 							<c:if test="${errors.hasFieldErrors('email') }">
 								<span class="errorMsg">▶
-									${errors.getFieldError("email").getDefaultMessage() }</span><br>
+									${errors.getFieldError("email").getDefaultMessage() }</span>
+								<br>
 							</c:if>
 						</spring:hasBindErrors>
 					</span> <span class="errMsg"> <spring:hasBindErrors name="userDto">
 							<c:if test="${errors.hasFieldErrors('birth') }">
 								<span class="errorMsg">▶
-									${errors.getFieldError("birth").getDefaultMessage() }</span><br>
+									${errors.getFieldError("birth").getDefaultMessage() }</span>
+								<br>
 							</c:if>
 						</spring:hasBindErrors>
 					</span> <span class="errMsg"> <spring:hasBindErrors name="userDto">
@@ -85,7 +86,7 @@
 				</div>
 				<br>
 				<div class="btn_submitbox">
-					<button type="submit" id="btn_submit" class="btn btn-primary">등록하기</button>
+					<button type="submit" id="btn_submit" class="btn">등록하기</button>
 				</div>
 				<br>
 			</form>
@@ -93,35 +94,6 @@
 	</div>
 </body>
 
-<script>
-	$(function() {
-
-		$("#idCheck").click(function() {
-
-			const input_id = $("#login_Id").val(); // 입력 아이디 가져오기
-
-			$.ajax({
-				type : "POST",
-				url : "/idcheck", //요청 할 URL
-				async : false,
-				data : {
-					loginId : input_id
-				}, //넘길 파라미터
-				dataType : "json",
-				success : function(data) {
-					console.log(data);
-					if (data.result === 'true') {
-						alert("사용가능 아이디");
-					} else {
-						alert("사용 불가능한 아이디");
-					}
-				},
-				error : function(data) {
-					console.log("접속 중 오류가 발생했습니다."); //에러시 실행 할 내용
-				}
-			});
-
-		});
-	});
-</script>
+<script type="text/javascript" src="js/join.js"></script>
 </html>
+<%@ include file="footer.jsp"%>

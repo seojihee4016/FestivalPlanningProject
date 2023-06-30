@@ -65,4 +65,17 @@ public class UserServiceImpl implements UserService {
 		return false;
 	}
 
+	@Override
+	public int editUserInfo(UserDto userDto, BindingResult bindingResult) {
+		UserValidator.updateValidate(userDto, bindingResult);
+
+		if (bindingResult.hasErrors()) {
+			return 0;
+		}
+
+		int result = userDao.updateUserInfo(userDto);
+
+		return result;
+	}
+
 }

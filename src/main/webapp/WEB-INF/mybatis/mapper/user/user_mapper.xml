@@ -18,5 +18,12 @@
 		from f_user
 		where login_Id = #{loginId}
 	</select>
+	
+	<update id="update_user_info" parameterType="UserDto">
+		update f_user
+		set
+		login_pw = #{loginPw}, email = #{email}, tel_number = #{telNumber}
+		where login_pw = login_pw  
+	</update>
 
 </mapper>

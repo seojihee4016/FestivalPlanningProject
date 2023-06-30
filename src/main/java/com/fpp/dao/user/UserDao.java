@@ -8,5 +8,7 @@ public interface UserDao {
 	public int insertUser(UserDto userDto);
 
 	public UserDto selectUserById(UserDto userDto);
+	
+	public int updateUserInfo(UserDto userDto);
 
 }
