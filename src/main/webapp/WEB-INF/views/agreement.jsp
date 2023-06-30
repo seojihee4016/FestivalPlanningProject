@@ -34,8 +34,7 @@
 						설명하며, 아울러 여러분의 Piñata 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다. Piñata
 						서비스를 이용하시거나 Piñata 서비스 회원으로 가입하실 경우 여러분은 본 약관 및 관련 운영 정책을 확인하거나
 						동의하게 되므로, 잠시 시간을 내시어 주의 깊게 살펴봐 주시기 바랍니다.<br> <br> <label
-							for="agree"> <input type="checkbox" name="agree"
-							id="agreement" value="1"> <span>Piñata 이용약관 동의<strong>(필수)</strong>
+							for="agree"> <input type="checkbox" id="agreement" name="agree" value="1"> <span>Piñata 이용약관 동의<strong>(필수)</strong>
 						</span>
 						</label>
 					</div>
@@ -91,8 +90,8 @@
 			</div>
 			<br>
 			<div class="nextbtnbox">
-				<button type="button" class="btn btn-primary nextbtn"
-					id="submitBtn" onclick="movepage('/join');">다음</button>
+				<button type="button" class="btn btn-primary nextbtn" id="submitBtn"
+					onclick="movepage('/join');">다음</button>
 			</div>
 		</div>
 	</form>
@@ -100,13 +99,17 @@
 	<script type="text/javascript" src="js/agreement.js"></script>
 
 	<script>
-		document.getElementById('submitBtn').onclick = function movepage(page) {
-			if (document.getElementById('agreement').checked) {
-				window.document.location.href = page;
-			} else {
-				alert('필수동의 안함');
+		window.onload = function() {
+
+			document.getElementById('submitBtn').onclick = function movepage(
+					page) {
+				if (document.getElementById('agreement').checked == true) {
+					window.document.location.href = page;
+				} else {
+					alert('필수동의 안함');
+				}
 			}
-		}
+		};
 	</script>
 
 </body>
