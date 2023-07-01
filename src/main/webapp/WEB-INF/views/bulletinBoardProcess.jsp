@@ -195,8 +195,11 @@ ol {
 			</form>
 
 
+
+
+			<%--댓글 조회 --%>
 			<div class="wrap" id="comments">
-				<form name="updateAndDeleteComments" method="post">
+				<form name="updateAndDeleteComments" method="post" action="">
 					<div class="chat ch1">
 						<ol class="commentList">
 							<c:forEach items="${commentList}" var="commentList">
@@ -211,11 +214,11 @@ ol {
 											<br /> 댓글 내용:
 											<p>${commentList.content}</p>
 											<button type="button" class="replyUpdateBtn"
-												data-cno="${commentList.cno}"
+												data-cno="${commentList.cno}" data-bno="${commentList.bno}"
 												onclick="handleReplyUpdate(this)">수정</button>
+
 											<button type="button" class="replyDeleteBtn"
-												data-cno="${commentList.cno}"
-												onclick="handleReplyDelete(this)">삭제</button>
+												data-cno="${commentList.cno}">삭제</button>
 										</div>
 									</c:if></li>
 
@@ -227,19 +230,19 @@ ol {
 											<fmt:formatDate value="${commentList.regdate}"
 												pattern="yyyy-MM-dd" />
 											<br /> 댓글 내용:
-											<p>${commentList.content}</p>
+											<p>
+												<input type="text" value="${commentList.content}">
+											</p>
 
 											<div>
 												<c:if test="${commentList.writer == sessionScope.loginId}">
 													<button type="button" class="replyUpdateBtn"
-														data-cno="${commentList.cno}"
-														onclick="handleReplyUpdate(this)">수정</button>
+														data-cno="${commentList.cno}">수정</button>
 												</c:if>
 
 												<c:if test="${commentList.writer == sessionScope.loginId}">
 													<button type="button" class="replyDeleteBtn"
-														data-cno="${commentList.cno}"
-														onclick="handleReplyDelete(this)">삭제</button>
+														data-cno="${commentList.cno}">삭제</button>
 
 												</c:if>
 
@@ -356,81 +359,43 @@ ol {
 									+ "&perPageNum=${scri.perPageNum}"
 									+ "&searchType=${scri.searchType}&keyword=${scri.keyword}";
 						})
-
-		//댓글 작성
-		$(".replyWriteBtn")
-				.on(
-						"click",
-						function() {
-							if (confirm("댓글을 작성하시겠습니까?")) {
-								var formObj = $("form[name='replyForm']");
-								formObj.attr("action", "writeComments");
-								formObj.submit();
-							}
-
-							//댓글 수정 View
-							$(".replyUpdateBtn")
-									.on(
-											"click",
-											function() {
-												if (confirm("댓글 수정?")) {
-													location.href = "/bulletinBoardProcess?bno=${bno}"
-															+ "&page=${scri.page}"
-															+ "&perPageNum=${scri.perPageNum}"
-															+ "&searchType=${scri.searchType}"
-															+ "&keyword=${scri.keyword}"
-															+ "&cno="
-															+ $(this).attr(
-																	"data-cno");
-												}
-
-											});
-
-							//댓글 삭제 View
-							$(".replyDeleteBtn")
-									.on(
-											"click",
-											function() {
-												if (confirm("댓글 삭제?")) {
-													location.href = "/bulletinBoardProcess?bno=${bno}"
-															+ "&page=${scri.page}"
-															+ "&perPageNum=${scri.perPageNum}"
-															+ "&searchType=${scri.searchType}"
-															+ "&keyword=${scri.keyword}"
-															+ "&cno="
-															+ $(this).attr(
-																	"data-cno");
-												}
-											});
-						});
 	</script>
-	<!-- JavaScript 코드를 작성할 스크립트 태그 추가 -->
-	<!-- JavaScript 코드를 작성할 스크립트 태그 추가 -->
+
+
 	<script>
-		// 수정 버튼 클릭 이벤트 핸들러
-		function handleReplyUpdate(button) {
-			var cno = button.getAttribute("data-cno");
-			var bno = "${bno}";
-			var scriPage = "${scri.page}";
-			var scriPerPageNum = "${scri.perPageNum}";
-			var scriSearchType = "${scri.searchType}";
-			var scriKeyword = "${scri.keyword}";
+		// 댓글 수정
+		$(document).ready(
+				function() {
+					$(".replyUpdateBtn").on(
+							"click",
+							function() {
+								if (confirm("댓글을 수정하시겠습니까?")) {
+									var cno = $(this).attr("data-cno");
+									var updatedContent = $(this).closest("li")
+											.find("input[type='text']").val();
 
-			var url = "/bulletinBoardProcess?bno=" + bno + "&page=" + scriPage
-					+ "&perPageNum=" + scriPerPageNum + "&searchType="
-					+ scriSearchType + "&keyword=" + scriKeyword + "&cno="
-					+ cno;
-
-			// 페이지 리디렉션
-			location.href = url;
-		}
-
-		// 삭제 버튼 클릭 이벤트 핸들러
-		function handleReplyDelete(button) {
-			var cno = button.getAttribute("data-cno");
-			// 삭제 버튼을 클릭했을 때 수행해야 할 동작을 여기에 작성
-			// 예: 댓글 삭제 요청을 서버에 보내거나 다른 동작 수행
-		}
+									// AJAX를 사용하여 서버로 수정된 내용 전송
+									$.ajax({
+										type : "POST",
+										url : "/updateCommentsByCno",
+										data : {
+											cno : cno,
+											content : updatedContent
+										},
+										success : function(response) {
+											// 수정 성공 시 처리할 코드 작성
+											alert("댓글이 수정되었습니다.");
+											// 페이지 새로고침 또는 필요한 작업 수행
+											location.reload();
+										},
+										error : function(xhr, status, error) {
+											// 수정 실패 시 처리할 코드 작성
+											alert("댓글 수정에 실패했습니다. 다시 시도해주세요.");
+										}
+									});
+								}
+							});
+				});
 	</script>
 
 
