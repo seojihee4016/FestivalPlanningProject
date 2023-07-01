@@ -8,17 +8,17 @@
 	<insert id="insert"> 
 		INSERT INTO FESTIVAL_FORM
 		(FNO, PLACE, FESTIVAL_NAME, ADDRESS_EVENT, Number_of_people, carrying_difficulty,
-		start_date ,end_date, budget_range , commissioning_agency, name)
+		start_date ,end_date, budget_range , commissioning_agency, name, writer)
 		VALUES(FESTIVAL_FORM_SEQ.NEXTVAL, #{place}, #{festivalName}, #{addressEvent}, 
 		#{numberOfPeople}, #{carryingDifficulty} ,#{startDate}, #{endDate}, #{budgetRange}, 
-		#{commissioningAgency}, #{name})
+		#{commissioningAgency}, #{name}, #{writer})
 	</insert>
 	
 	
 	<!-- 신청 양식 리스트 (전체 불러오기)-->
 	<select id="list" resultType="com.fpp.dto.board.FormDto">
 		SELECT FNO, PLACE, FESTIVAL_NAME, ADDRESS_EVENT, Number_of_people, carrying_difficulty, 
-		start_date ,end_date, budget_range , commissioning_agency, name
+		start_date ,end_date, budget_range , commissioning_agency, name, writer
 		FROM FESTIVAL_FORM  ORDER BY FNO DESC
 	</select>
 	
@@ -26,7 +26,7 @@
 	<!-- 신청 양식 번호로 읽기 (번호로만 불러오기) -->
 	<select id="read" parameterType="int" resultType="com.fpp.dto.board.FormDto"> 
 		SELECT FNO, PLACE, FESTIVAL_NAME, ADDRESS_EVENT, Number_of_people, carrying_difficulty, 
-		start_date ,end_date, budget_range , commissioning_agency, name 
+		start_date ,end_date, budget_range , commissioning_agency, name ,writer
 		FROM FESTIVAL_FORM WHERE FNO = #{fno}
 	</select>
 	
