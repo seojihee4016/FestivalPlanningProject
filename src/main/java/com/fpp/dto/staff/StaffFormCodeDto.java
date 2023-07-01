@@ -6,7 +6,7 @@ import lombok.Data;
 @AllArgsConstructor
 
 @Data
-public class StaffBySrnoDto {
+public class StaffFormCodeDto {
 	int fno;
 	String FestivalName;
 	String commissioningAgency;
@@ -18,4 +18,6 @@ public class StaffBySrnoDto {
 	String recruitmentField;
 	String preferentialTreatment;
 	String applicationPeriod;
+	String codeType;
+	String codeName;
 }

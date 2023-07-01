@@ -7,6 +7,10 @@ h1 {
 	margin: 30px 0px 20px 0px;
 	text-align: center;
 }
+.errorMsg {
+	color: crimson;
+	font-size: 0.8rem;
+}
 
 .container {
 	width: 800px;
@@ -60,5 +64,4 @@ form {
     font-weight: bold;
     display: inline-block;
     cursor: pointer;
-    
 }

@@ -17,7 +17,7 @@
 		<h4>< 한 줄 공지사항(필요하면 팝업식으로) ></h4>
 		
 		<div class="list_container">
-			<c:forEach var="item" items="${StaffBySrnoList}">
+			<c:forEach var="item" items="${staffFormList}">
 				<a href="staffRecruitment?fno=${item.fno}">
 					<div class="list_area">
 						<p>${item.festivalName}</p>

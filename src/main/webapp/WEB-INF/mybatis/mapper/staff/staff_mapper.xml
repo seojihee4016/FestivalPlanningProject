@@ -27,25 +27,13 @@
 	</select>
 	
 	<!-- 스탭 모집 공고 + 신청 양식 테이블 조회 -->
-	 <select id="select_staff_recruitment_and_form_list" resultType="StaffBySrnoDto">
+	 <select id="select_staff_recruitment_and_form_list" resultType="StaffFormDto">
 		SELECT ff.fno, ff.festival_name, ff.commissioning_agency, ff.address_event, ff.place, ff.start_date, ff.end_date, 
 			   sr.recruitment_to, sr.recruitment_field, sr.preferential_treatment, sr.application_period
 		FROM staff_recruitment sr, FESTIVAL_FORM ff
 		WHERE sr.SRNO = ff.FNO
 		ORDER BY sr.application_period
 	</select>
-	
-
-<!-- 	<select id="select_staff_recruitment_list_by_fno" resultType="StaffDto"
-										    				   parameterType="String">
-		select festival_name, commissioning_agency, address_event, place,
-			   start_date, end_date,
-		       recruitment_to, recruitment_field,
-		       preferential_treatment, application_period
-		from staff_recruitment
-		where festival_name like '%' || #{value} || '%'
-	</select> -->
-	
 	
 	<!-- 스탭 신청 -->
 	<insert id="insert_staff_apply" parameterType="StaffApplyDto">
@@ -54,60 +42,23 @@
 		VALUES (#{SRNO}, staff_recruitment_apply_SEQ.NEXTVAL, #{supportPeriodStart}, #{supportPeriodEnd},
 				 #{recruitmentField}, #{id})
 	</insert>
-<!--   	<insert id="insert_staff_apply" parameterType="StaffApplyDto" useGeneratedKeys="false">
-		INSERT INTO staff_recruitment_apply
-		(SRNO, SRANO, support_period_start, support_period_end, recruitment_field, id)
-		VALUES (#{SRNO}, staff_recruitment_apply_SEQ.NEXTVAL, #{supportPeriodStart}, #{supportPeriodEnd},
-				 #{recruitmentField}, #{id})
-	</insert> -->
-<!-- 	
- 	 <insert id="insert_staff_apply" parameterType="StaffApplyDto" >
-		<selectKey keyColumn="SRANO" keyProperty="SRANO" resultType="int" order="BEFORE">
-			SELECT staff_recruitment_apply_SEQ.NEXTVAL 
-			FROM staff_recruitment_apply
-		</selectKey>
-		INSERT INTO staff_recruitment_apply
-		(SRNO, SRANO, support_period_start, support_period_end, recruitment_field, id)
-		VALUES (#{SRNO}, #{SRANO}, #{supportPeriodStart}, #{supportPeriodEnd},
-				 #{recruitmentField}, #{id})
-	</insert>
-	 -->
-<!-- 	 <insert id="insert_staff_apply" parameterType="StaffApplyDto" useGeneratedKeys="true" keyColumn="SRANO" keyProperty="SRANO">
-
-		INSERT INTO staff_recruitment_apply 
-		VALUES (#{SRNO}, #{SRANO}, #{supportPeriodStart}, #{supportPeriodEnd},
-				 #{recruitmentField}, #{id})
-
-	 </insert> -->
-	 
 	
-	
-	<!-- 모집 공고 불러오기 -->
-<!-- 	<select id="select_staff_recruitment_by_fno" parameterType="int"> 
-		SELECT SRNO, recruitment_to, recruitment_field, preferential_treatment, application_period
-		FROM staff_recruitment WHERE SRNO = #{SRNO}
-		
-		SELECT ff.festival_name, ff.commissioning_agency, ff.address_event, ff.place, ff.start_date, ff.end_date, 
+	<!--  -->
+	<select id="select_staff_recruitment_and_form_list_by_fno" parameterType="int" resultType="StaffFormDto">
+		SELECT ff.fno, ff.festival_name, ff.commissioning_agency, ff.address_event, ff.place, ff.start_date, ff.end_date, 
 			   sr.recruitment_to, sr.recruitment_field, sr.preferential_treatment, sr.application_period
 		FROM staff_recruitment sr, FESTIVAL_FORM ff
-		WHERE sr.SRNO = ff.FNO AND ff.FNO = #{fno}
-	</select> -->
-	
-<!-- 	<select id="select_staff_recruitment_by_fno" parameterType="FormDto"> 
-		SELECT ff.festival_name, ff.commissioning_agency, ff.address_event, ff.place, ff.start_date, ff.end_date, 
-			   sr.recruitment_to, sr.recruitment_field, sr.preferential_treatment, sr.application_period
-		FROM staff_recruitment sr
-		INNER JOIN FESTIVAL_FORM ff ON sr.SRNO = ff.FNO
-		WHERE ff.FNO = #{fno}
-	</select> -->
-	
-<!-- 	<select id="select_staff_recruitment_by_fno" parameterType="int" resultType="FormDto"> 
-		SELECT ff.festival_name, ff.commissioning_agency, ff.address_event, ff.place, ff.start_date, ff.end_date, 
-			   sr.recruitment_to, sr.recruitment_field, sr.preferential_treatment, sr.application_period
-		FROM staff_recruitment sr, FESTIVAL_FORM ff
-		WHERE sr.SRNO = ff.FNO AND ff.FNO = #{fno}
-	</select> -->
+		WHERE sr.SRNO = ff.FNO AND ff.fno = #{fno}
+	</select>
 	
 	
+	<!--  -->
+	<select id="select_staff_recruitment_and_form_and_code_by_fno" parameterType="int" resultType="StaffFormCodeDto">
+		SELECT ff.fno, ff.festival_name, ff.commissioning_agency, ff.address_event, ff.place, ff.start_date, ff.end_date, 
+			   sr.recruitment_to, sr.recruitment_field, sr.preferential_treatment, sr.application_period,
+			   cc.code_type, cc.code_name
+		FROM staff_recruitment sr, FESTIVAL_FORM ff, common_code cc
+		WHERE sr.SRNO = ff.FNO AND sr.recruitment_field = cc.code_type AND ff.fno = #{fno}
+	</select>
 
 </mapper>

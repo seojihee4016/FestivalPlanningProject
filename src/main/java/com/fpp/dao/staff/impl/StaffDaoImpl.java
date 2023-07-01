@@ -8,8 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import com.fpp.dao.staff.StaffDao;
 import com.fpp.dto.staff.StaffApplyDto;
-import com.fpp.dto.staff.StaffBySrnoDto;
+import com.fpp.dto.staff.StaffFormDto;
 import com.fpp.dto.staff.StaffDto;
+import com.fpp.dto.staff.StaffFormCodeDto;
 
 @Repository
 public class StaffDaoImpl implements StaffDao {
@@ -37,17 +38,6 @@ public class StaffDaoImpl implements StaffDao {
 		
 		return list;
 	}
-	
-	/*
-	@Override
-	public List<StaffDto> selectStaffRecruitmentListByFestivalName(String festivalName) {
-		// TODO Auto-generated method stub
-		List<StaffDto> list =
-				sqlSessionTemplate.selectList("staff_mapper.select_staff_recruitment_list_by_festivalName", festivalName);
-		
-		return list;
-	}
-	*/
 
 	//스탭 신청
 	@Override
@@ -67,14 +57,32 @@ public class StaffDaoImpl implements StaffDao {
 		
 		return staffDto;
 	}
+	@Override
+	public StaffFormCodeDto selectStaffRecruitmentFormCodeByFno(int fno) {
+		// TODO Auto-generated method stub
+		
+		StaffFormCodeDto staffFormCodeDto = 
+				sqlSessionTemplate.selectOne("staff_mapper.select_staff_recruitment_and_form_and_code_by_fno", fno);
+		
+		return staffFormCodeDto;
+	}
 
 	//스탭 모집 공고 + 신청 양식 테이블 조회
 	@Override
-	public List<StaffBySrnoDto> selectStaffRecruitmentAndFormList() {
+	public List<StaffFormDto> selectStaffRecruitmentAndFormList() {
 		// TODO Auto-generated method stub
 		
-		List<StaffBySrnoDto> list =
+		List<StaffFormDto> list =
 				sqlSessionTemplate.selectList("staff_mapper.select_staff_recruitment_and_form_list");
+		
+		return list;
+	}
+	@Override
+	public List<StaffFormDto> selectStaffRecruitmentAndFormListByFno(int fno) {
+		// TODO Auto-generated method stub
+
+		List<StaffFormDto> list =
+				sqlSessionTemplate.selectList("staff_mapper.select_staff_recruitment_and_form_list_by_fno", fno);
 		
 		return list;
 	}

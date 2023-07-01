@@ -7,8 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.fpp.dao.staff.StaffDao;
 import com.fpp.dto.staff.StaffApplyDto;
-import com.fpp.dto.staff.StaffBySrnoDto;
+import com.fpp.dto.staff.StaffFormDto;
 import com.fpp.dto.staff.StaffDto;
+import com.fpp.dto.staff.StaffFormCodeDto;
 import com.fpp.service.staff.StaffService;
 
 @Service
@@ -36,18 +37,6 @@ public class StaffServiceImpl implements StaffService {
 		
 		return list;
 	}
-	
-	/*
-	@Override
-	public List<StaffDto> getStaffRecruitmentListByFestivalName(String festivalName) {
-		// TODO Auto-generated method stub
-		
-		List<StaffDto> list =
-				staffDao.selectStaffRecruitmentListByFestivalName(festivalName);
-		
-		return list;
-	}
-	*/
 
 	//스탭 신청 추가
 	@Override
@@ -67,17 +56,32 @@ public class StaffServiceImpl implements StaffService {
 		
 		return staffDto;
 	}
+	@Override
+	public StaffFormCodeDto getStaffRecruitmentFormCodeByFno(int fno) {
+		// TODO Auto-generated method stub
+		
+		StaffFormCodeDto staffFormCodeDto = staffDao.selectStaffRecruitmentFormCodeByFno(fno);
+		
+		return staffFormCodeDto;
+	}
+	
 
 	//스탭 모집 공고 + 신청 양식 테이블 조회
 	@Override
-	public List<StaffBySrnoDto> getStaffRecruitmentAndFormList() {
+	public List<StaffFormDto> getStaffRecruitmentAndFormList() {
 		// TODO Auto-generated method stub
 		
-		List<StaffBySrnoDto> list = staffDao.selectStaffRecruitmentAndFormList();
+		List<StaffFormDto> list = staffDao.selectStaffRecruitmentAndFormList();
 		
 		return list;
 	}
+	@Override
+	public List<StaffFormDto> getStaffRecruitmentAndFormListByFno(int fno) {
+		// TODO Auto-generated method stub
 
-
+		List<StaffFormDto> list = staffDao.selectStaffRecruitmentAndFormListByFno(fno);
+		
+		return list;
+	}
 
 }

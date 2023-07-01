@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +17,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fpp.dto.board.FormDto;
+import com.fpp.dto.commonCode.CommonCodeDto;
 import com.fpp.dto.staff.StaffApplyDto;
-import com.fpp.dto.staff.StaffBySrnoDto;
+import com.fpp.dto.staff.StaffFormDto;
 import com.fpp.dto.staff.StaffDto;
+import com.fpp.dto.staff.StaffFormCodeDto;
 import com.fpp.service.applicationForm.BoardService;
+import com.fpp.service.commonCode.CommonCodeService;
 import com.fpp.service.staff.StaffService;
 
 @Controller
@@ -32,6 +34,9 @@ public class StaffRecruitmentController {
 	
 	@Autowired
 	BoardService boardService;
+	
+	@Autowired
+	CommonCodeService commonCodeService;
 	
 	//스탭 모집 공고 작성 페이지
 	@GetMapping("/staffRecruitment_form")
@@ -54,122 +59,108 @@ public class StaffRecruitmentController {
 		
 		//모집 공고 중복 업로드 확인
 		FormDto formDto = boardService.read(fno);
-	    //int srno = staffDto.getSRNO();
 	    
 	    //StaffDto List 중 SRNO 가져와서 중복 체크하기
 		List<StaffDto> staffList = staffService.getStaffRecruitmentList();
-	    // 중복 여부 확인
+	    
 	    for (StaffDto staff : staffList) {
 	        if (staff.getSRNO() == formDto.getFno()) {
 	        	redirectAttributes.addFlashAttribute("errorFno", "이미 업로드된 모집 공고입니다.");
 	        	return "redirect:/staffRecruitment_form?fno=" + fno;
 	        }
 	    }
-		
-		/*
-	    if (srno == formDto.getFno()) {
-	        //model.addAttribute("errorFno", "이미 업로드된 모집 공고입니다."); //redirect:/시 파라미터값이 전달되지 않음
-	    	redirectAttributes.addFlashAttribute("errorFno", "이미 업로드된 모집 공고입니다.");
-	    	return "redirect:/staffRecruitment_form?fno=" + fno; // 오류가 있는 경우 다시 해당 페이지를 표시
-	    }*/
 	    
-	    
-//	    Map<String, String> errors = new HashMap<>();
-	    
-	    if (ObjectUtils.isEmpty(staffDto.getRecruitmentTO())) {
-	        bindingResult.addError(new FieldError("staffDto"
-	                    , "recruitmentTO"
-	                    , "모집 인원을 입력해 주세요."));
+	    if (staffDto.getRecruitmentTO() == null || staffDto.getRecruitmentTO() <= 0) {
+	    	//오류 메시지를 bindingResult에 추가합니다.
+	    	//이는 검증 실패 시 해당 오류 메시지가 bindingResult에 저장되어야 한다는 의미입니다.
+	        bindingResult.addError(new FieldError("staffDto", "recruitmentTO", "모집 인원을 입력해 주세요."));
+	        
+	        //오류 메시지를 redirectAttributes에 추가합니다.
+	        //이는 검증 실패 시 해당 오류 메시지를 리다이렉트된 페이지로 전달하여 출력하기 위한 것입니다.
+	        redirectAttributes.addFlashAttribute("errorRecruitmentTO", "모집 인원을 입력해 주세요.");
 	    }
-	    if (ObjectUtils.isEmpty(staffDto.getApplicationPeriod())) {
-	        bindingResult.addError(new FieldError("staffDto"
-	                    , "applicationPeriod"
-	                    , "접수 기간을 입력해 주세요."));
+
+	    if (staffDto.getApplicationPeriod() == null) {
+	        bindingResult.addError(new FieldError("staffDto", "applicationPeriod", "접수 기간을 입력해 주세요."));
+	        redirectAttributes.addFlashAttribute("errorApplicationPeriod", "접수 기간을 입력해 주세요.");
 	    }
 	    
-	 // 검증에 실패하면 다시 입력 폼으로
+	    //검증 실패 시, 다시 입력 폼으로
 	    if (bindingResult.hasErrors()) {
-	        return "redirect:/staffRecruitment_form?fno=\" + fno";
+	    	redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.staffDto", bindingResult);
+	        redirectAttributes.addFlashAttribute("staffDto", staffDto);
+	        return "redirect:/staffRecruitment_form?fno=" + fno;
 	    }
 	    
-	    //모집 공고 업로드
+	    //검증 성공 시, 모집 공고 업로드
 	    staffService.recruitmentStaff(staffDto);
-	    
-	    return "redirect:/staffRecruitmentList";
+	    redirectAttributes.addFlashAttribute("successUpload", "모집 공고가 업로드되었습니다.");
+    	
+	    return "redirect:/staffRecruitment_form?fno=" + fno;
 	}
 	
 	
-	//스탭 모집 공고 리스트 페이지
+	//스탭 모집 공고 페이지
 	@GetMapping("/staffRecruitmentList")
 	public String staffRecruitmentList(Model model) throws Exception {
 		
-		//신청 양식 불러오기
-//		List<FormDto> formlist = boardService.list();
-//
-//		model.addAttribute("formlist", formlist);
-//		staff_recruitment 테이블로 다시 불러오기
-		
-		List<StaffBySrnoDto> StaffBySrnoList = staffService.getStaffRecruitmentAndFormList();
-		model.addAttribute("StaffBySrnoList", StaffBySrnoList);
+		List<StaffFormDto> staffFormList = staffService.getStaffRecruitmentAndFormList();
+		model.addAttribute("staffFormList", staffFormList);
 		
 		return "staffRecruitmentList";
 	}
 	
 	//스탭 신청 페이지
 	@GetMapping("/staffRecruitment")
-	public String staffRecruitment(@RequestParam("fno") int fno,
-			/* @Valid @RequestBody FormDto formDtoByFno, */
-			/* @PathVariable(value="fno", required = false) */
-			/* FormDto formDto, StaffDto staffDto, */ Model model/*, 
-			BindingResult bindingResult*/) throws Exception {
+	public String staffRecruitment(@RequestParam("fno") int fno, 
+			 	  Model model) throws Exception {
 		
-		//Form
-		//해당 축제의 데이터 가져오기
-		FormDto formDtoByFno = boardService.read(fno);
-		//모델에 추가하여 뷰로 전달
-		model.addAttribute("formDtoByFno", formDtoByFno);
+//		//Form
+//		FormDto formDtoByFno = boardService.read(fno);
+//		model.addAttribute("formDtoByFno", formDtoByFno);
+//		//Staff
+//		StaffDto staffRecruitment = staffService.getStaffRecruitment(fno);
+//		model.addAttribute("staffRecruitment", staffRecruitment);
 		
-		//Staff
-		//스탭 모집 공고 조회
-		StaffDto staffRecruitment = staffService.getStaffRecruitment(fno);
-		model.addAttribute("staffRecruitment", staffRecruitment);
+		StaffFormCodeDto staffFormCode = staffService.getStaffRecruitmentFormCodeByFno(fno);
+		model.addAttribute("staffFormCode", staffFormCode);
 		
 		/*
-		 * if (bindingResult.hasErrors()) { System.out.println("bindingResult = " +
-		 * bindingResult.getAllErrors()); return "valid :: #form"; }
-		 */
+		List<StaffFormDto> staffFormListByFno = staffService.getStaffRecruitmentAndFormListByFno(fno);
+		model.addAttribute("staffFormListByFno", staffFormListByFno);
+		*/
 		
-		//formDto.getFno();를 가져오는데 fno < 0인 경우 유효성 검사 추가
-		//http://localhost:8080/updateView로 들어가는 경우에는 list 로 이동
-		/*
-		fno = formDtoByFno.getFno();
-	    if (fno < 0 || fno !=  ) {
-	        return "list";
-	    }
-	    */
-
+		
+		List<CommonCodeDto> commonCodeList = commonCodeService.getCommonCodeList();
+		model.addAttribute("commonCodeList", commonCodeList);
+		
 		return "staffRecruitment";
 	}
 	
 	@PostMapping("/staffRecruitment")
 	public String staffRecruitment_process (@RequestParam("fno") int fno, 
 				  Model model, @ModelAttribute StaffApplyDto staffApplyDto, 
-				  @RequestParam("supportPeriodStart") String supportPeriodStart,
-			      @RequestParam("supportPeriodEnd") String supportPeriodEnd,
 			      BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+		
+		StaffFormCodeDto staffFormCode = staffService.getStaffRecruitmentFormCodeByFno(fno);
 		
 		//날짜가 String이라서 형변환 후 if문으로 비교
 	    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	    
 	    try {
-	        LocalDate startDate = LocalDate.parse(supportPeriodStart, dateFormatter);
-	        LocalDate endDate = LocalDate.parse(supportPeriodEnd, dateFormatter);
+	        LocalDate startDate = LocalDate.parse(staffApplyDto.getSupportPeriodStart(), dateFormatter);
+	        LocalDate endDate = LocalDate.parse(staffApplyDto.getSupportPeriodEnd(), dateFormatter);
 
 	        if (endDate.isBefore(startDate)) {
 	        	redirectAttributes.addFlashAttribute("errorDate", "지원기간을 다시 확인해 주세요.");
 	            
 	            return "redirect:/staffRecruitment?fno=" + fno;
 	        }
+			if(!staffFormCode.getRecruitmentField().equals(staffApplyDto.getRecruitmentField())) {
+				redirectAttributes.addFlashAttribute("errorRecruitmentField", "지원할 수 없는 분야입니다.");
+				
+				return "redirect:/staffRecruitment?fno=" + fno;
+			}
 	        
 	        //유효성 검사 통과 시, 스탭 신청 성공
 			staffService.staffRecruitmentApply(staffApplyDto);

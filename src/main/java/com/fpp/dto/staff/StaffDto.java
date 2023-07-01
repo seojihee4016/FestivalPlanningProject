@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class StaffDto {
 	int SRNO;						//스탭 모집 공고 고유 번호
-	int recruitmentTO;				//모집인원
+	Integer recruitmentTO;			//모집인원
 	String recruitmentField;		//모집분야
 	String preferentialTreatment;	//우대사항
 	String applicationPeriod;		//접수기간
