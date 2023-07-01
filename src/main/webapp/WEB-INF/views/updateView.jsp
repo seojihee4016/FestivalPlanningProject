@@ -33,13 +33,13 @@
 	</header>
 
 	<main>
-		<p>*은 필수 입력입니다.</p>
+		<p><span id="essential">*</span> 은 필수 입력입니다.</p>
 
 
 		<form action="" method="post" class="form" id="update">
 			<input type="hidden" id="fno" name="fno" value="${update.fno}" />
 			<fieldset>
-				<p class="place">장소 구분을 선택해주세요 *</p>
+				<p class="place">장소 구분을 선택해주세요 <span id="essential">*</span></p>
 				<br> <input type="radio" name="place" id="inside"
 					value="inside" <c:if test="${update.place}">checked</c:if>>
 				<label for="inside"> 실내</label> <br> <input type="radio"
@@ -52,20 +52,20 @@
 			</fieldset>
 
 			<fieldset>
-				<p class="festival_name">행사명을 적어주세요 *</p>
+				<p class="festival_name">행사명을 적어주세요 <span id="essential">*</span></p>
 				<br> <input type="text" class="answer1" name="festivalName"
 					id="festivalName" value="${update.festivalName}"
 					placeholder="행사명을 입력해주세요">
 			</fieldset>
 
 			<fieldset>
-				<p class="address_event">행사장 주소를 적어주세요 *</p>
+				<p class="address_event">행사장 주소를 적어주세요 <span id="essential">*</span></p>
 				<br> <input type="text" class="answer1" name="addressEvent"
 					value="${update.addressEvent}" placeholder="행사장 주소를 입력해주세요">
 			</fieldset>
 
 			<fieldset>
-				<p class="Number_of_people">예상 인원 수가 어떻게 되시나요? *</p>
+				<p class="Number_of_people">예상 인원 수가 어떻게 되시나요? <span id="essential">*</span></p>
 				<br> <input type="radio" name="numberOfPeople"
 					value="NumberOfPeople 50" id="numberOfPeople_50"
 					<c:if test="${update.numberOfPeople == 'NumberOfPeople 50'}">checked</c:if>>
@@ -89,7 +89,7 @@
 			</fieldset>
 
 			<fieldset>
-				<p class="carrying_difficulty">운반 난이도가 어떻게 되시나요? *</p>
+				<p class="carrying_difficulty">운반 난이도가 어떻게 되시나요? <span id="essential">*</span></p>
 				<br> <select name="carryingDifficulty" id="carryingDifficulty">
 					<option selected>운반 난이도를 선택해주세요</option>
 					<option value="level1"
@@ -114,7 +114,7 @@
 			</fieldset>
 
 			<fieldset>
-				<p class="start_date">행사일과 시작 시간이 어떻게 되시나요? *</p>
+				<p class="start_date">행사일과 시작 시간이 어떻게 되시나요? <span id="essential">*</span></p>
 				<br>
 				<p class="mini-name">날짜</p>
 				<input type="date" class="datetime" value="${update.startDate}"
@@ -130,7 +130,7 @@
 			</fieldset>
 
 			<fieldset>
-				<p class="budget_range">예상 금액이 어떻게 되시나요? *</p>
+				<p class="budget_range">예상 금액이 어떻게 되시나요? <span id="essential">*</span></p>
 				<br> <select name="budgetRange" id="budgetRange">
 					<option selected>예상 금액을 선택해주세요</option>
 					<option value="budgetRange 100"
@@ -164,21 +164,21 @@
 			</fieldset>
 
 			<fieldset>
-				<p class="commissioning_agency">의뢰 회사(기관)을 적어주세요 *</p>
+				<p class="commissioning_agency">의뢰 회사(기관)을 적어주세요 <span id="essential">*</span></p>
 				<br> <input type="text" class="answer1"
 					name="commissioningAgency" value="${update.commissioningAgency}"
 					placeholder="회사명을 입력해주세요">
 			</fieldset>
 
 			<fieldset>
-				<p class="name">담당자 성함을 적어주세요 *</p>
+				<p class="name">담당자 성함을 적어주세요 <span id="essential">*</span></p>
 				<br> <input type="text" class="answer1" name="name"
 					value="${update.name}" placeholder="성함을 입력해주세요">
 			</fieldset>
 
 			<button type="submit" class="update_btn">수정</button>
 			<button type="submit" class="delete_btn">삭제</button>
-			<button type="button" class="cancel-btn" onclick="history.back();">취소</button>
+			<button type="button" class="cancel-btn" onclick="history.back();">목록</button>
 
 		</form>
 	</main>
@@ -249,7 +249,7 @@
 	</script>
 
 	<script type="text/javascript">
-		$(document).ready(function() {
+/*		$(document).ready(function() {
 			var formObj = $("#update");
 
 			// 수정
@@ -259,7 +259,21 @@
 					formObj.attr("method", "post");
 					formObj.submit();
 				}
-			});
+			});*/
+			
+			
+			$(document).ready(function() {
+			    var formObj = $("#update");
+			    // 수정
+			    $(".update_btn").on("click", function(e) {
+			        e.preventDefault(); // 기본 동작 중지
+			        if (confirm("수정하시겠습니까?")) {
+			            formObj.attr("action", "/updateView");
+			            formObj.attr("method", "post");
+			            formObj.submit();
+			        }
+			    });
+			
 
 			// 삭제
 			$(".delete_btn").on("click", function() {

@@ -1,17 +1,22 @@
 package com.fpp.controller.applicationForm;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fpp.service.applicationForm.BoardService;
 import com.fpp.dto.board.FormDto;
+import com.fpp.dto.bulletinBoard.BulletinBoardDto;
+import com.fpp.dto.user.UserDto;
 
 @Controller
 public class BoardController {
@@ -22,7 +27,10 @@ public class BoardController {
 	/*신청 양식 작성*/
 	//localhost:8080/applicationForm
 	@RequestMapping("/applicationForm")  
-	public String applicationForm() {
+	public String applicationForm(@ModelAttribute UserDto userDto, HttpSession session, BulletinBoardDto bulletinBoardDto , Model model) {
+		// 세션에서 사용자아이디를 가져옴
+		String writer = (String)session.getAttribute("loginId");
+		model.addAttribute("writer" ,writer);
 		return "applicationForm";
 	}
 
