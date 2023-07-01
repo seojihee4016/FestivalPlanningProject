@@ -212,13 +212,21 @@ ol {
 											<fmt:formatDate value="${commentList.regdate}"
 												pattern="yyyy-MM-dd" />
 											<br /> 댓글 내용:
-											<p>${commentList.content}</p>
-											<button type="button" class="replyUpdateBtn"
-												data-cno="${commentList.cno}" data-bno="${commentList.bno}"
-												onclick="handleReplyUpdate(this)">수정</button>
+											<p>
+												<input type="text" value="${commentList.content}"
+													style="width: 400px;">
+											</p>
 
-											<button type="button" class="replyDeleteBtn"
-												data-cno="${commentList.cno}">삭제</button>
+											<c:if test="${commentList.writer == sessionScope.loginId}">
+												<button type="button" class="replyUpdateBtn"
+													data-cno="${commentList.cno}">수정</button>
+											</c:if>
+
+											<c:if test="${commentList.writer == sessionScope.loginId}">
+												<button type="button" class="replyDeleteBtn"
+													data-cno="${commentList.cno}">삭제</button>
+
+											</c:if>
 										</div>
 									</c:if></li>
 
@@ -231,7 +239,8 @@ ol {
 												pattern="yyyy-MM-dd" />
 											<br /> 댓글 내용:
 											<p>
-												<input type="text" value="${commentList.content}">
+												<input type="text" value="${commentList.content}"
+													style="width: 400px;">
 											</p>
 
 											<div>
@@ -288,8 +297,9 @@ ol {
 									readonly />
 							</c:when>
 						</c:choose>
-						<br /> <label for="content"></label><input type="text"
+						<br /> <label for="content"></label> <input type="text"
 							id="content" name="content" />
+
 					</div>
 					<div>
 						<c:if test="${sessionScope.loginId == updateBulletinBoard.writer}">
@@ -306,7 +316,7 @@ ol {
 
 
 
-
+	<!-- 게시글 수정 / 삭제 -->
 	<script type="text/javascript">
 		$(document).ready(function() {
 			var formObj = $("#updateBulletinBoard");
@@ -331,7 +341,8 @@ ol {
 		});
 	</script>
 
-	<!-- input 유효성 검사 -->
+
+	<!-- 게시글 / 댓글 input 유효성 검사 -->
 	<script>
 		function validateForm() {
 
@@ -343,14 +354,13 @@ ol {
 				alert('내용을 입력해주세요.');
 				return false;
 			}
-
 			return true;
 		}
 	</script>
 
 	<!-- 페이지 값 작성 / 댓글 -->
 	<script>
-		// 목록
+		/*목록으로 이동 시 페이징*/
 		$(".list-btn")
 				.on(
 						"click",
@@ -358,44 +368,79 @@ ol {
 							location.href = "/bulletinBoardList?page=${scri.page}"
 									+ "&perPageNum=${scri.perPageNum}"
 									+ "&searchType=${scri.searchType}&keyword=${scri.keyword}";
-						})
+						});
 	</script>
 
-
 	<script>
-		// 댓글 수정
-		$(document).ready(
-				function() {
-					$(".replyUpdateBtn").on(
-							"click",
-							function() {
-								if (confirm("댓글을 수정하시겠습니까?")) {
-									var cno = $(this).attr("data-cno");
-									var updatedContent = $(this).closest("li")
-											.find("input[type='text']").val();
+	/*댓글 작성*/
+	$(".replyWriteBtn").on("click", function() {
+	    if (confirm("댓글을 작성하시겠습니까?")) {
+	        var formObj = $("form[name='replyForm']");
+	        formObj.attr("action", "writeComments");
+	        formObj.submit();
+	    }
+	});
 
-									// AJAX를 사용하여 서버로 수정된 내용 전송
-									$.ajax({
-										type : "POST",
-										url : "/updateCommentsByCno",
-										data : {
-											cno : cno,
-											content : updatedContent
-										},
-										success : function(response) {
-											// 수정 성공 시 처리할 코드 작성
-											alert("댓글이 수정되었습니다.");
-											// 페이지 새로고침 또는 필요한 작업 수행
-											location.reload();
-										},
-										error : function(xhr, status, error) {
-											// 수정 실패 시 처리할 코드 작성
-											alert("댓글 수정에 실패했습니다. 다시 시도해주세요.");
-										}
-									});
-								}
-							});
-				});
+	/*댓글 수정*/
+	$(document).ready(function() {
+	    $(".replyUpdateBtn").on("click", function() {
+	        if (confirm("댓글을 수정하시겠습니까?")) {
+	            var cno = $(this).attr("data-cno");
+	            var updatedContent = $(this).closest("li").find("input[type='text']").val();
+
+	            // AJAX를 사용하여 서버로 수정된 내용 전송
+	            $.ajax({
+	                type: "POST",
+	                url: "/updateCommentsByCno",
+	                data: {
+	                    cno: cno,
+	                    content: updatedContent
+	                },
+	                success: function(response) {
+	                    // 수정 성공 시 처리할 코드 작성
+	                    alert("댓글이 수정되었습니다.");
+	                    // 페이지 새로고침 또는 필요한 작업 수행
+	                    location.reload();
+	                },
+	                error: function(xhr, status, error) {
+	                    // 수정 실패 시 처리할 코드 작성
+	                    alert("댓글 수정에 실패했습니다. 다시 시도해주세요.");
+	                }
+	            });
+	        }
+	    });
+
+
+	        $(".replyDeleteBtn").on("click", function() {
+	            if (confirm("댓글을 삭제하시겠습니까?")) {
+	                var cno = $(this).attr("data-cno");
+	                var deletedContent = $(this).closest("li").find("input[type='text']").val();
+
+	                // AJAX를 사용하여 서버로 삭제 요청 전송
+	                $.ajax({
+	                    type: "post",
+	                    url: "/deleteReply",
+	                    data: {
+	                        cno: cno,
+	                        content: deletedContent
+	                    },
+	                    success: function(response) {
+	                        // 삭제 성공 시 처리할 코드 작성
+	                        alert("댓글이 삭제되었습니다.");
+	                        // 페이지 새로고침 또는 필요한 작업 수행
+	                        location.reload();
+	                    },
+	                    error: function(xhr, status, error) {
+	                        // 삭제 실패 시 처리할 코드 작성
+	                        alert("댓글 삭제에 실패했습니다. 다시 시도해주세요.");
+	                    }
+	                });
+	            }
+	        });
+	    });
+
+
+
 	</script>
 
 

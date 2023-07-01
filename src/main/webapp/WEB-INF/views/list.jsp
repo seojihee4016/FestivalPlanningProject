@@ -37,8 +37,7 @@
 					<c:forEach items="${list}" var="list">
 						<tr>
 							<td><c:out value="${list.fno}" /></td>
-							<td><a href="/updateView?fno=${list.fno}"><c:out
-										value="${list.festivalName}" /></a></td>
+							<td><c:out value="${list.festivalName}" /></td>
 							<td><c:out value="${list.name}" /></td>
 							<!--  <td><c:out value="${list.place}" /></td> -->
 							<td><c:out value="${list.addressEvent}" /></td>
@@ -46,8 +45,9 @@
               <td><c:out value="${list.carryingDifficulty}" /></td>
               <td><c:out value="${list.budgetRange}" /></td> -->
 							<td><c:out value="${list.commissioningAgency}" /></td>
-							<td><c:out value="${list.startDate}" /></td>
-							<td><c:out value="${list.endDate}" /></td>
+							<td><c:out value="${list.startDate.split(' ')[0]}" /></td>
+							<td><c:out value="${list.endDate.split(' ')[0]}" /></td>
+
 							<td><a href="/updateView?fno=${list.fno}"
 								class="custom-button">수정</a></td>
 
@@ -62,9 +62,6 @@
 					<span>신청하기</span>
 				</button>
 			</div>
-
-
-
 		</section>
 	</div>
 

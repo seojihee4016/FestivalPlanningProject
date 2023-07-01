@@ -158,7 +158,7 @@ public class BulletinBoardController {
 	//댓글 수정 post
 	@PostMapping("/updateCommentsByCno")
 	public String replyUpdate(CommentsDto commentsDto, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
-		
+
 		commentsService.updateCommentsByCno(commentsDto);
 
 		rttr.addAttribute("bno", commentsDto.getBno());
@@ -169,5 +169,35 @@ public class BulletinBoardController {
 
 		return "redirect:/bulletinBoardProcess";
 	}
+
+
+	//댓글 삭제 GET
+	@GetMapping("/deleteReply")
+	public String deleteReply(CommentsDto commentsDto, SearchCriteria scri, Model model) throws Exception {
+
+		model.addAttribute("deleteReply", commentsService.selectReply(commentsDto.getCno()));
+		model.addAttribute("scri", scri);
+
+		return "bulletinBoardProcess";
+	}
+
+	//댓글 삭제
+	@PostMapping("/deleteReply")
+	public String replyDelete(CommentsDto commentsDto, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
+
+		commentsService.deleteReply(commentsDto);
+
+		rttr.addAttribute("bno", commentsDto.getBno());
+		rttr.addAttribute("page", scri.getPage());
+		rttr.addAttribute("perPageNum", scri.getPerPageNum());
+		rttr.addAttribute("searchType", scri.getSearchType());
+		rttr.addAttribute("keyword", scri.getKeyword());
+
+		return "redirect:/bulletinBoardProcess";
+	}
+
+
+
+
 
 }

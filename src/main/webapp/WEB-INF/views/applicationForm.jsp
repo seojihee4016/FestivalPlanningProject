@@ -63,18 +63,19 @@
 
 			<fieldset>
 				<p class="Number_of_people">예상 인원 수가 어떻게 되시나요? *</p>
-				<br> <input type="radio" name="NumberOfPeople"
-					value="NumberOfPeople 50"> <label for="50"> 50명 이내
-				</label> <br> <input type="radio" name="NumberOfPeople"
+				<br> <input type="radio" id="50" name="NumberOfPeople"
+					value="NumberOfPeople 50"> <label for="50">50명 이내</label> <br>
+				<input type="radio" id="51~100" name="NumberOfPeople"
 					value="NumberOfPeople 51~100"> <label for="51~100">51~100명</label>
-				<br> <input type="radio" name="NumberOfPeople"
+				<br> <input type="radio" id="101~200" name="NumberOfPeople"
 					value="NumberOfPeople 101~200"> <label for="101~200">101명~200명</label>
-				<br> <input type="radio" name="NumberOfPeople"
+				<br> <input type="radio" id="201~300" name="NumberOfPeople"
 					value="NumberOfPeople 201~300"> <label for="201~300">201명
-					~ 400명</label> <br> <input type="radio" name="NumberOfPeople"
-					value="NumberOfPeople 301~400"> <label for="301~400">400명
-					이상</label> <br>
+					~ 400명</label> <br> <input type="radio" id="301~400"
+					name="NumberOfPeople" value="NumberOfPeople 301~400"> <label
+					for="301~400">400명 이상</label> <br>
 			</fieldset>
+
 
 
 
@@ -96,8 +97,8 @@
 				<p class="start_date">행사일과 시작 시간이 어떻게 되시나요? *</p>
 				<br>
 				<p class="mini-name">날짜</p>
-				<input type="date" class="datetime" value="startDate"
-					name="startDate">
+		<input type="date" class="datetime" value="startDate"
+					name="startDate">  
 			</fieldset>
 			<!--  시간
 			<p class="mini-name">시간</p>
@@ -110,7 +111,7 @@
 				<p class="end_date">행사일과 종료 시간이 어떻게 되시나요? *</p>
 				<br>
 				<p class="mini-name">날짜</p>
-				<input type="date" class="datetime" value="endDate" name="endDate">
+		<input type="date" class="datetime" value="endDate" name="endDate"> 
 			</fieldset>
 			<!--  시간
 				
@@ -256,8 +257,5 @@
 			return true;
 		}
 	</script>
-
-
-
 </body>
 </html>
