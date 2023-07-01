@@ -24,9 +24,30 @@ public class CommentsServiceImpl implements CommentsService{
 
 	//댓글 작성
 	@Override
-	public void writeReply(CommentsDto commentsDto) throws Exception {
+	public void writeComments(CommentsDto commentsDto) throws Exception {
 		// TODO Auto-generated method stub
-		commentsDao.writeReply(commentsDto);
+		commentsDao.writeComments(commentsDto);
+	}
+
+	//댓글 수정
+	@Override
+	public void updateCommentsByCno(CommentsDto commentsDto) throws Exception {
+		// TODO Auto-generated method stub
+		commentsDao.updateCommentsByCno(commentsDto);
+	}
+	
+	//댓글 삭제
+	@Override
+	public void deleteReply(CommentsDto commentsDto) throws Exception {
+		// TODO Auto-generated method stub
+		commentsDao.deleteReply(commentsDto);
+	}
+	
+	//선택된 댓글 조회
+	@Override
+	public CommentsDto selectReply(int cno) throws Exception {
+		// TODO Auto-generated method stub
+		return commentsDao.selectReply(cno);
 	}
 
 }

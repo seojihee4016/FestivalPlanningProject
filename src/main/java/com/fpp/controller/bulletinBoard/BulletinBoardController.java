@@ -131,10 +131,35 @@ public class BulletinBoardController {
 	RedirectAttributes는 redirect했을때 값들을 가지고 이동
 	SearchCriteria의 값을 넣어서 댓글을 저장 한 뒤 원래 페이지로 redirect하여 이동하는 구조*/
 
-	@PostMapping("/writeReply")
+	@PostMapping("/writeComments")
 	public String writeReply(CommentsDto commentsDto, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
 
-		commentsService.writeReply(commentsDto);
+		commentsService.writeComments(commentsDto);
+
+		rttr.addAttribute("bno", commentsDto.getBno());
+		rttr.addAttribute("page", scri.getPage());
+		rttr.addAttribute("perPageNum", scri.getPerPageNum());
+		rttr.addAttribute("searchType", scri.getSearchType());
+		rttr.addAttribute("keyword", scri.getKeyword());
+
+		return "redirect:/bulletinBoardProcess";
+	}
+
+	//댓글 수정 get
+	@GetMapping("/updateCommentsByCno")
+	public String updateCommentsByCno(CommentsDto commentsDto, SearchCriteria scri, Model model) throws Exception {
+
+		model.addAttribute("updateCommentsByCno", commentsService.selectReply(commentsDto.getCno()));
+		model.addAttribute("scri", scri);
+
+		return "bulletinBoardProcess";
+	}
+
+	//댓글 수정 post
+	@PostMapping("/updateCommentsByCno")
+	public String replyUpdate(CommentsDto commentsDto, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
+		
+		commentsService.updateCommentsByCno(commentsDto);
 
 		rttr.addAttribute("bno", commentsDto.getBno());
 		rttr.addAttribute("page", scri.getPage());

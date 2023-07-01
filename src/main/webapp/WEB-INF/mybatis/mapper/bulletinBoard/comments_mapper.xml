@@ -5,7 +5,7 @@
 <mapper namespace="comments_mapper">
 
 	<!-- 댓글 조회 -->
-	<select id="read_Comments_List" resultType="CommentsDto">
+	<select id="read_comments_List" resultType="CommentsDto">
 		SELECT
 		CNO, CONTENT,
 		WRITER, REGDATE
@@ -14,7 +14,7 @@
 	</select>
 
 	<!-- 댓글 작성 -->
-	<insert id="write_Reply">
+	<insert id="write_comments">
 		INSERT INTO comments(
 		BNO
 		, CNO
@@ -26,4 +26,30 @@
 		, #{content}
 		, #{writer} )
 	</insert>
+
+	<!-- 댓글 수정 -->
+	<update id="update_comments_by_cno" parameterType="CommentsDto">
+		UPDATE
+		comments SET CONTENT = #{content}
+		WHERE CNO = #{cno}
+	</update>
+
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply" parameterType="CommentsDto">
+		DELETE FROM comments
+		WHERE CNO = #{cno}
+	</delete>
+
+	<!-- 선택된 댓글 조회 -->
+	<select id="selectReply" resultType="CommentsDto">
+		SELECT
+		BNO
+		, CNO
+		, CONTENT
+		, WRITER
+		, REGDATE
+		FROM comments
+		WHERE CNO = #{cno}
+	</select>
+
 </mapper>
