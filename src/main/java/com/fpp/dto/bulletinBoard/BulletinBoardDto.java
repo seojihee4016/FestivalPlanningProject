@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class BulletinBoardDto {
 	private int bno;
+	private String typeOfInquiry;
 	private String title;
 	private String content;
 	private String writer;

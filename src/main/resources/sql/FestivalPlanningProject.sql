@@ -24,6 +24,7 @@ INCREMENT BY 1;
 CREATE TABLE Bulletin_Board(
     BNO NUMBER NOT NULL,										--게시판 고유 번호
     TITLE VARCHAR2(100)     NOT NULL,				--제목
+    TYPE_OF_INQUIRY VARCHAR2(100)  NOT NULL,--글 유형
     CONTENT VARCHAR2(2000)  NOT NULL,				--내용
     WRITER VARCHAR2(100)    NOT NULL,				--작성자
     REGDATE DATE            DEFAULT SYSDATE,--등록일자	

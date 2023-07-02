@@ -4,139 +4,107 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="header.jsp"%>
+<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
+<link href="${path}/css/board.css?ver=3" rel="stylesheet"
+	type="text/css" />
 <meta charset="UTF-8">
 <title>BulletinBoard</title>
 <style>
-/*게시판*/
-* {
-	padding: 0;
-	margin: 0;
-	box-sizing: border-box;
-}
-
-body {
-	font-family: Arial, sans-serif;
-}
-
-#root {
-	width: 600px;
-	margin: 0 auto;
-}
-
-header {
-	text-align: center;
-	padding: 20px 0;
-}
-
-h1 {
-	font-size: 24px;
-	color: #333;
-}
-
-hr {
-	border: none;
-	border-top: 1px solid #ccc;
-	margin-bottom: 20px;
-}
-
-#container {
-	margin-bottom: 20px;
-}
-
-table {
-	width: 100%;
-	border-collapse: collapse;
-}
-
-label {
-	font-weight: bold;
-}
-
-input[type="text"], textarea {
-	width: 100%;
-	padding: 8px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-}
-
-button[type="submit"], button[type="button"] {
-	display: inline-block;
-	padding: 8px 16px;
-	border: none;
-	border-radius: 4px;
-	background-color: #333;
-	color: #fff;
-	cursor: pointer;
-	margin-top: 10px;
-	margin-right: 10px;
-}
-
-button[type="submit"]:hover, button[type="button"]:hover {
-	background-color: #222;
-}
-
-button[type="submit"]:focus, button[type="button"]:focus {
-	outline: none;
-}
 </style>
 </head>
 <body>
-	<div id="root">
-		<header>
-			<h1>게시판</h1>
-		</header>
-		<hr />
 
-		<nav>nav bar</nav>
-		<hr />
+	<article class="qna-sec">
+		<h1>Q&A</h1>
 
-		<section id="container">
+		<div class="box">
+			<h3>문의하기</h3>
+
 			<form role="form" method="post" action="BulletinBoard"
 				onsubmit="return validateForm()">
-				<table>
-					<tbody>
 
-						<tr>
-							<td><label for="title">제목</label><input type="text"
-								id="title" name="title" value="" /></td>
-						</tr>
-						<tr>
-							<td><label for="content">내용</label> <textarea id="content"
-									name="content"></textarea></td>
-						</tr>
-						<tr>
-							<td><label for="writer">작성자</label><input
-								type="text" id="writer" name="writer" value="<c:out value="${writer}" />" readonly/></td>
-						</tr>
-						<tr>
-							<td><button type="submit">작성</button></td>
-						</tr>
+				<ul class="cont-box">
 
-					</tbody>
-				</table>
+					<li><select name="typeOfInquiry" id="typeOfInquiry">
+							<option selected disabled>선택해주세요</option>
+							<option value="[축제 문의]">축제 문의</option>
+							<option value="[배치도 문의]">배치도 문의</option>
+							<option value="[가격 문의]">가격 문의</option>
+							<option value="[홍보 문의]">홍보 문의</option>
+							<option value="[그 외]">그 외</option>
+					</select></li>
+
+					<li><input type="text" id="title" name="title" value=""
+						placeholder="제목을 입력하세요" /></li>
+
+					<li>
+						<div class="tx">
+							<textarea placeholder="문의내용을 입력해주세요. (2000자 이내)" maxlength="2000"
+								id="content" name="content" rows="12"></textarea>
+							<span id="overs">(0/2000자)</span>
+						</div>
+					</li>
+
+					<li><label for="writer">작성자</label><input type="text"
+						id="writer" name="writer" value="<c:out value="${writer}" />"
+						readonly /></li>
+
+					<li>
+						<div class="file-box">
+							<input type="file" class="" name="reg-file-1" id="addFile">
+							<label for="addFile" class="gray-text"> 첨부파일</label> <span
+								class="gray-text">5MB이하의 이미지 파일(JPG, PNG, GIF)<br>
+								1개 첨부하실 수 있습니다.
+							</span>
+						</div>
+					</li>
+				</ul>
+				<button type="submit">작성</button>
 			</form>
-		</section>
-		<hr />
-	</div>
+
+		</div>
+	</article>
 
 	<script>
-	function validateForm() {
+		function validateForm() {
 
+			var selectElement = document.getElementById('typeOfInquiry');
+			var selectedOption = selectElement.options[selectElement.selectedIndex].text;
 
-		if (title.value.trim() === '') {
-			alert('제목을 입력해주세요.');
-			return false;
+			if (selectedOption === '선택해주세요') {
+				alert('문의 유형을 선택해주세요.');
+				return false;
+			}
+
+			if (title.value.trim() === '') {
+				alert('제목을 입력해주세요.');
+				return false;
+			}
+			if (content.value.trim() === '') {
+				alert('내용을 입력해주세요.');
+				return false;
+			}
+			if (writer.value.trim() === '') {
+				alert('로그인을 해주세요.');
+				return false;
+			}
+			
+			return true;
 		}
-		if (content.value.trim() === '') {
-			alert('내용을 입력해주세요.');
-			return false;
-		}
-		
-		return true;
-	}
+
+		var form = document.querySelector('form');
+		form.addEventListener('submit', function(event) {
+			event.preventDefault(); // 잘못된 경우 폼 전송 막기
+
+			if (validateForm() && confirm('게시글을 작성하시겠습니까?')) {
+				form.submit();
+			}
+		});
 	</script>
+
+
 </body>
 </html>

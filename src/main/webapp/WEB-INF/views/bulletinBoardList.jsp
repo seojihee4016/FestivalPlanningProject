@@ -29,6 +29,7 @@ li {
 				<table>
 					<tr>
 						<th>번호</th>
+						<th>문의 종류</th>
 						<th>제목</th>
 						<th>내용</th>
 						<th>작성자</th>
@@ -40,7 +41,8 @@ li {
 						var="selectBulletinBoardList">
 						<tr>
 							<td><c:out value="${selectBulletinBoardList.bno}" /></td>
-							<td><c:out value="${selectBulletinBoardList.title}" /></a></td>
+							<td><c:out value="${selectBulletinBoardList.typeOfInquiry}"/></td>
+							<td><c:out value="${selectBulletinBoardList.title}" /></td>
 							<td><c:out value="${selectBulletinBoardList.content}" /></td>
 							<td><c:out value="${selectBulletinBoardList.writer}" /></td>
 							<td><fmt:formatDate
@@ -126,7 +128,6 @@ li {
 			</div>
 		</section>
 	</div>
-
 
 </body>
 </html>
