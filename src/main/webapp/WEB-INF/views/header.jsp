@@ -70,8 +70,12 @@
 					</div>
 				</div>
 				<c:choose>
+<<<<<<< HEAD
 					<c:when
 						test="${empty sessionScope || sessionScope.loginId == null}">
+=======
+					<c:when test="${empty sessionScope || sessionScope.loginId == null}">
+>>>>>>> ft-board
 						<ul class="nav justify-content-end">
 							<li class="nav-item"><a class="nav-link" href="login">로그인</a></li>
 							<li class="nav-item"><a class="nav-link" href="agreement">회원가입</a></li>
