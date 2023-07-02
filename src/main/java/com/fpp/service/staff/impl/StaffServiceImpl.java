@@ -9,7 +9,6 @@ import com.fpp.dao.staff.StaffDao;
 import com.fpp.dto.staff.StaffApplyDto;
 import com.fpp.dto.staff.StaffFormDto;
 import com.fpp.dto.staff.StaffDto;
-import com.fpp.dto.staff.StaffFormCodeDto;
 import com.fpp.service.staff.StaffService;
 
 @Service
@@ -38,7 +37,7 @@ public class StaffServiceImpl implements StaffService {
 		return list;
 	}
 
-	//스탭 신청 추가
+	//스탭 신청
 	@Override
 	public void staffRecruitmentApply(StaffApplyDto staffApplyDto) {
 		// TODO Auto-generated method stub
@@ -46,25 +45,6 @@ public class StaffServiceImpl implements StaffService {
 		staffDao.insertStaffApply(staffApplyDto);
 		
 	}
-
-	//스탭 모집 공고 조회
-	@Override
-	public StaffDto getStaffRecruitment(int fno) {
-		// TODO Auto-generated method stub
-		
-		StaffDto staffDto = staffDao.selectStaffRecruitment(fno);
-		
-		return staffDto;
-	}
-	@Override
-	public StaffFormCodeDto getStaffRecruitmentFormCodeByFno(int fno) {
-		// TODO Auto-generated method stub
-		
-		StaffFormCodeDto staffFormCodeDto = staffDao.selectStaffRecruitmentFormCodeByFno(fno);
-		
-		return staffFormCodeDto;
-	}
-	
 
 	//스탭 모집 공고 + 신청 양식 테이블 조회
 	@Override
@@ -76,12 +56,12 @@ public class StaffServiceImpl implements StaffService {
 		return list;
 	}
 	@Override
-	public List<StaffFormDto> getStaffRecruitmentAndFormListByFno(int fno) {
+	public StaffFormDto getStaffRecruitmentFormListByFno(int fno) {
 		// TODO Auto-generated method stub
 
-		List<StaffFormDto> list = staffDao.selectStaffRecruitmentAndFormListByFno(fno);
+		StaffFormDto staffFormDto = staffDao.selectStaffRecruitmentFormListByFno(fno);
 		
-		return list;
+		return staffFormDto;
 	}
 
 }

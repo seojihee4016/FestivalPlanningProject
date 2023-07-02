@@ -13,47 +13,47 @@
 <body>
 	<div class="container">
 		<h1>스탭 신청하기</h1>
-	 	<p>축제명 : ${staffFormCode.festivalName}</p>
-		<p>주최 : ${staffFormCode.commissioningAgency}</p>
-		<p>축제 장소 : ${staffFormCode.addressEvent}</p>
+	 	<p>축제명 : ${staffFormListByFno.festivalName}</p>
+		<p>주최 : ${staffFormListByFno.commissioningAgency}</p>
+		<p>축제 장소 : ${staffFormListByFno.addressEvent}</p>
  		<p>장소구분 :
 			<c:forEach var="Code" items="${commonCodeList}">
-				<c:set var="place" value="${staffFormCode.place}" />
+				<c:set var="place" value="${staffFormListByFno.place}" />
 				<c:if test="${place == Code.codeType}">
         			${Code.codeName}
     			</c:if>
 			</c:forEach>
 		</p>
-		<p>축제 기간 : ${staffFormCode.startDate} ~ ${staffFormCode.endDate}</p> 
+		<p>축제 기간 : ${staffFormListByFno.startDate} ~ ${staffFormListByFno.endDate}</p> 
 	
-	 	<p>모집인원 : ${staffFormCode.recruitmentTO}</p>
+	 	<p>모집인원 : ${staffFormListByFno.recruitmentTO}</p>
 		<p>모집분야 : 
 			<c:forEach var="Code" items="${commonCodeList}">
-				<c:set var="recruitmentField" value="${staffFormCode.recruitmentField}" />
+				<c:set var="recruitmentField" value="${staffFormListByFno.recruitmentField}" />
 				<c:if test="${recruitmentField == Code.codeType}">
         			${Code.codeName}
     			</c:if>
 			</c:forEach>
 		</p>
 		<p>우대사항 : 
-			<c:set var="preferentialTreatment" value="${staffFormCode.preferentialTreatment}" />
+			<c:set var="preferentialTreatment" value="${staffFormListByFno.preferentialTreatment}" />
 			<c:if test="${not empty preferentialTreatment}">
-				${staffFormCode.preferentialTreatment}
+				${staffFormListByFno.preferentialTreatment}
 			</c:if>
 			<c:if test="${empty preferentialTreatment}">
 				해당 없음
 			</c:if>
 		</p>
-		<p>접수기간 : ~ ${staffFormCode.applicationPeriod}</p> 
+		<p>접수기간 : ~ ${staffFormListByFno.applicationPeriod}</p> 
 	
 		<hr />
 	
 	  	<form action="" method="post">
-			<input type="hidden" name="SRNO" value="${staffFormCode.fno}" />
+			<input type="hidden" name="SRNO" value="${staffFormListByFno.fno}" />
 	
 			<c:set var="maxDate" value="" />
-			<c:if test="${staffFormCode != null}">
-				<c:set var="maxDate" value="${staffFormCode.applicationPeriod}" />
+			<c:if test="${staffFormListByFno != null}">
+				<c:set var="maxDate" value="${staffFormListByFno.applicationPeriod}" />
 			</c:if>
 	
 		 	<p>지원기간 <input type="date" name="supportPeriodStart" required="required"
@@ -68,6 +68,7 @@
 					 <input type="radio" name="recruitmentField" id="rf0" value="rf0" />
 					 <label for="rf0">기타</label>
 			</p>
+			<input type="hidden" name="id" value="${sessionScope.loginId}" />
 			<button type="submit">신청하기</button>
 		</form>
 	</div>
@@ -86,6 +87,12 @@
 	if (successApply) {
 		alert(successApply);
 		location.href ="staffRecruitmentList";
+	}
+	
+	var errorLogin = "${errorLogin}";
+	if (errorLogin) {
+		alert(errorLogin);
+		location.href ="login";
 	}
 </script>
 

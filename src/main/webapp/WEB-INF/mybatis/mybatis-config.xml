@@ -19,7 +19,6 @@
     	<typeAlias type="com.fpp.dto.staff.StaffDto" alias="StaffDto"/>
     	<typeAlias type="com.fpp.dto.staff.StaffApplyDto" alias="StaffApplyDto"/>
     	<typeAlias type="com.fpp.dto.staff.StaffFormDto" alias="StaffFormDto"/>
-    	<typeAlias type="com.fpp.dto.staff.StaffFormCodeDto" alias="StaffFormCodeDto"/>
     	<typeAlias type="com.fpp.dto.user.UserDto" alias="UserDto"/>
     </typeAliases>
 
