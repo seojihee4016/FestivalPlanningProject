@@ -11,4 +11,5 @@ public interface UserDao {
 	
 	public int updateUserInfo(UserDto userDto);
 
+	public UserDto selectUserByPw(UserDto userDto);
 }

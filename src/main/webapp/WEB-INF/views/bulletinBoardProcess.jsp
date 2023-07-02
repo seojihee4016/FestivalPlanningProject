@@ -161,14 +161,11 @@ ol {
 
 				<!-- 페이징 -->
 				<!-- cri값을 보관하기위해 form태그안에 타입 hidden으로 input태그를 추가 -->
-				<input type="hidden" id="bno" name="bno"
-					value="${updateBulletinBoard.bno}" /> <input type="hidden"
-					id="page" name="page" value="${scri.page}"> <input
-					type="hidden" id="perPageNum" name="perPageNum"
-					value="${scri.perPageNum}"> <input type="hidden"
-					id="searchType" name="searchType" value="${scri.searchType}">
-				<input type="hidden" id="keyword" name="keyword"
-					value="${scri.keyword}">
+				<input type="hidden" id="bno" name="bno" value="${updateBulletinBoard.bno}" /> 
+				<input type="hidden" id="page" name="page" value="${scri.page}"> 
+				<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
+				<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}">
+				<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
 
 				<!-- 게시글 작성 -->
 				<table>

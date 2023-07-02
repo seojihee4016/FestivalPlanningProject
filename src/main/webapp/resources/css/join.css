@@ -37,10 +37,6 @@
 	text-align: center;
 }
 
-#btn_submit {
-	width: 70%;
-}
-
 .idbox {
 	position: relative;
 }
@@ -58,12 +54,13 @@
 	color: white;
 }
 
-#btn_submit {
+.btn_submit {
 	background-color: #333;
 	color: white;
+	width: 70%;
 }
 
-#btn_submit:hover {
+.btn_submit:hover {
 	background: #505050;
 	color: white;
 }

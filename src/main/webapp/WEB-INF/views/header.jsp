@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="css/main.css" rel="stylesheet" type="text/css">
 <!-- CSS only -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -70,12 +71,8 @@
 					</div>
 				</div>
 				<c:choose>
-<<<<<<< HEAD
 					<c:when
 						test="${empty sessionScope || sessionScope.loginId == null}">
-=======
-					<c:when test="${empty sessionScope || sessionScope.loginId == null}">
->>>>>>> ft-board
 						<ul class="nav justify-content-end">
 							<li class="nav-item"><a class="nav-link" href="login">로그인</a></li>
 							<li class="nav-item"><a class="nav-link" href="agreement">회원가입</a></li>
@@ -87,8 +84,7 @@
 								<ul class="nav justify-content-end ms-2">
 									<li class="nav-item"><span class="nav-link"> 관리자모드
 											접속중</span></li>
-									<li class="nav-item"><a class="nav-link"
-										href="admin">관리자페이지</a></li>
+									<li class="nav-item"><a class="nav-link" href="admin">관리자페이지</a></li>
 									<li class="nav-item"><a class="nav-link" href="logout">로그아웃</a></li>
 								</ul>
 							</c:when>
@@ -99,11 +95,10 @@
 									<li class="nav-item dropdown"><a
 										class="nav-link dropdown-toggle" href="#" role="button"
 										data-bs-toggle="dropdown" aria-expanded="false"> 마이페이지 </a>
-										<ul class="dropdown-menu">
-											<li><a class="dropdown-item" href="userupdate">회원정보
-													수정</a></li>
+										<ul class="dropdown-menu menubox">
+											<li><a class="dropdown-item" href="pwcheck">회원정보 수정</a></li>
 											<li><hr class="dropdown-divider"></li>
-											<li><a class="dropdown-item" href="withdrawal">회원탈퇴</a></li>
+											<li><a class="dropdown-item" href="pwcheck">회원탈퇴</a></li>
 										</ul></li>
 									<li class="nav-item"><a class="nav-link" href="logout">로그아웃</a></li>
 								</ul>

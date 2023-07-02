@@ -1,12 +1,8 @@
 package com.fpp.service.user.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 
 import com.fpp.dao.user.UserDao;
 import com.fpp.dto.user.UserDto;
@@ -66,6 +62,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public boolean pwCheck(UserDto userDto) {
+		UserDto userPw = userDao.selectUserByPw(userDto);
+
+		if (userPw != null) {
+			if (userPw.getLoginPw().equals(userDto.getLoginPw())) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	@Override
 	public int editUserInfo(UserDto userDto, BindingResult bindingResult) {
 		UserValidator.updateValidate(userDto, bindingResult);
 
@@ -73,9 +82,8 @@ public class UserServiceImpl implements UserService {
 			return 0;
 		}
 
-		int result = userDao.updateUserInfo(userDto);
+		int result1 = userDao.updateUserInfo(userDto);
 
-		return result;
+		return result1;
 	}
-
 }

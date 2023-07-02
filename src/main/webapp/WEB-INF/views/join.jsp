@@ -15,7 +15,7 @@
 <link href="css/join.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<div class="container" style="background-image: url('');">
+	<div class="container">
 		<div class="form">
 			<br>
 			<div class="d-flex justify-content-center">
@@ -86,7 +86,7 @@
 				</div>
 				<br>
 				<div class="btn_submitbox">
-					<button type="submit" id="btn_submit" class="btn">등록하기</button>
+					<button type="submit" class="btn btn_submit">등록하기</button>
 				</div>
 				<br>
 			</form>

@@ -19,9 +19,10 @@
 				<div class="input-box">
 					<img src="images/password.png">
 				</div>
+				<br>
 				<div class="restinfo">
 					<input type="password" class="form-control mb-1" name="loginPw"
-						placeholder="비밀번호" value="${userDto.loginPw}" /> <input
+						placeholder="새로운 비밀번호" value="${userDto.loginPw}" /> <input
 						type="text" class="form-control mb-1" name="email"
 						placeholder="이메일" value="${userDto.email}" /> <input type="text"
 						class="form-control" name="telNumber" placeholder="전화번호"

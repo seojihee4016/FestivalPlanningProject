@@ -92,8 +92,7 @@
 			</div>
 			<br>
 			<div class="nextbtnbox">
-				<input type="button" class="btn nextbtn" value="다음"
-					id="submitBtn">
+				<input type="button" class="btn nextbtn" value="다음" id="submitBtn">
 			</div>
 		</div>
 	</form>

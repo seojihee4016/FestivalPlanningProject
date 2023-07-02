@@ -52,6 +52,7 @@ public class UserController {
 			return "join";
 		}
 		// 회원가입 성공
+		ScriptUtil.alert(response, "Piñata의 회원이 되신 것을 환영합니다!");
 		return "main";
 	}
 
@@ -123,21 +124,16 @@ public class UserController {
 	public String userupdate_proc(@ModelAttribute UserDto userDto, BindingResult bindingResult,
 			HttpServletResponse response) throws IOException {
 
-		int result = userService.editUserInfo(userDto, bindingResult);
+		int result2 = userService.editUserInfo(userDto, bindingResult);
 
 		// 유효성 검증 실패
-		if (bindingResult.hasErrors() || result == 0) {
-			ScriptUtil.alert(response, "회원정보 수정에 실패했습니다.");
+		if (bindingResult.hasErrors() || result2 == 0) {
+			ScriptUtil.alert(response, "회원정보 수정을 실패했습니다.");
 			return "userupdate";
 		}
 		// 회원정보 수정성공
+		ScriptUtil.alert(response, "회원정보 수정을 완료했습니다.");
 		return "main";
-	}
-
-	@RequestMapping("/mypage")
-	public String mypage() {
-
-		return "mypage";
 	}
 
 	@RequestMapping("/withdrawal")
@@ -150,5 +146,26 @@ public class UserController {
 	public String footer() {
 
 		return "footer";
+	}
+	
+	@GetMapping("/pwcheck")
+	public String pwcheck() {
+		return "pwcheck";
+	}
+
+	@PostMapping("/pwcheck")
+	public String pwcheck_proc(@ModelAttribute UserDto userDto, HttpSession session) {
+
+		System.out.println(userDto.toString());
+		boolean tryPwCheck = userService.pwCheck(userDto);
+
+		System.out.println(tryPwCheck);
+
+		if (tryPwCheck) {
+			session.setAttribute("loginPw", userDto.getLoginPw());
+			return "redirect:/userupdate";
+		}
+
+		return "redirect:/pwcheck";
 	}
 }

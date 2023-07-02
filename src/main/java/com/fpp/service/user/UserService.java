@@ -13,5 +13,7 @@ public interface UserService {
 	public boolean login(UserDto userDto);
 	
 	public int editUserInfo(UserDto userDto, BindingResult bindingResult);
+	
+	public boolean pwCheck(UserDto userDto);
 
 }
