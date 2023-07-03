@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+						
+
+<mapper namespace="common_code_mapper">
+	<!-- CommonCode List 조회 -->
+ 	<select id="select_common_code_list" resultType="CommonCodeDto">
+		SELECT code_type, code_name 
+		FROM common_code
+	</select>
+</mapper>

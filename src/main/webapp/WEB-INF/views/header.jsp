@@ -42,6 +42,7 @@
 					<li class="nav-item"><a class="nav-link active fs-5" href="/festivalList">지역축제</a></li>
 					<li class="nav-item"><a class="nav-link active fs-5" href="#">행사문의</a></li>
 					<li class="nav-item"><a class="nav-link active fs-5" href="#">채용공고</a></li>
+					<li class="nav-item"><a class="nav-link active fs-5" href="#">미정</a></li>
 					<li class="nav-item"><a class="nav-link active fs-5" href="#">게시판</a></li>
 					<li class="nav-item"><a class="nav-link active fs-5" href="#">고객센터</a></li>
 				</ul>
@@ -84,7 +85,8 @@
 								<ul class="nav justify-content-end ms-2">
 									<li class="nav-item"><span class="nav-link"> 관리자모드
 											접속중</span></li>
-									<li class="nav-item"><a class="nav-link" href="admin">관리자페이지</a></li>
+									<li class="nav-item"><a class="nav-link"
+										href="<!-- 관리자페이지 -->">관리자페이지</a></li>
 									<li class="nav-item"><a class="nav-link" href="logout">로그아웃</a></li>
 								</ul>
 							</c:when>

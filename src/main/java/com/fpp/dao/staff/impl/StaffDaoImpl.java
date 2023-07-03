@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.fpp.dao.staff.StaffDao;
 import com.fpp.dto.staff.StaffApplyDto;
+import com.fpp.dto.staff.StaffFormDto;
 import com.fpp.dto.staff.StaffDto;
 
 @Repository
@@ -16,6 +17,7 @@ public class StaffDaoImpl implements StaffDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
+	//스탭 모집 공고 추가
 	@Override
 	public int insertStaff(StaffDto staffDto) {
 		// TODO Auto-generated method stub
@@ -25,6 +27,7 @@ public class StaffDaoImpl implements StaffDao {
 		return result;
 	}
 
+	//스탭 모집 공고 리스트 조회
 	@Override
 	public List<StaffDto> selectStaffRecruitmentList() {
 		// TODO Auto-generated method stub
@@ -35,22 +38,32 @@ public class StaffDaoImpl implements StaffDao {
 		return list;
 	}
 
+	//스탭 신청
 	@Override
-	public List<StaffDto> selectStaffRecruitmentListByFestivalName(String festivalName) {
+	public void insertStaffApply(StaffApplyDto staffApplyDto) {
 		// TODO Auto-generated method stub
-		List<StaffDto> list =
-				sqlSessionTemplate.selectList("staff_mapper.select_staff_recruitment_list_by_festivalName", festivalName);
+		
+		sqlSessionTemplate.insert("staff_mapper.insert_staff_apply", staffApplyDto);
+	}
+
+	//스탭 모집 공고 + 신청 양식 테이블 조회
+	@Override
+	public List<StaffFormDto> selectStaffRecruitmentAndFormList() {
+		// TODO Auto-generated method stub
+		
+		List<StaffFormDto> list =
+				sqlSessionTemplate.selectList("staff_mapper.select_staff_recruitment_and_form_list");
 		
 		return list;
 	}
-
 	@Override
-	public int insertStaffApply(StaffApplyDto staffApplyDto) {
+	public StaffFormDto selectStaffRecruitmentFormListByFno(int fno) {
 		// TODO Auto-generated method stub
+
+		StaffFormDto staffFormDto =
+				sqlSessionTemplate.selectOne("staff_mapper.select_staff_recruitment_form_list_by_fno", fno);
 		
-		int result = sqlSessionTemplate.insert("staff_mapper.insert_staff_apply", staffApplyDto);
-		
-		return result;
+		return staffFormDto;
 	}
 
 }
