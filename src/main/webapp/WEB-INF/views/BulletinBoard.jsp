@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="${path}/css/board.css?ver=3" rel="stylesheet"
+<link href="${path}/css/bulletinBoard.css?ver=3" rel="stylesheet"
 	type="text/css" />
 <meta charset="UTF-8">
 <title>BulletinBoard</title>
@@ -18,7 +18,9 @@
 <body>
 
 	<article class="qna-sec">
-		<h1>Q&A</h1>
+		<h1>
+			Q<img src="images/pinata.png">A
+		</h1>
 
 		<div class="box">
 			<h3>문의하기</h3>
@@ -91,18 +93,11 @@
 				alert('로그인을 해주세요.');
 				return false;
 			}
-			
-			return true;
-		}
-
-		var form = document.querySelector('form');
-		form.addEventListener('submit', function(event) {
-			event.preventDefault(); // 잘못된 경우 폼 전송 막기
-
-			if (validateForm() && confirm('게시글을 작성하시겠습니까?')) {
-				form.submit();
+			if (true) {
+				alert('게시글을 작성하시겠습니까?');
+				return true;
 			}
-		});
+		}
 	</script>
 
 
