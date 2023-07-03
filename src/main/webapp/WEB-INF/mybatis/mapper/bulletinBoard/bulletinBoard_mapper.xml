@@ -9,11 +9,12 @@
 		parameterType="BulletinBoardDto">
 		INSERT INTO Bulletin_Board(
 		BNO
+		,type_of_inquiry
 		, TITLE
 		, CONTENT
 		, WRITER )
 		VALUES( Bulletin_Board_SEQ.NEXTVAL
-		,#{title}, #{content}, #{writer} )
+		,#{typeOfInquiry},#{title}, #{content}, #{writer} )
 	</insert>
 
 	<!-- 게시판 작성된 리스트 조회 <select id="select_BulletinBoard_List" resultType="BulletinBoardDto"> 
@@ -28,12 +29,14 @@
 	<select id="listPage" resultType="BulletinBoardDto"
 		parameterType="SearchCriteria">
 		SELECT BNO,
+		type_of_inquiry,
 		TITLE,
 		CONTENT,
 		WRITER,
 		REGDATE
 		FROM (
 		SELECT BNO,
+		type_of_inquiry,
 		TITLE,
 		CONTENT,
 		WRITER,
@@ -78,7 +81,7 @@
 	<!-- 번호로 리스트 조회 -->
 	<select id="select_BulletinBoard_List_By_Bno"
 		parameterType="int" resultType="BulletinBoardDto">
-		SELECT BNO, TITLE, CONTENT, WRITER,
+		SELECT BNO,type_of_inquiry, TITLE, CONTENT, WRITER,
 		REGDATE
 		FROM Bulletin_Board
 		WHERE BNO = #{bno}

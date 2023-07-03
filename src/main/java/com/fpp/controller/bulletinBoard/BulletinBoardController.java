@@ -2,6 +2,9 @@ package com.fpp.controller.bulletinBoard;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +25,10 @@ import com.fpp.dto.bulletinBoard.PageMaker;
 import com.fpp.dto.bulletinBoard.SearchCriteria;
 import com.fpp.dto.bulletinBoard.Criteria;
 import com.fpp.dto.staff.StaffDto;
+import com.fpp.dto.user.UserDto;
 import com.fpp.service.bulletinBoard.BulletinBoardService;
 import com.fpp.service.bulletinBoard.CommentsService;
+import com.fpp.service.user.UserService;
 
 @Controller
 public class BulletinBoardController {
@@ -34,15 +39,23 @@ public class BulletinBoardController {
 	@Autowired
 	CommentsService commentsService;
 
+	@Autowired
+	UserService userService;
+
 	// 게시판 글 작성
 	@GetMapping("/BulletinBoard") 
-	public String BulletinBoard() {
+	public String BulletinBoard(@ModelAttribute UserDto userDto, HttpSession session, BulletinBoardDto bulletinBoardDto , Model model) {
+
+		// 세션에서 사용자아이디를 가져옴
+		String writer = (String)session.getAttribute("loginId");
+		model.addAttribute("writer" ,writer);
 		return "BulletinBoard";
 	}
 
 	@PostMapping("/BulletinBoard")
-	public String insertBulletinBoard_process(BulletinBoardDto bulletinBoardDto) throws Exception{
+	public String insertBulletinBoard_process(BulletinBoardDto bulletinBoardDto, Model model) throws Exception{
 		bulletinBoardService.insertBulletinBoard(bulletinBoardDto);
+
 		return "redirect:/bulletinBoardList";
 	}
 
@@ -56,16 +69,20 @@ public class BulletinBoardController {
 		pageMaker.setCri(scri);
 		pageMaker.setTotalCount(bulletinBoardService.listCount(scri));
 
+
+
 		model.addAttribute("pageMaker", pageMaker);
 		return "bulletinBoardList";	
 	}
 
 	//게시글 수정
 	@GetMapping("/bulletinBoardProcess")
-	public String bulletinBoardProcess(BulletinBoardDto bulletinBoardDto,CommentsDto commentsDto, @ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception{
+	public String bulletinBoardProcess(BulletinBoardDto bulletinBoardDto ,UserDto userDto ,CommentsDto commentsDto, @ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception{
 
 		model.addAttribute("updateBulletinBoard", bulletinBoardService.selectBulletinBoardListByBno(bulletinBoardDto.getBno()));
 		model.addAttribute("scri", scri);
+
+
 
 		//댓글 - commentsService 주입
 		List<CommentsDto> commentList = commentsService.readCommentsList(bulletinBoardDto.getBno());
@@ -113,11 +130,11 @@ public class BulletinBoardController {
 	SearchCriteria는 bulletinBoardProcess에 있던 page, perPageNum, searchType, keyword값을 받아오는 용도
 	RedirectAttributes는 redirect했을때 값들을 가지고 이동
 	SearchCriteria의 값을 넣어서 댓글을 저장 한 뒤 원래 페이지로 redirect하여 이동하는 구조*/
-	
-	@PostMapping("/writeReply")
+
+	@PostMapping("/writeComments")
 	public String writeReply(CommentsDto commentsDto, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
 
-		commentsService.writeReply(commentsDto);
+		commentsService.writeComments(commentsDto);
 
 		rttr.addAttribute("bno", commentsDto.getBno());
 		rttr.addAttribute("page", scri.getPage());
@@ -127,6 +144,60 @@ public class BulletinBoardController {
 
 		return "redirect:/bulletinBoardProcess";
 	}
+
+	//댓글 수정 get
+	@GetMapping("/updateCommentsByCno")
+	public String updateCommentsByCno(CommentsDto commentsDto, SearchCriteria scri, Model model) throws Exception {
+
+		model.addAttribute("updateCommentsByCno", commentsService.selectReply(commentsDto.getCno()));
+		model.addAttribute("scri", scri);
+
+		return "bulletinBoardProcess";
+	}
+
+	//댓글 수정 post
+	@PostMapping("/updateCommentsByCno")
+	public String replyUpdate(CommentsDto commentsDto, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
+
+		commentsService.updateCommentsByCno(commentsDto);
+
+		rttr.addAttribute("bno", commentsDto.getBno());
+		rttr.addAttribute("page", scri.getPage());
+		rttr.addAttribute("perPageNum", scri.getPerPageNum());
+		rttr.addAttribute("searchType", scri.getSearchType());
+		rttr.addAttribute("keyword", scri.getKeyword());
+
+		return "redirect:/bulletinBoardProcess";
+	}
+
+
+	//댓글 삭제 GET
+	@GetMapping("/deleteReply")
+	public String deleteReply(CommentsDto commentsDto, SearchCriteria scri, Model model) throws Exception {
+
+		model.addAttribute("deleteReply", commentsService.selectReply(commentsDto.getCno()));
+		model.addAttribute("scri", scri);
+
+		return "bulletinBoardProcess";
+	}
+
+	//댓글 삭제
+	@PostMapping("/deleteReply")
+	public String replyDelete(CommentsDto commentsDto, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
+
+		commentsService.deleteReply(commentsDto);
+
+		rttr.addAttribute("bno", commentsDto.getBno());
+		rttr.addAttribute("page", scri.getPage());
+		rttr.addAttribute("perPageNum", scri.getPerPageNum());
+		rttr.addAttribute("searchType", scri.getSearchType());
+		rttr.addAttribute("keyword", scri.getKeyword());
+
+		return "redirect:/bulletinBoardProcess";
+	}
+
+
+
 
 
 }

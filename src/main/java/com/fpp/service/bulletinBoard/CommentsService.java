@@ -10,6 +10,14 @@ public interface CommentsService {
 	public List<CommentsDto> readCommentsList(int bno) throws Exception;
 	
 	//댓글 작성
-	public void writeReply(CommentsDto commentsDto) throws Exception;
+	public void writeComments(CommentsDto commentsDto) throws Exception;
 	
+	//댓글 수정
+	public void updateCommentsByCno(CommentsDto commentsDto) throws Exception;
+	
+	//댓글 삭제
+	public void deleteReply(CommentsDto commentsDto) throws Exception;
+	
+	//선택된 댓글 조회
+	public CommentsDto selectReply(int cno) throws Exception ;
 }

@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 .errMsg {
+	font-size: 0.77rem;
 	color: red;
 	font-style: italic;
 }
@@ -21,25 +22,19 @@
 }
 
 .id_pwbox {
-	width: 500px;
 	height: 130px;
+	width: 90%;
+	margin: 0 auto;
 }
 
 .restinfo {
-	width: 500px;
+	width: 90%;
 	height: 260px;
+	margin: 0 auto;
 }
 
 .btn_submitbox {
 	text-align: center;
-}
-
-#btn_submit {
-	width: 70%;
-}
-
-.errorMsg {
-	font-size: 0.80rem;
 }
 
 .idbox {
@@ -48,6 +43,24 @@
 
 .idCheckBtn {
 	position: absolute;
+	background-color: #333;
+	color: white;
 	top: 0;
 	right: 0;
+}
+
+.idCheckBtn:hover {
+	background: #505050;
+	color: white;
+}
+
+.btn_submit {
+	background-color: #333;
+	color: white;
+	width: 80%;
+}
+
+.btn_submit:hover {
+	background: #505050;
+	color: white;
 }

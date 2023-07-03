@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+.update-errMsg {
+	color: red;
+	font-style: italic;
+	font-size: 0.80rem;
+}
+
+.container {
+	margin-top: 50px;
+}
+
+.form {
+	border-radius: 5%;
+	background-color: white;
+	margin-top: 20px;
+	width: 500px;
+	margin: 0 auto;
+	height: auto;
+	max-height: 100%;
+	border: 1px solid lightgray;
+}
+
+.update-info {
+	width: 90%;
+	height: 200px;
+	margin:0 auto;
+}
+
+.btn_submitbox {
+	text-align: center;
+}
+
+h1 {
+	text-align: center;
+	margin-top: 60px;
+}
+
+.input-box {
+	text-align: center;
+}
+
+#btn_submit {
+	width:80%;
+	background-color: #333;
+	color: white;
+}
+
+#btn_submit:hover {
+	background: #505050;
+	color: white;
+}

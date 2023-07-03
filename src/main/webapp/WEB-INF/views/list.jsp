@@ -2,17 +2,20 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="header.jsp"%>
 <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <html>
 <head>
 <link href="${path}/css/applicationFormList.css?ver=3" rel="stylesheet"
 	type="text/css" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 <title>게시판</title>
 </head>
 <body>
 	<div id="root">
 		<header>
-			<h1>신청 양식 조회</h1>
+			<h3>견적 신청 <i class="bi bi-clipboard-check"></i></h3>
 		</header>
 
 		<section id="container">
@@ -30,15 +33,19 @@
 						<th>운영 기관</th>
 						<th>축제 시작 일자</th>
 						<th>축제 종료 일자</th>
-						<th>수정</th>
-						<th>모집 공고</th>
+
+
+						<th>작성자</th>
+						<c:if test="${sessionScope.loginId == list[0].writer}">
+							<th>수정</th>
+						</c:if>
+
 					</tr>
 
 					<c:forEach items="${list}" var="list">
 						<tr>
 							<td><c:out value="${list.fno}" /></td>
-							<td><a href="/updateView?fno=${list.fno}"><c:out
-										value="${list.festivalName}" /></a></td>
+							<td><c:out value="${list.festivalName}" /></td>
 							<td><c:out value="${list.name}" /></td>
 							<!--  <td><c:out value="${list.place}" /></td> -->
 							<td><c:out value="${list.addressEvent}" /></td>
@@ -46,12 +53,16 @@
               <td><c:out value="${list.carryingDifficulty}" /></td>
               <td><c:out value="${list.budgetRange}" /></td> -->
 							<td><c:out value="${list.commissioningAgency}" /></td>
-							<td><c:out value="${list.startDate}" /></td>
-							<td><c:out value="${list.endDate}" /></td>
-							<td><a href="/updateView?fno=${list.fno}"
-								class="custom-button">수정</a></td>
-							<td><a href="/staffRecruitment_form?fno=${list.fno}"
-								class="custom-button">올리기</a></td>
+
+							<td><c:out value="${list.startDate.split(' ')[0]}" /></td>
+							<td><c:out value="${list.endDate.split(' ')[0]}" /></td>
+							<td><c:out value="${list.writer}" /></td>
+
+							<c:if test="${sessionScope.loginId == list.writer}">
+								<td><a href="/updateView?fno=${list.fno}"
+									class="custom-button">수정</a></td>
+							</c:if>
+
 
 						</tr>
 					</c:forEach>
@@ -64,9 +75,6 @@
 					<span>신청하기</span>
 				</button>
 			</div>
-
-
-
 		</section>
 	</div>
 

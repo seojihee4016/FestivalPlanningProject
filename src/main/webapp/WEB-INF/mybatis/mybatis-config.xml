@@ -4,10 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-    <settings>
-        <setting name="mapUnderscoreToCamelCase" value="true"/><!-- room_number → roomNumber -->
-        <setting name="jdbcTypeForNull" value="VARCHAR" />
-    </settings>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" /><!-- room_number 
+			→ roomNumber -->
+		<setting name="jdbcTypeForNull" value="VARCHAR" />
+	</settings>
 
     <typeAliases>	<!-- mapper-parameterType -->
     	<typeAlias type="com.fpp.dto.commonCode.CommonCodeDto" alias="CommonCodeDto"/>
@@ -22,5 +23,6 @@
     	<typeAlias type="com.fpp.dto.festivalData.FestivalDataDto" alias="FestivalDataDto"/>
     	<typeAlias type="com.fpp.dto.user.UserDto" alias="UserDto"/>
     </typeAliases>
+
 
 </configuration>

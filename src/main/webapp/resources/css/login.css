@@ -5,26 +5,50 @@
 }
 
 .login-form {
-	margin-top: 50px;
 	border: 1px solid lightgray;
 	border-radius: 5%;
 	width: 500px;
-	height: 460px;
+	height: 580px;
 	max-height: 100%;
 	margin: 0 auto;
+}
+
+.id-pwbox {
+	width: 90%;
 	margin: 0 auto;
-	max-height: 100%;
 }
 
 .input-box {
 	text-align: center;
 }
 
+.login-btnbox {
+	text-align: center;
+	border-radius: 5%;
+}
+
 .login-btn {
-	width: 100%;
+	width: 80%;
+	background-color: #333;
+	color: white;
+}
+
+.login-btn:hover {
+	background: #505050;
+	color: white;
 }
 
 h1 {
 	text-align: center;
-	margin-top: 100px;
+	margin-top: 60px;
+}
+
+.advice-box {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.advice {
+	font-size: 0.90rem;
+	color: #333;
 }

@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class FormDto {
 	private int fno;
+	private String writer;
 	private String festivalName;
 	private String place;
 	private String addressEvent;
