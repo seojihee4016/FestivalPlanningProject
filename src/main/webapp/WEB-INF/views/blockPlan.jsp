@@ -9,16 +9,12 @@
 <meta charset="UTF-8">
 <title>배치도</title>
 <link href="${path}/css/blockPlan.css" rel="stylesheet" type="text/css" />
-<!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <div class="titleContainer">
 	<h1>배치도 만들기</h1>
-<!-- 		<span>
-			<button class="btn btn-light btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#howToUse" aria-expanded="false" aria-controls="howToUse">
-				<b>그리기 도구 사용 방법</b>
-			</button>
-		</span> -->
+	<button onclick="captureScreenshot()">스크린샷 캡처</button>
 		<div class="dropdown">
 			<button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 				그리기 도구 사용 방법
@@ -48,27 +44,6 @@
 			</ul>
 		</div>
 	</div>
-<!-- 	<div class="collapse" id="howToUse">
-	  <div class="card card-body">
-	   	<ul><b>그리기</b>
-			<li>아이콘이 선택된 상태에서 지도 위에 클릭합니다.</li>
-			<li>shift를 누르고 있는 경우 정방형/직교좌표로 스냅이 제공됩니다.</li>
-			<li>polygon, polyline: 마우스 오른쪽 버튼 클릭/Esc로 그리기 종료.</li>
-		</ul>
-		<ul><b>이동</b>
-			<li>그려진 도형을 클릭하여 편집 모드로 변경합니다.</li>
-			<li>그려진 도형을 드래그하여 이동합니다.</li>
-		</ul>
-		<ul><b>수정</b>
-			<li>그려진 도형을 클릭하여 편집 모드로 변경합니다.</li>
-			<li>그려진 도형의 제어점을 드래그하여 수정합니다.</li>
-			<li>polygon, polyline: 중간 제어점을 클릭하면 점을 추가합니다.</li>
-		</ul>
-		<ul><b>삭제</b>
-			<li>그려진 도형을 마우스 오른쪽 버튼으로 클릭해 삭제합니다.</li>
-		</ul>
-	  </div>
-	</div> -->
 	
 	<!-- 서브 모듈 로드하기 -->
 	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ths5zg540n&submodules=drawing"></script>
@@ -88,7 +63,7 @@
 	    mapTypeControl: true,
 	    zoom: 20 //지도의 초기 줌 레벨 최대 21
 	});
-	
+
 	//그리기 도구 관련 설정
 	var drawingManager;
 	naver.maps.Event.once(map, 'init', function() {
@@ -124,6 +99,25 @@
 	});
 	
 </script>
+    <script>
+        function captureScreenshot() {
+        	console.log(JSON.stringify(drawingManager.toGeoJson()));
+        	
+            $.ajax({
+                url: "/captureScreenshot",
+                method: "POST",
+                data: JSON.stringify(drawingManager.toGeoJson()),
+                success: function(response) {
+                    console.log("Screenshot captured successfully");
+                    // 여기에서 캡처된 이미지를 처리하거나 표시할 수 있습니다.
+                    // 예: 이미지를 <img> 요소에 표시하거나 다운로드 링크 생성
+                },
+                error: function(xhr, status, error) {
+                    console.log("Failed to capture screenshot: " + error);
+                }
+            });
+        }
+    </script>
 
 </body>
 </html>
