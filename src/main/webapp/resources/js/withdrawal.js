@@ -1,18 +1,17 @@
-//회원가입 아이디 중복체크
-$(function() {
-
-	$("#idCheck").click(function() {
-
-		const input_id = $("#login_Id").val(); // 입력 아이디 가져오기
-
+$(function(){
+	$("#withdrawal-btn").click(function(){
+		
+		let form = $("form")[0];
+		let formData = new FormData(form);
+		
 		$.ajax({
-			url: "/idcheck", //요청 할 URL
+			cache: false,
+			url: "/withdrawal", //요청 할 URL
+			processData: false,
+			contentType: false,
 			type: "POST",
 			async: false,
-			data: {
-				loginId: input_id
-			}, //넘길 파라미터
-			dataType: "json",
+			data: formData, //넘길 파라미터
 			success: function(data) {
 				console.log(data);
 				if (data == true) {
@@ -25,7 +24,5 @@ $(function() {
 				console.log("접속 중 오류가 발생했습니다."); //에러시 실행 할 내용
 			}
 		});
-
 	});
 });
-

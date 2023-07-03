@@ -26,7 +26,16 @@ h2, h4, h5 {
 }
 
 .card-container {
-	width:90%;
+	width: 90%;
 	margin: 0 auto;
 	margin-bottom: 40px;
+}
+
+.accent {
+	background-color: #16479D;
+	color: white;
+}
+
+.text-box {
+	height: 230px;
 }

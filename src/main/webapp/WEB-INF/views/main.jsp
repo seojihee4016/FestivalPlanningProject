@@ -1,16 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<%@ include file="header.jsp" %>
-	
 
-
+<%@ include file="header.jsp"%>
 
 <div id="carouselExampleInterval" class="carousel slide carouselbox"
 	data-bs-ride="carousel">
@@ -81,32 +72,39 @@
 </div>
 
 <div class="container text-center">
+	<h2>
+		행사 담당자가 <span class="accent">즐거운 이유</span> (With Piñata)
+	</h2>
 	<div class="row">
-		<div class="col-8">
+		<div class="col-7">
 			<div class="card mb-3">
 				<div class="row g-0">
 
-					<div class="col-md-8">
+					<div class="col text-box">
 						<div class="card-body">
+							<br>
 							<h5 class="card-title">유사 행사 사진과</h5>
 							<h5 class="card-title">필요 품목 리스트 제공</h5>
+							<br>
 							<p class="card-text">내 행사와 유사한 사례를 보고,</p>
 							<span class="card-text">그 행사에 사용된 물품을 바로 행사 문의할 수 있어요.</span>
 						</div>
 					</div>
 					<div class="col-md-4">
-						<img src="images/mainicon4.png" class="img-fluid rounded-start"
-							alt="...">
+						<img src="images/mainicon4.png"
+							class="img-fluid rounded-start mainicon-box" alt="...">
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-4">
+		<div class="col-5">
 			<div class="card mb-3">
 				<div class="row g-0">
-					<div class="col-md-8">
+					<div class="col text-box">
 						<div class="card-body">
+							<br>
 							<h5 class="card-title">한 곳에서 편리하게</h5>
+							<br> <br>
 							<p class="card-text">행수 물품 대여, 공연/MC 섭외, 인쇄물 디자인 및 제작</p>
 							<span class="card-text">식음료 주문 등 모든 것을 한 번에 준비해 드려요.</span>
 						</div>
@@ -116,33 +114,35 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col">
+		<div class="col-5">
 			<div class="card mb-3">
 				<div class="row g-0">
-					<div class="col-md-4">
-						<img src="..." class="img-fluid rounded-start" alt="...">
-					</div>
-					<div class="col-md-8">
+					<div class="col text-box">
 						<div class="card-body">
+							<br>
 							<h5 class="card-title">행사는 완벽하게, 서류는 깔끔하게</h5>
+							<br> <br>
 							<p class="card-text">고객님 상황에 맞는 각종 인증서류 및 계약서류가</p>
-							<p class="card-text">미리 준비되어 있습니다.</p>
+							<span class="card-text">미리 준비되어 있습니다.</span>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col">
+		<div class="col-7">
 			<div class="card mb-3">
 				<div class="row g-0">
 					<div class="col-md-4">
-						<img src="..." class="img-fluid rounded-start" alt="...">
+						<img src="images/mainicon5.png"
+							class="img-fluid rounded-start mainicon-box" alt="...">
 					</div>
-					<div class="col-md-8">
+					<div class="col text-box">
 						<div class="card-body">
+							<br>
 							<h5 class="card-title">쉽고 빠른</h5>
 							<h5 class="card-title">행사예산 편성</h5>
-							<p class="card-text">실시간으로 예상견적을 확인 할 수 있습니다.</p>
+							<br> <br> <span class="card-text">실시간으로 예상견적을 확인
+								할 수 있습니다.</span>
 						</div>
 					</div>
 				</div>
@@ -151,11 +151,5 @@
 	</div>
 </div>
 
-
 <%@ include file="footer.jsp"%>
 
-
-
-
-</body>
-</html>
