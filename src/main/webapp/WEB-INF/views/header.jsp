@@ -33,7 +33,7 @@
 
 	<nav class="navbar navbar-expand-lg bg-light">
 		<div class="container-xl">
-			<a class="navbar-brand fs-2" href="main"><img
+			<a class="navbar-brand fs-2" href="/main"><img
 				src="images/mainIcon.png" class="mainicon"></a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -43,7 +43,7 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active fs-5" href="#">지역축제</a></li>
+					<li class="nav-item"><a class="nav-link active fs-5" href="/festivalList">지역축제</a></li>
 					<li class="nav-item"><a class="nav-link active fs-5" href="#">행사문의</a></li>
 					<li class="nav-item"><a class="nav-link active fs-5" href="staffRecruitmentList">채용공고</a></li>
 					<li class="nav-item"><a class="nav-link active fs-5" href="#">미정</a></li>

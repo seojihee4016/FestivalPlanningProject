@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="festivalData_mapper">
+
+	<select id="select_festivalList" resultType="FestivalDataDto">
+		SELECT fstvl_Nm,
+		fstvl_Start_Date, fstvl_End_Date, fstvl_Co, phone_Number , ft_Code FROM
+		festival_info
+		WHERE fstvl_Start_Date &lt;= sysdate AND fstvl_End_Date &gt;= sysdate 
+		ORDER BY fstvl_End_Date DESC
+	</select>
+	
+	<select id="select_festivalDetailInfo" resultType="FestivalDataDto" parameterType="String">
+		select * from festival_info where ft_Code = #{value}
+	</select>
+	
+	<update id="merge_festivalDataUpdate"
+		parameterType="FestivalDataDto">
+		MERGE INTO festival_info
+		USING (
+		SELECT
+		#{fstvlNm} as fstvlNm,
+		#{opar} as opar,
+		#{fstvlStartDate} as fstvlStartDate,
+		#{fstvlEndDate} as fstvlEndDate,
+		#{fstvlCo} as fstvlCo,
+		#{mnnst} as mnnst,
+		#{auspcInstt} as auspcInstt,
+		#{suprtInstt} as suprtInstt,
+		#{phoneNumber} as phoneNumber,
+		#{homepageUrl} as homepageUrl,
+		#{relateInfo} as relateInfo,
+		#{rdnmadr} as rdnmadr,
+		#{lnmadr} as lnmadr,
+		#{latitude} as latitude,
+		#{longitude} as longitude,
+		#{referenceDate} as referenceDate,
+		#{insttCode} as insttcode
+		FROM DUAL ) T1 ON (festival_info.fstvl_Nm = T1.fstvlNm)
+		WHEN MATCHED THEN
+		UPDATE SET
+		festival_info.opar = T1.opar,
+		festival_info.fstvl_Start_Date = T1.fstvlStartDate,
+		festival_info.fstvl_End_Date = T1.fstvlEndDate,
+		festival_info.fstvl_Co = T1.fstvlCo,
+		festival_info.mnnst = T1.mnnst,
+		festival_info.auspc_Instt = T1.auspcInstt,
+		festival_info.suprt_Instt = T1.suprtInstt,
+		festival_info.phone_Number = T1.phoneNumber,
+		festival_info.homepage_Url = T1.homepageUrl,
+		festival_info.relate_Info = T1.relateInfo,
+		festival_info.rdnmadr = T1.rdnmadr,
+		festival_info.lnmadr = T1.lnmadr,
+		festival_info.latitude = T1.latitude,
+		festival_info.longitude = T1.longitude,
+		festival_info.reference_Date = T1.referenceDate,
+		festival_info.instt_code = T1.insttcode
+		WHEN NOT MATCHED THEN
+		INSERT (
+		ft_Code,
+		fstvl_Nm,
+		opar,
+		fstvl_Start_Date,
+		fstvl_End_Date,
+		fstvl_Co,
+		mnnst,
+		auspc_Instt,
+		suprt_Instt,
+		phone_Number,
+		homepage_Url,
+		relate_Info,
+		rdnmadr,
+		lnmadr,
+		latitude,
+		longitude,
+		reference_Date,
+		instt_Code
+		)
+		VALUES (
+		NVL((SELECT ft_code FROM (SELECT ft_code FROM festival_info ORDER BY FT_CODE DESC) WHERE ROWNUM = 1), 0)+1,
+		T1.fstvlNm,
+		T1.opar,
+		T1.fstvlStartDate,
+		T1.fstvlEndDate,
+		T1.fstvlCo,
+		T1.mnnst,
+		T1.auspcInstt,
+		T1.suprtInstt,
+		T1.phoneNumber,
+		T1.homepageUrl,
+		T1.relateInfo,
+		T1.rdnmadr,
+		T1.lnmadr,
+		T1.latitude,
+		T1.longitude,
+		T1.referenceDate,
+		T1.insttCode
+		)
+	</update>
+
+</mapper>
