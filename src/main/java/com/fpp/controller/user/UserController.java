@@ -80,7 +80,13 @@ public class UserController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:/login";
+		return "redirect:/main";
+	}
+	
+	@RequestMapping("/logout2")
+	public String logout2(HttpSession session) {
+		session.invalidate();
+		return "logout2";
 	}
 
 	@PostMapping("/idcheck")
@@ -122,12 +128,13 @@ public class UserController {
 
 	@PostMapping("/userupdate")
 	public String userupdate_proc(@ModelAttribute UserDto userDto, BindingResult bindingResult,
-			HttpServletResponse response) throws IOException {
+			HttpServletResponse response, HttpSession session) throws IOException {
 
-		int result2 = userService.editUserInfo(userDto, bindingResult);
+		userDto.setLoginId(session.getAttribute("loginId").toString());
+		int result = userService.editUserInfo(userDto, bindingResult);
 
 		// 유효성 검증 실패
-		if (bindingResult.hasErrors() || result2 == 0) {
+		if (bindingResult.hasErrors() || result == 0) {
 			ScriptUtil.alert(response, "회원정보 수정을 실패했습니다.");
 			return "userupdate";
 		}
@@ -136,18 +143,12 @@ public class UserController {
 		return "main";
 	}
 
-	@RequestMapping("/withdrawal")
-	public String withdrawal() {
-
-		return "withdrawal";
-	}
-
 	@RequestMapping("/footer")
 	public String footer() {
 
 		return "footer";
 	}
-	
+
 	@GetMapping("/pwcheck")
 	public String pwcheck() {
 		return "pwcheck";
@@ -156,6 +157,7 @@ public class UserController {
 	@PostMapping("/pwcheck")
 	public String pwcheck_proc(@ModelAttribute UserDto userDto, HttpSession session) {
 
+		userDto.setLoginId(session.getAttribute("loginId").toString());
 		System.out.println(userDto.toString());
 		boolean tryPwCheck = userService.pwCheck(userDto);
 
@@ -167,5 +169,25 @@ public class UserController {
 		}
 
 		return "redirect:/pwcheck";
+	}
+
+	@GetMapping("/withdrawal")
+	public String withdrawal() {
+		return "withdrawal";
+	}
+
+	@PostMapping("/withdrawal")
+	public String withdrawal_proc(@ModelAttribute UserDto userDto, HttpSession session, HttpServletResponse response) throws IOException {
+
+		userDto.setLoginId(session.getAttribute("loginId").toString());
+		int result = userService.WithdrawalUserInfo(userDto);
+
+		if (result == 0) {
+			ScriptUtil.alert(response, "입력하신 비밀번호가 일치하지 않습니다.");
+			return "withdrawal";
+		}
+		// 회원탈퇴 성공
+		ScriptUtil.alert(response, "그동안 Piñata를 이용해주셔서 감사합니다.");
+		return "logout2";
 	}
 }

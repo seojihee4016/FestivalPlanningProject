@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Piñata</title>
 <link href="css/login.css" rel="stylesheet" type="text/css">
 </head>
 <body>

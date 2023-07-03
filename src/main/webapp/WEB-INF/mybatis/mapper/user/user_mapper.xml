@@ -31,8 +31,13 @@
 		update f_user
 		set
 		login_pw = #{loginPw}, email = #{email}, tel_number = #{telNumber}
-		where login_pw = login_pw
+		where login_Id = #{loginId}
 	</update>
+
+	<delete id="delete_user_info" parameterType="UserDto">
+		delete from f_user 
+		where login_Pw = #{loginPw}
+	</delete>
 
 
 </mapper>

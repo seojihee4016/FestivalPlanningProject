@@ -70,7 +70,6 @@ public class UserServiceImpl implements UserService {
 				return true;
 			}
 		}
-
 		return false;
 	}
 
@@ -82,8 +81,17 @@ public class UserServiceImpl implements UserService {
 			return 0;
 		}
 
-		int result1 = userDao.updateUserInfo(userDto);
+		int result = userDao.updateUserInfo(userDto);
 
-		return result1;
+		return result;
 	}
+
+	@Override
+	public int WithdrawalUserInfo(UserDto userDto) {
+
+		int result = userDao.deleteUserInfo(userDto);
+
+		return result;
+	}
+
 }

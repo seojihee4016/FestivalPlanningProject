@@ -41,14 +41,28 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public int updateUserInfo(UserDto userDto) {
-		int result2 = 0;
+		int result = 0;
 
 		try {
-			result2 = sqlSessionTemplate.update("user_mapper.update_user_info", userDto);
+			result = sqlSessionTemplate.update("user_mapper.update_user_info", userDto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return result2;
+		return result;
+	}
+
+	@Override
+	public int deleteUserInfo(UserDto userDto) {
+		
+		int result = 0;
+
+		try {
+			result = sqlSessionTemplate.delete("user_mapper.delete_user_info", userDto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 }
