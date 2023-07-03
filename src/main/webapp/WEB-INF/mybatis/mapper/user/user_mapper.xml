@@ -19,4 +19,25 @@
 		where login_Id = #{loginId}
 	</select>
 
+	<select id="select_user_by_pw" resultType="UserDto"
+		parameterType="UserDto">
+		select login_id, login_pw, name, email, tel_number,
+		birth
+		from f_user
+		where login_Pw = #{loginPw}
+	</select>
+
+	<update id="update_user_info" parameterType="UserDto">
+		update f_user
+		set
+		login_pw = #{loginPw}, email = #{email}, tel_number = #{telNumber}
+		where login_Id = #{loginId}
+	</update>
+
+	<delete id="delete_user_info" parameterType="UserDto">
+		delete from f_user 
+		where login_Pw = #{loginPw}
+	</delete>
+
+
 </mapper>

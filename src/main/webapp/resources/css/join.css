@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+.errMsg {
+	font-size: 0.77rem;
+	color: red;
+	font-style: italic;
+}
+
+.container {
+	margin-top: 70px;
+}
+
+.form {
+	border-radius: 5%;
+	background-color: white;
+	margin-top: 20px;
+	width: 500px;
+	margin: 0 auto;
+	height: auto;
+	max-height: 100%;
+	border: 1px solid lightgray;
+}
+
+.id_pwbox {
+	height: 130px;
+	width: 90%;
+	margin: 0 auto;
+}
+
+.restinfo {
+	width: 90%;
+	height: 260px;
+	margin: 0 auto;
+}
+
+.btn_submitbox {
+	text-align: center;
+}
+
+.idbox {
+	position: relative;
+}
+
+.idCheckBtn {
+	position: absolute;
+	background-color: #333;
+	color: white;
+	top: 0;
+	right: 0;
+}
+
+.idCheckBtn:hover {
+	background: #505050;
+	color: white;
+}
+
+.btn_submit {
+	background-color: #333;
+	color: white;
+	width: 70%;
+}
+
+.btn_submit:hover {
+	background: #505050;
+	color: white;
+}

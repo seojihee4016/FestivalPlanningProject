@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.agreebox {
+	width: 550px;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+
+.nextbtn {
+	width: 450px;
+	background-color: #333;
+	color: white;
+}
+
+.nextbtn:hover {
+	background: #505050;
+	color: white;
+}
+
+.nextbtnbox {
+	text-align: center;
+}

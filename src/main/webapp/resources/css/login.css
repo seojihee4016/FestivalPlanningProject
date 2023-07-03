@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+.container {
+	box-sizing: border-box;
+}
+
+.login-form {
+	border: 1px solid lightgray;
+	border-radius: 5%;
+	width: 500px;
+	height: 580px;
+	max-height: 100%;
+	margin: 0 auto;
+}
+
+.id-pwbox {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.input-box {
+	text-align: center;
+}
+
+.login-btnbox {
+	text-align: center;
+	border-radius: 5%;
+}
+
+.login-btn {
+	width: 80%;
+	background-color: #333;
+	color: white;
+}
+
+.login-btn:hover {
+	background: #505050;
+	color: white;
+}
+
+h1 {
+	text-align: center;
+	margin-top: 60px;
+}
+
+.advice-box {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.advice {
+	font-size: 0.90rem;
+	color: #333;
+}

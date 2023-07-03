@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+h1 {
+	text-align: center;
+}
+.pwcheck-box {
+	width: 500px;
+	margin: 0 auto;
+	margin-top: 140px;
+}
+
+.pwbox {
+	position: relative;
+}
+
+.pwCheckBtn {
+	position: absolute;
+	background-color: #333;
+	color: white;
+	top: 0;
+	right: 0;
+}
+
+.pwCheckBtn:hover {
+	background: #505050;
+	color: white;
+}
+
+.nextBtn {
+	background-color: #333;
+	color: white;
+	margin: 0 aito;
+	width: 70%;
+}
+
+.nextBtn:hover {
+	background: #505050;
+	color: white;
+}
+
+.nextBtn-box {
+	text-align: center;
+}

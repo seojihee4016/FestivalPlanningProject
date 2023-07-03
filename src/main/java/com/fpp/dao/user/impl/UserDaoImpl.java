@@ -33,4 +33,36 @@ public class UserDaoImpl implements UserDao {
 		return findUser;
 	}
 
+	@Override
+	public UserDto selectUserByPw(UserDto userDto) {
+		UserDto findUserPw = sqlSessionTemplate.selectOne("user_mapper.select_user_by_pw", userDto);
+		return findUserPw;
+	}
+
+	@Override
+	public int updateUserInfo(UserDto userDto) {
+		int result = 0;
+
+		try {
+			result = sqlSessionTemplate.update("user_mapper.update_user_info", userDto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	@Override
+	public int deleteUserInfo(UserDto userDto) {
+		
+		int result = 0;
+
+		try {
+			result = sqlSessionTemplate.delete("user_mapper.delete_user_info", userDto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
 }
