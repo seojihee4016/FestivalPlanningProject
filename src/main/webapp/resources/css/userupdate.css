@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.errMsg {
+.update-errMsg {
 	color: red;
 	font-style: italic;
 	font-size: 0.80rem;
@@ -21,9 +21,10 @@
 	border: 1px solid lightgray;
 }
 
-.restinfo {
-	width: 500px;
+.update-info {
+	width: 90%;
 	height: 200px;
+	margin:0 auto;
 }
 
 .btn_submitbox {

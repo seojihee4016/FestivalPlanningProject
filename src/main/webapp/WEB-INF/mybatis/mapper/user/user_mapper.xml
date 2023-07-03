@@ -36,7 +36,7 @@
 
 	<delete id="delete_user_info" parameterType="UserDto">
 		delete from f_user 
-		where login_Pw = #{loginPw}
+		where login_Pw = #{loginPw} and login_Id = #{loginId}
 	</delete>
 
 
