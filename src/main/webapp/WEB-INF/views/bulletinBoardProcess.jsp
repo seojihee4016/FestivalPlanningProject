@@ -10,6 +10,8 @@
 <head>
 <link href="${path}/css/bulletinBoard.css?ver=3" rel="stylesheet"
 	type="text/css" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 <meta charset="UTF-8">
 <title>BulletinBoard</title>
 </head>
@@ -99,11 +101,11 @@
 	</section>
 
 
-	
+
 
 	<%--댓글 작성 --%>
-	
-	<h1>댓글</h1>
+
+	<h3>댓글</h3>
 	<div class="qna-sec">
 		<div class="box">
 			<form name="replyForm" method="post">
@@ -119,7 +121,7 @@
 					<div style="width: 100%; height: 20px;">
 						<c:choose>
 							<%-- 관리자인 경우 --%>
-							<c:when test="${sessionScope.loginId eq 'pinata1234'}">
+							<c:when test="${sessionScope.loginId eq 'admin'}">
 								<label for="writer"></label>
 								<input type="text" id="writer" name="writer"
 									value="${sessionScope.loginId}" readonly />
@@ -141,7 +143,7 @@
 				</div>
 				<div style="margin-top: 10px;">
 					<c:if
-						test="${sessionScope.loginId == updateBulletinBoard.writer || sessionScope.loginId == 'pinata1234'}">
+						test="${sessionScope.loginId == updateBulletinBoard.writer || sessionScope.loginId == 'admin'}">
 						<button type="button" class="replyWriteBtn">댓글 작성</button>
 					</c:if>
 				</div>
@@ -149,11 +151,11 @@
 		</div>
 	</div>
 
-	
-<%--댓글 조회 --%>
-	
-	<div class="qna-sec" style="width: 100%; margin-bottom: 20px; ">
-		<div class="box" >
+
+	<%--댓글 조회 --%>
+	<h3><i class="bi bi-chat-right-dots"></i></h3>
+	<div class="qna-sec" style="width: 100%; margin-bottom: 20px;">
+		<div class="box">
 			<div class="wrap" id="comments" style="width: 100%">
 				<form name="updateAndDeleteComments" method="post" action="">
 					<div class="chat ch1">
@@ -163,8 +165,8 @@
 
 								<%-- 관리자인 경우 --%>
 
-								<c:if test="${commentList.writer eq 'pinata1234'}">
-									
+								<c:if test="${commentList.writer eq 'admin'}">
+
 									<li class="comment admin">
 										<div class="textbox">
 											<p>
@@ -172,7 +174,7 @@
 													style="width: 100%; background-color: #333; border: solid #333; color: #fff;">
 											</p>
 											<div style="text-align: right;">
-											${commentList.writer}
+												${commentList.writer}
 												<fmt:formatDate value="${commentList.regdate}"
 													pattern="yyyy-MM-dd" />
 											</div>
@@ -194,20 +196,18 @@
 
 								<%-- 글 작성자인 경우 --%>
 								<c:if test="${commentList.writer == updateBulletinBoard.writer}">
-									<div style="text-align: left;">
-										
-									</div>
+									<div style="text-align: left;"></div>
 									<li class="comment user">
 										<div class="textbox">
 											<p>
 												<input type="text" value="${commentList.content}"
-													style="width: 100%; height:100%; background-color: #333; border: solid #333; color: #fff;">
+													style="width: 100%; height: 100%; background-color: #333; border: solid #333; color: #fff;">
 											</p>
-											
+
 											<div style="text-align: left;">
-											
-											${commentList.writer}
-												  <fmt:formatDate value="${commentList.regdate}"
+
+												${commentList.writer}
+												<fmt:formatDate value="${commentList.regdate}"
 													pattern="yyyy-MM-dd" />
 											</div>
 											<div style="float: left; width: 100%; margin-top: 40px;">

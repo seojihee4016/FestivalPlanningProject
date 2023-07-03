@@ -8,12 +8,14 @@
 <head>
 <link href="${path}/css/applicationFormList.css?ver=3" rel="stylesheet"
 	type="text/css" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 <title>게시판</title>
 </head>
 <body>
 	<div id="root">
 		<header>
-			<h1>신청 양식 조회</h1>
+			<h3>견적 신청 <i class="bi bi-clipboard-check"></i></h3>
 		</header>
 
 		<section id="container">
@@ -32,7 +34,9 @@
 						<th>축제 시작 일자</th>
 						<th>축제 종료 일자</th>
 						<th>작성자</th>
-						<th>수정</th>
+						<c:if test="${sessionScope.loginId == list[0].writer}">
+							<th>수정</th>
+						</c:if>
 					</tr>
 
 					<c:forEach items="${list}" var="list">

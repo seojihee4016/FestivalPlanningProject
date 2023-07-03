@@ -26,7 +26,8 @@
 				<p>문의 링크 / 이메일</p>
 			</section>
 			<div class="trans">
-				<c:out value="${writer}" />
+				<input type="text" id="writer" name="writer"
+					value="<c:out value="${writer}" />" readonly />
 			</div>
 		</section>
 	</header>
@@ -155,6 +156,8 @@
 			<input type="hidden" name="writer"
 				value="<c:out value="${writer}" />">
 
+
+
 			<div class="bottom">
 				<button type="submit" class="submit">제출</button>
 				<button type="reset" class="clear">양식 지우기</button>
@@ -166,6 +169,13 @@
 	<!-- 유효성 검사 스크립트 -->
 	<script>
 		function validateForm() {
+
+			//비회원
+			if (writer.value.trim() === '') {
+				alert('로그인을 해주세요.');
+				return false;
+			}
+
 			var placeRadioButtons = document
 					.querySelectorAll('input[name="place"]');
 			var placeRadioButtonChecked = false;
@@ -175,23 +185,9 @@
 					break;
 				}
 			}
+
 			if (!placeRadioButtonChecked) {
 				alert('장소 구분을 선택해주세요.');
-				return false;
-			}
-
-			// 예상 인원 수
-			var numberOfPeopleRadioButtons = document
-					.querySelectorAll('input[name="NumberOfPeople"]');
-			var numberOfPeopleRadioButtonChecked = false;
-			for (var i = 0; i < numberOfPeopleRadioButtons.length; i++) {
-				if (numberOfPeopleRadioButtons[i].checked) {
-					numberOfPeopleRadioButtonChecked = true;
-					break;
-				}
-			}
-			if (!numberOfPeopleRadioButtonChecked) {
-				alert('예상 인원 수를 선택해주세요.');
 				return false;
 			}
 
@@ -211,32 +207,26 @@
 				return false;
 			}
 
-			// 의뢰 회사(기관)
-			var commissioningAgencyField = document
-					.querySelector('input[name="commissioningAgency"]');
-			if (commissioningAgencyField.value.trim() === '') {
-				alert('회사명을 입력해주세요.');
+			// 예상 인원 수
+			var numberOfPeopleRadioButtons = document
+					.querySelectorAll('input[name="NumberOfPeople"]');
+			var numberOfPeopleRadioButtonChecked = false;
+			for (var i = 0; i < numberOfPeopleRadioButtons.length; i++) {
+				if (numberOfPeopleRadioButtons[i].checked) {
+					numberOfPeopleRadioButtonChecked = true;
+					break;
+				}
+			}
+			if (!numberOfPeopleRadioButtonChecked) {
+				alert('예상 인원 수를 선택해주세요.');
 				return false;
 			}
 
-			// 담당자 성함 (name) field
-			var nameField = document.querySelector('input[name="name"]');
-			if (nameField.value.trim() === '') {
-				alert('담당자 성함을 입력해주세요.');
-				return false;
-			}
-
+			//운반 난이도
 			var carryingDifficultySelect = document
 					.querySelector('select[name="carryingDifficulty"]');
 			if (carryingDifficultySelect.value === '운반 난이도를 선택해주세요') {
 				alert('운반 난이도를 선택해주세요.');
-				return false;
-			}
-
-			var budgetRangeSelect = document
-					.querySelector('select[name="budgetRange"]');
-			if (budgetRangeSelect.value === '예상 금액을 선택해주세요') {
-				alert('예상 금액을 선택해주세요.');
 				return false;
 			}
 
@@ -260,36 +250,44 @@
 				return false;
 			}
 
-			var selectedStartDate = new Date(startDateField.value + 'T00:00:00'); // Add time information (00:00:00)
+			var selectedStartDate = new Date(startDateField.value + 'T00:00:00');
 			var currentDate = new Date();
 
-			var minDate = new Date(selectedStartDate); // Copy selected start date
-			minDate.setDate(minDate.getDate() - 7); // Subtract 7 days
+			var minDate = new Date(selectedStartDate);
+			minDate.setDate(minDate.getDate() - 7);
 
 			if (currentDate > minDate) {
 				alert('마감 기한은 행사 시작 7일 전까지입니다.');
 				return false;
 			}
 
+			//예상 금액
+			var budgetRangeSelect = document
+					.querySelector('select[name="budgetRange"]');
+			if (budgetRangeSelect.value === '예상 금액을 선택해주세요') {
+				alert('예상 금액을 선택해주세요.');
+				return false;
+			}
+
+			// 의뢰 회사(기관)
+			var commissioningAgencyField = document
+					.querySelector('input[name="commissioningAgency"]');
+			if (commissioningAgencyField.value.trim() === '') {
+				alert('회사명을 입력해주세요.');
+				return false;
+			}
+
+			// 담당자 성함
+			var nameField = document.querySelector('input[name="name"]');
+			if (nameField.value.trim() === '') {
+				alert('담당자 성함을 입력해주세요.');
+				return false;
+			}
+
 			return true;
 		}
-
-		var form = document.querySelector('form');
-		form.addEventListener('submit', function(event) {
-			event.preventDefault(); // 잘못된 경우 폼 전송 막기
-
-			if (validateForm()) {
-				if (confirm('작성하시겠습니까?')) {
-					form.submit();
-				}
-			}
-		});
-
-		function resetForm() {
-			// 양식의 ID를 사용하여 각 필드를 초기 상태로 되돌립니다.
-			document.getElementById("formId").reset();
-		}
 	</script>
+
 
 </body>
 </html>

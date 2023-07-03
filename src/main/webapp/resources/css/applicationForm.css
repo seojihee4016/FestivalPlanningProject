@@ -10,7 +10,7 @@ body {
 	width: 800px;
 	color: rgb(54, 54, 54);
 	margin: 25px auto;
-	background-color: #F5F7FA;
+	background-color: #fff;
 }
 
 .header, fieldset, .trans {
@@ -146,4 +146,7 @@ button[type="submit"], button[type="button"] {
     cursor: pointer;
     margin-top: 10px;
     margin-right: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    vertical-align: center;
 }

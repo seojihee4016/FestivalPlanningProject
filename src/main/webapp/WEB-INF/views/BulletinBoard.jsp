@@ -32,11 +32,11 @@
 
 					<li><select name="typeOfInquiry" id="typeOfInquiry">
 							<option selected disabled>선택해주세요</option>
-							<option value="[축제 문의]">축제 문의</option>
-							<option value="[배치도 문의]">배치도 문의</option>
-							<option value="[가격 문의]">가격 문의</option>
-							<option value="[홍보 문의]">홍보 문의</option>
-							<option value="[그 외]">그 외</option>
+							<option value="축제 문의">축제 문의</option>
+							<option value="배치도 문의">배치도 문의</option>
+							<option value="가격 문의">가격 문의</option>
+							<option value="홍보 문의">홍보 문의</option>
+							<option value="그 외">그 외</option>
 					</select></li>
 
 					<li><input type="text" id="title" name="title" value=""
