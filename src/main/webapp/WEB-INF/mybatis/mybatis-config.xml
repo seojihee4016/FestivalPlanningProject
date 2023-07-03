@@ -4,13 +4,23 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-    <settings>
-        <setting name="mapUnderscoreToCamelCase" value="true"/><!-- room_number → roomNumber -->
-        <setting name="jdbcTypeForNull" value="VARCHAR" />
-    </settings>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" /><!-- room_number 
+			→ roomNumber -->
+		<setting name="jdbcTypeForNull" value="VARCHAR" />
+	</settings>
 
-    <typeAliases>	<!-- mapper-parameterType -->
-    	<typeAlias type="com.fpp.dto.user.UserDto" alias="UserDto"/>
-    </typeAliases>
+	<typeAliases>	<!-- mapper-parameterType -->
+		<typeAlias type="com.fpp.dto.board.FormDto" alias="FormDto" />
+		<typeAlias type="com.fpp.dto.bulletinBoard.BulletinBoardDto"
+			alias="BulletinBoardDto" />
+		<typeAlias type="com.fpp.dto.bulletinBoard.Criteria"
+			alias="Criteria" />
+		<typeAlias type="com.fpp.dto.bulletinBoard.SearchCriteria"
+			alias="SearchCriteria" />
+		<typeAlias type="com.fpp.dto.bulletinBoard.CommentsDto"
+			alias="CommentsDto" />
+		<typeAlias type="com.fpp.dto.user.UserDto" alias="UserDto" />
+	</typeAliases>
 
 </configuration>

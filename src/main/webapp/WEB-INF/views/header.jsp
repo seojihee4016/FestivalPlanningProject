@@ -24,13 +24,6 @@
 	crossorigin="anonymous"></script>
 <link rel="short icon" href="#">
 <link href="css/header.css" rel="stylesheet" type="text/css">
-<link href="css/main.css" rel="stylesheet" type="text/css">
-<link href="css/join.css" rel="stylesheet" type="text/css">
-<link href="css/agreement.css" rel="stylesheet" type="text/css">
-<link href="css/login.css" rel="stylesheet" type="text/css">
-<link href="css/footer.css" rel="stylesheet" type="text/css">
-<link href="css/pwcheck.css" rel="stylesheet" type="text/css">
-<link href="css/userupdate.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>

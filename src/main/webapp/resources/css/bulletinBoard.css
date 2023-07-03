@@ -1,0 +1,378 @@
+@charset "utf-8";
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap')
+	;
+
+@font-face {
+	font-family: 'HallymGothic-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2204@1.0/HallymGothic-Regular.woff2')
+		format('woff2');
+	font-weight: 400;
+	font-style: normal;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	outline: 0px solid;
+}
+
+html, body {
+	height: 100%;
+}
+
+body {
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.8rem;
+	color: #111;
+	text-align: center;
+	word-break: keep-all;
+}
+
+/*게시판 작성*/
+h1, h3 {
+	font-family: 'HallymGothic-Regular', serif;
+	font-weight: 700;
+	margin-top: 20px
+}
+
+h1 {
+	font-size: 3rem;
+	line-height: 5rem;
+}
+
+h3 {
+	font-size: 1.8rem;
+	line-height: 2.4rem;
+}
+
+li {
+	list-style: none;
+}
+
+button {
+	font-size: 0.9rem;
+	letter-spacing: -.02rem;
+	width: 100%;
+	margin: 0 auto;
+	margin-bottom: 6px;
+	padding: .6rem;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 4px;
+	transition: 0.1s;
+	cursor: pointer;
+	background-color: #333;
+	color: #fff;
+}
+
+button img {
+	height: 20px;
+	vertical-align: middle;
+}
+
+textarea {
+	width: 100%;
+	padding: 8px;
+	background: #fff;
+	color: #222;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 1rem;
+	line-height: 1.6rem;
+	text-align: left;
+	resize: none;
+}
+
+select {
+	width: 100%;
+	padding: .6rem;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	font-size: 1rem;
+	font-weight: 600;
+	transition: 0.1s;
+}
+
+input {
+	width: 100%;
+	padding: .6rem;
+	height: auto;
+	transition: 0.1s;
+	border: 0.9px solid #ddd;
+	outline: 0;
+	font-size: 1rem;
+	border-radius: 4px;
+}
+
+input:focus, textarea:focus, select:focus {
+	border: 1px solid #0982f0;
+	outline: 0;
+}
+
+input[type="submit"] {
+	letter-spacing: -.02rem;
+	width: 45%;
+	padding: .5rem;
+	border: 0;
+	border-radius: 4px;
+}
+
+input[type="checkbox"] {
+	width: 16px;
+	height: 16px;
+	margin-right: 6px;
+	vertical-align: baseline;
+}
+
+/*----class start----*/
+.box {
+	width: 100%;
+	max-width: 1000px;
+	padding: 40px 20px;
+	border: 1px solid #ddd;
+	border-radius: 16px;
+	margin: 20px auto;
+}
+
+.flex-box {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	align-items: center;
+	vertical-align: middle;
+}
+
+.file-box {
+	position: relative;
+	display: inline-block;
+}
+
+.qna-sec {
+	padding: 40px 6%;
+	margin: 0 auto;
+}
+
+.qna-sec .box {
+	width: 100%;
+}
+
+.qna-sec .box li:not(:last-child) {
+	margin-bottom: 10px;
+}
+
+.qna-sec .cont-box {
+	padding: 30px 0;
+}
+
+.qna-sec .file-box {
+	display: flex;
+	align-items: center;
+}
+
+.qna-sec .file-box input[type="file"] {
+	position: absolute;
+	width: 0;
+	height: 0;
+	padding: 0;
+	overflow: hidden;
+	border: 0;
+}
+
+.qna-sec .file-box label {
+	color: #000;
+	margin: 0 10px 0 0;
+	background: #333;
+	color: #fff;
+}
+
+.qna-sec .file-box span {
+	text-align: left;
+	font-size: .9rem;
+	line-height: 1.2rem;
+}
+
+.qna-sec .box .rag-title {
+	border: 0;
+	border-radius: 0;
+	border-bottom: 1px solid #ddd;
+	outline: none;
+}
+
+.qna-sec .box .rag-title:focus {
+	border-color: #0982f0;
+}
+
+.qna-sec .tx {
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+.qna-sec .tx textarea {
+	border: 0;
+	border-radius: 4px 4px 0px 0px;
+}
+
+.qna-sec .tx span {
+	width: 100%;
+	margin-top: -8px;
+	padding: 0 10px;
+	line-height: 2rem;
+	text-align: left;
+	border-top: 1px solid #ddd;
+	display: block;
+}
+
+.qna-sec .tx textarea:focus {
+	border: 1px solid #0982f0;
+	outline: 0;
+}
+
+.qna-sec>:nth-child(3) .cont-box:before {
+	content: "";
+	background:
+		url("https://user-images.githubusercontent.com/110369667/189029189-5bfe7282-62ec-4720-b6f7-a947ca247d17.png")
+		no-repeat center;
+	background-size: contain;
+	width: 60px;
+	height: 60px;
+	margin: 0 auto;
+	display: block;
+}
+
+.qna-sec>:nth-child(3) .cont-box>:nth-child(1) {
+	margin-top: 20px;
+}
+
+.file-box label {
+	display: inline-block;
+	padding: 10px 20px;
+	color: #999;
+	background: #333;
+	cursor: pointer;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	transition: all 0.2s;
+}
+
+.file-box input[type="file"] {
+	position: absolute;
+	width: 0;
+	height: 0;
+	padding: 0;
+	overflow: hidden;
+	border: 0;
+}
+
+/*이미지*/
+img {
+	width: 100px;
+	height: 100px;
+}
+
+/*댓글 조회*/
+.replyUpdateBtn, .replyDeleteBtn {
+	width: 30%;
+}
+
+.comment {
+	width: 40%;
+	margin: 50px;
+	background: #333;
+	padding: 20px;
+	text-align: center;
+	font-weight: normal;
+	color: #fff;
+	font-family: arial;
+	position: relative;
+	border-radius: 10px;
+	margin-bottom: 50px;
+	margin-top: 100px;
+}
+
+.admin {
+	margin-left: auto; /* 왼쪽 마진을 자동으로 설정. 화면 오른쪽에 위치 */
+	margin-right: 50px;
+	margin-bottom: 50px;
+}
+
+.user {
+	margin-left: 0; /* 왼쪽 마진을 없앰. */
+	margin-right: auto;
+	margin-bottom: 50px;
+}
+
+.admin:before {
+	content: "";
+	width: 0px;
+	height: 0px;
+	position: absolute;
+	border-left: 10px solid #333;
+	border-right: 10px solid transparent;
+	border-top: 10px solid #333;
+	border-bottom: 10px solid transparent;
+	right: -13px; /*세모*/
+	top: 6px;
+}
+
+.user:before {
+	content: "";
+	width: 0px;
+	height: 0px;
+	position: absolute;
+	border-left: 10px solid transparent;
+	border-right: 10px solid #333;
+	border-top: 10px solid #333;
+	border-bottom: 10px solid transparent;
+	left: -17px; /*세모*/
+	top: 6px;
+}
+
+/*프로필
+.icon_admin{
+	text-align: right;
+	float: right;
+	margin-bottom: 20px;
+	width: 10px;
+	height:10px;
+	text-align: right;
+}
+
+.writer_admin{
+	vertical-align: right;
+	float: right;
+	text-align: right;
+	top:20px;
+}
+
+.icon_user{
+	text-align: left;
+	float: left;
+	margin-bottom: 20px;
+	width: 10px;
+	height:10px;
+	text-align: left;
+}
+
+.writer_user{
+	vertical-align: left;
+	float: left;
+	text-align: left;
+	top:20px;
+}*/
+/*댓글 작성*/
+#write_comments {
+	padding: 40px 6%;
+	margin: 0 auto;
+	margin-top: 100px;
+}
+
+.replyWriteBtn {
+	margin-top: 20px;
+}
