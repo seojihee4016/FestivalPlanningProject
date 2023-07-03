@@ -1,3 +1,16 @@
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap')
+	;
+
+@font-face {
+	font-family: 'HallymGothic-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2204@1.0/HallymGothic-Regular.woff2')
+		format('woff2');
+	font-weight: 400;
+	font-style: normal;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -11,6 +24,7 @@ h1, h4 {
 .container {
 	width: 800px;
 	margin: 0 auto;
+	padding: 20px;
 }
 
 a {
