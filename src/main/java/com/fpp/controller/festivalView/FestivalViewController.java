@@ -28,6 +28,13 @@ public class FestivalViewController {
 		
 		String code = request.getParameter("ftCode");
 		FestivalDataDto detailInfo = festivalViewService.loadDetailInfo(code);
+		if(detailInfo.getLnmadr()==null) {
+			model.addAttribute("festivalAddress", detailInfo.getRdnmadr());
+		} else {
+			model.addAttribute("festivalAddress", detailInfo.getLnmadr());
+		}
+		
+		
 		model.addAttribute("festivalDetailInfo", detailInfo);
 		return "festivalView";	
 	}

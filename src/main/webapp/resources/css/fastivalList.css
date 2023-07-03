@@ -10,17 +10,10 @@ li{
 }
 
 .festivalListBox-header {
-    padding: 0 20px;
+
     width: 100%;
-    height: 150px;
+
     display: flex;
 
 }
 
-.fastivalSearchBox {
-    width: 100%;
-    height: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}

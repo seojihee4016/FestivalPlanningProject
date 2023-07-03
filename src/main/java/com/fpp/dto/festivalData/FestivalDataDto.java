@@ -26,5 +26,6 @@ public class FestivalDataDto {
 	String longitude;
 	String referenceDate;
 	String insttCode;
+	String imgHref;
 
 }

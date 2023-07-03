@@ -7,8 +7,7 @@
 <mapper namespace="festivalData_mapper">
 
 	<select id="select_festivalList" resultType="FestivalDataDto">
-		SELECT fstvl_Nm,
-		fstvl_Start_Date, fstvl_End_Date, fstvl_Co, phone_Number , ft_Code FROM
+		SELECT * FROM
 		festival_info
 		WHERE fstvl_Start_Date &lt;= sysdate AND fstvl_End_Date &gt;= sysdate 
 		ORDER BY fstvl_End_Date DESC

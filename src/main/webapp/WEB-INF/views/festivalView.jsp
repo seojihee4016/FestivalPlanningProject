@@ -10,21 +10,27 @@
 	<%@ include file="header.jsp"%>
 
 
+	<div>
+		<div style="display: flex; justify-content: center;">
+			<img alt="" src="${festivalDetailInfo.imgHref}">
+		</div>
+		<div>
+			${festivalDetailInfo.fstvlNm}
+		</div>
+		${festivalDetailInfo.fstvlStartDate} <br>
+		${festivalDetailInfo.fstvlEndDate} <br>
+		${festivalDetailInfo.fstvlCo} <br>
+		${festivalDetailInfo.phoneNumber} <br>
+		${festivalDetailInfo.homepageUrl} <br>
+		${festivalDetailInfo.lnmadr} <br>
+		${festivalDetailInfo.referenceDate} <br>
 
-	${festivalDetailInfo.fstvlNm}
-	<br> ${festivalDetailInfo.fstvlCo}
-	<br> ${festivalDetailInfo.fstvlStartDate}
-	<br> ${festivalDetailInfo.fstvlEndDate}
-	<br> ${festivalDetailInfo.phoneNumber}
-	<br> ${festivalDetailInfo.rdnmadr}
-
-
-
-	<div id="map" style="width:100%;height:350px;"></div>
-
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c3a1ace8882c963b2a6c6cb119d50764&libraries=services"></script>
-<script>
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	</div>
+	<div id="map" style="width: 300px; height: 350px;"></div>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c3a1ace8882c963b2a6c6cb119d50764&libraries=services"></script>
+	<script>
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(${festivalDetailInfo.latitude}, ${festivalDetailInfo.longitude}), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
@@ -36,8 +42,10 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
 
+
+
 // 주소로 좌표를 검색합니다
-geocoder.addressSearch('${festivalDetailInfo.rdnmadr}', function(result, status) {
+geocoder.addressSearch('${festivalAddress}', function(result, status) {
 
     // 정상적으로 검색이 완료됐으면 
      if (status === kakao.maps.services.Status.OK) {
@@ -59,7 +67,7 @@ geocoder.addressSearch('${festivalDetailInfo.rdnmadr}', function(result, status)
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
     } 
-	});    
+});    
 </script>
 </body>
 </html>
