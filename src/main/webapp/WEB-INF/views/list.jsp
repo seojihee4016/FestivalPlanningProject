@@ -112,17 +112,17 @@
 				<div>
 					<ul>
 						<c:if test="${pageMaker.prev}">
-							<li><a
+							<li class= "li_class"><a
 								href="list${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
 						</c:if>
 
 						<c:forEach begin="${pageMaker.startPage}"
 							end="${pageMaker.endPage}" var="idx">
-							<li><a href="list${pageMaker.makeSearch(idx)}">${idx}</a></li>
+							<li class= "li_class"><a href="list${pageMaker.makeSearch(idx)}">${idx}</a></li>
 						</c:forEach>
 
 						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-							<li><a
+							<li class= "li_class"><a
 								href="list${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
 						</c:if>
 					</ul>
