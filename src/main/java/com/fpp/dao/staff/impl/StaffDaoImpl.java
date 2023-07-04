@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.fpp.dao.staff.StaffDao;
 import com.fpp.dto.staff.StaffApplyDto;
+import com.fpp.dto.staff.StaffApplyListDto;
 import com.fpp.dto.staff.StaffFormDto;
 import com.fpp.dto.staff.StaffDto;
 
@@ -64,6 +65,16 @@ public class StaffDaoImpl implements StaffDao {
 				sqlSessionTemplate.selectOne("staff_mapper.select_staff_recruitment_form_list_by_fno", fno);
 		
 		return staffFormDto;
+	}
+
+	@Override
+	public List<StaffApplyListDto> selectStaffApplyList() {
+		// TODO Auto-generated method stub
+		
+		List<StaffApplyListDto> list =
+				sqlSessionTemplate.selectList("staff_mapper.select_staff_apply_list");
+		
+		return list;
 	}
 
 }

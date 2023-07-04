@@ -13,8 +13,8 @@
 </head>
 <body>
 <div class="titleContainer">
-	<h1>배치도 만들기</h1>
-	<button onclick="captureScreenshot()">스크린샷 캡처</button>
+	<h3>배치도 만들기</h3>
+	<div class="btns">
 		<div class="dropdown">
 			<button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 				그리기 도구 사용 방법
@@ -43,25 +43,28 @@
 				</ul>
 			</ul>
 		</div>
+		<button class="btn btn-success captureBtn" onclick="captureScreenshot()">지도 캡쳐</button>
 	</div>
+	</div>
+		<p class="captureP">지도 캡쳐 시, C드라이브(C:)에 mapsScreenshot 폴더를 생성해 주세요.</p>
 	
 	<!-- 서브 모듈 로드하기 -->
-	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ths5zg540n&submodules=drawing"></script>
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ths5zg540n&submodules=drawing,geocoder"></script>
 	
 	<!-- 지도가 생성되는 div 영역 -->
-	<div id="map" style="margin:0 auto; width:90%; max-width:100%; height:700px;"></div>
+	<div id="map" style="margin:25px auto; width:90%; max-width:100%; height:600px;"></div>
 	
 <script>
 	//지도 관련 설정
 	var map = new naver.maps.Map('map', {
 		center: new naver.maps.LatLng(36.807322, 127.147193), //지도의 초기 중심 좌표
-	    zoomControl: true, //줌 컨트롤의 표시 여부
+	    zoomControl: false, //줌 컨트롤의 표시 여부
 	    zoomControlOptions: {
 	        style: naver.maps.ZoomControlStyle.LARGE,
 	        position: naver.maps.Position.TOP_RIGHT
 	    },
 	    mapTypeControl: true,
-	    zoom: 20 //지도의 초기 줌 레벨 최대 21
+	    zoom: 21 //지도의 초기 줌 레벨 최대 21
 	});
 
 	//그리기 도구 관련 설정
@@ -106,6 +109,7 @@
             $.ajax({
                 url: "/captureScreenshot",
                 method: "POST",
+                contentType: "application/json; charset=utf-8", //=제거
                 data: JSON.stringify(drawingManager.toGeoJson()),
                 success: function(response) {
                     console.log("Screenshot captured successfully");

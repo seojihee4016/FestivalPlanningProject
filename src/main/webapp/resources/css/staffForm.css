@@ -1,10 +1,28 @@
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap')
+	;
+
+@font-face {
+	font-family: 'HallymGothic-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2204@1.0/HallymGothic-Regular.woff2')
+		format('woff2');
+	font-weight: 400;
+	font-style: normal;
+}
+
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
-h1 {
-	margin: 30px 0px 20px 0px;
+html, body {
+	height: 100%;
+	font-family: HallymGothic-Regular;
+}
+h3 {
+	margin-bottom: 40px;
+	font-weight: 700;
 	text-align: center;
 }
 .errorMsg {
@@ -15,9 +33,10 @@ h1 {
 .container {
 	width: 800px;
 	margin: 0 auto;
+	padding: 20px;
 }
 form {
-	width: 800px;
+	width: 780;
 	margin: 20px 0px;
 	padding: 15px 20px;
 	border: 2px solid darkgray;
@@ -49,7 +68,7 @@ form {
 }
 
 .btnArea {
-	margin-top: 30px;
+	margin-top: 20px;
 	text-align: center;
 }
 #submitBtn {

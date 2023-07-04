@@ -3,6 +3,7 @@ package com.fpp.dao.staff;
 import java.util.List;
 
 import com.fpp.dto.staff.StaffApplyDto;
+import com.fpp.dto.staff.StaffApplyListDto;
 import com.fpp.dto.staff.StaffFormDto;
 import com.fpp.dto.staff.StaffDto;
 
@@ -21,4 +22,7 @@ public interface StaffDao {
 	
 	//스탭 모집 공고 + 신청 양식 테이블 조회 by fno
 	public StaffFormDto selectStaffRecruitmentFormListByFno(int fno);
+	
+	//스탭 신청 리스트 조회
+	public List<StaffApplyListDto> selectStaffApplyList();
 }

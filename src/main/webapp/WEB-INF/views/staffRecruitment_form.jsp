@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div class="container">
-		<h1>스탭 모집 공고 올리기</h1>
+		<h3>스탭 모집 공고 올리기</h3>
 		<form action="" method="post">
 			<div class="formContainer">
 				<div class="formArea">
@@ -38,7 +38,16 @@
 						</c:if>
 					</p>
 					<p class="formKey">축제 기간</p>
-					<p class="formValue">${formDto.startDate} ~ ${formDto.endDate}</p>
+					<p class="formValue">
+						<!-- 문자열에서 Date 형변환 -->
+						<fmt:parseDate var="startDate" value="${formDto.startDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+						<fmt:parseDate var="endDate" value="${formDto.endDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+						<!-- Date 객체를 원하는 형식의 문자열로 변환 -->
+						<fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd" var="formattedStartDate" />
+						<fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd" var="formattedEndDate" />
+
+						${formattedStartDate} ~ ${formattedEndDate}
+					</p>
 				</div>
 				<div class="formArea">
 					<p class="formKey">모집인원
@@ -83,8 +92,8 @@
 						</c:if>
 					</p>
 					<p class="formValue inputText">
-						<input type="date" class="inputText" name="applicationPeriod" value="${formDto.endDate}" required="required" 
-							   min="<%= java.time.LocalDate.now().plusDays(1) %>" max="${formDto.endDate}" />
+						<input type="date" class="inputText" name="applicationPeriod" value="${formattedEndDate}" required="required" 
+							   min="<%= java.time.LocalDate.now().plusDays(1) %>" max="${formattedEndDate}" />
 					</p>
 				</div>
 			</div>

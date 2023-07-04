@@ -1,14 +1,81 @@
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap')
+	;
+
+@font-face {
+	font-family: 'HallymGothic-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2204@1.0/HallymGothic-Regular.woff2')
+		format('woff2');
+	font-weight: 400;
+	font-style: normal;
+}
+
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
-h1 {
-	margin: 30px 0px 20px 0px;
+html, body {
+	height: 100%;
+	font-family: HallymGothic-Regular;
+}
+h3 {
+	margin-bottom: 40px;
+	font-weight: 700;
 	text-align: center;
 }
 
 .container {
 	width: 800px;
 	margin: 0 auto;
+	padding: 20px;
+}
+form {
+	width: 780;
+	margin: 20px 0px;
+	padding: 15px 20px;
+	border: 2px solid darkgray;
+	border-radius: 10px;
+}
+.formContainer {
+	display: flex;
+	justify-content: space-evenly;
+    align-items: center;
+}
+
+.formKey {
+	margin-top: 20px;
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+.formValue {
+	padding-bottom: 5px;
+	font-size: 1.1rem;
+}
+
+.IContainer {
+	display: flex;
+    justify-content: space-evenly;
+}
+.inputContainer {
+	display: flex;
+	flex-direction: column;
+}
+.btnArea {
+	margin-top: 20px;
+	text-align: center;
+}
+#submitBtn {
+    width: 230px;
+    height: 50px;
+    margin: 10px;
+    color: #fff;
+    background-color: #333;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    display: inline-block;
+    cursor: pointer;
 }

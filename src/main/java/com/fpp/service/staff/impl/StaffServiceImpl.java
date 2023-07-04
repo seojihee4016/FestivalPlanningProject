@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.fpp.dao.staff.StaffDao;
 import com.fpp.dto.staff.StaffApplyDto;
+import com.fpp.dto.staff.StaffApplyListDto;
 import com.fpp.dto.staff.StaffFormDto;
 import com.fpp.dto.staff.StaffDto;
 import com.fpp.service.staff.StaffService;
@@ -62,6 +63,15 @@ public class StaffServiceImpl implements StaffService {
 		StaffFormDto staffFormDto = staffDao.selectStaffRecruitmentFormListByFno(fno);
 		
 		return staffFormDto;
+	}
+
+	@Override
+	public List<StaffApplyListDto> getStaffApplyList() {
+		// TODO Auto-generated method stub
+
+		List<StaffApplyListDto> list = staffDao.selectStaffApplyList();
+		
+		return list;
 	}
 
 }
