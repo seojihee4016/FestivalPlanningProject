@@ -34,7 +34,7 @@
 						<th>작성자</th>
 						<th>등록일</th>
 						<c:if
-							test="${selectBulletinBoardList[0].writer == sessionScope.loginId}">
+							test="${selectBulletinBoardList[0].writer == sessionScope.loginId || 'admin' == sessionScope.loginId}">
 							<th>수정</th>
 						</c:if>
 					</tr>
@@ -50,8 +50,8 @@
 							<td><fmt:formatDate
 									value="${selectBulletinBoardList.regdate}" pattern="yyyy-MM-dd" /></td>
 							<c:if
-								test="${sessionScope.loginId == selectBulletinBoardList.writer}">
-								<td ><a
+								test="${sessionScope.loginId == selectBulletinBoardList.writer || sessionScope.loginId == 'admin'}">
+								<td><a
 									href="/bulletinBoardProcess?bno=${selectBulletinBoardList.bno}&page=${scri.page}
 								&perPageNum=${scri.perPageNum}
 								&searchType=${scri.searchType}
@@ -129,7 +129,7 @@
 			<div class="container">
 				<button class="button" style="vertical-align: middle;"
 					onclick="location.href='${path}/BulletinBoard'">
-					<span >글 쓰기</span>
+					<span>글 쓰기</span>
 				</button>
 			</div>
 		</section>

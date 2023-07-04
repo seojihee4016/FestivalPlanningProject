@@ -5,51 +5,116 @@
 <mapper namespace="board_mapper">
 
 	<!-- 신청 양식 작성 -->
-	<insert id="insert"> 
+	<insert id="insert">
 		INSERT INTO FESTIVAL_FORM
-		(FNO, PLACE, FESTIVAL_NAME, ADDRESS_EVENT, Number_of_people, carrying_difficulty,
-		start_date ,end_date, budget_range , commissioning_agency, name, writer)
-		VALUES(FESTIVAL_FORM_SEQ.NEXTVAL, #{place}, #{festivalName}, #{addressEvent}, 
-		#{numberOfPeople}, #{carryingDifficulty} ,#{startDate}, #{endDate}, #{budgetRange}, 
-		#{commissioningAgency}, #{name}, #{writer})
+		(FNO, PLACE, FESTIVAL_NAME,
+		ADDRESS_EVENT,
+		Number_of_people, carrying_difficulty,
+		start_date
+		,end_date,
+		budget_range , commissioning_agency, name, writer)
+		VALUES(FESTIVAL_FORM_SEQ.NEXTVAL, #{place}, #{festivalName},
+		#{addressEvent},
+		#{numberOfPeople}, #{carryingDifficulty}
+		,#{startDate}, #{endDate}, #{budgetRange},
+		#{commissioningAgency},
+		#{name}, #{writer})
 	</insert>
-	
-	
-	<!-- 신청 양식 리스트 (전체 불러오기)-->
-	<select id="list" resultType="com.fpp.dto.board.FormDto">
-		SELECT FNO, PLACE, FESTIVAL_NAME, ADDRESS_EVENT, Number_of_people, carrying_difficulty, 
-		start_date ,end_date, budget_range , commissioning_agency, name, writer
-		FROM FESTIVAL_FORM  ORDER BY FNO DESC
+
+
+	<!-- 신청 양식 리스트 (전체 불러오기) -->
+	<select id="listPage" resultType="com.fpp.dto.board.FormDto"
+		parameterType="SearchCriteria">
+		SELECT FNO,
+		PLACE,
+		FESTIVAL_NAME,
+		ADDRESS_EVENT,
+		Number_of_people,
+		carrying_difficulty,
+		start_date ,
+		end_date,
+		budget_range ,
+		commissioning_agency,
+		name,
+		writer
+		FROM
+		(SELECT FNO, PLACE, FESTIVAL_NAME,
+		ADDRESS_EVENT,
+		Number_of_people,
+		carrying_difficulty,start_date
+		,end_date,
+		budget_range , commissioning_agency, name, writer
+		,ROW_NUMBER()
+		OVER(ORDER BY FNO DESC) AS FESTIVAL_FORM
+		FROM FESTIVAL_FORM
+		WHERE
+		1=1
+		<include refid="search"></include>
+		) FESTIVAL_FORM
+		WHERE FESTIVAL_FORM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY
+		FNO
+		DESC
 	</select>
-	
-	
+
+	<!-- 페이지네이션 카운트 -->
+	<select id="listCount" resultType="int"
+		parameterType="SearchCriteria">
+		SELECT COUNT(FNO)
+		FROM FESTIVAL_FORM
+		WHERE 1=1
+		<include refid="search"></include>
+		AND FNO > 0
+	</select>
+
+	<!-- 검색 기능을 위해 동적 쿼리문 추가 -->
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 'f'.toString()">AND FESTIVAL_NAME LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'c'.toString()">AND commissioning_agency LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'w'.toString()">AND WRITER LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'fc'.toString()">AND (FESTIVAL_NAME LIKE '%' || #{keyword} || '%') or (commissioning_agency
+				LIKE '%' || #{keyword} || '%')</if>
+		</if>
+	</sql>
+
 	<!-- 신청 양식 번호로 읽기 (번호로만 불러오기) -->
-	<select id="read" parameterType="int" resultType="com.fpp.dto.board.FormDto"> 
-		SELECT FNO, PLACE, FESTIVAL_NAME, ADDRESS_EVENT, Number_of_people, carrying_difficulty, 
-		start_date ,end_date, budget_range , commissioning_agency, name ,writer
-		FROM FESTIVAL_FORM WHERE FNO = #{fno}
+	<select id="read" parameterType="int"
+		resultType="com.fpp.dto.board.FormDto">
+		SELECT FNO, PLACE, FESTIVAL_NAME, ADDRESS_EVENT,
+		Number_of_people,
+		carrying_difficulty,
+		start_date ,end_date,
+		budget_range , commissioning_agency, name ,writer
+		FROM
+		FESTIVAL_FORM
+		WHERE FNO = #{fno}
 	</select>
-	
+
+
+
 	<!-- 신청 양식 수정 -->
-	<update id="update" parameterType="com.fpp.dto.board.FormDto"> 
+	<update id="update" parameterType="com.fpp.dto.board.FormDto">
 		UPDATE FESTIVAL_FORM SET
-		
+
 		FESTIVAL_NAME = #{festivalName},
-		ADDRESS_EVENT = #{addressEvent}, 
-		
-		start_date = #{startDate}, 
-		end_date = #{endDate}, 
-		
-		commissioning_agency = #{commissioningAgency}, 
-		name = #{name} 
+		ADDRESS_EVENT = #{addressEvent},
+
+		start_date = #{startDate},
+		end_date = #{endDate},
+
+		commissioning_agency =
+		#{commissioningAgency},
+		name = #{name}
 		WHERE FNO = #{fno}
 	</update>
 
 	<!-- 신청 양식 삭제 -->
 	<delete id="delete" parameterType="int">
-		DELETE 
+		DELETE
 		FROM FESTIVAL_FORM
-		WHERE FNO = #{fno}
+		WHERE
+		FNO = #{fno}
 	</delete>
-	
+
 </mapper>

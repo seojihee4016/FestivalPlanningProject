@@ -41,7 +41,18 @@
 
 		<form action="" method="post" class="form" id="update"
 			onsubmit="return validateForm()">
-			<input type="hidden" id="fno" name="fno" value="${update.fno}" />
+
+
+			<!-- 페이징 -->
+			<!-- cri값을 보관하기위해 form태그안에 타입 hidden으로 input태그를 추가 -->
+			<input type="hidden" id="fno" name="fno" value="${update.fno}" /> <input
+				type="hidden" id="page" name="page" value="${scri.page}"> <input
+				type="hidden" id="perPageNum" name="perPageNum"
+				value="${scri.perPageNum}"> <input type="hidden"
+				id="searchType" name="searchType" value="${scri.searchType}">
+			<input type="hidden" id="keyword" name="keyword"
+				value="${scri.keyword}"> <input type="hidden" id="fno"
+				name="fno" value="${update.fno}" />
 			<fieldset>
 				<p class="place">
 					장소 구분을 선택해주세요 <span id="essential">*</span>
@@ -209,6 +220,20 @@
 
 		</form>
 	</main>
+
+
+	<!-- 페이지 값 작성 / 댓글 -->
+	<script>
+		/*목록으로 이동 시 페이징*/
+		$(".cancel-btn")
+				.on(
+						"click",
+						function() {
+							location.href = "/list?page=${scri.page}"
+									+ "&perPageNum=${scri.perPageNum}"
+									+ "&searchType=${scri.searchType}&keyword=${scri.keyword}";
+						});
+	</script>
 
 
 	<script>

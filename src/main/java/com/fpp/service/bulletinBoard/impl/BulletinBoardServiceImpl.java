@@ -10,7 +10,6 @@ import com.fpp.dto.board.FormDto;
 import com.fpp.dto.bulletinBoard.BulletinBoardDto;
 import com.fpp.dto.bulletinBoard.Criteria;
 import com.fpp.dto.bulletinBoard.SearchCriteria;
-import com.fpp.dto.staff.StaffDto;
 import com.fpp.service.bulletinBoard.BulletinBoardService;
 
 @Service
