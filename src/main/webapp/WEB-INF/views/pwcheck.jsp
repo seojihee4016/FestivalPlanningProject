@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
+<link href="css/pwcheck.css" rel="stylesheet" type="text/css">
 
 <div class="pwcheck-box">
 	<c:if test="${pwCheck == null}">
@@ -24,3 +25,5 @@
 		</form>
 	</c:if>
 </div>
+
+<%@ include file="footer.jsp"%>

@@ -1,5 +1,5 @@
 --------------------------------------------------------
---  파일이 생성됨 - 수요일-6월-28-2023   
+--  파일이 생성됨 - 화요일-7월-04-2023   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Table F_USER
@@ -21,7 +21,7 @@
   TABLESPACE "EXAMPLE" ;
 REM INSERTING into SCOTT.F_USER
 SET DEFINE OFF;
-Insert into SCOTT.F_USER (LOGIN_ID,LOGIN_PW,NAME,EMAIL,TEL_NUMBER,BIRTH) values ('pinata1234','pinata1234!','관리자','pinata1234@gmail.com','010-1234-5678','2023-06-28');
+Insert into SCOTT.F_USER (LOGIN_ID,LOGIN_PW,NAME,EMAIL,TEL_NUMBER,BIRTH) values ('admin','admin','관리자','pinata2023@gmail.com','010-2023-0704','2023-07-04');
 --------------------------------------------------------
 --  DDL for Index SYS_C007783
 --------------------------------------------------------

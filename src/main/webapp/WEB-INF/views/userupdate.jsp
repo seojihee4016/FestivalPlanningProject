@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
+<link href="css/userupdate.css" rel="stylesheet" type="text/css">
 
 <div class="container">
 	<h1>회원정보 수정</h1>
@@ -46,4 +47,5 @@
 		</form>
 	</div>
 </div>
+
 <%@ include file="footer.jsp"%>
