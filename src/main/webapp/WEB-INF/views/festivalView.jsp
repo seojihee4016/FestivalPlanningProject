@@ -5,28 +5,83 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%@ include file="header.jsp"%>
+<style type="text/css">
+h2, h3, h4 {
+	text-align: left;
+}
+
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap')
+	;
+
+@font-face {
+	font-family: 'HallymGothic-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2204@1.0/HallymGothic-Regular.woff2')
+		format('woff2');
+	font-weight: 400;
+	font-style: normal;
+}
+
+html, body {
+	height: 100%;
+	font-family: HallymGothic-Regular;
+}
+</style>
 </head>
 <body>
-	<%@ include file="header.jsp"%>
 
 
-	<div>
-		<div style="display: flex; justify-content: center;">
+
+	<div
+		style="display: flex; align-items: center; flex-direction: column;">
+		<div
+			style="display: flex; justify-content: center; padding-top: 30px;">
 			<img alt="" src="${festivalDetailInfo.imgHref}">
 		</div>
-		<div>
-			${festivalDetailInfo.fstvlNm}
-		</div>
-		${festivalDetailInfo.fstvlStartDate} <br>
-		${festivalDetailInfo.fstvlEndDate} <br>
-		${festivalDetailInfo.fstvlCo} <br>
-		${festivalDetailInfo.phoneNumber} <br>
-		${festivalDetailInfo.homepageUrl} <br>
-		${festivalDetailInfo.lnmadr} <br>
-		${festivalDetailInfo.referenceDate} <br>
+		<div style="width: 90%;">
+			<div
+				style="display: flex; align-items: center; flex-direction: column;">
+				<div style="text-align: center; width: 910px;">
 
+					<h1>${festivalDetailInfo.fstvlNm}</h1>
+					<hr width="100%">
+				</div>
+			</div>
+
+			<div>
+				<div style="padding-left: 20%; margin-top: 20px; width: 910px;">
+					<h3 style="margin-top: 30px;">
+						축제 내용 : ${festivalDetailInfo.fstvlCo}<br>
+					</h3>
+
+				</div>
+
+			</div>
+
+			<div>
+				<div style="padding-left: 20%; margin-top: 20px; width: 910px;">
+
+					<h4>기간 : ${festivalDetailInfo.fstvlStartDate} ~
+						${festivalDetailInfo.fstvlEndDate}</h4>
+					<br>
+					<h4>축제 주소 : ${festivalDetailInfo.lnmadr}</h4>
+				</div>
+			</div>
+			<div>
+				<div style="padding-left: 20%; margin-top: 20px; width: 910px;">
+					<h4>
+						전화번호 : ${festivalDetailInfo.phoneNumber}<br>
+						<br> 홈페이지 : ${festivalDetailInfo.homepageUrl}<br>
+					</h4>
+				</div>
+			</div>
+		</div>
+		<div id="map" style="width: 90%; height: 500px; margin-top: 50px; "></div>
 	</div>
-	<div id="map" style="width: 300px; height: 350px;"></div>
+
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c3a1ace8882c963b2a6c6cb119d50764&libraries=services"></script>
 	<script>
@@ -51,7 +106,7 @@ geocoder.addressSearch('${festivalAddress}', function(result, status) {
      if (status === kakao.maps.services.Status.OK) {
 
         var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
+			
         // 결과값으로 받은 위치를 마커로 표시합니다
         var marker = new kakao.maps.Marker({
             map: map,

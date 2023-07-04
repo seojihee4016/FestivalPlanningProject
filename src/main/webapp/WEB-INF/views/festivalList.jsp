@@ -27,7 +27,7 @@
 
 		<c:forEach var="item" items="${festivalList}">
 			<div
-				style="border: 5px solid #FBD9F9; background-color: #FFEAF7; margin: 20px; width: 320px; border-radius: 10%; overflow: hidden;">
+				style="border: 5px solid #D9E5FF; background-color: #EBF7FF; margin: 20px; width: 320px; border-radius: 10%; overflow: hidden;">
 
 				<a href="/festivalView?ftCode=${item.ftCode}"> <img alt=""
 					src="${item.imgHref}" width="100%" height="160px">
