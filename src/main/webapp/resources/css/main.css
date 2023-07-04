@@ -13,7 +13,7 @@
 }
 
 .img-container {
-	width: 90%;
+	width: 95%;
 	margin: 0 auto;
 	margin-bottom: 40px;
 }
@@ -28,7 +28,7 @@ h2, h4, h5 {
 }
 
 .card-container {
-	width: 90%;
+	width: 95%;
 	margin: 0 auto;
 	margin-bottom: 40px;
 }
@@ -40,4 +40,13 @@ h2, h4, h5 {
 
 .text-box {
 	height: 230px;
+}
+
+.card-title {
+	font-weight: bold;
+}
+
+.card-text {
+	color: gray;
+	font-weight: bold;
 }
