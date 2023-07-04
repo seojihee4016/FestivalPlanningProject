@@ -11,13 +11,14 @@ $(function(){
 			contentType: false,
 			type: "POST",
 			async: false,
+			dataType: "json",
 			data: formData, //넘길 파라미터
 			success: function(data) {
 				console.log(data);
-				if (data == true) {
-					alert("사용가능 아이디");
+				if (data === "true") {
+					alert("이용해주셔서 감사합니다.");
 				} else {
-					alert("사용 불가능한 아이디");
+					alert("입력하신 비밀번호가 일치하지 않습니다.");
 				}
 			},
 			error: function() {

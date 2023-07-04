@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="header.jsp"%>
+<link href="css/main.css" rel="stylesheet" type="text/css">
 
 <div id="carouselExampleInterval" class="carousel slide carouselbox"
 	data-bs-ride="carousel">

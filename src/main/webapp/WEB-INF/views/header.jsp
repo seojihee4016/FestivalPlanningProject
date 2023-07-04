@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Piñata</title>
 <!-- CSS only -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -24,13 +24,7 @@
 	crossorigin="anonymous"></script>
 <link rel="short icon" href="#">
 <link href="css/header.css" rel="stylesheet" type="text/css">
-<link href="css/main.css" rel="stylesheet" type="text/css">
-<link href="css/join.css" rel="stylesheet" type="text/css">
-<link href="css/agreement.css" rel="stylesheet" type="text/css">
-<link href="css/login.css" rel="stylesheet" type="text/css">
-<link href="css/footer.css" rel="stylesheet" type="text/css">
-<link href="css/pwcheck.css" rel="stylesheet" type="text/css">
-<link href="css/userupdate.css" rel="stylesheet" type="text/css">
+
 </head>
 
 <body>

@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+h1 {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.withdrawal-box {
+	width: 580px;
+	margin: 0 auto;
+	margin-top: 60px;
+	border: 1px solid lightgray;
+	border-radius: 5%;
+}
+
+.withdrawal-form {
+	width: 93%;
+	margin: 0 auto;
+}
+
+.pwbox {
+	position: relative;
+	text-align: center;
+}
+
+.pwCheckBtn {
+	position: absolute;
+	background-color: #333;
+	color: white;
+	top: 0;
+	right: 0;
+}
+
+.check-image {
+	width: 100px;
+	height: 100px;
+	text-align: center;
+}
+
+.pwCheckBtn:hover {
+	background: #505050;
+	color: white;
+}
+
+.nextBtn {
+	background-color: #333;
+	color: white;
+	margin: 0 aito;
+	width: 70%;
+}
+
+.nextBtn:hover {
+	background: #505050;
+	color: white;
+}
+
+.nextBtn-box {
+	text-align: center;
+}
