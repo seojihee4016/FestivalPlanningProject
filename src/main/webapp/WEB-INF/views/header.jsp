@@ -41,10 +41,11 @@
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active fs-5"
 						href="/festivalList">지역축제</a></li>
-					<li class="nav-item"><a class="nav-link active fs-5" href="list">행사문의</a></li>
+					<li class="nav-item"><a class="nav-link active fs-5"
+						href="list">행사문의</a></li>
 					<li class="nav-item"><a class="nav-link active fs-5" href="#">채용공고</a></li>
-					<li class="nav-item"><a class="nav-link active fs-5" href="bulletinBoardList">게시판</a></li>
-					<li class="nav-item"><a class="nav-link active fs-5" href="#">고객센터</a></li>
+					<li class="nav-item"><a class="nav-link active fs-5"
+						href="bulletinBoardList">게시판</a></li>
 				</ul>
 				<!-- Button trigger modal -->
 				<div class="search-btnbox">
