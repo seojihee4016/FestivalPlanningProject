@@ -45,7 +45,8 @@ create table comments (
     regdate date default sysdate,		 --등록일자
     primary key(bno, cno)
 );
-
+--댓글 시퀀스
+create sequence comments_seq START WITH 1 MINVALUE 0;
 
 --공통 코드 
 create table common_code (
@@ -79,3 +80,107 @@ insert into common_code values ('NumberOfPeople 301~400', '400명 이상');
 insert into common_code values ('inside', '실내');
 insert into common_code values ('outdoors', '실외');
 insert into common_code values ('inAndOut', '실내 + 실외');
+
+--회원 테이블
+  CREATE TABLE "SCOTT"."F_USER" 
+   (	"LOGIN_ID" VARCHAR2(200 BYTE), 
+	"LOGIN_PW" VARCHAR2(200 BYTE), 
+	"NAME" VARCHAR2(100 BYTE), 
+	"EMAIL" VARCHAR2(200 BYTE), 
+	"TEL_NUMBER" VARCHAR2(200 BYTE), 
+	"BIRTH" VARCHAR2(100 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "EXAMPLE" ;
+REM INSERTING into SCOTT.F_USER
+SET DEFINE OFF;
+Insert into SCOTT.F_USER (LOGIN_ID,LOGIN_PW,NAME,EMAIL,TEL_NUMBER,BIRTH) values ('admin','admin','관리자','pinata2023@gmail.com','010-2023-0704','2023-07-04');
+--------------------------------------------------------
+--  DDL for Index SYS_C007783
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SCOTT"."SYS_C007783" ON "SCOTT"."F_USER" ("LOGIN_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "EXAMPLE" ;
+--------------------------------------------------------
+--  Constraints for Table F_USER
+--------------------------------------------------------
+
+  ALTER TABLE "SCOTT"."F_USER" MODIFY ("LOGIN_ID" NOT NULL ENABLE);
+  ALTER TABLE "SCOTT"."F_USER" MODIFY ("LOGIN_PW" NOT NULL ENABLE);
+  ALTER TABLE "SCOTT"."F_USER" MODIFY ("NAME" NOT NULL ENABLE);
+  ALTER TABLE "SCOTT"."F_USER" MODIFY ("EMAIL" NOT NULL ENABLE);
+  ALTER TABLE "SCOTT"."F_USER" MODIFY ("TEL_NUMBER" NOT NULL ENABLE);
+  ALTER TABLE "SCOTT"."F_USER" ADD PRIMARY KEY ("LOGIN_ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "EXAMPLE"  ENABLE;
+  ALTER TABLE "SCOTT"."F_USER" MODIFY ("BIRTH" NOT NULL ENABLE);
+
+--
+CREATE TABLE staff_recruitment( --스탭 모집 공고
+    SRNO NUMBER PRIMARY KEY,                  --스탭 모집 공고 고유 번호
+    recruitment_to NUMBER NOT NULL,           --모집인원
+    recruitment_field VARCHAR2(100) NOT NULL, --모집분야
+    preferential_treatment VARCHAR2(100),     --우대사항
+    application_period VARCHAR2(100) NOT NULL --접수기간
+);
+
+CREATE TABLE staff_recruitment_apply( --스탭 신청 양식
+    SRNO NUMBER,                                 --스탭 모집 공고 고유 번호
+    SRANO NUMBER,                                --스탭 신청 양식 고유 번호
+    support_period_start VARCHAR2(100) NOT NULL, --지원기간 시작일
+    support_period_end VARCHAR2(100) NOT NULL,   --지원기간 종료일
+    recruitment_field VARCHAR2(100) NOT NULL,    --모집분야
+    id VARCHAR2(100) NOT NULL,                   --아이디
+    CONSTRAINT staff_recruitment_apply_pk PRIMARY KEY (SRNO, SRANO) --PK 2개 설정
+);
+--스탭 신청 양식 고유 번호 시퀀스
+CREATE SEQUENCE staff_recruitment_apply_SEQ
+START WITH 1
+INCREMENT BY 1;
+
+CREATE TABLE common_code( --공통 코드
+    code_type VARCHAR2(100) PRIMARY KEY,
+    code_name VARCHAR2(100) NOT NULL
+);
+
+SELECT * FROM staff_recruitment ORDER BY SRNO DESC;
+SELECT * FROM staff_recruitment_apply ORDER BY SRANO DESC;
+SELECT * FROM common_code;
+
+INSERT INTO common_code VALUES ('rf0', '기타');
+INSERT INTO common_code VALUES ('rf1', '안내도우미');
+INSERT INTO common_code VALUES ('rf2', '안전요원');
+
+--api 테이블
+ CREATE TABLE "SCOTT"."FESTIVAL_INFO" 
+   (	"FT_CODE" NUMBER(4,0), 
+	"FSTVL_NM" VARCHAR2(200 BYTE), 
+	"OPAR" VARCHAR2(200 BYTE), 
+	"FSTVL_START_DATE" VARCHAR2(20 BYTE), 
+	"FSTVL_END_DATE" VARCHAR2(20 BYTE), 
+	"FSTVL_CO" VARCHAR2(2000 BYTE), 
+	"MNNST" VARCHAR2(200 BYTE), 
+	"AUSPC_INSTT" VARCHAR2(400 BYTE), 
+	"SUPRT_INSTT" VARCHAR2(400 BYTE), 
+	"PHONE_NUMBER" VARCHAR2(13 BYTE), 
+	"HOMEPAGE_URL" VARCHAR2(300 BYTE), 
+	"RELATE_INFO" VARCHAR2(200 BYTE), 
+	"RDNMADR" VARCHAR2(200 BYTE), 
+	"LNMADR" VARCHAR2(200 BYTE), 
+	"LATITUDE" VARCHAR2(200 BYTE), 
+	"LONGITUDE" VARCHAR2(200 BYTE), 
+	"REFERENCE_DATE" VARCHAR2(200 BYTE), 
+	"INSTT_CODE" VARCHAR2(200 BYTE), 
+	"IMG_HREF" VARCHAR2(400 BYTE)
+   ) 

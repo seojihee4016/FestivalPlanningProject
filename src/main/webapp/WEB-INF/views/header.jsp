@@ -40,10 +40,10 @@
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active fs-5"
-						href="/festivalList">지역축제</a></li>
+						href="festivalList">지역축제</a></li>
 					<li class="nav-item"><a class="nav-link active fs-5"
 						href="list">행사문의</a></li>
-					<li class="nav-item"><a class="nav-link active fs-5" href="#">채용공고</a></li>
+					<li class="nav-item"><a class="nav-link active fs-5" href="staffRecruitmentList">채용공고</a></li>
 					<li class="nav-item"><a class="nav-link active fs-5"
 						href="bulletinBoardList">게시판</a></li>
 				</ul>
@@ -87,7 +87,7 @@
 									<li class="nav-item"><span class="nav-link"> 관리자모드
 											접속중</span></li>
 									<li class="nav-item"><a class="nav-link"
-										href="<!-- 관리자페이지 -->">관리자페이지</a></li>
+										href="admin">관리자페이지</a></li>
 									<li class="nav-item"><a class="nav-link" href="logout">로그아웃</a></li>
 								</ul>
 							</c:when>

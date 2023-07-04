@@ -28,7 +28,4 @@
 	</form>
 </div>
 
-<script type="text/javascript" src="js/withdrawal.js"></script>
-
 <%@ include file="footer.jsp"%>
-

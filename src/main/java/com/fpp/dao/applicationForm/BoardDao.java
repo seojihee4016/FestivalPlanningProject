@@ -11,6 +11,8 @@ public interface BoardDao {
 
 	// 신청 양식 리스트 조회
 	public List<FormDto> list(SearchCriteria scri) throws Exception;
+	
+	public List<FormDto> list2() throws Exception;
 
 	//게시글 페이지네이션 카운트 - 총 개수
 	public int listCount(SearchCriteria scri) throws Exception;

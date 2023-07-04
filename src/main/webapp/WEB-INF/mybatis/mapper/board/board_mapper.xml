@@ -21,7 +21,7 @@
 		#{name}, #{writer})
 	</insert>
 
-
+	
 	<!-- 신청 양식 리스트 (전체 불러오기) -->
 	<select id="listPage" resultType="com.fpp.dto.board.FormDto"
 		parameterType="SearchCriteria">
@@ -116,5 +116,11 @@
 		WHERE
 		FNO = #{fno}
 	</delete>
-
+	
+	   <!-- 신청 양식 리스트 (전체 불러오기)-->
+   <select id="list" resultType="com.fpp.dto.board.FormDto">
+      SELECT FNO, PLACE, FESTIVAL_NAME, ADDRESS_EVENT, Number_of_people, carrying_difficulty, 
+      start_date ,end_date, budget_range , commissioning_agency, name, writer
+      FROM FESTIVAL_FORM  ORDER BY FNO DESC
+   </select>
 </mapper>

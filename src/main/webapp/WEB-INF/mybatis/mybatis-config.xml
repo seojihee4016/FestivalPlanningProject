@@ -10,20 +10,31 @@
 		<setting name="jdbcTypeForNull" value="VARCHAR" />
 	</settings>
 
-    <typeAliases>	<!-- mapper-parameterType -->
-    	<typeAlias type="com.fpp.dto.commonCode.CommonCodeDto" alias="CommonCodeDto"/>
+	<typeAliases>	<!-- mapper-parameterType -->
+		<typeAlias type="com.fpp.dto.commonCode.CommonCodeDto"
+			alias="CommonCodeDto" />
 
-    	<typeAlias type="com.fpp.dto.board.FormDto" alias="FormDto"/>
-       	<typeAlias type="com.fpp.dto.bulletinBoard.BulletinBoardDto" alias="BulletinBoardDto"/>
-       	<typeAlias type="com.fpp.dto.bulletinBoard.Criteria" alias="Criteria"/>
-       	<typeAlias type="com.fpp.dto.bulletinBoard.SearchCriteria" alias="SearchCriteria"/>
-       	<typeAlias type="com.fpp.dto.bulletinBoard.CommentsDto" alias="CommentsDto"/>
-    	<typeAlias type="com.fpp.dto.staff.StaffDto" alias="StaffDto"/>
-    	<typeAlias type="com.fpp.dto.staff.StaffApplyDto" alias="StaffApplyDto"/>
-    	<typeAlias type="com.fpp.dto.staff.StaffFormDto" alias="StaffFormDto"/>
-    	<typeAlias type="com.fpp.dto.staff.StaffApplyListDto" alias="StaffApplyListDto"/>
-    	<typeAlias type="com.fpp.dto.user.UserDto" alias="UserDto"/>
-    </typeAliases>
+		<typeAlias type="com.fpp.dto.board.FormDto" alias="FormDto" />
+		<typeAlias type="com.fpp.dto.bulletinBoard.BulletinBoardDto"
+			alias="BulletinBoardDto" />
+		<typeAlias type="com.fpp.dto.bulletinBoard.Criteria"
+			alias="Criteria" />
+		<typeAlias type="com.fpp.dto.bulletinBoard.SearchCriteria"
+			alias="SearchCriteria" />
+		<typeAlias type="com.fpp.dto.bulletinBoard.CommentsDto"
+			alias="CommentsDto" />
+		<typeAlias type="com.fpp.dto.staff.StaffDto"
+			alias="StaffDto" />
+		<typeAlias type="com.fpp.dto.staff.StaffApplyDto"
+			alias="StaffApplyDto" />
+		<typeAlias type="com.fpp.dto.staff.StaffFormDto"
+			alias="StaffFormDto" />
+		<typeAlias type="com.fpp.dto.staff.StaffApplyListDto"
+			alias="StaffApplyListDto" />
+		<typeAlias type="com.fpp.dto.festivalData.FestivalDataDto"
+			alias="FestivalDataDto" />
+		<typeAlias type="com.fpp.dto.user.UserDto" alias="UserDto" />
+	</typeAliases>
 
 
 

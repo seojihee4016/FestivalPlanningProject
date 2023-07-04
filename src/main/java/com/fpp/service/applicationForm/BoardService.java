@@ -11,6 +11,8 @@ public interface BoardService {
 
 	// 신청 양식 리스트 조회
 	public List<FormDto> list(SearchCriteria scri) throws Exception;
+	
+	public List<FormDto> list2() throws Exception;
 
 	//페이지
 	public int listCount(SearchCriteria scri) throws Exception ;
@@ -23,5 +25,7 @@ public interface BoardService {
 
 	// 신청 양식 삭제
 	public void delete(int fno) throws Exception;
+	
+	
 
 }

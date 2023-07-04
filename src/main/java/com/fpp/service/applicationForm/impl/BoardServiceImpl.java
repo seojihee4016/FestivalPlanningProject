@@ -56,4 +56,12 @@ public class BoardServiceImpl implements BoardService {
 
 		boardDao.delete(fno);
 	}
+
+	@Override
+	public List<FormDto> list2() throws Exception {
+	
+		return boardDao.list2();
+	}
+
+	
 }

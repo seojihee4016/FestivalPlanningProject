@@ -60,4 +60,10 @@ public class BoardDaoImpl implements BoardDao{
 		sqlSession.delete("board_mapper.delete", fno);
 	}
 
+	@Override
+	public List<FormDto> list2() throws Exception {
+		List<FormDto> list2 = sqlSession.selectList("board_mapper.list");
+		return list2;
+	}
+
 }
