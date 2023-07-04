@@ -38,9 +38,6 @@
 						<th>축제 시작 일자</th>
 						<th>축제 종료 일자</th>
 						<th>작성자</th>
-						<c:if test="${sessionScope.loginId == list[0].writer}">
-							<th>수정</th>
-						</c:if>
 					</tr>
 
 					<c:forEach items="${list}" var="list">
@@ -58,14 +55,7 @@
 							<td><c:out value="${list.endDate.split(' ')[0]}" /></td>
 							<td><c:out value="${list.writer}" /></td>
 
-							<c:if test="${sessionScope.loginId == list.writer}">
-								<td><a
-									href="/updateView?fno=${list.fno}&page=${scri.page}
-								&perPageNum=${scri.perPageNum}
-								&searchType=${scri.searchType}
-								&keyword=${scri.keyword}"
-									class="custom-button">수정</a></td>
-							</c:if>
+						
 
 						</tr>
 					</c:forEach>

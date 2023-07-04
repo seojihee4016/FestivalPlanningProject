@@ -1,8 +1,11 @@
 @charset "UTF-8";
 /*초기화*/
 body, header, h1, input {
-	margin: 0;
-	padding: 0;
+   margin: 0;
+   padding: 0;
+   border: none; 
+   background: transparent;
+   outline: none;
 }
 html, body {
 		width: 100%;
