@@ -22,7 +22,7 @@
 		</header>
 
 		<section id="container">
-			<form role="form" method="post" action="list">
+			<form role="form" method="get" action="list">
 
 				<table>
 					<tr>
@@ -60,7 +60,7 @@
 
 							<c:if test="${sessionScope.loginId == list.writer}">
 								<td><a
-									href="/list?fno=${list.fno}&page=${scri.page}
+									href="/updateView?fno=${list.fno}&page=${scri.page}
 								&perPageNum=${scri.perPageNum}
 								&searchType=${scri.searchType}
 								&keyword=${scri.keyword}"
@@ -90,14 +90,13 @@
 							+ 담당기관</option>
 					</select> <input type="text" name="keyword" id="keywordInput"
 						value="${scri.keyword}" />
-					<button id="searchBtn" type="button">
+					<button id="searchBtnForm" type="button">
 						<i class="bi bi-search"></i>
 					</button>
 					<script>
 						$(function() {
-							$('#searchBtn')
-									.click(
-											function() {
+							$('#searchBtnForm').click(
+											function(e) {
 												self.location = "list"
 														+ '${pageMaker.makeQuery(1)}'
 														+ "&searchType="
@@ -110,7 +109,12 @@
 																.val());
 											});
 						});
-					</script>
+						
+
+					</script>	
+
+
+
 				</div>
 
 

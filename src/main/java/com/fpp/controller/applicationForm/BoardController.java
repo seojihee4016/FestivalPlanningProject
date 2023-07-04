@@ -45,7 +45,7 @@ public class BoardController {
 	}
 
 	// 신청 양식 목록 조회 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@GetMapping("/list")
 	public String list(Model model , @ModelAttribute("scri") SearchCriteria scri) throws Exception{
 		model.addAttribute("list",boardService.list(scri));
 
