@@ -41,3 +41,12 @@ h2, h4, h5 {
 .text-box {
 	height: 230px;
 }
+
+.card-title {
+	font-weight: bold;
+}
+
+.card-text {
+	color: gray;
+	font-weight: bold;
+}
