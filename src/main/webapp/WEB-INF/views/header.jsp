@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="css/main.css" rel="stylesheet" type="text/css">
+<title>Piñata</title>
 <!-- CSS only -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -26,7 +27,6 @@
 </head>
 
 <body>
-
 	<nav class="navbar navbar-expand-lg bg-light">
 		<div class="container-xl">
 			<a class="navbar-brand fs-2" href="/main"><img
@@ -39,12 +39,13 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active fs-5" href="/festivalList">지역축제</a></li>
-					<li class="nav-item"><a class="nav-link active fs-5" href="#">행사문의</a></li>
+					<li class="nav-item"><a class="nav-link active fs-5"
+						href="/festivalList">지역축제</a></li>
+					<li class="nav-item"><a class="nav-link active fs-5"
+						href="list">행사문의</a></li>
 					<li class="nav-item"><a class="nav-link active fs-5" href="#">채용공고</a></li>
-					<li class="nav-item"><a class="nav-link active fs-5" href="#">미정</a></li>
-					<li class="nav-item"><a class="nav-link active fs-5" href="#">게시판</a></li>
-					<li class="nav-item"><a class="nav-link active fs-5" href="#">고객센터</a></li>
+					<li class="nav-item"><a class="nav-link active fs-5"
+						href="bulletinBoardList">게시판</a></li>
 				</ul>
 				<!-- Button trigger modal -->
 				<div class="search-btnbox">
@@ -98,9 +99,7 @@
 										class="nav-link dropdown-toggle" href="#" role="button"
 										data-bs-toggle="dropdown" aria-expanded="false"> 마이페이지 </a>
 										<ul class="dropdown-menu menubox">
-											<li><a class="dropdown-item" href="<!-- 지희님페이지 -->"></a></li>
-											<li><hr class="dropdown-divider"></li>
-											<li><a class="dropdown-item" href="<!-- 승아님페이지 -->"></a></li>
+											<li><a class="dropdown-item" href="<!-- 마이페이지 -->"></a></li>
 											<li><hr class="dropdown-divider"></li>
 											<li><a class="dropdown-item" href="pwcheck">회원정보 수정</a></li>
 											<li><hr class="dropdown-divider"></li>
@@ -115,5 +114,3 @@
 			</div>
 		</div>
 	</nav>
-
-</body>

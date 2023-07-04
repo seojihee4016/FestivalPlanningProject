@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.fpp.dao.applicationForm.BoardDao;
 import com.fpp.dto.board.FormDto;
+import com.fpp.dto.bulletinBoard.SearchCriteria;
 import com.fpp.service.applicationForm.BoardService;
 
 @Service
@@ -23,11 +24,17 @@ public class BoardServiceImpl implements BoardService {
 
 	//신청 양식 리스트 조회
 	@Override
-	public List<FormDto> list() throws Exception {
+	public List<FormDto> list(SearchCriteria scri) throws Exception {
 		// TODO Auto-generated method stub
-		return boardDao.list();
+		return boardDao.list(scri);
 	}
 
+	//페이지네이션 게시물 총 개수
+	@Override
+	public int listCount(SearchCriteria scri) throws Exception {
+		// TODO Auto-generated method stub
+		return boardDao.listCount(scri);
+	}
 
 	// 신청 양식 번호로 조회
 	@Override

@@ -8,20 +8,26 @@
 <head>
 <link href="${path}/css/applicationFormList.css?ver=3" rel="stylesheet"
 	type="text/css" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
 <title>게시판</title>
 </head>
 <body>
 	<div id="root">
 		<header>
-			<h1>신청 양식 조회</h1>
+			<h3>
+				견적 신청 <i class="bi bi-clipboard-check"></i>
+			</h3>
 		</header>
 
 		<section id="container">
-			<form role="form" method="post" action="list">
+			<form role="form" method="get" action="list">
+
 				<table>
 					<tr>
 						<th>번호</th>
-						<th>축제 이름</th>
+						<th>축제명</th>
 						<th>담당자 성함</th>
 						<!-- <th>장소 구분</th>  -->
 						<th>축제 장소</th>
@@ -32,8 +38,9 @@
 						<th>축제 시작 일자</th>
 						<th>축제 종료 일자</th>
 						<th>작성자</th>
-						<th>수정</th>
-						<th>모집 공고</th>
+						<c:if test="${sessionScope.loginId == list[0].writer}">
+							<th>수정</th>
+						</c:if>
 					</tr>
 
 					<c:forEach items="${list}" var="list">
@@ -52,13 +59,85 @@
 							<td><c:out value="${list.writer}" /></td>
 
 							<c:if test="${sessionScope.loginId == list.writer}">
-								<td><a href="/updateView?fno=${list.fno}"
+								<td><a
+									href="/updateView?fno=${list.fno}&page=${scri.page}
+								&perPageNum=${scri.perPageNum}
+								&searchType=${scri.searchType}
+								&keyword=${scri.keyword}"
 									class="custom-button">수정</a></td>
 							</c:if>
 
 						</tr>
 					</c:forEach>
 				</table>
+
+				<!-- 검색 기능 -->
+				<div class="search">
+					<select name="searchType">
+
+						<option value="n"
+							<c:out value="${scri.searchType == null ? 'selected' : ''}"/>>검색할
+							목록을 선택하세요</option>
+						<option value="f"
+							<c:out value="${scri.searchType eq 'f' ? 'selected' : ''}"/>>축제명</option>
+						<option value="c"
+							<c:out value="${scri.searchType eq 'c' ? 'selected' : ''}"/>>운영
+							기관</option>
+						<option value="w"
+							<c:out value="${scri.searchType eq 'w' ? 'selected' : ''}"/>>작성자</option>
+						<option value="fc"
+							<c:out value="${scri.searchType eq 'fc' ? 'selected' : ''}"/>>축제이름
+							+ 담당기관</option>
+					</select> <input type="text" name="keyword" id="keywordInput"
+						value="${scri.keyword}" />
+					<button id="searchBtnForm" type="button">
+						<i class="bi bi-search"></i>
+					</button>
+					<script>
+						$(function() {
+							$('#searchBtnForm').click(
+											function(e) {
+												self.location = "list"
+														+ '${pageMaker.makeQuery(1)}'
+														+ "&searchType="
+														+ $(
+																"select option:selected")
+																.val()
+														+ "&keyword="
+														+ encodeURIComponent($(
+																'#keywordInput')
+																.val());
+											});
+						});
+						
+
+					</script>	
+
+
+
+				</div>
+
+
+				<!-- 페이지네이션 -->
+				<div>
+					<ul>
+						<c:if test="${pageMaker.prev}">
+							<li><a
+								href="list${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
+						</c:if>
+
+						<c:forEach begin="${pageMaker.startPage}"
+							end="${pageMaker.endPage}" var="idx">
+							<li><a href="list${pageMaker.makeSearch(idx)}">${idx}</a></li>
+						</c:forEach>
+
+						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+							<li><a
+								href="list${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
+						</c:if>
+					</ul>
+				</div>
+
 			</form>
 
 			<div class="container">

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -18,7 +17,7 @@
 <body>
 
 	<header>
-	<img src="images/신청 양식 이미지3.png"  width="800" height="220">
+		<img src="images/신청 양식 이미지3.png" width="800" height="220">
 		<section class="header-wrap">
 			<div class="top-deco">""</div>
 			<section class="header">
@@ -27,19 +26,36 @@
 				<p>문의 링크 / 이메일</p>
 			</section>
 			<div class="trans">
-				세션 아이디 <a href="">로그아웃</a>
+				<input type="text" id="writer" name="writer"
+					value="<c:out value="${update.writer}" />" readonly />
 			</div>
 		</section>
 	</header>
 
 	<main>
-		<p><span id="essential">*</span> 은 필수 입력입니다.</p>
+		<p>
+			<span id="essential">*</span> 은 필수 입력입니다.
+		</p>
 
 
-		<form action="" method="post" class="form" id="update">
-			<input type="hidden" id="fno" name="fno" value="${update.fno}" />
+		<form action="" method="post" class="form" id="update"
+			onsubmit="return validateForm()">
+
+
+			<!-- 페이징 -->
+			<!-- cri값을 보관하기위해 form태그안에 타입 hidden으로 input태그를 추가 -->
+			<input type="hidden" id="fno" name="fno" value="${update.fno}" /> <input
+				type="hidden" id="page" name="page" value="${scri.page}"> <input
+				type="hidden" id="perPageNum" name="perPageNum"
+				value="${scri.perPageNum}"> <input type="hidden"
+				id="searchType" name="searchType" value="${scri.searchType}">
+			<input type="hidden" id="keyword" name="keyword"
+				value="${scri.keyword}"> <input type="hidden" id="fno"
+				name="fno" value="${update.fno}" />
 			<fieldset>
-				<p class="place">장소 구분을 선택해주세요 <span id="essential">*</span></p>
+				<p class="place">
+					장소 구분을 선택해주세요 <span id="essential">*</span>
+				</p>
 				<br> <input type="radio" name="place" id="inside"
 					value="inside" <c:if test="${update.place}">checked</c:if>>
 				<label for="inside"> 실내</label> <br> <input type="radio"
@@ -52,20 +68,26 @@
 			</fieldset>
 
 			<fieldset>
-				<p class="festival_name">행사명을 적어주세요 <span id="essential">*</span></p>
+				<p class="festival_name">
+					행사명을 적어주세요 <span id="essential">*</span>
+				</p>
 				<br> <input type="text" class="answer1" name="festivalName"
 					id="festivalName" value="${update.festivalName}"
 					placeholder="행사명을 입력해주세요">
 			</fieldset>
 
 			<fieldset>
-				<p class="address_event">행사장 주소를 적어주세요 <span id="essential">*</span></p>
+				<p class="address_event">
+					행사장 주소를 적어주세요 <span id="essential">*</span>
+				</p>
 				<br> <input type="text" class="answer1" name="addressEvent"
 					value="${update.addressEvent}" placeholder="행사장 주소를 입력해주세요">
 			</fieldset>
 
 			<fieldset>
-				<p class="Number_of_people">예상 인원 수가 어떻게 되시나요? <span id="essential">*</span></p>
+				<p class="Number_of_people">
+					예상 인원 수가 어떻게 되시나요? <span id="essential">*</span>
+				</p>
 				<br> <input type="radio" name="numberOfPeople"
 					value="NumberOfPeople 50" id="numberOfPeople_50"
 					<c:if test="${update.numberOfPeople == 'NumberOfPeople 50'}">checked</c:if>>
@@ -89,7 +111,9 @@
 			</fieldset>
 
 			<fieldset>
-				<p class="carrying_difficulty">운반 난이도가 어떻게 되시나요? <span id="essential">*</span></p>
+				<p class="carrying_difficulty">
+					운반 난이도가 어떻게 되시나요? <span id="essential">*</span>
+				</p>
 				<br> <select name="carryingDifficulty" id="carryingDifficulty">
 					<option selected>운반 난이도를 선택해주세요</option>
 					<option value="level1"
@@ -114,7 +138,9 @@
 			</fieldset>
 
 			<fieldset>
-				<p class="start_date">행사일과 시작 시간이 어떻게 되시나요? <span id="essential">*</span></p>
+				<p class="start_date">
+					행사일이 어떻게 되시나요? <span id="essential">*</span>
+				</p>
 				<br>
 				<p class="mini-name">날짜</p>
 				<input type="date" class="datetime" value="${update.startDate}"
@@ -122,7 +148,7 @@
 			</fieldset>
 
 			<fieldset>
-				<p class="end_date">행사일과 종료 시간이 어떻게 되시나요? *</p>
+				<p class="end_date">행사 종료 일이 어떻게 되시나요? *</p>
 				<br>
 				<p class="mini-name">날짜</p>
 				<input type="date" class="datetime" value="${update.endDate}"
@@ -130,7 +156,9 @@
 			</fieldset>
 
 			<fieldset>
-				<p class="budget_range">예상 금액이 어떻게 되시나요? <span id="essential">*</span></p>
+				<p class="budget_range">
+					예상 금액이 어떻게 되시나요? <span id="essential">*</span>
+				</p>
 				<br> <select name="budgetRange" id="budgetRange">
 					<option selected>예상 금액을 선택해주세요</option>
 					<option value="budgetRange 100"
@@ -164,17 +192,26 @@
 			</fieldset>
 
 			<fieldset>
-				<p class="commissioning_agency">의뢰 회사(기관)을 적어주세요 <span id="essential">*</span></p>
+				<p class="commissioning_agency">
+					의뢰 회사(기관)을 적어주세요 <span id="essential">*</span>
+				</p>
 				<br> <input type="text" class="answer1"
 					name="commissioningAgency" value="${update.commissioningAgency}"
 					placeholder="회사명을 입력해주세요">
 			</fieldset>
 
 			<fieldset>
-				<p class="name">담당자 성함을 적어주세요 <span id="essential">*</span></p>
+				<p class="name">
+					담당자 성함을 적어주세요 <span id="essential">*</span>
+				</p>
 				<br> <input type="text" class="answer1" name="name"
 					value="${update.name}" placeholder="성함을 입력해주세요">
 			</fieldset>
+
+
+			<!-- null 값 방지용 input -->
+			<input type="hidden" name="writer"
+				value="<c:out value="${update.writer}" />">
 
 			<button type="submit" class="update_btn">수정</button>
 			<button type="submit" class="delete_btn">삭제</button>
@@ -184,13 +221,27 @@
 	</main>
 
 
+	<!-- 페이지 값 작성 / 댓글 -->
+	<script>
+		/*목록으로 이동 시 페이징*/
+		$(".cancel-btn")
+				.on(
+						"click",
+						function() {
+							location.href = "/list?page=${scri.page}"
+									+ "&perPageNum=${scri.perPageNum}"
+									+ "&searchType=${scri.searchType}&keyword=${scri.keyword}";
+						});
+	</script>
+
+
 	<script>
 		document
 				.addEventListener(
 						"DOMContentLoaded",
 						function() {
 							// 장소 구분 값 가져오기
-							
+
 							var place = "${update.place}";
 							var placeRadios = document
 									.getElementsByName("place");
@@ -249,31 +300,29 @@
 	</script>
 
 	<script type="text/javascript">
-/*		$(document).ready(function() {
-			var formObj = $("#update");
+		/*		$(document).ready(function() {
+		 var formObj = $("#update");
 
+		 // 수정
+		 $(".update_btn").on("click", function() {
+		 if (confirm("수정하시겠습니까?")) {
+		 formObj.attr("action", "/updateView");
+		 formObj.attr("method", "post");
+		 formObj.submit();
+		 }
+		 });*/
+
+		$(document).ready(function() {
+			var formObj = $("#update");
 			// 수정
-			$(".update_btn").on("click", function() {
+			$(".update_btn").on("click", function(e) {
+				e.preventDefault(); // 기본 동작 중지
 				if (confirm("수정하시겠습니까?")) {
 					formObj.attr("action", "/updateView");
 					formObj.attr("method", "post");
 					formObj.submit();
 				}
-			});*/
-			
-			
-			$(document).ready(function() {
-			    var formObj = $("#update");
-			    // 수정
-			    $(".update_btn").on("click", function(e) {
-			        e.preventDefault(); // 기본 동작 중지
-			        if (confirm("수정하시겠습니까?")) {
-			            formObj.attr("action", "/updateView");
-			            formObj.attr("method", "post");
-			            formObj.submit();
-			        }
-			    });
-			
+			});
 
 			// 삭제
 			$(".delete_btn").on("click", function() {
@@ -287,6 +336,114 @@
 		});
 	</script>
 
+	<!-- 유효성 검사 스크립트 -->
+	<script>
+		function validateForm() {
+
+			//비회원
+			if (writer.value.trim() === '') {
+				alert('로그인을 해주세요.');
+				return false;
+			}
+
+			var placeRadioButtons = document
+					.querySelectorAll('input[name="place"]');
+			var placeRadioButtonChecked = false;
+			for (var i = 0; i < placeRadioButtons.length; i++) {
+				if (placeRadioButtons[i].checked) {
+					placeRadioButtonChecked = true;
+					break;
+				}
+			}
+
+			if (!placeRadioButtonChecked) {
+				alert('장소 구분을 선택해주세요.');
+				return false;
+			}
+
+			// 행사명
+			var festivalNameField = document
+					.querySelector('input[name="festivalName"]');
+			if (festivalNameField.value.trim() === '') {
+				alert('행사명을 입력해주세요.');
+				return false;
+			}
+
+			// 행사장 주소
+			var addressEventField = document
+					.querySelector('input[name="addressEvent"]');
+			if (addressEventField.value.trim() === '') {
+				alert('행사장 주소를 입력해주세요.');
+				return false;
+			}
+
+		
+
+			//운반 난이도
+			var carryingDifficultySelect = document
+					.querySelector('select[name="carryingDifficulty"]');
+			if (carryingDifficultySelect.value === '운반 난이도를 선택해주세요') {
+				alert('운반 난이도를 선택해주세요.');
+				return false;
+			}
+
+			var startDateField = document
+					.querySelector('input[name="startDate"]');
+			if (startDateField.value.trim() === '') {
+				alert('행사 시작 날짜를 선택해주세요.');
+				return false;
+			}
+
+			var endDateField = document.querySelector('input[name="endDate"]');
+			if (endDateField.value.trim() === '') {
+				alert('행사 종료 날짜를 선택해주세요.');
+				return false;
+			}
+
+			var startDate = new Date(startDateField.value);
+			var endDate = new Date(endDateField.value);
+			if (endDate < startDate) {
+				alert('행사 종료 날짜는 행사 시작 날짜보다 이후 날짜여야 합니다.');
+				return false;
+			}
+
+			var selectedStartDate = new Date(startDateField.value + 'T00:00:00');
+			var currentDate = new Date();
+
+			var minDate = new Date(selectedStartDate);
+			minDate.setDate(minDate.getDate() - 7);
+
+			if (currentDate > minDate) {
+				alert('마감 기한은 행사 시작 7일 전까지입니다.');
+				return false;
+			}
+
+			//예상 금액
+			var budgetRangeSelect = document
+					.querySelector('select[name="budgetRange"]');
+			if (budgetRangeSelect.value === '예상 금액을 선택해주세요') {
+				alert('예상 금액을 선택해주세요.');
+				return false;
+			}
+
+			// 의뢰 회사(기관)
+			var commissioningAgencyField = document
+					.querySelector('input[name="commissioningAgency"]');
+			if (commissioningAgencyField.value.trim() === '') {
+				alert('회사명을 입력해주세요.');
+				return false;
+			}
+
+			// 담당자 성함
+			var nameField = document.querySelector('input[name="name"]');
+			if (nameField.value.trim() === '') {
+				alert('담당자 성함을 입력해주세요.');
+				return false;
+			}
+
+			return true;
+		}
+	</script>
 
 
 

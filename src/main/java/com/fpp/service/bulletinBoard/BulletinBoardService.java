@@ -12,17 +12,11 @@ public interface BulletinBoardService {
 	public void insertBulletinBoard(BulletinBoardDto  bulletinBoardDto) throws Exception;
 
 	// 게시물 목록 조회
-//	public List<BulletinBoardDto> selectBulletinBoardList() throws Exception;
-	
 	public List<BulletinBoardDto> selectBulletinBoardList(SearchCriteria scri) throws Exception;
 	
 	//페이지
 	public int listCount(SearchCriteria scri) throws Exception ;
-	
-	
-	
-	
-	
+
 	// 게시글 번호로 조회
 	public BulletinBoardDto selectBulletinBoardListByBno(int bno) throws Exception;
 

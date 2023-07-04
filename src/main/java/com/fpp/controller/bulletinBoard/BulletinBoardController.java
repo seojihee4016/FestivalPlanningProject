@@ -24,7 +24,6 @@ import com.fpp.dto.bulletinBoard.CommentsDto;
 import com.fpp.dto.bulletinBoard.PageMaker;
 import com.fpp.dto.bulletinBoard.SearchCriteria;
 import com.fpp.dto.bulletinBoard.Criteria;
-import com.fpp.dto.staff.StaffDto;
 import com.fpp.dto.user.UserDto;
 import com.fpp.service.bulletinBoard.BulletinBoardService;
 import com.fpp.service.bulletinBoard.CommentsService;

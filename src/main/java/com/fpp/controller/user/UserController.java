@@ -14,14 +14,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fpp.dto.user.UserDto;
 import com.fpp.service.user.UserService;
 import com.fpp.utils.ScriptUtil;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 @Controller
 public class UserController {
@@ -29,13 +26,8 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
-	@RequestMapping("/")
-	public String main() {
-		return "main";
-	}
-	
 	@RequestMapping("/main")
-	public String mainpage() {
+	public String main() {
 		return "main";
 	}
 
@@ -67,7 +59,8 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public String login_proc(@ModelAttribute UserDto userDto, HttpSession session) {
+	public String login_proc(@ModelAttribute UserDto userDto, HttpSession session, HttpServletResponse response)
+			throws IOException {
 
 		System.out.println(userDto.toString());
 		boolean tryLogin = userService.login(userDto);
@@ -75,11 +68,12 @@ public class UserController {
 		System.out.println(tryLogin);
 
 		if (tryLogin) {
+			ScriptUtil.alert(response, userDto.getLoginId() + "님 환영합니다!");
 			session.setAttribute("loginId", userDto.getLoginId());
-			return "redirect:/main";
+			return "main";
 		}
-
-		return "redirect:/login";
+		ScriptUtil.alert(response, "입력하신 정보가 일치하지 않습니다.");
+		return "login";
 	}
 
 	@RequestMapping("/logout")
@@ -87,30 +81,23 @@ public class UserController {
 		session.invalidate();
 		return "redirect:/main";
 	}
-	
-	@RequestMapping("/logout2")
-	public String logout2(HttpSession session) {
+
+	@RequestMapping("/withdrawalsuccess")
+	public String withdrawalsuccess(HttpSession session) {
 		session.invalidate();
-		return "logout2";
+		return "withdrawalsuccess";
 	}
 
 	@PostMapping("/idcheck")
 	@ResponseBody
-	public JsonObject idCheck(@ModelAttribute UserDto userDto, BindingResult bindingResult) {
-
-		JsonParser parser = new JsonParser();
-		JsonObject obj = null;
+	public String idCheck(UserDto userDto, BindingResult bindingResult) {
 
 		boolean idCheck = userService.idCheck(userDto, bindingResult);
 
 		if (idCheck) {
-			obj = (JsonObject) parser.parse("{\"result\" : \"true\" }");
-		} else {
-			obj = (JsonObject) parser.parse("{\"result\" : \"false\" }");
-
+			return "true";
 		}
-
-		return obj;
+		return "false";
 	}
 
 	@RequestMapping("/header")
@@ -182,17 +169,15 @@ public class UserController {
 	}
 
 	@PostMapping("/withdrawal")
-	public String withdrawal_proc(@ModelAttribute UserDto userDto, HttpSession session, HttpServletResponse response) throws IOException {
+	public String withdrawal_proc(UserDto userDto, HttpSession session) {
 
 		userDto.setLoginId(session.getAttribute("loginId").toString());
 		int result = userService.WithdrawalUserInfo(userDto);
 
-		if (result == 0) {
-			ScriptUtil.alert(response, "입력하신 비밀번호가 일치하지 않습니다.");
-			return "withdrawal";
-		}
 		// 회원탈퇴 성공
-		ScriptUtil.alert(response, "그동안 Piñata를 이용해주셔서 감사합니다.");
-		return "logout2";
+		if (result != 0) {
+			return "redirect:/withdrawalsuccess";
+		}
+		return "redirect:/withdrawal";
 	}
 }
