@@ -40,13 +40,3 @@ INSERT INTO common_code VALUES ('rf2', '안전요원');
 INSERT INTO common_code VALUES ('inside', '실내');
 INSERT INTO common_code VALUES ('outdoors', '실외');
 INSERT INTO common_code VALUES ('inAndOut', '실내 + 실외');
-
-
-
-
-
-SELECT ff.FESTIVAL_NAME, ff.address_event, ff.place,
-        sra.id, sra.support_period_start, sra.support_period_end,
-        cc.code_name
-FROM FESTIVAL_FORM ff, staff_recruitment_apply sra, common_code cc
-WHERE ff.fno = sra.srno AND sra.recruitment_field = cc.code_type AND sra.id = 'admin';

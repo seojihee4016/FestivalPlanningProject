@@ -103,8 +103,8 @@
 										class="nav-link dropdown-toggle" href="#" role="button"
 										data-bs-toggle="dropdown" aria-expanded="false"> 마이페이지 </a>
 										<ul class="dropdown-menu menubox">
-											<li><a class="dropdown-item" href="<!-- 마이페이지 -->"></a></li>
-											<li><hr class="dropdown-divider"></li>
+											<!-- <li><a class="dropdown-item" href="staffApplyList">스탭 신청 내역</a></li>
+											<li><hr class="dropdown-divider"></li> -->
 											<li><a class="dropdown-item" href="pwcheck">회원정보 수정</a></li>
 											<li><hr class="dropdown-divider"></li>
 											<li><a class="dropdown-item" href="withdrawal">회원탈퇴</a></li>

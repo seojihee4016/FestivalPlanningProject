@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fpp.dto.board.FormDto;
 import com.fpp.dto.commonCode.CommonCodeDto;
 import com.fpp.dto.staff.StaffApplyDto;
+import com.fpp.dto.staff.StaffApplyListDto;
 import com.fpp.dto.staff.StaffFormDto;
 import com.fpp.dto.staff.StaffDto;
 import com.fpp.service.applicationForm.BoardService;
@@ -181,6 +182,16 @@ public class StaffRecruitmentController {
 	    }
 
 	    return "redirect:/staffRecruitment?fno=" + fno;
+	}
+	
+	
+	@GetMapping("/staffApplyList")
+	public String staffApplyList(Model model) {
+		
+		List<StaffApplyListDto> staffApplyList = staffService.getStaffApplyList();
+		model.addAttribute("staffApplyList", staffApplyList);
+		
+		return "staffApplyList";
 	}
 
 }
