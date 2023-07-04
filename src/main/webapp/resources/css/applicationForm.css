@@ -4,10 +4,13 @@ body, header, h1, input {
 	margin: 0;
 	padding: 0;
 }
-
+html, body {
+		width: 100%;
+}
 /*디자인*/
+
 body {
-	width: 800px;
+width:800px;
 	color: rgb(54, 54, 54);
 	margin: 25px auto;
 	background-color: #fff;
