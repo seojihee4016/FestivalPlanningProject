@@ -74,126 +74,126 @@ public class BulletinBoardController {
 		return "bulletinBoardList";	
 	}
 
-	//게시글 수정
-	@GetMapping("/bulletinBoardProcess")
-	public String bulletinBoardProcess(BulletinBoardDto bulletinBoardDto ,UserDto userDto ,CommentsDto commentsDto, @ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception{
-
-		model.addAttribute("updateBulletinBoard", bulletinBoardService.selectBulletinBoardListByBno(bulletinBoardDto.getBno()));
-		model.addAttribute("scri", scri);
-
-
-
-		//댓글 - commentsService 주입
-		List<CommentsDto> commentList = commentsService.readCommentsList(bulletinBoardDto.getBno());
-		model.addAttribute("commentList", commentList);
-
-
-		return "bulletinBoardProcess";
-	}
-
-	// 게시글 수정 이후 리스트로 이동 - 페이징 유지 기능 추가
-	@PostMapping("/bulletinBoardProcess")
-	public String update(BulletinBoardDto bulletinBoardDto, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception{
-
-		//게시글 수정
-		bulletinBoardService.updateBulletinBoard(bulletinBoardDto);
-
-		//페이징 유지
-		rttr.addAttribute("page", scri.getPage());
-		rttr.addAttribute("perPageNum", scri.getPerPageNum());
-		rttr.addAttribute("searchType", scri.getSearchType());
-		rttr.addAttribute("keyword", scri.getKeyword());
-
-		return "redirect:/bulletinBoardList";
-	}	
-
-	// 게시글 삭제
-	@PostMapping("/deleteBulletinBoardByBno")
-	public String deleteBulletinBoard(BulletinBoardDto bulletinBoardDto, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception{
-
-		bulletinBoardService.deleteBulletinBoardByBno(bulletinBoardDto.getBno());
-
-		rttr.addFlashAttribute("scri", scri);
-
-		rttr.addAttribute("page", scri.getPage());
-		rttr.addAttribute("perPageNum", scri.getPerPageNum());
-		rttr.addAttribute("searchType", scri.getSearchType());
-		rttr.addAttribute("keyword", scri.getKeyword());
-
-		return "redirect:/bulletinBoardList";
-	}
-
-
-	/*댓글 작성
-	CommentsDto는 댓글 작성하기위한 데이터, 
-	SearchCriteria는 bulletinBoardProcess에 있던 page, perPageNum, searchType, keyword값을 받아오는 용도
-	RedirectAttributes는 redirect했을때 값들을 가지고 이동
-	SearchCriteria의 값을 넣어서 댓글을 저장 한 뒤 원래 페이지로 redirect하여 이동하는 구조*/
-
-	@PostMapping("/writeComments")
-	public String writeReply(CommentsDto commentsDto, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
-
-		commentsService.writeComments(commentsDto);
-
-		rttr.addAttribute("bno", commentsDto.getBno());
-		rttr.addAttribute("page", scri.getPage());
-		rttr.addAttribute("perPageNum", scri.getPerPageNum());
-		rttr.addAttribute("searchType", scri.getSearchType());
-		rttr.addAttribute("keyword", scri.getKeyword());
-
-		return "redirect:/bulletinBoardProcess";
-	}
-
-	//댓글 수정 get
-	@GetMapping("/updateCommentsByCno")
-	public String updateCommentsByCno(CommentsDto commentsDto, SearchCriteria scri, Model model) throws Exception {
-
-		model.addAttribute("updateCommentsByCno", commentsService.selectReply(commentsDto.getCno()));
-		model.addAttribute("scri", scri);
-
-		return "bulletinBoardProcess";
-	}
-
-	//댓글 수정 post
-	@PostMapping("/updateCommentsByCno")
-	public String replyUpdate(CommentsDto commentsDto, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
-
-		commentsService.updateCommentsByCno(commentsDto);
-
-		rttr.addAttribute("bno", commentsDto.getBno());
-		rttr.addAttribute("page", scri.getPage());
-		rttr.addAttribute("perPageNum", scri.getPerPageNum());
-		rttr.addAttribute("searchType", scri.getSearchType());
-		rttr.addAttribute("keyword", scri.getKeyword());
-
-		return "redirect:/bulletinBoardProcess";
-	}
-
-
-	//댓글 삭제 GET
-	@GetMapping("/deleteReply")
-	public String deleteReply(CommentsDto commentsDto, SearchCriteria scri, Model model) throws Exception {
-
-		model.addAttribute("deleteReply", commentsService.selectReply(commentsDto.getCno()));
-		model.addAttribute("scri", scri);
-
-		return "bulletinBoardProcess";
-	}
-
-	//댓글 삭제
-	@PostMapping("/deleteReply")
-	public String replyDelete(CommentsDto commentsDto, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
-
-		commentsService.deleteReply(commentsDto);
-
-		rttr.addAttribute("bno", commentsDto.getBno());
-		rttr.addAttribute("page", scri.getPage());
-		rttr.addAttribute("perPageNum", scri.getPerPageNum());
-		rttr.addAttribute("searchType", scri.getSearchType());
-		rttr.addAttribute("keyword", scri.getKeyword());
-
-		return "redirect:/bulletinBoardProcess";
-	}
+//	//게시글 수정
+//	@GetMapping("/bulletinBoardProcess")
+//	public String bulletinBoardProcess(BulletinBoardDto bulletinBoardDto ,UserDto userDto ,CommentsDto commentsDto, @ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception{
+//
+//		model.addAttribute("updateBulletinBoard", bulletinBoardService.selectBulletinBoardListByBno(bulletinBoardDto.getBno()));
+//		model.addAttribute("scri", scri);
+//
+//
+//
+//		//댓글 - commentsService 주입
+//		List<CommentsDto> commentList = commentsService.readCommentsList(bulletinBoardDto.getBno());
+//		model.addAttribute("commentList", commentList);
+//
+//
+//		return "bulletinBoardProcess";
+//	}
+//
+//	// 게시글 수정 이후 리스트로 이동 - 페이징 유지 기능 추가
+//	@PostMapping("/bulletinBoardProcess")
+//	public String update(BulletinBoardDto bulletinBoardDto, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception{
+//
+//		//게시글 수정
+//		bulletinBoardService.updateBulletinBoard(bulletinBoardDto);
+//
+//		//페이징 유지
+//		rttr.addAttribute("page", scri.getPage());
+//		rttr.addAttribute("perPageNum", scri.getPerPageNum());
+//		rttr.addAttribute("searchType", scri.getSearchType());
+//		rttr.addAttribute("keyword", scri.getKeyword());
+//
+//		return "redirect:/bulletinBoardList";
+//	}	
+//
+//	// 게시글 삭제
+//	@PostMapping("/deleteBulletinBoardByBno")
+//	public String deleteBulletinBoard(BulletinBoardDto bulletinBoardDto, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception{
+//
+//		bulletinBoardService.deleteBulletinBoardByBno(bulletinBoardDto.getBno());
+//
+//		rttr.addFlashAttribute("scri", scri);
+//
+//		rttr.addAttribute("page", scri.getPage());
+//		rttr.addAttribute("perPageNum", scri.getPerPageNum());
+//		rttr.addAttribute("searchType", scri.getSearchType());
+//		rttr.addAttribute("keyword", scri.getKeyword());
+//
+//		return "redirect:/bulletinBoardList";
+//	}
+//
+//
+//	/*댓글 작성
+//	CommentsDto는 댓글 작성하기위한 데이터, 
+//	SearchCriteria는 bulletinBoardProcess에 있던 page, perPageNum, searchType, keyword값을 받아오는 용도
+//	RedirectAttributes는 redirect했을때 값들을 가지고 이동
+//	SearchCriteria의 값을 넣어서 댓글을 저장 한 뒤 원래 페이지로 redirect하여 이동하는 구조*/
+//
+//	@PostMapping("/writeComments")
+//	public String writeReply(CommentsDto commentsDto, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
+//
+//		commentsService.writeComments(commentsDto);
+//
+//		rttr.addAttribute("bno", commentsDto.getBno());
+//		rttr.addAttribute("page", scri.getPage());
+//		rttr.addAttribute("perPageNum", scri.getPerPageNum());
+//		rttr.addAttribute("searchType", scri.getSearchType());
+//		rttr.addAttribute("keyword", scri.getKeyword());
+//
+//		return "redirect:/bulletinBoardProcess";
+//	}
+//
+//	//댓글 수정 get
+//	@GetMapping("/updateCommentsByCno")
+//	public String updateCommentsByCno(CommentsDto commentsDto, SearchCriteria scri, Model model) throws Exception {
+//
+//		model.addAttribute("updateCommentsByCno", commentsService.selectReply(commentsDto.getCno()));
+//		model.addAttribute("scri", scri);
+//
+//		return "bulletinBoardProcess";
+//	}
+//
+//	//댓글 수정 post
+//	@PostMapping("/updateCommentsByCno")
+//	public String replyUpdate(CommentsDto commentsDto, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
+//
+//		commentsService.updateCommentsByCno(commentsDto);
+//
+//		rttr.addAttribute("bno", commentsDto.getBno());
+//		rttr.addAttribute("page", scri.getPage());
+//		rttr.addAttribute("perPageNum", scri.getPerPageNum());
+//		rttr.addAttribute("searchType", scri.getSearchType());
+//		rttr.addAttribute("keyword", scri.getKeyword());
+//
+//		return "redirect:/bulletinBoardProcess";
+//	}
+//
+//
+//	//댓글 삭제 GET
+//	@GetMapping("/deleteReply")
+//	public String deleteReply(CommentsDto commentsDto, SearchCriteria scri, Model model) throws Exception {
+//
+//		model.addAttribute("deleteReply", commentsService.selectReply(commentsDto.getCno()));
+//		model.addAttribute("scri", scri);
+//
+//		return "bulletinBoardProcess";
+//	}
+//
+//	//댓글 삭제
+//	@PostMapping("/deleteReply")
+//	public String replyDelete(CommentsDto commentsDto, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
+//
+//		commentsService.deleteReply(commentsDto);
+//
+//		rttr.addAttribute("bno", commentsDto.getBno());
+//		rttr.addAttribute("page", scri.getPage());
+//		rttr.addAttribute("perPageNum", scri.getPerPageNum());
+//		rttr.addAttribute("searchType", scri.getSearchType());
+//		rttr.addAttribute("keyword", scri.getKeyword());
+//
+//		return "redirect:/bulletinBoardProcess";
+//	}
 
 
 

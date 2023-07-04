@@ -150,10 +150,10 @@ a:hover {
 	right: 0;
 }
 
-li {
+.li_class {
 	list-style: none;
 	float: left;
-	padding: 6px;
+	margin-right: 10px;
 }
 
 /*검색*/

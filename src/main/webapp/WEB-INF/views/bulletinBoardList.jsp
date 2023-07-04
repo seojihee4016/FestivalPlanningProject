@@ -33,10 +33,6 @@
 						<th>내용</th>
 						<th>작성자</th>
 						<th>등록일</th>
-						<c:if
-							test="${selectBulletinBoardList[0].writer == sessionScope.loginId || 'admin' == sessionScope.loginId}">
-							<th>수정</th>
-						</c:if>
 					</tr>
 
 					<c:forEach items="${selectBulletinBoardList}"
@@ -49,15 +45,7 @@
 							<td><c:out value="${selectBulletinBoardList.writer}" /></td>
 							<td><fmt:formatDate
 									value="${selectBulletinBoardList.regdate}" pattern="yyyy-MM-dd" /></td>
-							<c:if
-								test="${sessionScope.loginId == selectBulletinBoardList.writer || sessionScope.loginId == 'admin'}">
-								<td><a
-									href="/bulletinBoardProcess?bno=${selectBulletinBoardList.bno}&page=${scri.page}
-								&perPageNum=${scri.perPageNum}
-								&searchType=${scri.searchType}
-								&keyword=${scri.keyword}"
-									class="custom-button">수정</a></td>
-							</c:if>
+							
 
 						</tr>
 					</c:forEach>
@@ -109,17 +97,17 @@
 				<div>
 					<ul>
 						<c:if test="${pageMaker.prev}">
-							<li><a
+							<li  class= "li_class"><a
 								href="bulletinBoardList${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
 						</c:if>
 
 						<c:forEach begin="${pageMaker.startPage}"
 							end="${pageMaker.endPage}" var="idx">
-							<li><a href="bulletinBoardList${pageMaker.makeSearch(idx)}">${idx}</a></li>
+							<li class= "li_class"><a href="bulletinBoardList${pageMaker.makeSearch(idx)}">${idx}</a></li>
 						</c:forEach>
 
 						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-							<li><a
+							<li class= "li_class"><a
 								href="bulletinBoardList${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
 						</c:if>
 					</ul>
