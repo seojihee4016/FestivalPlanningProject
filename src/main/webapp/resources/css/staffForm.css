@@ -16,8 +16,13 @@
 	padding: 0;
 	box-sizing: border-box;
 }
-h1 {
-	margin: 30px 0px 20px 0px;
+html, body {
+	height: 100%;
+	font-family: HallymGothic-Regular;
+}
+h3 {
+	margin-bottom: 40px;
+	font-weight: 700;
 	text-align: center;
 }
 .errorMsg {
@@ -63,7 +68,7 @@ form {
 }
 
 .btnArea {
-	margin-top: 30px;
+	margin-top: 20px;
 	text-align: center;
 }
 #submitBtn {

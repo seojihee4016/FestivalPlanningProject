@@ -13,15 +13,13 @@
 </head>
 <body>
 	<div class="container">
-		<h3>스탭 모집 공고 페이지</h3>
-		
-		<h4>< 한 줄 공지사항(필요하면 팝업식으로) ></h4>
+		<h3>스탭 모집 공고</h3>
 		
 		<div class="list_container">
 			<c:forEach var="item" items="${activeStaffFormList}">
 				<a href="staffRecruitment?fno=${item.fno}">
 					<div class="list_area">
-						<p>${item.festivalName}</p>
+						<p><b>${item.festivalName}</b></p>
 						<p>
 							<!-- 문자열에서 Date 형변환 -->
 						<fmt:parseDate var="startDate" value="${item.startDate}" pattern="yyyy-MM-dd HH:mm:ss" />

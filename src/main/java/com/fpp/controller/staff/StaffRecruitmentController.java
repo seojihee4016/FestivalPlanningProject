@@ -72,10 +72,10 @@ public class StaffRecruitmentController {
 	    if (staffDto.getRecruitmentTO() == null || staffDto.getRecruitmentTO() <= 0) {
 	    	//오류 메시지를 bindingResult에 추가합니다.
 	    	//이는 검증 실패 시 해당 오류 메시지가 bindingResult에 저장되어야 한다는 의미입니다.
-	        bindingResult.addError(new FieldError("staffDto", "recruitmentTO", "모집 인원을 입력해 주세요."));
+	        bindingResult.addError(new FieldError("staffDto", "recruitmentTO", " *모집 인원을 입력해 주세요."));
 	        //오류 메시지를 redirectAttributes에 추가합니다.
 	        //이는 검증 실패 시 해당 오류 메시지를 "리다이렉트"된 페이지로 전달하여 출력하기 위한 것입니다.
-	        redirectAttributes.addFlashAttribute("errorRecruitmentTO", "모집 인원을 입력해 주세요.");
+	        redirectAttributes.addFlashAttribute("errorRecruitmentTO", " *모집 인원을 입력해 주세요.");
 	    }
 	    //모집분야
 	    if (staffDto.getApplicationPeriod() == null) {
