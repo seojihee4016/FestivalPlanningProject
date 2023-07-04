@@ -5,41 +5,44 @@
 						
 
 <mapper namespace="staff_mapper">
-	<!-- 스탭 모집 공고 -->
+
+	<!-- 스탭 모집 공고 추가 -->
 	<insert id="insert_staff" parameterType="StaffDto">
-		insert into t_staff_recruitment
-		values ( #{festivalName}, #{commissioningAgency}, #{addressEvent},
-				 #{place}, #{startDate}, #{endDate},
-				 #{recruitmentTO}, #{recruitmentField},
+		INSERT INTO staff_recruitment
+		(SRNO, recruitment_to, recruitment_field, preferential_treatment, application_period) 
+		VALUES ( #{SRNO}, #{recruitmentTO}, #{recruitmentField},
 				 #{preferentialTreatment}, #{applicationPeriod} )
 	</insert>
 	
-	<select id="select_staff_recruitment_list" resultType="StaffDto">
-		select festival_name, commissioning_agency, address_event, place,
-			   start_date, end_date,
-		       recruitment_to, recruitment_field,
-		       preferential_treatment, application_period
-		from t_staff_recruitment
+	<!-- 스탭 모집 공고 리스트 조회 -->
+ 	<select id="select_staff_recruitment_list" resultType="StaffDto">
+		SELECT SRNO, recruitment_to, recruitment_field, preferential_treatment, application_period 
+		FROM staff_recruitment
 	</select>
 	
-	<select id="select_staff_recruitment_list_by_festivalName" resultType="StaffDto"
-										    				   parameterType="String">
-		select festival_name, commissioning_agency, address_event, place,
-			   start_date, end_date,
-		       recruitment_to, recruitment_field,
-		       preferential_treatment, application_period
-		from t_staff_recruitment
-		where festival_name like '%' || #{value} || '%'
+	<!-- 스탭 모집 공고 + 신청 양식 테이블 조회 -->
+	 <select id="select_staff_recruitment_and_form_list" resultType="StaffFormDto">
+		SELECT ff.fno, ff.festival_name, ff.commissioning_agency, ff.address_event, ff.place, ff.start_date, ff.end_date, 
+			   sr.recruitment_to, sr.recruitment_field, sr.preferential_treatment, sr.application_period
+		FROM staff_recruitment sr, FESTIVAL_FORM ff
+		WHERE sr.SRNO = ff.FNO
+		ORDER BY sr.application_period
 	</select>
 	
+	<!-- 스탭 모집 공고 + 신청 양식 테이블 조회 by fno -->
+	<select id="select_staff_recruitment_form_list_by_fno" parameterType="int" resultType="StaffFormDto">
+		SELECT ff.fno, ff.festival_name, ff.commissioning_agency, ff.address_event, ff.place, ff.start_date, ff.end_date, 
+			   sr.recruitment_to, sr.recruitment_field, sr.preferential_treatment, sr.application_period
+		FROM staff_recruitment sr, FESTIVAL_FORM ff
+		WHERE sr.SRNO = ff.FNO AND ff.fno = #{fno}
+	</select>
 	
-	<!-- 스탭 모집 신청 -->
+	<!-- 스탭 신청 -->
 	<insert id="insert_staff_apply" parameterType="StaffApplyDto">
-		insert into t_staff_recruitment_apply
-		values ( #{festivalName}, #{supportPeriodStart}, #{supportPeriodEnd},
-				 #{recruitmentField} )
+		INSERT INTO staff_recruitment_apply
+		(SRNO, SRANO, support_period_start, support_period_end, recruitment_field, id)
+		VALUES (#{SRNO}, staff_recruitment_apply_SEQ.NEXTVAL, #{supportPeriodStart}, #{supportPeriodEnd},
+				 #{recruitmentField}, #{id})
 	</insert>
 	
-	
-
 </mapper>

@@ -33,6 +33,7 @@
 						<th>축제 종료 일자</th>
 						<th>작성자</th>
 						<th>수정</th>
+						<th>모집 공고</th>
 					</tr>
 
 					<c:forEach items="${list}" var="list">

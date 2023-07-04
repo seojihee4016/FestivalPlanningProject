@@ -1,28 +1,111 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
+<%@ include file="header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>스탭 모집 입력</title>
+<link href="${path}/css/staffForm.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-	<h1>staffRecruitment_form</h1>
+	<div class="container">
+		<h1>스탭 모집 공고 올리기</h1>
+		<form action="" method="post">
+			<div class="formContainer">
+				<div class="formArea">
+					<input type="hidden" name="SRNO" value="${formDto.fno}" />
+					<p class="formKey">축제명</p>
+					<p class="formValue">${formDto.festivalName}</p>
+					<p class="formKey">주최</p>
+					<p class="formValue">${formDto.commissioningAgency}</p>
+					<p class="formKey">축제장소</p>
+					<p class="formValue">${formDto.addressEvent}</p>
+					<p class="formKey">장소구분</p>
+					<p class="formValue">
+						<c:set var="place" value="${formDto.place}" />
+						<c:if test="${place == 'inside'}">
+							실내
+						</c:if>
+						<c:if test="${place == 'outdoors'}">
+							실외
+						</c:if>
+						<c:if test="${place == 'inAndOut'}">
+							실내 + 실외
+						</c:if>
+					</p>
+					<p class="formKey">축제 기간</p>
+					<p class="formValue">${formDto.startDate} ~ ${formDto.endDate}</p>
+				</div>
+				<div class="formArea">
+					<p class="formKey">모집인원
+						<c:if test="${not empty errorRecruitmentTO}">
+							<span class="errorMsg">${errorRecruitmentTO}</span>
+						</c:if>
+					</p>
+					<p class="formValue borderBottom">
+						<!-- String 값 비교 후 int형변환+value 저장 -->
+						<c:set var="numberOfPeople" value="${formDto.numberOfPeople}" />
+						<c:if test="${numberOfPeople == 'NumberOfPeople 50'}">
+							<fmt:parseNumber var="recruitmentTO_value" value="50" integerOnly="true" />
+						</c:if>
+						<c:if test="${numberOfPeople == 'NumberOfPeople 51~100'}">
+							<fmt:parseNumber var="recruitmentTO_value" value="100" integerOnly="true" />
+						</c:if>
+						<c:if test="${numberOfPeople == 'NumberOfPeople 101~200'}">
+							<fmt:parseNumber var="recruitmentTO_value" value="200" integerOnly="true" />
+						</c:if>
+						<c:if test="${numberOfPeople == 'NumberOfPeople 201~300'}">
+							<fmt:parseNumber var="recruitmentTO_value" value="300" integerOnly="true" />
+						</c:if>
+						<c:if test="${numberOfPeople == 'NumberOfPeople 301~400'}">
+							<fmt:parseNumber var="recruitmentTO_value" value="400" integerOnly="true" />
+						</c:if>
+						<!-- 모집인원 화면 출력시 input 기본값 소수점 없애기 -->
+						<fmt:parseNumber var="recruitmentTO_value" value="${recruitmentTO_value/10}" integerOnly="true" />
+						<input type="text" class="inputText" name="recruitmentTO" value="${recruitmentTO_value}"/> <!--  required="required" -->
+					</p>
+					
+					<p class="formKey">모집분야</p>
+					<p class="formValue">
+						<input type="radio" name="recruitmentField" id="rf1" value="rf1" checked="checked" /><label for="rf1"> 안내 도우미 </label>
+						<input type="radio" name="recruitmentField" id="rf2" value="rf2" /><label for="rf2"> 안전요원 </label>
+						<input type="radio" name="recruitmentField" id="rf0" value="rf0" /><label for="rf0"> 기타</label>
+					</p>
+					<p class="formKey">우대사항</p>
+					<p class="formValue borderBottom"><input type="text" class="inputText" name="preferentialTreatment" placeholder="해당사항을 적어주세요"/></p>
+					<p class="formKey">접수기간
+						<c:if test="${not empty errorApplicationPeriod}">
+							<span class="errorMsg">${errorApplicationPeriod}</span>
+						</c:if>
+					</p>
+					<p class="formValue inputText">
+						<input type="date" class="inputText" name="applicationPeriod" value="${formDto.endDate}" required="required" 
+							   min="<%= java.time.LocalDate.now().plusDays(1) %>" max="${formDto.endDate}" />
+					</p>
+				</div>
+			</div>
+			<div class="btnArea">
+				<button type="submit" id="submitBtn">업로드</button>
+			</div>
+		</form>	
+	</div>
 	
-	<form action="" method="post">
-		<p>축제명 <input type="text" name="festivalName" /></p>
-		<p>주최 <input type="text" name="commissioningAgency" /></p>
-		<p>축제 장소 <input type="text" name="addressEvent" /></p>
-		<p>장소 구분 <input type="text" name="place" /></p> <!-- 라디오? -->
-		<p>축제 시작일 <input type="date" name="startDate" /></p>
-		<p>축제 종료일 <input type="date" name="endDate" /></p>
-		<p>모집인원 <input type="text" name="recruitmentTO" /></p><!-- 예상인원/10 등 기본값 적용하기 -->
-		<!-- <p>모집분야 <input type="text" name="recruitmentField" /></p> -->
-		<p>모집분야 <input type="radio" name="recruitmentField" value="1" checked="checked" />안내 도우미
-				 <input type="radio" name="recruitmentField" value="2" />안전요원</p>
-		<p>우대사항 <input type="text" name="preferentialTreatment" /></p>
-		<p>접수기간 <input type="date" name="applicationPeriod" /></p>
-		<button type="submit">업로드</button>
-	</form>	
+	
+<script>
+    var errorFno = "${errorFno}";
+    if (errorFno) {
+        alert(errorFno);
+        location.href ="staffRecruitmentList";
+    }
+    var successUpload = "${successUpload}";
+    if (successUpload) {
+        alert(successUpload);
+        location.href ="staffRecruitmentList";
+    }
+</script>
 </body>
 </html>
