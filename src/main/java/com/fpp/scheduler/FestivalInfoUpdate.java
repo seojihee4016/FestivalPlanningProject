@@ -31,7 +31,7 @@ public class FestivalInfoUpdate {
 	@Autowired
 	FestivalDataDao festivalDataDao;
 	
-	@Scheduled(cron  = "0 0 3 * * *")
+	@Scheduled(cron  = "0 * 3 * * *")
 	public void festivalInfoUpdateScheduler() throws IOException, ParseException {
 
 //		StringBuilder urlBuilder = new StringBuilder("http://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api"); URL
