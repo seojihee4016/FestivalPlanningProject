@@ -10,11 +10,8 @@
     </settings>
 
     <typeAliases>	<!-- mapper-parameterType -->
-<<<<<<< HEAD
-
-=======
     	<typeAlias type="com.fpp.dto.commonCode.CommonCodeDto" alias="CommonCodeDto"/>
->>>>>>> ft-staffRecruitment
+
     	<typeAlias type="com.fpp.dto.board.FormDto" alias="FormDto"/>
        	<typeAlias type="com.fpp.dto.bulletinBoard.BulletinBoardDto" alias="BulletinBoardDto"/>
        	<typeAlias type="com.fpp.dto.bulletinBoard.Criteria" alias="Criteria"/>
@@ -22,11 +19,8 @@
        	<typeAlias type="com.fpp.dto.bulletinBoard.CommentsDto" alias="CommentsDto"/>
     	<typeAlias type="com.fpp.dto.staff.StaffDto" alias="StaffDto"/>
     	<typeAlias type="com.fpp.dto.staff.StaffApplyDto" alias="StaffApplyDto"/>
-<<<<<<< HEAD
-=======
     	<typeAlias type="com.fpp.dto.staff.StaffFormDto" alias="StaffFormDto"/>
     	<typeAlias type="com.fpp.dto.festivalData.FestivalDataDto" alias="FestivalDataDto"/>
->>>>>>> ft-staffRecruitment
     	<typeAlias type="com.fpp.dto.user.UserDto" alias="UserDto"/>
     </typeAliases>
 
