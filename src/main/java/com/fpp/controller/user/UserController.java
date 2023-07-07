@@ -45,7 +45,7 @@ public class UserController {
 
 		// 유효성 검증 실패
 		if (bindingResult.hasErrors() || result == 0) {
-			ScriptUtil.alert(response, "회원가입에 실패했습니다.");
+		
 			return "join";
 		}
 		// 회원가입 성공
@@ -68,7 +68,6 @@ public class UserController {
 		System.out.println(tryLogin);
 
 		if (tryLogin) {
-			ScriptUtil.alert(response, userDto.getLoginId() + "님 환영합니다!");
 			session.setAttribute("loginId", userDto.getLoginId());
 			return "main";
 		}

@@ -48,10 +48,10 @@
 						href="bulletinBoardList">게시판</a></li>
 				</ul>
 				<!-- Button trigger modal -->
-				<div class="search-btnbox">
+<!-- 				<div class="search-btnbox">
 					<img src="images/searchicon.svg" class="form-control search-btn1"
 						data-bs-toggle="modal" data-bs-target="#exampleModal">
-				</div>
+				</div> -->
 				<!-- Modal -->
 				<div class="modal fade" id="exampleModal" tabindex="-1"
 					aria-labelledby="exampleModalLabel" aria-hidden="true">

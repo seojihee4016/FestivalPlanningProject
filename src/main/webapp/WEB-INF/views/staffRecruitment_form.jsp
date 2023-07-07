@@ -75,7 +75,7 @@
 						</c:if>
 						<!-- 모집인원 화면 출력시 input 기본값 소수점 없애기 -->
 						<fmt:parseNumber var="recruitmentTO_value" value="${recruitmentTO_value/10}" integerOnly="true" />
-						<input type="text" class="inputText" name="recruitmentTO" value="${recruitmentTO_value}"/> <!--  required="required" -->
+						<input type="number" class="inputText" name="recruitmentTO" value="${recruitmentTO_value}"/> <!--  required="required" -->
 					</p>
 					
 					<p class="formKey">모집분야</p>

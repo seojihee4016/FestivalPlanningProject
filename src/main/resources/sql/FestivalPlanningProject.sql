@@ -163,7 +163,7 @@ INSERT INTO common_code VALUES ('rf1', '안내도우미');
 INSERT INTO common_code VALUES ('rf2', '안전요원');
 
 --api 테이블
- CREATE TABLE "SCOTT"."FESTIVAL_INFO" 
+ CREATE TABLE FESTIVAL_INFO
    (	"FT_CODE" NUMBER(4,0), 
 	"FSTVL_NM" VARCHAR2(200 BYTE), 
 	"OPAR" VARCHAR2(200 BYTE), 
@@ -183,4 +183,44 @@ INSERT INTO common_code VALUES ('rf2', '안전요원');
 	"REFERENCE_DATE" VARCHAR2(200 BYTE), 
 	"INSTT_CODE" VARCHAR2(200 BYTE), 
 	"IMG_HREF" VARCHAR2(400 BYTE)
-   ) 
+   ) ;
+   
+ --  drop table FESTIVAL_INFO;
+  
+   UPDATE FESTIVAL_INFO
+SET IMG_HREF = 'https://cdn.netongs.com/news/photo/201808/107012_61214_2134.JPG'
+WHERE FSTVL_NM = '청년거리문화축제';
+   
+   UPDATE FESTIVAL_INFO
+SET IMG_HREF = 'https://www.newsro.kr/wp-content/uploads/2019/09/%EB%AC%B8%ED%99%94%EC%9E%AC%ED%99%9C%EC%9A%A9%EC%82%AC%EC%97%85-%EC%A0%84%ED%86%B5%EC%82%B0%EC%82%AC-%EC%B2%B4%ED%97%98-771x514.jpg'
+WHERE FSTVL_NM = '전통산사문화재';
+
+UPDATE FESTIVAL_INFO
+SET IMG_HREF = 'https://cdn.fieldnews.co.kr/news/photo/201910/49820_50223_1120.jpg'
+WHERE FSTVL_NM = '생생문화재';
+
+UPDATE FESTIVAL_INFO
+SET IMG_HREF = 'https://www.incheonin.com/news/photo/202209/91091_128634_3734.jpg'
+WHERE FSTVL_NM = '섬마을밴드 음악축제';
+
+UPDATE FESTIVAL_INFO
+SET IMG_HREF = 'https://www.monthlypeople.com/news/photo/202304/508640_507348_3116.jpg'
+WHERE FSTVL_NM = '양동통맥축제';
+
+UPDATE FESTIVAL_INFO
+SET IMG_HREF = 'http://www.headlinejeju.co.kr/news/photo/201107/119267_21380_5231.jpg'
+WHERE FSTVL_NM = '거리예술제';
+
+UPDATE FESTIVAL_INFO
+SET IMG_HREF = 'https://m.cas.or.kr/data/21040100/20230627_133744_b1f3314.jpg'
+WHERE FSTVL_NM = '문화와 예술이 어울어지는 미니콘서트';
+
+UPDATE FESTIVAL_INFO
+SET IMG_HREF = 'https://cphoto.asiae.co.kr/listimglink/1/2019071511095444790_1563156594.jpg'
+WHERE FSTVL_NM = '제24회 용전들노래 정기공연';
+
+UPDATE FESTIVAL_INFO
+SET IMG_HREF = 'https://www.incheonilbo.com/news/photo/202306/1200641_498171_1746.jpg'
+WHERE FSTVL_NM = '제27회 부천국제판타스틱영화제';
+
+select * from FESTIVAL_INFO;

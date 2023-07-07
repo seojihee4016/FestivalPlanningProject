@@ -124,5 +124,6 @@ geocoder.addressSearch('${festivalAddress}', function(result, status) {
     } 
 });    
 </script>
+<%@ include file="footer.jsp"%>
 </body>
 </html>
