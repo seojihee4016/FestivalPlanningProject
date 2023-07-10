@@ -1,7 +1,7 @@
 package com.fpp.dto.bulletinBoard;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.io.UnsupportedEncodingException;
 
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -58,7 +58,7 @@ public class PageMaker {
 		startPage = (endPage - displayPageNum) + 1;
 
 		int tempEndPage = (int) (Math.ceil(totalCount / (double)cri.getPerPageNum()));
-		if (endPage > tempEndPage) {
+ 		if (endPage > tempEndPage) {
 			endPage = tempEndPage;
 		}
 

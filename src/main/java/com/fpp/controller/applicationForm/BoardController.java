@@ -46,7 +46,16 @@ public class BoardController {
 
 	// 신청 양식 목록 조회 
 	@GetMapping("/list")
-	public String list(Model model , @ModelAttribute("scri") SearchCriteria scri) throws Exception{
+	public String list(HttpSession session, Model model , @ModelAttribute("scri") SearchCriteria scri) throws Exception{
+		
+		
+		if(session != null) {
+			String writer = (String)session.getAttribute("loginId");
+			if(writer != null) {
+				scri.setLoginId(writer);
+			}
+		}
+		
 		model.addAttribute("list",boardService.list(scri));
 
 		PageMaker pageMaker = new PageMaker();

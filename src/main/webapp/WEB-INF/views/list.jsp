@@ -40,26 +40,35 @@
 						<th>작성자</th>
 					</tr>
 
+
 					<c:forEach items="${list}" var="list">
-						<tr>
-							<td><c:out value="${list.fno}" /></td>
-							<td><c:out value="${list.festivalName}" /></td>
-							<td><c:out value="${list.name}" /></td>
-							<!--  <td><c:out value="${list.place}" /></td> -->
-							<td><c:out value="${list.addressEvent}" /></td>
-							<!-- <td><c:out value="${list.numberOfPeople}" /></td>
-              <td><c:out value="${list.carryingDifficulty}" /></td>
-              <td><c:out value="${list.budgetRange}" /></td> -->
-							<td><c:out value="${list.commissioningAgency}" /></td>
-							<td><c:out value="${list.startDate.split(' ')[0]}" /></td>
-							<td><c:out value="${list.endDate.split(' ')[0]}" /></td>
-							<td><c:out value="${list.writer}" /></td>
-
-						
-
-						</tr>
+						<c:if test="${sessionScope.loginId == list.writer}">
+							<tr class="clickable-row" data-href="/updateView?fno=${list.fno}">
+								<td><c:out value="${list.fno}" /></td>
+								<td><c:out value="${list.festivalName}" /></td>
+								<td><c:out value="${list.name}" /></td>
+								<td><c:out value="${list.addressEvent}" /></td>
+								<td><c:out value="${list.commissioningAgency}" /></td>
+								<td><c:out value="${list.startDate.split(' ')[0]}" /></td>
+								<td><c:out value="${list.endDate.split(' ')[0]}" /></td>
+								<td><c:out value="${list.writer}" /></td>
+							</tr>
+						</c:if>
 					</c:forEach>
 				</table>
+				
+				<!-- 열을 누르면 fno에 맞춰서 신청 양식에 들어올 수 있도록 설정하는 스크립트 -->
+				<script>
+					document.addEventListener("DOMContentLoaded", function() {
+						var rows = document
+								.getElementsByClassName("clickable-row");
+						for (var i = 0; i < rows.length; i++) {
+							rows[i].addEventListener("click", function() {
+								window.location = this.dataset.href;
+							});
+						}
+					});
+				</script>
 
 				<!-- 검색 기능 -->
 				<div class="search">
@@ -85,7 +94,8 @@
 					</button>
 					<script>
 						$(function() {
-							$('#searchBtnForm').click(
+							$('#searchBtnForm')
+									.click(
 											function(e) {
 												self.location = "list"
 														+ '${pageMaker.makeQuery(1)}'
@@ -99,9 +109,7 @@
 																.val());
 											});
 						});
-						
-
-					</script>	
+					</script>
 
 
 
@@ -112,17 +120,18 @@
 				<div>
 					<ul>
 						<c:if test="${pageMaker.prev}">
-							<li class= "li_class"><a
+							<li class="li_class"><a
 								href="list${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
 						</c:if>
 
 						<c:forEach begin="${pageMaker.startPage}"
 							end="${pageMaker.endPage}" var="idx">
-							<li class= "li_class"><a href="list${pageMaker.makeSearch(idx)}">${idx}</a></li>
+							<li class="li_class"><a
+								href="list${pageMaker.makeSearch(idx)}">${idx}</a></li>
 						</c:forEach>
 
 						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-							<li class= "li_class"><a
+							<li class="li_class"><a
 								href="list${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
 						</c:if>
 					</ul>

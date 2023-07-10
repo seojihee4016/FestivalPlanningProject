@@ -75,6 +75,7 @@
 			<if test="searchType == 'w'.toString()">AND WRITER LIKE '%' || #{keyword} || '%'</if>
 			<if test="searchType == 'fc'.toString()">AND (FESTIVAL_NAME LIKE '%' || #{keyword} || '%') or (commissioning_agency
 				LIKE '%' || #{keyword} || '%')</if>
+			<if test="loginId != null and loginId != ''"> AND writer = #{loginId} </if>
 		</if>
 	</sql>
 
