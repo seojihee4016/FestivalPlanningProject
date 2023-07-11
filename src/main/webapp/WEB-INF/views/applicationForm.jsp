@@ -9,6 +9,8 @@
 <link href="${path}/css/applicationForm.css?ver=3" rel="stylesheet"
 	type="text/css" />
 <!-- 버전 정보 쿼리스트링 형태로 추가. 브라우저가 url 인식해 캐쉬된 파일 대신 쿼리 스티링 추가된 css사용 -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 <title>google form</title>
 </head>
 <body>
@@ -38,6 +40,16 @@
 
 		<form action="applicationForm" method="post" class="form"
 			onsubmit="return validateForm()">
+
+			<fieldset>
+				<div >
+					<input class="form-check-input" type="checkbox" name="secret"
+						id="secret" value="true"> <label class="form-check-label">비밀글
+						설정</label>
+				</div>
+			</fieldset>
+
+
 			<fieldset>
 				<p class="place" id="">
 					장소 구분을 선택해주세요 <span id="essential">*</span>
@@ -169,9 +181,10 @@
 	<script>
 		function validateForm() {
 
-			//비회원
+			// 비회원
 			if (writer.value.trim() === '') {
 				alert('로그인을 해주세요.');
+				window.location.href = '/login';
 				return false;
 			}
 

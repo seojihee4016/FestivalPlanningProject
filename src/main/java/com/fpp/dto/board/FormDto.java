@@ -18,6 +18,6 @@ public class FormDto {
 	private String budgetRange;
 	private String commissioningAgency;
 	private String name;
-	
+	private String secret; // 공개 / 비공개 여부
 }
 

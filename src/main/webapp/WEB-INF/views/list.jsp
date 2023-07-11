@@ -40,40 +40,68 @@
 						<th>작성자</th>
 					</tr>
 
-
 					<c:forEach items="${list}" var="list">
-						<c:if test="${sessionScope.loginId == list.writer}">
-							<tr class="clickable-row" data-href="/updateView?fno=${list.fno}">
-								<td><c:out value="${list.fno}" /></td>
-								<td><c:out value="${list.festivalName}" /></td>
-								<td><c:out value="${list.name}" /></td>
-								<td><c:out value="${list.addressEvent}" /></td>
-								<td><c:out value="${list.commissioningAgency}" /></td>
-								<td><c:out value="${list.startDate.split(' ')[0]}" /></td>
-								<td><c:out value="${list.endDate.split(' ')[0]}" /></td>
-								<td><c:out value="${list.writer}" /></td>
-							</tr>
-						</c:if>
+						<tr class="clickable-row" data-href="/updateView?fno=${list.fno}">
+							<td><c:out value="${list.fno}" /></td>
+							<td><c:out value="${list.festivalName}" /></td>
+							<td><c:out value="${list.name}" /></td>
+							<td><c:out value="${list.addressEvent}" /></td>
+							<td><c:out value="${list.commissioningAgency}" /></td>
+							<td><c:out value="${list.startDate.split(' ')[0]}" /></td>
+							<td><c:out value="${list.endDate.split(' ')[0]}" /></td>
+							<td><c:out value="${list.writer}" /></td>
+						</tr>
 					</c:forEach>
 				</table>
-				
+
 				<!-- 열을 누르면 fno에 맞춰서 신청 양식에 들어올 수 있도록 설정하는 스크립트 -->
 				<script>
-					document.addEventListener("DOMContentLoaded", function() {
-						var rows = document
-								.getElementsByClassName("clickable-row");
-						for (var i = 0; i < rows.length; i++) {
-							rows[i].addEventListener("click", function() {
-								window.location = this.dataset.href;
-							});
-						}
-					});
+					document
+							.addEventListener(
+									"DOMContentLoaded",
+									function() {
+										var rows = document
+												.getElementsByClassName("clickable-row");
+										var loginId = "${sessionScope.loginId}";
+										var isAdmin = (loginId === "admin");
+
+										for (var i = 0; i < rows.length; i++) {
+											var listRow = rows[i];
+											var listWriter = listRow
+													.querySelector("td:nth-child(8)").textContent;
+
+											if (loginId === listWriter
+													|| isAdmin) {
+												var fno = listRow
+														.querySelector("td:nth-child(1)").textContent;
+
+												listRow
+														.addEventListener(
+																"click",
+																function() {
+																	var href = "/updateView?fno="
+																			+ fno
+																			+ "&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}";
+																	window.location.href = href;
+																});
+											} else {
+												listRow.style.pointerEvents = "none";
+											}
+										}
+									});
 				</script>
+				
+
+
+
+
+
+
+
 
 				<!-- 검색 기능 -->
 				<div class="search">
 					<select name="searchType">
-
 						<option value="n"
 							<c:out value="${scri.searchType == null ? 'selected' : ''}"/>>검색할
 							목록을 선택하세요</option>
@@ -110,9 +138,6 @@
 											});
 						});
 					</script>
-
-
-
 				</div>
 
 
@@ -151,4 +176,7 @@
 
 </body>
 </html>
+
+
+
 

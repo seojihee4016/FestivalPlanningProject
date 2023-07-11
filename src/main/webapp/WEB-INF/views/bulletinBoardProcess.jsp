@@ -45,20 +45,20 @@
 					<ul class="cont-box">
 
 						<li><select name="typeOfInquiry" id="typeOfInquiry">
-								<option value="[축제 문의]"
-									<c:if test="${updateBulletinBoard.typeOfInquiry == '[축제 문의]'}">selected</c:if>>축제
+								<option value="축제 문의"
+									<c:if test="${updateBulletinBoard.typeOfInquiry == '축제 문의'}">selected</c:if>>축제
 									문의</option>
-								<option value="[배치도 문의]"
-									<c:if test="${updateBulletinBoard.typeOfInquiry == '[배치도 문의]'}">selected</c:if>>배치도
+								<option value="배치도 문의"
+									<c:if test="${updateBulletinBoard.typeOfInquiry == '배치도 문의'}">selected</c:if>>배치도
 									문의</option>
-								<option value="[가격 문의]"
-									<c:if test="${updateBulletinBoard.typeOfInquiry == '[가격 문의]'}">selected</c:if>>가격
+								<option value="가격 문의"
+									<c:if test="${updateBulletinBoard.typeOfInquiry == '가격 문의'}">selected</c:if>>가격
 									문의</option>
-								<option value="[홍보 문의]"
-									<c:if test="${updateBulletinBoard.typeOfInquiry == '[홍보 문의]'}">selected</c:if>>홍보
+								<option value="홍보 문의"
+									<c:if test="${updateBulletinBoard.typeOfInquiry == '홍보 문의'}">selected</c:if>>홍보
 									문의</option>
-								<option value="[그 외]"
-									<c:if test="${updateBulletinBoard.typeOfInquiry == '[그 외]'}">selected</c:if>>그
+								<option value="그 외"
+									<c:if test="${updateBulletinBoard.typeOfInquiry == '그 외'}">selected</c:if>>그
 									외</option>
 						</select></li>
 
@@ -269,7 +269,6 @@
 
 		typeOfInquirySelect.addEventListener('click', function() {
 			typeOfInquirySelect.disabled = true; // 비활성화
-			alert('수정할 수 없습니다.');
 		});
 	</script>
 
