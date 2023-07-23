@@ -1,1 +1,139 @@
+/*카드 전환*/
+.flip-card {
+  position: relative;
+  background-color: transparent;
+  width: 220px;
+  height: 270px;
+  perspective: 1600px;
+  /*카드 전환될 때 3D 공간의 깊이*/
+  margin-bottom: 80px;
+}
+
+.flip-card-inner {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.7s;
+  transform-style: preserve-3d;
+  /*2D => 3D로 전환하기 위해 사용*/
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+input[type="checkbox"] {
+  /*체크 박스 숨기기*/
+  display: none;
+}
+
+ul {
+	list-style: none;
+}
+
+.flipcard {
+  animation-name: animateflipcard;
+  animation-duration: 500ms;
+  animation-fill-mode: forwards;
+  /*앞부분 보여주기, 사용 안 하면 원래 이미지로 돌아온다.*/
+}
+
+@keyframes animateflipcard {
+  0% {
+    -webkit-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+  }
+}
+
+.-flipcard {
+  animation-name: -animateflipcard;
+  animation-duration: 500ms;
+  animation-fill-mode: forwards;
+}
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-gap: 20px;
+  justify-content: center;
+}
+
+@keyframes -animateflipcard {
+  0% {
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+  }
+
+  100% {
+    -webkit-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+  }
+}
+
+/*=============================카드 앞부분==========================*/
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Flexbox properties with vendor prefixes */
+.flip-card-front {
+  display: -webkit-box; /* Safari */
+  display: -ms-flexbox; /* IE 10 */
+  display: flex;
+  -webkit-box-align: center; /* Safari */
+  -ms-flex-align: center; /* IE 10 */
+  align-items: center;
+  -webkit-box-pack: center; /* Safari */
+  -ms-flex-pack: center; /* IE 10 */
+  justify-content: center;
+}
+
+.flip-card-front h5 {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.flip-card-front h6 {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+/*=============================카드 뒷부분==========================*/
+.flip-card-back {
+  background: radial-gradient(circle at 10% 20%, #FEFCF3, #F5EBE0, #F0DBDB, #F8CBA6);
+  transform: rotateY(180deg);
+  font-family: 'Abel', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-container {
+  width: 100%;
+  height: 100%;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+}
+
+
 
