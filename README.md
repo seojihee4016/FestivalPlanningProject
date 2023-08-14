@@ -27,7 +27,7 @@
 #### 회원 가입 - <a href = "https://github.com/seojihee4016/FestivalPlanningProject/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(-%ED%9A%8C%EC%9B%90-%EA%B0%80%EC%9E%85,-%EB%A1%9C%EA%B7%B8%EC%9D%B8,--%EC%A0%95%EB%B3%B4-%EC%88%98%EC%A0%95,-%ED%9A%8C%EC%9B%90-%ED%83%88%ED%87%B4)" >상세보기 - WIKI 이동 <a/> 
 - ID 중복 체크
 
-#### 로그인 - <a href="[https://github.com/seojihee4016/FestivalPlanningProject/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%A1%9C%EA%B7%B8%EC%9D%B8)](https://github.com/seojihee4016/FestivalPlanningProject/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(-%ED%9A%8C%EC%9B%90-%EA%B0%80%EC%9E%85,-%EB%A1%9C%EA%B7%B8%EC%9D%B8,--%EC%A0%95%EB%B3%B4-%EC%88%98%EC%A0%95,-%ED%9A%8C%EC%9B%90-%ED%83%88%ED%87%B4))"> 상세보기 - WIKI 이동 </a>
+#### 로그인 - <a href = "https://github.com/seojihee4016/FestivalPlanningProject/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(-%ED%9A%8C%EC%9B%90-%EA%B0%80%EC%9E%85,-%EB%A1%9C%EA%B7%B8%EC%9D%B8,--%EC%A0%95%EB%B3%B4-%EC%88%98%EC%A0%95,-%ED%9A%8C%EC%9B%90-%ED%83%88%ED%87%B4)" >상세보기 - WIKI 이동 <a/> 
 - DB 값 검증
 - 로그인 시 쿠키(Cookie) 및 세션(Session) 생성
 
