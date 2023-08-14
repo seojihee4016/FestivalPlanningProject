@@ -24,14 +24,10 @@
 - *ORM** : Mybatis
 
 ## 📌 주요 기능
-#### 회원 가입 - <a href = "https://github.com/seojihee4016/FestivalPlanningProject/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(-%ED%9A%8C%EC%9B%90-%EA%B0%80%EC%9E%85,-%EB%A1%9C%EA%B7%B8%EC%9D%B8,--%EC%A0%95%EB%B3%B4-%EC%88%98%EC%A0%95,-%ED%9A%8C%EC%9B%90-%ED%83%88%ED%87%B4)" >상세보기 - WIKI 이동 <a/> 
+#### 회원 가입 / 로그인 / 회원 탈퇴/ 정보 수정 - <a href = "https://github.com/seojihee4016/FestivalPlanningProject/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(-%ED%9A%8C%EC%9B%90-%EA%B0%80%EC%9E%85,-%EB%A1%9C%EA%B7%B8%EC%9D%B8,--%EC%A0%95%EB%B3%B4-%EC%88%98%EC%A0%95,-%ED%9A%8C%EC%9B%90-%ED%83%88%ED%87%B4)" >상세보기 - WIKI 이동 <a/> 
 - ID 중복 체크
-
-#### 로그인 - <a href = "https://github.com/seojihee4016/FestivalPlanningProject/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(-%ED%9A%8C%EC%9B%90-%EA%B0%80%EC%9E%85,-%EB%A1%9C%EA%B7%B8%EC%9D%B8,--%EC%A0%95%EB%B3%B4-%EC%88%98%EC%A0%95,-%ED%9A%8C%EC%9B%90-%ED%83%88%ED%87%B4)" >상세보기 - WIKI 이동 <a/> 
 - DB 값 검증
 - 로그인 시 쿠키(Cookie) 및 세션(Session) 생성
-
-#### 회원 탈퇴 , 정보 수정 - <a href = "https://github.com/seojihee4016/FestivalPlanningProject/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(-%ED%9A%8C%EC%9B%90-%EA%B0%80%EC%9E%85,-%EB%A1%9C%EA%B7%B8%EC%9D%B8,--%EC%A0%95%EB%B3%B4-%EC%88%98%EC%A0%95,-%ED%9A%8C%EC%9B%90-%ED%83%88%ED%87%B4)" >상세보기 - WIKI 이동 <a/> 
 - 비밀번호 일치 시, 회원 탈퇴
 - 이메일, 전화번호, 비밀번호 수정 가능
 
@@ -41,10 +37,15 @@
 #### 견적 신청 - <a href="[https://github.com/seojihee4016/FestivalPlanningProject/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EC%B6%95%EC%A0%9C-%EA%B2%AC%EC%A0%81-%EC%8B%A0%EC%B2%AD)](https://github.com/seojihee4016/FestivalPlanningProject/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EC%B6%95%EC%A0%9C-%EA%B2%AC%EC%A0%81-%EC%8B%A0%EC%B2%AD))">상세보기 - WIKI 이동</a>
 - 로그인 시, 축제 견적 신청 폼 작성
 - 수정 , 삭제 가능 (마이페이지와 연동)
+- 리스트 페이지네이션 구현 
+- 리스트 검색 기능 구현(키워드 , 페이징 유지)
 
 #### 문의 게시판 - <a href="https://github.com/seojihee4016/FestivalPlanningProject/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%AC%B8%EC%9D%98-%EA%B2%8C%EC%8B%9C%ED%8C%90)">상세보기 - WIKI 이동</a>
 - 로그인 완료 시 , 문의글 작성 가능
 - 수정, 삭제 가능(마이페이지와 연동)
+- 작성자와 세션 아이디가 같을 시 댓글 작성 가능 (작성자와 관리자)
+- 댓글 수정, 삭제 가능
+- 페이지네이션 구현
 
 #### 배치도 작성 - <a href="">>상세보기 - WIKI 이동</a
 - 신청 견적서 주소로 배치도 작성(Selenium) 사용
