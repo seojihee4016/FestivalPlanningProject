@@ -27,28 +27,28 @@
 #### 회원 가입 - <a href = "https://github.com/seojihee4016/FestivalPlanningProject/wiki/%EC%B6%95%EC%A0%9C-%EA%B2%AC%EC%A0%81-%EC%8B%A0%EC%B2%AD" >상세보기 - WIKI 이동 <a/> 
 - ID 중복 체크
 
-#### 로그인 - 상세보기 - WIKI 이동
+#### 로그인 - <a href="https://github.com/seojihee4016/FestivalPlanningProject/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%A1%9C%EA%B7%B8%EC%9D%B8)"> 상세보기 - WIKI 이동 </a>
 - DB 값 검증
 - 로그인 시 쿠키(Cookie) 및 세션(Session) 생성
 
-#### 회원 탈퇴 , 정보 수정 - 상세보기 - WIKI 이동
+#### 회원 탈퇴 , 정보 수정 - <a href="">상세보기 - WIKI 이동</a>
 - 비밀번호 일치 시, 회원 탈퇴
 - 이메일, 전화번호, 비밀번호 수정 가능
 
-#### 지역축제 확인 - 상세보기 - WIKI 이동
+#### 지역축제 확인 -<a href="">상세보기 - WIKI 이동</a>
 - 비회원 / 회원 모두 개최 중인 지역 축제 정보 확인 - API 연동
 
-#### 견적 신청 - 상세보기 - WIKI 이동
+#### 견적 신청 - <a href="">상세보기 - WIKI 이동</a>
 - 로그인 시, 축제 견적 신청 폼 작성
 - 수정 , 삭제 가능 (마이페이지와 연동)
 
-#### 문의 게시판 - 상세보기 - WIKI 이동
+#### 문의 게시판 - <a href="">상세보기 - WIKI 이동</a>
 - 로그인 완료 시 , 문의글 작성 가능
 - 수정, 삭제 가능(마이페이지와 연동)
 
-#### 배치도 작성 - 상세보기 - WIKI 이동
+#### 배치도 작성 - <a href="">>상세보기 - WIKI 이동</a
 - 신청 견적서 주소로 배치도 작성(Selenium) 사용
 
-#### 스텝 공고 / 관리자 페이 - 상세보기 - WIKI 이동
+#### 스텝 공고 / 관리자 페이지 - <a href="">상세보기 - WIKI 이동</a>
 - 관리자로 로그인 시, 축제 견적 신청서를 토대로 스텝 공고 업로드
 
