@@ -47,7 +47,7 @@
 - 댓글 수정, 삭제 가능
 - 페이지네이션 구현
 
-#### 배치도 작성 - <a href="">상세보기 - WIKI 이동</a>
+#### 배치도 작성 - <a href="https://github.com/seojihee4016/FestivalPlanningProject/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%B0%B0%EC%B9%98%EB%8F%84-%EC%9E%91%EC%84%B1)">상세보기 - WIKI 이동</a>
 - 신청 견적서 주소로 배치도 작성(Selenium) 사용
 
 #### 스텝 공고 / 관리자 페이지 - <a href="">상세보기 - WIKI 이동</a>
