@@ -24,7 +24,7 @@
 - *ORM** : Mybatis
 
 ## 📌 주요 기능
-#### 회원 가입 - <a href = "https://github.com/seojihee4016/FestivalPlanningProject/wiki/%EC%B6%95%EC%A0%9C-%EA%B2%AC%EC%A0%81-%EC%8B%A0%EC%B2%AD" >상세보기 - WIKI 이동 <a/> 
+#### 회원 가입 - <a href = "https://github.com/seojihee4016/FestivalPlanningProject/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%ED%9A%8C%EC%9B%90-%EA%B0%80%EC%9E%85)" >상세보기 - WIKI 이동 <a/> 
 - ID 중복 체크
 
 #### 로그인 - <a href="https://github.com/seojihee4016/FestivalPlanningProject/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EB%A1%9C%EA%B7%B8%EC%9D%B8)"> 상세보기 - WIKI 이동 </a>
