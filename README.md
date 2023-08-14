@@ -31,7 +31,7 @@
 - 비밀번호 일치 시, 회원 탈퇴
 - 이메일, 전화번호, 비밀번호 수정 가능
 
-#### 지역축제 확인 - <a href="">상세보기 - WIKI 이동 </a>
+#### 지역축제 확인 - <a href="https://github.com/seojihee4016/FestivalPlanningProject/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EA%B0%9C%EC%B5%9C-%EC%A7%80%EC%97%AD-%EC%B6%95%EC%A0%9C-api)">상세보기 - WIKI 이동 </a>
 - 비회원 / 회원 모두 개최 중인 지역 축제 정보 확인 - API 연동
 
 #### 견적 신청 - <a href="https://github.com/seojihee4016/FestivalPlanningProject/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EC%B6%95%EC%A0%9C-%EA%B2%AC%EC%A0%81-%EC%8B%A0%EC%B2%AD)">상세보기 - WIKI 이동</a>
